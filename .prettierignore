@@ -16,3 +16,6 @@ deno.lock
 
 # Bloc réécrit par `next dev` : ne pas le reformater
 AGENTS.md
+
+# EZJSDEV: project specs are reference documents, not formatted
+specs/
