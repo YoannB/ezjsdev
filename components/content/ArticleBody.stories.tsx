@@ -28,7 +28,7 @@ slug: writing-an-article
 
 > A quote, and ignored raw HTML: <b>not interpreted</b>.
 
-![Cover](/articles/writing-articles/cover.svg)
+![Cover](/articles/material-design/material-design.css.png)
 `;
 
 const meta = {
