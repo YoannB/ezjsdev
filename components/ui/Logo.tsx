@@ -1,9 +1,10 @@
 "use client";
+import { SITE_NAME } from "@/constants/site";
 import { cn } from "@/lib/cn";
 
-// The pulse travels the axon BACK AND FORTH (keyPoints 0;1;0) instead of looping
-// 0->1->0 by teleporting: no more visible jump at the end of the run. keySplines
-// softens the ends. The orbit and the core already loop symmetrically (no jump).
+// ezjsdev mark: a `</>` glyph stroked with the cyan → blue brand gradient (tokens, so it follows
+// both themes). Static by default; the Loader / splash animate it from CSS (site/theme.css),
+// with a static fallback under prefers-reduced-motion. Same system as app/icon.svg.
 export function Logo({ size = 36, className }: { size?: number; className?: string }) {
     return (
         <svg
@@ -12,28 +13,19 @@ export function Logo({ size = 36, className }: { size?: number; className?: stri
             height={size}
             viewBox="0 0 48 48"
             role="img"
-            aria-label="Axons"
+            aria-label={SITE_NAME}
         >
             <defs>
                 <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="var(--accent-1)" />
-                    <stop offset="100%" stopColor="var(--accent-2)" />
+                    <stop offset="0%" stopColor="var(--accent-2)" />
+                    <stop offset="100%" stopColor="var(--accent-1)" />
                 </linearGradient>
             </defs>
-            <circle className="logo__orbit" cx="24" cy="24" r="18" />
-            <path className="logo__axon" d="M10 30 C 18 30, 18 18, 26 18 S 36 26, 38 16" />
-            <circle className="logo__pulse" r="2.6" cx="0" cy="0">
-                <animateMotion
-                    dur="3.2s"
-                    repeatCount="indefinite"
-                    calcMode="spline"
-                    keyPoints="0;1;0"
-                    keyTimes="0;0.5;1"
-                    keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
-                    path="M10 30 C 18 30, 18 18, 26 18 S 36 26, 38 16"
-                />
-            </circle>
-            <path className="logo__core" d="M24 12 L33 33 H15 Z" fill="url(#logoGrad)" />
+            <g stroke="url(#logoGrad)">
+                <path className="logo__glyph logo__bracket--left" d="M16 13 L6 24 L16 35" />
+                <path className="logo__glyph logo__slash" d="M28 9 L20 39" pathLength={1} />
+                <path className="logo__glyph logo__bracket--right" d="M32 13 L42 24 L32 35" />
+            </g>
         </svg>
     );
 }

@@ -1,24 +1,26 @@
 import type { SiteConfig } from "@/lib/site-extension";
 
-// THE SITE'S OWN CONFIGURATION — the file a derived site replaces (with site/messages/*.json).
-// Axons ships its own identity here; everything else (env, flags, locales, layout constants)
-// stays in constants/site.ts, which re-exports these values under their historical names.
+// EZJSDEV — the site's own configuration (with site/messages/*.json). Everything else (env, flags,
+// locales, layout constants) stays in Axons' constants/site.ts, which re-exports these values.
 // Contract and merge rules: lib/site-extension.ts; guide: docs/architecture.md → Deriving a site.
 
-// The site's own localized routes (logical key → path, or one path per locale), merged into
-// i18n/routing.ts. Example: { "/about": { fr: "/a-propos", en: "/about", es: "/acerca-de",
-// de: "/uber-uns", it: "/chi-siamo", pt: "/sobre" }, "/services": "/services" }.
+// The site's own localized routes (none yet: the IDE shell pages come later).
 const pathnames = {} as const;
 
 export const SITE = {
-    name: "Axons",
-    defaultTitle: "Axons — Next.js AI/SEO boilerplate",
-    defaultDescription: "Next.js 16 boilerplate for SEO and AI (OpenRouter), deployable on Netlify.",
-    githubUrl: "https://github.com/YoannB/axons",
-    brandAccentFrom: 1,
+    name: "ezjsdev",
+    defaultTitle: "ezjsdev — Sites web & applications React, TypeScript, Node.js",
+    defaultDescription:
+        "Yoann Barbier, développeur full-stack indépendant à Nantes : conception, architecture et évolution d'applications web React, TypeScript et Node.js.",
+    githubUrl: "https://github.com/YoannB/ezjsdev",
+    // The mockup shows the word plainly (the `</>` mark carries the accent color): no accented part.
+    brandAccentFrom: "ezjsdev".length,
     headerNavEnabled: true,
     githubLinkEnabled: true,
     articlesEnabled: true,
+    // TEMPORARY: Axons' curated (real, public) Next.js resources, kept until the IDE shell replaces
+    // the Axons home. Emptying them renders an empty black player (and 404 poster requests to
+    // i.ytimg.com) because SeoResources has no "nothing to show" state.
     seoResources: [
         {
             id: "yt",
@@ -55,9 +57,7 @@ export const SITE = {
     ],
     heroVideoId: "jzdTBDmCAKE",
     pathnames,
-    // Example: [{ href: "/about", key: "nav.about" }, { href: "/services", key: "nav.services", header: false }]
-    // (labels go in site/messages/<locale>.json under "nav").
     nav: [],
-    // Example: ["meta.home", "hero"] lets site/messages replace Axons' home metadata and hero copy.
-    messageOverrides: [],
+    // Axons copy replaced on purpose by site/messages/<locale>.json.
+    messageOverrides: ["meta.home", "footer.tagline"],
 } as const satisfies SiteConfig<typeof pathnames>;
