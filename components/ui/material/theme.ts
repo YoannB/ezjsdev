@@ -10,8 +10,15 @@ export function buildTheme(mode: "light" | "dark"): Theme {
         cssVariables: true,
         palette: {
             mode,
-            primary: { main: "#7c5cff" },
-            secondary: { main: "#22d3ee" },
+            // ezjsdev brand (site/theme.css tokens). MUI needs parsable colors (no var()), so the
+            // values are mirrored here, per mode: outlined/text buttons use them as TEXT color,
+            // hence lighter on dark and darker on light (AA on --bg-0 / --surface-*). contrastText is
+            // the label of the primary (blue → cyan gradient) button: navy on dark, white on light.
+            primary:
+                mode === "dark"
+                    ? { main: "#5b9bff", contrastText: "#06101f" }
+                    : { main: "#1d4ed8", contrastText: "#ffffff" },
+            secondary: { main: mode === "dark" ? "#22c3ee" : "#0e7490" },
             background: {
                 default: "transparent",
                 paper: "transparent",
