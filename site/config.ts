@@ -58,6 +58,8 @@ export const SITE = {
     heroVideoId: "jzdTBDmCAKE",
     pathnames,
     nav: [],
+    // Markdown collections besides the articles (the reminders come in their own PR).
+    collections: [],
     // Axons copy replaced on purpose by site/messages/<locale>.json.
     messageOverrides: ["meta.home", "footer.tagline"],
 } as const satisfies SiteConfig<typeof pathnames>;
