@@ -25,7 +25,7 @@ Attività svolte:
 
 - [Gruntfile.js][3] Rimozione dei task Compass, sostituiti da task Stylus.
 
-    ```
+    ```javascript
     ... [Watch task]
     stylus: {
       files: ['<%= yeoman.app %>/styles/**/*.styl'],
@@ -34,7 +34,7 @@ Attività svolte:
     ...
     ```
 
-    ```
+    ```javascript
     ... [Stylus task]
     stylus: {
       compile: {
@@ -57,7 +57,7 @@ Attività svolte:
     ...
     ```
 
-    ```
+    ```javascript
     ... [Copy task]
     styles: {
       expand: true,
@@ -70,7 +70,7 @@ Attività svolte:
 
 - [main.styl][4] Ridenominazione di main.scss in main.styl e refactoring del codice.
 
-    ```
+    ```stylus
     /* definire una variabile di colore */
     $border-color=#e5e5e5
     /* e usarla così */
@@ -80,21 +80,21 @@ Attività svolte:
 
 - [bower.json][5] Aggiunta del componente bootstrap-css-only al posto dell'import bootstrap di compass.
 
-    ```
+    ```json
     --"sass-bootstrap": "~3.0.2",--
     "bootstrap-css-only": "~3.0.0",
     ```
 
 - [index.html][6] Sostituzione dell'import css di sass-bootstrap con bootstrap-css-only.
 
-    ```
+    ```html
     <!--link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" /-->
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
     ```
 
 **Nota:** per usare i font di bootstrap, copiare tutti i file di bootstrap-css-only/fonts/ in una cartella fonts e aggiungere questa riga al task di copia generale:
 
-```
+```javascript
 'fonts/**/*',
 ```
 

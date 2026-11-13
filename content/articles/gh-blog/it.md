@@ -44,7 +44,7 @@ config
 
 È il file principale, in cui puoi attivare o disattivare ogni parte del sito:
 
-```
+```json
 "skills":true,
 "cv":true,
 "blog":true
@@ -60,7 +60,7 @@ Hai tre possibilità per la tua foto:
 
 1. Un'immagine nella cartella **images**:
 
-    ```
+    ```json
     "photo": {
         "img":"images/me.jpg"
     }
@@ -68,7 +68,7 @@ Hai tre possibilità per la tua foto:
 
 2. Il tuo **nome utente GitHub**:
 
-    ```
+    ```json
     "photo": {
         "github":"github"
     }
@@ -76,7 +76,7 @@ Hai tre possibilità per la tua foto:
 
 3. Oppure il tuo **indirizzo email gravatar**:
 
-    ```
+    ```json
     "photo": {
         "gravatar":"github@mail.com"
     }
@@ -94,7 +94,7 @@ Allo stesso modo, devi solo modificare il file **skills.json**.
 
 Aggiungere un elemento nel file **blog.json** come nell'esempio seguente:
 
-```
+```json
 {
     "id" : "the-id",
     "title": "Il titolo",
@@ -112,7 +112,7 @@ Andare sul [sito][4] e registrare un nuovo account se vuoi usare disqus sul tuo 
 
 Poi aggiungere il nuovo identificativo dell'account nel file **site.json**:
 
-```
+```json
 "disqus" : {
     "shortname":"username"
 },
@@ -122,7 +122,7 @@ Poi aggiungere il nuovo identificativo dell'account nel file **site.json**:
 
 Puoi cambiare lo stile usato modificando il file css nell'attributo **cssMarkdown**:
 
-```
+```json
 "cssMarkdown" : "github.css",
 ```
 
