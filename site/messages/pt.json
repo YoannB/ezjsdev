@@ -1,7 +1,11 @@
 {
     "nav": {
         "tagline": "Sites e aplicações web — React, TypeScript, Node.js",
-        "reminders": "Lembretes"
+        "reminders": "Lembretes",
+        "about": "Sobre mim",
+        "services": "Serviços",
+        "projects": "Projetos",
+        "contact": "Contacto"
     },
     "footer": {
         "tagline": "Desenvolvimento full-stack independente, sediado em Nantes (França)."
@@ -22,6 +26,151 @@
         },
         "articles": {
             "intro": "Artigos técnicos escritos entre 2013 e 2015, guardados tal como estavam, como arquivo."
+        },
+        "about": {
+            "title": "Sobre mim",
+            "intro": "Percurso de Yoann Barbier, programador full-stack independente em Nantes (França): mais de 15 anos de experiência com React, TypeScript e Node.js.",
+            "lead": "Programador full-stack independente sediado em Nantes, acompanho empresas e equipas de produto na conceção, na arquitetura e na evolução de aplicações web modernas.",
+            "summaryTitle": "Em resumo",
+            "summary": [
+                "Mais de 15 anos de experiência profissional.",
+                "Programador full-stack independente desde junho de 2021.",
+                "Diplomado pela Polytech'Nantes em 2008.",
+                "Sediado em Nantes, disponível em teletrabalho ou presencialmente, consoante o projeto."
+            ],
+            "approachTitle": "Abordagem",
+            "approach": [
+                "Trabalho sobretudo com JavaScript e TypeScript, com especial atenção à qualidade do código, ao desempenho e à robustez das soluções.",
+                "As minhas intervenções abrangem arquitetura, boas práticas, testes, integração contínua e pipelines de CI/CD, em colaboração com as equipas de produto e de design."
+            ],
+            "expertiseTitle": "Competências",
+            "experienceTitle": "Percurso",
+            "stackLabel": "Tecnologias:",
+            "experience": [
+                {
+                    "period": "Desde junho de 2021",
+                    "role": "Programador full-stack",
+                    "company": "Independente",
+                    "summary": "Intervenções de especialista front-end e full-stack em React.js, TypeScript e Node.js: arquitetura, desempenho, boas práticas, integração contínua, testes e pipelines de CI/CD, em colaboração com as equipas de produto e de design."
+                },
+                {
+                    "period": "Junho de 2018 – junho de 2021",
+                    "role": "Lead Developer FullStack",
+                    "company": "Lone Stone",
+                    "summary": "Líder técnico em projetos SaaS, web e móveis: supervisão de equipas, escolhas tecnológicas, arquitetura, desenvolvimento, desempenho, escalabilidade, CI/CD e mentoria.",
+                    "stack": "Angular, React, React Native, Vue / Nuxt, Node.js, NestJS, TypeORM, GitLab CI"
+                },
+                {
+                    "period": "Setembro de 2014 – maio de 2018",
+                    "role": "CTO",
+                    "company": "Keople",
+                    "summary": "Direção técnica e conceção da plataforma SaaS myKeople, ferramenta de RH online: arquitetura MEAN, desenvolvimento do produto do protótipo a uma versão escalável, microsserviços, Socket.IO, cache em memória, balanceamento de carga, geração de PDF e gestão de equipa."
+                },
+                {
+                    "period": "Junho de 2013 – agosto de 2014",
+                    "role": "Engenheiro de desenvolvimento",
+                    "company": "Bull",
+                    "summary": "Desenvolvimento de interfaces para uma box de televisão por satélite: UI 3D, guia de TV, VOD, leitor multimédia, componentes interativos, middleware e depuração remota."
+                },
+                {
+                    "period": "Julho de 2008 – outubro de 2012",
+                    "role": "Engenheiro de software",
+                    "company": "ODAXYS / Infotel",
+                    "summary": "Participação em projetos para grandes clientes: reformulação de aplicações de negócio, desenvolvimento front-end, evolução de ExtJS, enquadramento técnico e integração contínua."
+                }
+            ],
+            "educationTitle": "Formação",
+            "education": "Diploma da Polytech'Nantes, especialidade Sistemas Informáticos, Software e Redes («Système Informatique Logicielle et Réseaux»), obtido em 2008.",
+            "nextTitle": "Para continuar"
+        },
+        "services": {
+            "title": "Serviços",
+            "intro": "Serviços de Yoann Barbier, programador full-stack independente: React, TypeScript, Node.js, arquitetura, liderança técnica, qualidade, testes e CI/CD.",
+            "lead": "Serviços que resultam diretamente do meu percurso: desenvolvimento, arquitetura, liderança técnica e qualidade de software.",
+            "items": [
+                {
+                    "title": "Especialização e desenvolvimento React / TypeScript",
+                    "body": "Desenvolvimento de interfaces e aplicações web com React.js e TypeScript, em colaboração com as equipas de produto e de design."
+                },
+                {
+                    "title": "Desenvolvimento full-stack com Node.js",
+                    "body": "Desenvolvimento do lado do servidor com Node.js e NestJS, até à interface, para aplicações SaaS, web e móveis."
+                },
+                {
+                    "title": "Arquitetura, reformulação e evolução de aplicações web",
+                    "body": "Escolhas de arquitetura, reformulação de aplicações existentes e evolução de um produto para uma versão mais robusta e escalável."
+                },
+                {
+                    "title": "Liderança técnica, acompanhamento e mentoria",
+                    "body": "Supervisão de equipas, escolhas tecnológicas, coordenação e mentoria de programadores."
+                },
+                {
+                    "title": "Desempenho, qualidade, testes e CI/CD",
+                    "body": "Otimização do desempenho e da escalabilidade, boas práticas, testes, documentação, integração contínua e pipelines de CI/CD."
+                },
+                {
+                    "title": "Consultoria sobre as bases técnicas de um produto",
+                    "body": "Acompanhamento nas bases técnicas de um produto SaaS ou de uma aplicação web: stack, arquitetura, organização do código e ferramentas."
+                }
+            ],
+            "nextTitle": "Para continuar"
+        },
+        "projects": {
+            "title": "Projetos",
+            "intro": "Projetos de Yoann Barbier: Axons, o boilerplate Next.js de código aberto em que este site se baseia, e myKeople, plataforma SaaS de RH concebida na Keople.",
+            "lead": "Cada projeto é apresentado com o seu contexto, o meu papel exato e as tecnologias efetivamente utilizadas.",
+            "current": "Projeto atual",
+            "context": "Contexto",
+            "role": "Papel",
+            "contribution": "Contributo",
+            "stack": "Tecnologias",
+            "linksTitle": "Ligações",
+            "newTab": "(abre num novo separador)",
+            "links": {
+                "source": "Código-fonte no GitHub",
+                "preview": "Pré-visualização online do Axons"
+            },
+            "items": {
+                "axons": {
+                    "name": "Axons",
+                    "tagline": "Boilerplate Next.js de código aberto em que este site se baseia",
+                    "context": "Uma base reutilizável para criar sites e aplicações web Next.js multilingues. Este site, ezjsdev, foi construído sobre ela.",
+                    "role": "Conceção e desenvolvimento do projeto.",
+                    "contribution": [
+                        "Arquitetura Next.js (App Router) com React e TypeScript",
+                        "Seis línguas com URL traduzidos, etiquetas hreflang e sitemap XML",
+                        "Biblioteca de componentes Material UI isolada atrás de uma API neutra",
+                        "Testes unitários e end-to-end, Storybook e integração contínua",
+                        "Implementação no Netlify"
+                    ]
+                },
+                "mykeople": {
+                    "name": "myKeople",
+                    "tagline": "Plataforma SaaS de RH online, concebida na Keople",
+                    "context": "O myKeople é uma ferramenta de RH online disponibilizada em SaaS pela Keople, onde fui CTO de setembro de 2014 a maio de 2018.",
+                    "role": "CTO: direção técnica, conceção da plataforma e gestão da equipa.",
+                    "contribution": [
+                        "Conceção da plataforma e da sua arquitetura MEAN",
+                        "Desenvolvimento do produto, do protótipo a uma versão escalável",
+                        "Microsserviços, Socket.IO, cache em memória e balanceamento de carga",
+                        "Geração de documentos PDF"
+                    ]
+                }
+            },
+            "nextTitle": "Para continuar"
+        },
+        "contact": {
+            "title": "Contacto",
+            "intro": "Contactar Yoann Barbier, programador full-stack independente em Nantes (França): de preferência pelo LinkedIn, ou por e-mail.",
+            "lead": "Para falar de um projeto ou de uma missão, o LinkedIn é a forma mais simples de me contactar.",
+            "linkedinTitle": "LinkedIn",
+            "linkedinBody": "Envie-me uma mensagem a partir do meu perfil:",
+            "linkedinCta": "Perfil LinkedIn de Yoann Barbier",
+            "newTab": "(abre num novo separador)",
+            "emailTitle": "E-mail",
+            "emailBody": "Também me pode escrever para este endereço:",
+            "locationTitle": "Localização",
+            "location": "Sediado em Nantes (França), disponível em teletrabalho ou presencialmente, consoante o projeto."
         }
     },
     "ide": {
@@ -59,6 +208,9 @@
             "legal": "Aviso-legal",
             "privacy": "Privacidade",
             "cookies": "Cookies"
+        },
+        "fileNames": {
+            "about": "conteudo.md"
         }
     },
     "siteHome": {
@@ -79,6 +231,11 @@
             "Vue / Nuxt, Angular, HTML e CSS"
         ],
         "remindersTitle": "Últimos lembretes",
-        "remindersAll": "Todos os lembretes"
+        "remindersAll": "Todos os lembretes",
+        "contactCta": "Contactar-me",
+        "aboutCta": "O meu percurso",
+        "servicesAll": "Ver os serviços",
+        "projectsTitle": "Projetos",
+        "projectsAll": "Ver os projetos"
     }
 }

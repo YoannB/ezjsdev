@@ -1,0 +1,209 @@
+/* =====================================================================
+   ezjsdev — content pages (About, Services, Projects, Contact: app/[locale]/<page>/page.tsx) and
+   the home's links to them. Imported by site/theme.css after ide.css. Pages render inside the IDE
+   editor (site/ide.css → "Editor"): flattened StaticPage, line-number gutter per block.
+   ===================================================================== */
+
+/* Gutter: a list item holding headings/paragraphs numbers its blocks, not itself (two numbers
+   would overlap); tags sit on one line and are not numbered. */
+.ide-editor .static-page__card :is(.ez-timeline__item, .ez-services__item, .ez-tags li)::before {
+    content: none;
+}
+.ide-editor .static-page__card :is(.ez-timeline__item, .ez-services__item) p::before {
+    content: counter(ide-line) / "";
+}
+@media (max-width: 29.99rem) {
+    .ide-editor .static-page__card :is(.ez-timeline__item, .ez-services__item) p::before {
+        content: none;
+    }
+}
+
+.ez-page h2 {
+    margin: 1.75rem 0 0.6rem;
+    font-size: 1.3rem;
+    line-height: 1.3;
+}
+.ez-page h3 {
+    margin: 1rem 0 0.35rem;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+.ez-page ul,
+.ez-page ol {
+    padding-left: 1.1rem;
+}
+.ez-page a {
+    color: var(--accent-2);
+    overflow-wrap: anywhere;
+}
+
+/* Summary box ("encadré de synthèse", spec §5.2). */
+.ez-callout {
+    margin: 1.25rem 0 0;
+    padding: 0.25rem 1.1rem 0.6rem;
+    border: 1px solid var(--border-2);
+    border-left: 3px solid var(--accent-2);
+    border-radius: var(--radius-sm);
+    background: var(--surface-1);
+}
+.ez-callout h2 {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+}
+
+/* About: experience timeline. */
+.ez-timeline {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ez-timeline__item {
+    padding: 0.25rem 0 0.75rem;
+    border-bottom: 1px solid var(--border-1);
+}
+.ez-timeline__item:last-child {
+    border-bottom: 0;
+}
+.ez-timeline__company {
+    color: var(--text-2);
+    font-weight: 500;
+}
+.ez-timeline__period,
+.ez-label {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+.ez-timeline__period {
+    margin: 0 0 0.35rem;
+}
+.ez-timeline__stack {
+    color: var(--text-2);
+    font-size: 0.95rem;
+}
+
+/* Services. */
+.ez-services__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ez-services__item h2 {
+    font-size: 1.15rem;
+}
+
+/* Projects. */
+.ez-project + .ez-project {
+    margin-top: 2rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-1);
+}
+.ez-project__tagline {
+    margin: 0;
+    color: var(--text-2);
+}
+.ez-badge {
+    display: inline-block;
+    margin-left: 0.6rem;
+    padding: 0.1rem 0.55rem;
+    border: 1px solid var(--accent-2);
+    border-radius: 999px;
+    color: var(--accent-2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    vertical-align: middle;
+}
+.ez-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.25rem 0 0;
+    padding: 0 !important;
+    list-style: none;
+}
+.ez-tags li {
+    padding: 0.15rem 0.55rem;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-sm);
+    background: var(--surface-1);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+/* "Read next" internal links (spec §15: links between services, projects, profile, contact). */
+.ez-next ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ez-next a::after {
+    content: " →" / "";
+}
+
+/* Contact. */
+.ez-contact__channel--primary {
+    padding: 0.25rem 1.1rem 0.75rem;
+    border: 1px solid var(--accent-2);
+    border-radius: var(--radius-sm);
+    background: var(--surface-1);
+}
+.ez-contact__channel--primary h2 {
+    margin-top: 0.75rem;
+}
+
+/* Button-like links (home actions, LinkedIn CTA): real links, 2.75rem targets on touch. */
+.ez-home__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.1rem 0 0;
+}
+.ez-home__action,
+.ez-page a.ez-contact__cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--accent-2);
+    border-radius: var(--radius-sm);
+    color: var(--accent-2);
+    font-weight: 600;
+    text-decoration: none;
+}
+.ez-home__action--primary,
+.ez-page a.ez-contact__cta {
+    border-color: transparent;
+    background: var(--accent-1);
+    color: var(--btn-fg);
+}
+.ez-home__action:hover,
+.ez-home__action:focus-visible,
+.ez-page a.ez-contact__cta:hover,
+.ez-page a.ez-contact__cta:focus-visible {
+    text-decoration: underline;
+}
+@media (pointer: coarse) {
+    .ez-home__action,
+    .ez-page a.ez-contact__cta {
+        min-height: 2.75rem;
+    }
+}
+.ez-contact__email {
+    font-family: var(--font-mono);
+}
+
+/* Home: projects preview. */
+.ez-home__projects ul {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-2);
+}
+.ez-home__projects strong {
+    color: var(--text-1);
+}
