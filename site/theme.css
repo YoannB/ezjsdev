@@ -1,5 +1,6 @@
 /* The IDE shell (page frame) has its own file; @import must precede every rule. */
 @import "./ide.css";
+@import "./pages.css";
 
 /* =====================================================================
    ezjsdev — site identity styles (imported LAST by app/globals.css, so these rules win over

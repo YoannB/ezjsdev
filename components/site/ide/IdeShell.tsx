@@ -194,6 +194,14 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
                 >
                     <IdeIcon name="tree" size={24} />
                 </Link>
+                <Link
+                    href="/contact"
+                    className={cn("ide-activity__item", route === "/contact" && "is-active")}
+                    aria-label={tn("contact")}
+                    title={tn("contact")}
+                >
+                    <IdeIcon name="mail" size={24} />
+                </Link>
                 {GITHUB_LINK_ENABLED ? (
                     <a
                         href={GITHUB_URL}

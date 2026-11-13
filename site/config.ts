@@ -6,6 +6,39 @@ import type { SiteConfig } from "@/lib/site-extension";
 
 // The site's own localized routes. [slug] = the TRANSLATED slug of the entry (front matter).
 const pathnames = {
+    // Content pages (spec v0.2 §5.2–§5.6).
+    "/about": {
+        fr: "/a-propos",
+        en: "/about",
+        es: "/sobre-mi",
+        de: "/ueber-mich",
+        it: "/chi-sono",
+        pt: "/sobre-mim",
+    },
+    "/services": {
+        fr: "/services",
+        en: "/services",
+        es: "/servicios",
+        de: "/leistungen",
+        it: "/servizi",
+        pt: "/servicos",
+    },
+    "/projects": {
+        fr: "/projets",
+        en: "/projects",
+        es: "/proyectos",
+        de: "/projekte",
+        it: "/progetti",
+        pt: "/projetos",
+    },
+    "/contact": {
+        fr: "/contact",
+        en: "/contact",
+        es: "/contacto",
+        de: "/kontakt",
+        it: "/contatti",
+        pt: "/contacto",
+    },
     "/reminders": {
         fr: "/pense-betes",
         en: "/reminders",
@@ -82,7 +115,15 @@ export const SITE = {
         light: { primary: "#1d4ed8", secondary: "#0e7490", contrastText: "#ffffff" },
     },
     pathnames,
-    nav: [{ href: "/reminders", key: "nav.reminders" }],
+    // Inserted after Home by Axons (buildNav); Axons' own entries (Articles, Sitemap, legal pages)
+    // follow, so "Articles" cannot sit between Projects and Reminders without an Axons change.
+    nav: [
+        { href: "/about", key: "nav.about" },
+        { href: "/services", key: "nav.services" },
+        { href: "/projects", key: "nav.projects" },
+        { href: "/reminders", key: "nav.reminders" },
+        { href: "/contact", key: "nav.contact" },
+    ],
     // Markdown collections besides the articles: the old site's "pense-bêtes" (2013–2017 archives).
     collections: [
         {
