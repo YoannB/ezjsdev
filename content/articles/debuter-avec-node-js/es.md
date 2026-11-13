@@ -178,4 +178,4 @@ Correo (https://github.com/andris9/nodemailer):
 npm install nodemailer --save
 ```
 
-[1]: #!reminders/installation-de-node-js
+[1]: /es/recordatorios/instalacion-de-node-js

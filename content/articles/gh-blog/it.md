@@ -143,7 +143,7 @@ I sorgenti del progetto sono [qui][5] e la demo è [qui][6].
 
 [original]: https://github.com/YoannB/gh-blog/blob/master/README.md
 [gh-pages]: https://pages.github.com/
-[reminder]: #!reminders/github
+[reminder]: /it/promemoria/promemoria-github
 [0]: https://github.com/YoannB/gh-blog/fork
 [1]: https://angularjs.org/
 [2]: http://getbootstrap.com/css/

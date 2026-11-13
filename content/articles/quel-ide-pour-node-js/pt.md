@@ -64,4 +64,4 @@ O [Adobe Brackets][5] é um editor feito para design e desenvolvimento e, como a
 [plugin2]: https://github.com/timboudreau/nb-nodejs
 [plugin3]: https://github.com/adobe/brackets/wiki/Brackets-Node-Process:-Overview-for-Developers
 [plugin4]: https://github.com/DennisKehrig/brackets-v8-node-live
-[post1]: #!articles/quel-ide-pour-node-js#post-1376414889
+[post1]: /pt/artigos/qual-ide-para-node-js

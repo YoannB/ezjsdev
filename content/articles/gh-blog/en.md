@@ -143,7 +143,7 @@ The project's sources are [here][5] and the demo is [here][6].
 
 [original]: https://github.com/YoannB/gh-blog/blob/master/README.md
 [gh-pages]: https://pages.github.com/
-[reminder]: #!reminders/github
+[reminder]: /en/reminders/github-cheat-sheet
 [0]: https://github.com/YoannB/gh-blog/fork
 [1]: https://angularjs.org/
 [2]: http://getbootstrap.com/css/

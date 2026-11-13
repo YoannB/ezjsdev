@@ -143,7 +143,7 @@ Les sources du projet sont [ici][5] et la démo est [ici][6].
 
 [original]: https://github.com/YoannB/gh-blog/blob/master/README.md
 [gh-pages]: https://pages.github.com/
-[reminder]: #!reminders/github
+[reminder]: /pense-betes/pense-bete-github
 [0]: https://github.com/YoannB/gh-blog/fork
 [1]: https://angularjs.org/
 [2]: http://getbootstrap.com/css/
