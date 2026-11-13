@@ -44,7 +44,7 @@ config
 
 Das ist die Hauptdatei, in der du jeden Teil der Website aktivieren oder deaktivieren kannst:
 
-```
+```json
 "skills":true,
 "cv":true,
 "blog":true
@@ -60,7 +60,7 @@ Für dein Foto hast du drei Möglichkeiten:
 
 1. Ein Bild im Verzeichnis **images**:
 
-    ```
+    ```json
     "photo": {
         "img":"images/me.jpg"
     }
@@ -68,7 +68,7 @@ Für dein Foto hast du drei Möglichkeiten:
 
 2. Deinen **GitHub-Benutzernamen**:
 
-    ```
+    ```json
     "photo": {
         "github":"github"
     }
@@ -76,7 +76,7 @@ Für dein Foto hast du drei Möglichkeiten:
 
 3. Oder deine **Gravatar-E-Mail-Adresse**:
 
-    ```
+    ```json
     "photo": {
         "gravatar":"github@mail.com"
     }
@@ -94,7 +94,7 @@ Ebenso musst du nur die Datei **skills.json** bearbeiten.
 
 Ein Element in die Datei **blog.json** einfügen, wie im folgenden Beispiel:
 
-```
+```json
 {
     "id" : "the-id",
     "title": "Der Titel",
@@ -112,7 +112,7 @@ Auf die [Website][4] gehen und ein neues Konto anlegen, wenn du Disqus in deinem
 
 Dann die neue Konto-ID in die Datei **site.json** eintragen:
 
-```
+```json
 "disqus" : {
     "shortname":"username"
 },
@@ -122,7 +122,7 @@ Dann die neue Konto-ID in die Datei **site.json** eintragen:
 
 Du kannst den verwendeten Stil ändern, indem du die CSS-Datei im Attribut **cssMarkdown** änderst:
 
-```
+```json
 "cssMarkdown" : "github.css",
 ```
 

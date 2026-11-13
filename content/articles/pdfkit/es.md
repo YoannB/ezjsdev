@@ -11,13 +11,13 @@ Para generar los PDF, elegí la librería [PdfKit][1] por su facilidad de uso (e
 
 Instalar el módulo (versión actual 0.7.0):
 
-```
+```bash
 npm install pdfkit
 ```
 
 o con la opción **--save** para guardar automáticamente la dependencia en el archivo package.json:
 
-```
+```bash
 npm install pdfkit --save
 ```
 

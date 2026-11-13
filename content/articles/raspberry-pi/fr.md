@@ -11,7 +11,7 @@ Installer et configurer son raspberry PI comme un serveur.
 
 Sous ubuntu, il faut démonter la carte SD pour ensuite faire la copie de l'image :
 
-```
+```bash
 # récupérer le nom de la carte SD
 df -h
 # démonter la carte SD
@@ -22,14 +22,14 @@ dd bs=4M if=YYYY-MM-DD-wheezy-raspbian.img of=/dev/sdb
 
 > Parmi les problèmes possibles, si le raspberry affiche un écran noir, ajouter dans le fichier **config.txt** sur la carte SD la ligne :
 
-```
+```ini
 #help to boot
 boot_delay=1
 ```
 
 > Résolution HD avec un raspberry pi 2 et Wheezy :
 
-```
+```ini
 hdmi_drive=2
 hdmi_group=1
 hdmi_mode=31
@@ -41,7 +41,7 @@ hdmi_mode=31
 
 La fenêtre de configuration se lance automatiquement au premier démarrage mais il est aussi possible de rappeler la fenêtre de configuration en tapant dans la console la commande :
 
-```
+```bash
 sudo raspi-config
 ```
 
@@ -56,7 +56,7 @@ Pour bénéficier d'un stockage plus important et aussi pour économiser la dur�
 
 Après avoir branché le disque dur sur le raspberry PI, il faut
 
-```
+```bash
 # récupérer le nom du disque dur
 df -h
 # monter le disque dur (changer sdb1 par le nom trouvé)
@@ -65,7 +65,7 @@ mount /dev/sdb1 /media/data
 
 Pour économiser la carte SD, je recopie également l'intégralité du **home** sur la partition du disque dur
 
-```
+```bash
 # déplacer home vers une partition /home du disque dur externe
 cd /mnt
 sudo mkdir new_home/
@@ -75,7 +75,7 @@ sudo cp -a /home/. /mnt/new_home/
 
 Finir par ajouter à la table des partitions du raspberry PI,
 
-```
+```bash
 sudo vi /etc/fstab
 ```
 
@@ -92,7 +92,7 @@ Les lignes suivantes :
 
 Le nom que portera le Raspberry PI sur le réseau est configurable à partir de la fenêtre de configuration (sudo raspi-config) mais on peut aussi l'éditer à la main dans le fichier **hosts** :
 
-```
+```bash
 sudo vi /etc/hosts
 ```
 
@@ -107,13 +107,13 @@ Ajouter les lignes :
 
 Pour ajouter un utilisateur au raspberry PI :
 
-```
+```bash
 sudo adduser username
 ```
 
 > Pour que le nouvel utilisateur ait les mêmes droits que l'utilisateur **pi** par défaut, faire :
 
-```
+```bash
 sudo visudo
 ```
 
@@ -129,32 +129,32 @@ Ensuite faire **Ctrl+O**, **Entrer**, **Ctrl+X**.
 
 Mise à jour des paquets :
 
-```
+```bash
 sudo apt-get update
 sudo apt-get upgrade
 ```
 
 Installation de samba :
 
-```
+```bash
 sudo apt-get install samba samba-common-bin
 ```
 
 Installation de Lighttpd (équivalent léger et simple d'un serveur apache) :
 
-```
+```bash
 sudo apt-get install lighttpd
 ```
 
 Installation de ssh :
 
-```
+```bash
 sudo apt-get install ssh
 ```
 
 Installation de Webmin :
 
-```
+```bash
 wget http://prdownloads.sourceforge.net/webadmin/webmin_1.660_all.deb
 sudo apt-get install libapt-pkg-perl libnet-ssleay-perl libauthen-pam-perl libio-pty-perl apt-show-versions
 sudo dpkg --install webmin_1.660_all.deb
@@ -168,7 +168,7 @@ Voir le pense-bête correspondant, [ici][samba].
 
 Éditer le fichier **interfaces** :
 
-```
+```bash
 sudo gedit /etc/network/interfaces
 ```
 
@@ -191,13 +191,13 @@ gateway 192.168.0.254
 
 Redémarrer le raspberry PI :
 
-```
+```bash
 sudo reboot
 ```
 
 ## Installation de Node.js
 
-```
+```bash
 cd /home/keople
 wget http://nodejs.org/dist/v0.10.28/node-v0.10.28.tar.gz
 tar -zxf node-v0.10.28.tar.gz
@@ -210,14 +210,14 @@ sudo make install
 
 > Node.js without SUDO
 
-```
+```bash
 sudo chown -R $USER /usr/local
 sudo chown -R $USER /home/$USER/.npm
 ```
 
 ## Installation de Yeoman
 
-```
+```bash
 npm install -g yo
 npm install -g grunt-cli
 npm install -g bower
@@ -227,7 +227,7 @@ Voir le pense-bête correspondant, [ici][yeoman].
 
 ## Installation d'un serveur privé git
 
-```
+```bash
 sudo apt-get install git-core
 sudo apt-get install wget (si besoin)
 sudo apt-get install ssh (si besoin)
@@ -237,20 +237,20 @@ sudo update-rc.d ssh defaults (si besoin)
 
 #### Création d'un nouvel utilisateur **git** :
 
-```
+```bash
 sudo adduser --system --shell /bin/bash --gecos 'git version control by pi' --group --home /home/git git
 ```
 
 ou création du groupe **git** et ajout à un utilisateur
 
-```
+```bash
 sudo addgroup git
 sudo adduser $USER git
 ```
 
 #### Création d'un nouveau projet :
 
-```
+```bash
 cd /home/$USER
 mkdir git
 cd git
@@ -264,13 +264,13 @@ sudo git remote add default $USER@[hostname]:/home/$USER/git/default.git
 
 Dans son espace de travail, récupérer le projet :
 
-```
+```bash
 git clone $USER@[hostname]:/home/$USER/git/default.git
 ```
 
 Créer un fichier **test.txt** :
 
-```
+```bash
 git add test.txt
 git commit -am "initial"
 git push origin master

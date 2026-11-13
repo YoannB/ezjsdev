@@ -13,7 +13,7 @@ Acesse o site do [clever-cloud][1] para se inscrever.
 
 > Depois da inscrição manual, já na página do [console][2], na seção perfil/Chaves SSH (no menu em baixo à esquerda, depois no topo da nova página), é preciso informar a sua chave pública ssh no site:
 
-```
+```bash
 # copiar a chave para a área de transferência
 xclip -sel clip < ~/.ssh/id_rsa.pub
 ```
@@ -67,7 +67,7 @@ Exemplo de package.json válido com servidor Express 4.9.5:
 
 > Para iniciar o ambiente em modo **produção**:
 
-```
+```json
 "scripts": {
    "start": "NODE_ENV=production node server.js"
  }
@@ -77,7 +77,7 @@ Exemplo de package.json válido com servidor Express 4.9.5:
 
 Nada mais simples: o Clever-cloud usa **git**. Ao escolher a linguagem, antes de configurar a chave ssh, você recebe um link **git remote**:
 
-```
+```bash
 git remote add clever git+ssh://git@push.par.clever-cloud.com/app_[id_da_sua_app].git
 ```
 
@@ -87,7 +87,7 @@ Se o projeto ainda não for um projeto **git**, executar `git init`.
 
 Depois, se o arquivo **.gitignore** do projeto estiver atualizado e tudo estiver bem preparado, executar os comandos:
 
-```
+```bash
 git add .
 git commit -m "initial commit"
 git push clever master
@@ -102,7 +102,7 @@ git push clever master
 
 > Em caso de problema com a chave ssh, o comando seguinte permite carregar a chave na sessão do terminal:
 
-```
+```bash
 ssh-add ~/.ssh/id_rsa
 ```
 

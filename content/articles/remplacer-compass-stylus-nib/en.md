@@ -25,7 +25,7 @@ Tasks performed:
 
 - [Gruntfile.js][3] Remove Compass tasks and replace by Stylus tasks.
 
-    ```
+    ```javascript
     ... [Watch task]
     stylus: {
       files: ['<%= yeoman.app %>/styles/**/*.styl'],
@@ -34,7 +34,7 @@ Tasks performed:
     ...
     ```
 
-    ```
+    ```javascript
     ... [Stylus task]
     stylus: {
       compile: {
@@ -57,7 +57,7 @@ Tasks performed:
     ...
     ```
 
-    ```
+    ```javascript
     ... [Copy task]
     styles: {
       expand: true,
@@ -70,7 +70,7 @@ Tasks performed:
 
 - [main.styl][4] Rename of main.scss in main.styl and refactor code.
 
-    ```
+    ```stylus
     /* define color variable */
     $border-color=#e5e5e5
     /* and use it like this */
@@ -80,21 +80,21 @@ Tasks performed:
 
 - [bower.json][5] Add bootstrap-css-only component instead of compass import bootstrap.
 
-    ```
+    ```json
     --"sass-bootstrap": "~3.0.2",--
     "bootstrap-css-only": "~3.0.0",
     ```
 
 - [index.html][6] Replace import css of sass-bootstrap by bootstrap-css-only.
 
-    ```
+    ```html
     <!--link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" /-->
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
     ```
 
 **Note:** To use fonts from bootstrap, copy all files in bootstrap-css-only/fonts/ to a folder fonts and add this line to the general copy task:
 
-```
+```javascript
 'fonts/**/*',
 ```
 

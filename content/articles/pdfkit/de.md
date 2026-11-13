@@ -11,13 +11,13 @@ Für die Erzeugung der PDFs habe ich die Bibliothek [PdfKit][1] gewählt, weil s
 
 Das Modul installieren (aktuelle Version 0.7.0):
 
-```
+```bash
 npm install pdfkit
 ```
 
 oder mit der Option **--save**, um die Abhängigkeit automatisch in der Datei package.json zu speichern:
 
-```
+```bash
 npm install pdfkit --save
 ```
 
