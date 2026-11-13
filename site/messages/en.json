@@ -124,7 +124,6 @@
             "role": "Role",
             "contribution": "Contribution",
             "stack": "Technologies",
-            "result": "Outcome",
             "linksTitle": "Links",
             "newTab": "(opens in a new tab)",
             "links": {
@@ -155,8 +154,7 @@
                         "Product development, from prototype to a scalable version",
                         "Microservices, Socket.IO, in-memory caching and load balancing",
                         "PDF document generation"
-                    ],
-                    "result": "Over {users} users and a {participation} participation rate."
+                    ]
                 }
             },
             "nextTitle": "Read next"

@@ -1,11 +1,11 @@
 import { expect, test, type Page } from "@playwright/test";
-import { PROFILE, PROJECT_SETTINGS } from "../../site/profile";
+import { PROFILE } from "../../site/profile";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption } from "./support/home";
 import { lp, lpRe } from "./support/locale-path";
 
 // EZJSDEV content pages (spec v0.2 §5.2–§5.6): About, Services, Projects, Contact — translated
 // routes (site/config.ts), explorer files (site/explorer.ts), sitemap.xml, language switch,
-// contact links, the myKeople figures switch (site/profile.ts) and the 375px layout. Pages are
+// contact links, the absence of any myKeople figure and the 375px layout. Pages are
 // opened with an explicit locale prefix (redirected to the canonical URL for the default locale).
 
 const PAGES = [
@@ -105,8 +105,7 @@ test.describe("Content pages", () => {
         await expect(main.locator('a[href^="tel:"], form')).toHaveCount(0);
     });
 
-    test("no myKeople figure is published while the switch is off", async ({ page }) => {
-        test.skip(PROJECT_SETTINGS.publishFigures, "figures published (site/profile.ts)");
+    test("no myKeople figure is published, in any page", async ({ page }) => {
         for (const path of ["/fr/projets", "/en/projects", "/fr/a-propos", "/fr"]) {
             await page.goto(path);
             await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
@@ -119,6 +118,11 @@ test.describe("Content pages", () => {
         const mykeople = page.locator('[data-project="mykeople"]');
         await expect(mykeople.getByRole("heading", { level: 2, name: "myKeople" })).toBeVisible();
         await expect(mykeople.getByRole("heading", { name: "Résultat" })).toHaveCount(0);
+        // Axons comes first, myKeople second.
+        const order = await page
+            .locator("[data-project]")
+            .evaluateAll((els) => els.map((e) => e.getAttribute("data-project")));
+        expect(order).toEqual(["axons", "mykeople"]);
     });
 
     test("projects: Axons links to its source and preview, in a new tab", async ({ page }) => {

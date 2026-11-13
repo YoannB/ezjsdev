@@ -1,14 +1,5 @@
-// PURE module (no React, no next-intl): the rules of ezjsdev's content pages that are worth a unit
-// test — which project figures may be shown, and the schema.org data of the About page. Data:
-// site/profile.ts. Unit tests: tests/unit/profile-model.test.ts.
-
-/** A figure of a project's result, formatted by the page in the visited locale. */
-export interface ProjectFigure {
-    /** Placeholder name in the `result` message (`{users}`). */
-    readonly key: string;
-    readonly value: number;
-    readonly style: "integer" | "percent";
-}
+// PURE module (no React, no next-intl): the types of ezjsdev's projects and the schema.org data of
+// the About page. Data: site/profile.ts. Unit tests: tests/unit/profile-model.test.ts.
 
 export interface ProjectLink {
     /** Label key under `pages.projects.links`. */
@@ -23,16 +14,6 @@ export interface ProjectDecl {
     readonly current: boolean;
     readonly stack: readonly string[];
     readonly links: readonly ProjectLink[];
-    /** Documented figures of the result; empty = no documented result. */
-    readonly figures: readonly ProjectFigure[];
-}
-
-/**
- * The figures that may be rendered: none unless their publication is enabled
- * (site/profile.ts `PROJECT_SETTINGS.publishFigures`). An empty list means "no result section".
- */
-export function visibleFigures(project: ProjectDecl, publishFigures: boolean): readonly ProjectFigure[] {
-    return publishFigures ? project.figures : [];
 }
 
 export interface ProfileFacts {
