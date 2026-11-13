@@ -5,7 +5,7 @@ date: 2014-09-12
 description: "Gerar PDFs com PdfKit e Node.JS."
 ---
 
-Para gerar os PDFs, escolhi a biblioteca [PdfKit][1] pela sua facilidade de uso (programa-se o pdf como um objeto Canvas HTML5), mas sobretudo porque gera pdfs conformes à norma do [w3c][2].
+Para gerar os PDFs, escolhi a biblioteca [PdfKit][1] pela sua facilidade de utilização (programa-se o pdf como um objeto Canvas HTML5), mas sobretudo porque gera pdfs conformes à norma do [w3c][2].
 
 ## Instalação
 
@@ -15,17 +15,17 @@ Instalar o módulo (versão atual 0.7.0):
 npm install pdfkit
 ```
 
-ou com a opção **--save** para salvar automaticamente a dependência no arquivo package.json:
+ou com a opção **--save** para guardar automaticamente a dependência no ficheiro package.json:
 
 ```bash
 npm install pdfkit --save
 ```
 
-> Nota: é possível usar a biblioteca num navegador sem lado servidor (requer um navegador recente, ver o site do [PdfKit][1])
+> Nota: é possível utilizar a biblioteca num navegador sem lado servidor (requer um navegador recente, ver o site do [PdfKit][1])
 
 ## Primeiros passos
 
-Num arquivo **pdf.js**, programa-se o conteúdo do pdf:
+Num ficheiro **pdf.js**, programa-se o conteúdo do pdf:
 
 ```javascript
 'use strict';

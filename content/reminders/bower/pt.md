@@ -13,7 +13,7 @@ Adicionar o manifesto bower.json:
 bower init
 ```
 
-Ou criar o arquivo bower.json com o conteúdo:
+Ou criar o ficheiro bower.json com o conteúdo:
 
 ```json
 {
@@ -50,7 +50,7 @@ Ver o lembrete do [GitHub][github].
 > git push --tags
 > ```
 
-## Registrar o pacote
+## Registar o pacote
 
 ```bash
 bower register <my-package-name> <git-endpoint>

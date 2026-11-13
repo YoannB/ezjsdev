@@ -28,7 +28,7 @@ E o estilo, entre a grande variedade de estilos propostos [aqui][1].
 Por exemplo, depois de a página ser carregada, com uma div que contém código no formato Markdown:
 
 ```js
-// Uso do marked combinado com o highlight
+// Utilização do marked combinado com o highlight
 var divToMarkdown = document.getElementById("idDivToMarkdown");
 
 marked(divToMarkdown.innerHTML, {

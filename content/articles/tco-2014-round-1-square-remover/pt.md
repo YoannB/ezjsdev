@@ -1,20 +1,20 @@
 ---
-title: "TCO 2014 - Rodada 1 - SquareRemover"
-slug: tco-2014-rodada-1-square-remover
+title: "TCO 2014 - Ronda 1 - SquareRemover"
+slug: tco-2014-ronda-1-square-remover
 date: 2014-04-24
-description: "Top Coder Open 2014 Rodada 1: o problema SquareRemover."
+description: "Top Coder Open 2014 Ronda 1: o problema SquareRemover."
 image: /articles/tco-2014-round-1-square-remover/visualizer.png
 ---
 
 _TopCoder TCO 2014 (24-04-2014)_
 
-## Rodada 1: SquareRemover
+## Ronda 1: SquareRemover
 
-O enunciado completo do problema proposto este ano na primeira rodada do TCO está disponível [aqui][1].
+O enunciado completo do problema proposto este ano na primeira ronda do TCO está disponível [aqui][1].
 
 Pequeno resumo do problema, temos:
 
-- Uma grade NxN (8<=N<=16) em que cada célula é colorida com uma das cores (4<=cores<=6)
+- Uma grelha NxN (8<=N<=16) em que cada célula é colorida com uma das cores (4<=cores<=6)
 - Um buffer de zonas seguintes; cada zona é composta por 4 células.
 
 O objetivo do jogo é reunir de 4 em 4 as células da mesma cor, que são destruídas e depois substituídas pela zona seguinte do buffer.
@@ -23,8 +23,8 @@ Cada zona de 4 células destruída vale **1 ponto**.
 
 É preciso implementar um método **playIt** que recebe como parâmetros um inteiro **colors**, um array de strings **board** e um inteiro **startSeed**.
 
-- colors: corresponde ao número de cores possíveis da grade
-- board: representa a grade na forma ["0123","2031","0221","3201"]
+- colors: corresponde ao número de cores possíveis da grelha
+- board: representa a grelha na forma ["0123","2031","0221","3201"]
 - startSeed: é o inteiro que permite gerar a nova zona
 
     ```
@@ -32,7 +32,7 @@ Cada zona de 4 células destruída vale **1 ponto**.
     A[i] = (A[i-1] * 48271) MOD 2147483647
     ```
 
-O método **playIt** deve retornar 10000 movimentos, ou seja, um array de 30000 inteiros:
+O método **playIt** deve devolver 10000 movimentos, ou seja, um array de 30000 inteiros:
 
 - 3\*i: linha da célula a mover
 - 3\*i+1: coluna da célula a mover
@@ -73,7 +73,7 @@ O objetivo do jogo é reunir as cores de 4 em 4:
 
 ## Solução
 
-Como não tive muito tempo e não sou um especialista (apenas 4/5 maratonas no último ano) em comparação com a maioria dos participantes, que também fazem partidas cronometradas de 8 h o ano todo e a maioria das maratonas, minha pontuação final está longe de ser a melhor, mas o algoritmo da minha solução é o que todas as melhores pontuações usaram, por isso tomo a liberdade de apresentá-lo aqui com um pouco mais de detalhe.
+Como não tive muito tempo e não sou um especialista (apenas 4/5 maratonas no último ano) em comparação com a maioria dos participantes, que também fazem partidas cronometradas de 8 h todo o ano e a maioria das maratonas, a minha pontuação final está longe de ser a melhor, mas o algoritmo da minha solução é o que todas as melhores pontuações utilizaram, por isso tomo a liberdade de apresentá-lo aqui com um pouco mais de detalhe.
 
 Este algoritmo é o [**Beam Search**][4] ([Algorithme de recherche en faisceau][5] em francês).
 
@@ -124,11 +124,11 @@ Pseudocódigo JAVA:
  }
 ```
 
-Para escolher os melhores pontos a mover, decidi pegar os pontos mais próximos de uma zona de 3 células da mesma cor e depois, se não houvesse, considerei em pares as células mais próximas de uma zona de 2 células da mesma cor.
+Para escolher os melhores pontos a mover, decidi pegar nos pontos mais próximos de uma zona de 3 células da mesma cor e depois, se não houvesse, considerei em pares as células mais próximas de uma zona de 2 células da mesma cor.
 
 Pontuação provisória do submit: 446164,62 e final: **418829,75**
 
-Eis as minhas pontuações para as 10 primeiras grades:
+Eis as minhas pontuações para as 10 primeiras grelhas:
 
 - 0\) 7440.0
 - 1\) 10536.0
@@ -143,7 +143,7 @@ Eis as minhas pontuações para as 10 primeiras grades:
 
 O primeiro tem aproximadamente o dobro em cada pontuação!!!
 
-**Observação:** Pena, minhas pontuações eram melhores, mas eu tinha um pequeno erro no código final que fez muitos casos de teste falharem; da próxima vez, espero ser mais atento.
+**Observação:** Pena, as minhas pontuações eram melhores, mas eu tinha um pequeno erro no código final que fez falhar muitos casos de teste; da próxima vez, espero ser mais atento.
 
 [1]: http://community.topcoder.com/longcontest/?module=ViewProblemStatement&rd=15938&pm=13132
 [2]: http://www.topcoder.com/contest/problem/SquareRemover/manual.html

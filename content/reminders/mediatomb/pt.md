@@ -5,9 +5,9 @@ date: 2014-05-08
 description: "Lembrete para criar um servidor Mediatomb (Ubuntu)."
 ---
 
-**Nota:** eis um lembrete relacionado ao meu trabalho atual, uma coisinha que tive de instalar esta semana para testar o projeto em que trabalho.
+**Nota:** eis um lembrete relacionado com o meu trabalho atual, uma coisinha que tive de instalar esta semana para testar o projeto em que trabalho.
 
-O **Mediatomb** permite criar o seu próprio servidor DLNA; assim é possível, entre outras coisas, ver o conteúdo do servidor na TV ou no decodificador.
+O **Mediatomb** permite criar o seu próprio servidor DLNA; assim é possível, entre outras coisas, ver o conteúdo do servidor na televisão ou no descodificador.
 
 ## Instalação
 
@@ -19,7 +19,7 @@ sudo apt-get install mediatomb
 
 ## Configuração
 
-#### Para ativar a interface do Mediatomb, editar o arquivo de configuração:
+#### Para ativar a interface do Mediatomb, editar o ficheiro de configuração:
 
 ```bash
 sudo gedit /etc/mediatomb/config.xml
@@ -55,7 +55,7 @@ ou
 
 ![Interface web do Mediatomb](/reminders/mediatomb/mediatomb.png)
 
-**Nota**: para limpar o banco de dados, apagar o arquivo **/var/lib/mediatomb/mediatomb.db** e depois reiniciar o mediatomb.
+**Nota**: para limpar a base de dados, apagar o ficheiro **/var/lib/mediatomb/mediatomb.db** e depois reiniciar o mediatomb.
 
 [1]: http://doc.ubuntu-fr.org/mediatomb
 [2]: http://localhost:49152/

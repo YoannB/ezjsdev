@@ -21,7 +21,7 @@ Estrutura do projeto gerado:
 
 ![Estrutura](/reminders/angular-js/angular_struc.png)
 
-Depois de instalado o projeto, é necessário baixar as dependências executando o comando
+Depois de instalado o projeto, é necessário transferir as dependências executando o comando
 
 ```bash
 bower install
@@ -49,7 +49,7 @@ Os diferentes comandos definidos pelo **grunt** são:
     grunt build
     ```
 
-Para iniciar a distribuição, vá ao diretório 'dist' e execute o comando
+Para iniciar a distribuição, ir ao diretório 'dist' e executar o comando
 
 ```bash
 NODE_ENV=production node server.js
@@ -57,7 +57,7 @@ NODE_ENV=production node server.js
 
 Testes com karma:
 
-**Nota:** é preciso um arquivo karma.conf.js; se não tiver sido gerado, será preciso adicionar um ([exemplo][4])
+**Nota:** é preciso um ficheiro karma.conf.js; se não tiver sido gerado, será preciso adicionar um ([exemplo][4])
 
 - Execução dos testes do lado do servidor
 

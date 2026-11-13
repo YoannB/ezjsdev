@@ -1,16 +1,16 @@
 ---
-title: "TCO 2014 - Rodada 2 - RectanglesAndHoles"
-slug: tco-2014-rodada-2-rectangles-and-holes
+title: "TCO 2014 - Ronda 2 - RectanglesAndHoles"
+slug: tco-2014-ronda-2-rectangles-and-holes
 date: 2014-06-11
-description: "Top Coder Open 2014 Rodada 2: o problema RectanglesAndHoles."
+description: "Top Coder Open 2014 Ronda 2: o problema RectanglesAndHoles."
 image: /articles/tco-2014-round-2-rectangles-and-holes/visualizer.png
 ---
 
 _TopCoder TCO 2014 (11-06-2014)_
 
-## Rodada 2: RectanglesAndHoles
+## Ronda 2: RectanglesAndHoles
 
-O enunciado completo do problema proposto na segunda rodada do TCO está disponível [aqui][1].
+O enunciado completo do problema proposto na segunda ronda do TCO está disponível [aqui][1].
 
 Pequeno resumo do problema, temos:
 
@@ -35,7 +35,7 @@ a__b
 c  d
 ```
 
-O método **place** deve retornar a posição de cada retângulo, ou seja, as suas coordenadas x e y para o vértice **c** e a orientação do retângulo em função dos lados fornecidos como parâmetros:
+O método **place** deve devolver a posição de cada retângulo, ou seja, as suas coordenadas x e y para o vértice **c** e a orientação do retângulo em função dos lados fornecidos como parâmetros:
 
 - 3\*i: coordenada x
 - 3\*i+1: coordenada y
@@ -70,14 +70,14 @@ Eis o resultado do meu algoritmo para o caso de teste 1:
 
 ## Solução
 
-- Não dediquei muito tempo a programar a minha solução; parti da ideia de fazer um **grande buraco** e um **máximo de pequenos buracos** ao lado. Para isso, peguei os retângulos e ordenei-os pelo lado mais comprido (girando os retângulos desde o início).
+- Não dediquei muito tempo a programar a minha solução; parti da ideia de fazer um **grande buraco** e um **máximo de pequenos buracos** ao lado. Para isso, peguei nos retângulos e ordenei-os pelo lado mais comprido (rodando os retângulos desde o início).
 - Somei os lados mais compridos para determinar um comprimento **D** de cerca de **TOTAL dos lados / COEFICIENTE**, com COEFICIENTE escolhido da seguinte lista {7, 6.75, 7.25, 6.25, 6.5, 7.5}.
 - Depois, tracei um quadrado de lado **D**/4 e transformei-o num círculo esticando cada lado.
-- Para terminar, com os retângulos restantes, usei o algoritmo **SA** para fazer o maior número de pequenos buracos.
+- Para terminar, com os retângulos restantes, utilizei o algoritmo **SA** para fazer o maior número de pequenos buracos.
 
 Pontuação provisória do submit: 489 126,27 e final: **488 719,07**
 
-Eis as minhas pontuações para as 10 primeiras grades:
+Eis as minhas pontuações para as 10 primeiras grelhas:
 
 - 0\) 6.6238253331408E13
 - 1\) 3.70667129175E13
