@@ -19,6 +19,9 @@
             "empty": "Ainda não há lembretes.",
             "publishedOn": "Publicado em {date}",
             "onlyIn": "Disponível apenas em {language}"
+        },
+        "articles": {
+            "intro": "Artigos técnicos escritos entre 2013 e 2015, guardados tal como estavam, como arquivo."
         }
     },
     "ide": {

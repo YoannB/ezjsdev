@@ -35,6 +35,18 @@
     }
 }
 
+/* Every scroller of the shell is a containing block: an absolutely positioned descendant (the
+   visually hidden texts below, the line-number gutter) then stays INSIDE the panel that scrolls
+   instead of resolving against the viewport and growing the document (a 70px page scroll that
+   pushed the title bar and the tabs off screen on desktop). */
+.ide,
+.ide-editor,
+.ide-panel__body,
+.ide-preview,
+.ide-tree {
+    position: relative;
+}
+
 /* Visually hidden, still read (accessible names of files, address label…). */
 .ide-sr,
 .ide-skip:not(:focus) {
@@ -566,7 +578,7 @@
     .ide-explorer,
     .ide.is-drawer-open .ide-explorer {
         grid-area: explorer;
-        position: static;
+        position: relative; /* containing block of its scrolling content (see the top of the file) */
         width: auto;
         padding-top: 0;
         transform: none;

@@ -1,5 +1,5 @@
 "use client";
-import { LanguageSwitcher, Logo, Tabs, Terminal, ThemeToggle } from "@/components/ui";
+import { LanguageSwitcher, Logo, Tabs, ThemeToggle } from "@/components/ui";
 import { CONSENT_REQUIRED, GITHUB_LINK_ENABLED, GITHUB_URL, SITE_NAME } from "@/constants/site";
 import { useCookieConsent } from "@/hooks/use-consent";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -12,6 +12,7 @@ import { ExplorerTree } from "./ExplorerTree";
 import { IdeIcon } from "./IdeIcon";
 import { IdePanel, type PanelState } from "./IdePanel";
 import { PagePreview } from "./PagePreview";
+import { StatusTerminal } from "./StatusTerminal";
 import {
     ancestorsOf,
     closeTab,
@@ -269,7 +270,7 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
                     showLabel={t("showTerminal")}
                     hideLabel={t("hideTerminal")}
                 >
-                    <Terminal lines={lines} ariaLabel={t("terminalLog")} rows={4} />
+                    <StatusTerminal lines={lines} ariaLabel={t("terminalLog")} />
                 </IdePanel>
             </div>
 

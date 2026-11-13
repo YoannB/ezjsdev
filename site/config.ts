@@ -95,5 +95,5 @@ export const SITE = {
         },
     ],
     // Axons copy replaced on purpose by site/messages/<locale>.json.
-    messageOverrides: ["meta.home", "footer.tagline"],
+    messageOverrides: ["meta.home", "footer.tagline", "pages.articles.intro"],
 } as const satisfies SiteConfig<typeof pathnames>;

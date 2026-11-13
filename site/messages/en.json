@@ -19,6 +19,9 @@
             "empty": "No reminders yet.",
             "publishedOn": "Published on {date}",
             "onlyIn": "Only available in {language}"
+        },
+        "articles": {
+            "intro": "Technical articles written between 2013 and 2015, kept as they were as an archive."
         }
     },
     "ide": {

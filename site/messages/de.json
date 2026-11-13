@@ -19,6 +19,9 @@
             "empty": "Noch keine Merkzettel.",
             "publishedOn": "Veröffentlicht am {date}",
             "onlyIn": "Nur auf {language} verfügbar"
+        },
+        "articles": {
+            "intro": "Technische Artikel aus den Jahren 2013 bis 2015, unverändert als Archiv aufbewahrt."
         }
     },
     "ide": {

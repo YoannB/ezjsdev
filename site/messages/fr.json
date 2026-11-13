@@ -19,6 +19,9 @@
             "empty": "Aucun pense-bête pour le moment.",
             "publishedOn": "Publié le {date}",
             "onlyIn": "Disponible uniquement en {language}"
+        },
+        "articles": {
+            "intro": "Articles techniques rédigés entre 2013 et 2015, conservés tels quels en archive."
         }
     },
     "ide": {

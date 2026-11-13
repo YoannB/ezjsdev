@@ -19,6 +19,9 @@
             "empty": "Ancora nessun promemoria.",
             "publishedOn": "Pubblicato il {date}",
             "onlyIn": "Disponibile solo in {language}"
+        },
+        "articles": {
+            "intro": "Articoli tecnici scritti tra il 2013 e il 2015, conservati così come sono, come archivio."
         }
     },
     "ide": {

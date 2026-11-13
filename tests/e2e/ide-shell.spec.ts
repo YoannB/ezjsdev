@@ -141,8 +141,12 @@ test.describe("IDE shell — desktop", () => {
         const preview = page.locator("#ide-preview");
         await expect(preview).toContainText("Mentions légales");
         await expect(preview.getByRole("link", { name: /English/ })).toHaveAttribute("href", lp("en", "/legal"));
-        const terminal = page.getByRole("log", { name: "Sortie du terminal" });
+        const terminal = page.getByRole("group", { name: "Sortie du terminal" });
         await expect(terminal).toContainText("open Mentions-legales/page.tsx");
+        // Not announced on navigation (Next's route announcer already does): no live region.
+        await expect(
+            page.locator("#ide-terminal [aria-live]:not([aria-live='off']), #ide-terminal [role='log']"),
+        ).toHaveCount(0);
 
         const togglePreview = page.getByRole("button", { name: "Masquer l'aperçu" });
         await togglePreview.click();
@@ -160,7 +164,30 @@ test.describe("IDE shell — desktop", () => {
         await ready(page);
         await expect(page.locator(".not-found")).toBeVisible();
         await expect(activeTab(page)).toHaveCount(0);
-        await expect(page.getByRole("log", { name: "Sortie du terminal" })).toHaveText("");
+        await expect(page.getByRole("group", { name: "Sortie du terminal" })).toHaveText("");
+    });
+
+    test("the page itself never scrolls: only the editor does, even on a long page", async ({ page }) => {
+        const pageScroll = () =>
+            page.evaluate(() => ({
+                scrollHeight: document.documentElement.scrollHeight,
+                innerHeight: window.innerHeight,
+                scrollY: window.scrollY,
+            }));
+        await page.goto(at());
+        await ready(page);
+        await folderRow(page, "Pense-betes").click();
+        await fileItem(page, /installation-de-node-js\.md/).click();
+        await expect(page).toHaveURL(lpRe("fr", "/pense-betes/installation-de-node-js"));
+        await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+        // A long reminder: the editor overflows, the document must not (regression: visually hidden
+        // texts escaping the scroller added ~70px of page scroll and pushed the title bar away).
+        expect(await page.locator("#main").evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(true);
+        const after = await pageScroll();
+        expect(after.scrollHeight).toBe(after.innerHeight);
+        expect(after.scrollY).toBe(0);
+        await expect(page.getByRole("banner")).toBeInViewport();
+        await expect(tabs(page)).toBeInViewport();
     });
 
     test("light and dark themes repaint the shell", async ({ page }) => {
