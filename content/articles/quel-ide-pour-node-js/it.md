@@ -64,4 +64,4 @@ Sito ufficiale [qui][4].
 [plugin2]: https://github.com/timboudreau/nb-nodejs
 [plugin3]: https://github.com/adobe/brackets/wiki/Brackets-Node-Process:-Overview-for-Developers
 [plugin4]: https://github.com/DennisKehrig/brackets-v8-node-live
-[post1]: #!articles/quel-ide-pour-node-js#post-1376414889
+[post1]: /it/articoli/quale-ide-per-node-js

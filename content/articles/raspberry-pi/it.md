@@ -276,6 +276,6 @@ git commit -am "initial"
 git push origin master
 ```
 
-[samba]: #!reminders/samba
-[yeoman]: #!reminders/yeoman
+[samba]: /it/promemoria/server-di-condivisione-samba
+[yeoman]: /it/promemoria/grunt-yo-bower-yeoman
 [1]: http://nodejs.org/dist/

@@ -250,7 +250,7 @@ El código **completo** del proyecto está en [github][4] y la demo está [aquí
 
 Para la demo, fui a [bootsnipp][6] a buscar un ejemplo de páginas **acerca de** y **contacto** hechas para Bootstrap.
 
-[pb1]: #!reminders/angular-js
+[pb1]: /es/recordatorios/angular-fullstack
 [1]: http://angularjs.org/
 [2]: http://getbootstrap.com/css/
 [3]: http://fortawesome.github.io/Font-Awesome/
