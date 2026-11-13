@@ -1,6 +1,4 @@
-// THE SITE'S PAGE FRAME — owned by a derived site (replace the export, keep its name).
-// app/[locale]/layout.tsx renders `<SiteShell locale={locale}>{page}</SiteShell>` inside the
-// providers; the cookie banner, GTM and the splash loader stay outside it. The frame owns the
-// <main> landmark. Contract: `SiteShellProps` (lib/site-extension.ts). Axons uses its own frame
-// (header + main + footer); a site may export a Server or a Client Component of its own.
-export { DefaultShell as SiteShell } from "@/components/layout/DefaultShell";
+// EZJSDEV's page frame: the VS Code–like IDE shell (explorer, tabs, editor, preview, terminal,
+// status bar). Contract: Axons' `SiteShellProps` (lib/site-extension.ts); design notes in
+// components/site/ide/IdeShell.tsx and the tree model in site/explorer.ts.
+export { SiteShell } from "@/components/site/ide/SiteShell";

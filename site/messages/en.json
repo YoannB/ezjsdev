@@ -20,5 +20,62 @@
             "publishedOn": "Published on {date}",
             "onlyIn": "Only available in {language}"
         }
+    },
+    "ide": {
+        "skip": "Skip to content",
+        "explorer": "Explorer",
+        "files": "Site files",
+        "openExplorer": "Open the explorer",
+        "closeExplorer": "Close the explorer",
+        "activity": "Activity bar",
+        "tabs": "Open files",
+        "closeTab": "Close {label}",
+        "preview": "Preview",
+        "showPreview": "Show the preview",
+        "hidePreview": "Hide the preview",
+        "previewEmpty": "No file open.",
+        "previewUrl": "Page address:",
+        "openInNewTab": "Open the page in a new tab",
+        "searchPreview": "Search engine preview",
+        "previewLanguages": "Also available in",
+        "terminal": "Terminal",
+        "showTerminal": "Show the terminal",
+        "hideTerminal": "Hide the terminal",
+        "terminalLog": "Terminal output",
+        "statusbar": "Site links",
+        "tree": {
+            "home": "Home",
+            "about": "About",
+            "services": "Services",
+            "projects": "Projects",
+            "seoTools": "SEO-Tools",
+            "contact": "Contact",
+            "articles": "Articles",
+            "reminders": "Reminders",
+            "sitemap": "Sitemap",
+            "legal": "Legal-notice",
+            "privacy": "Privacy",
+            "cookies": "Cookies"
+        }
+    },
+    "siteHome": {
+        "kicker": "Yoann Barbier · Nantes, France",
+        "title": "Senior Full-Stack Lead — React, TypeScript, Node.js",
+        "lead": "Independent full-stack developer based in Nantes, I help companies and product teams design, architect and evolve modern web applications. I work mainly with JavaScript and TypeScript, with particular care for code quality, performance and robust solutions.",
+        "expertiseTitle": "Expertise",
+        "expertise": [
+            "Front-end and full-stack development",
+            "React.js and TypeScript",
+            "Node.js and NestJS",
+            "Web application architecture and redesign",
+            "SaaS, web and mobile applications",
+            "Performance optimization and scalability",
+            "Technical leadership, coordination and mentoring",
+            "Continuous integration and CI/CD pipelines",
+            "Code quality, testing and documentation",
+            "Vue / Nuxt, Angular, HTML and CSS"
+        ],
+        "remindersTitle": "Latest reminders",
+        "remindersAll": "All reminders"
     }
 }

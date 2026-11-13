@@ -1,0 +1,748 @@
+/* =====================================================================
+   ezjsdev — IDE shell (components/site/ide/*, components/site/home/*). Imported by site/theme.css,
+   itself imported LAST by app/globals.css: these rules win over Axons' styles at equal specificity.
+   Layout (spec v0.2 §8): CSS Grid, rem breakpoints (browser zoom switches layouts like a narrower
+   screen), panels scroll inside, never a horizontal page scroll.
+   - < 64rem (tablet/mobile): compact title bar, explorer in a drawer, editor full width, preview
+     and terminal as collapsible panels stacked below the editor, the DOCUMENT scrolls.
+   - >= 64rem (desktop): full-height app — activity bar | explorer | editor (+ preview) over the
+     terminal, status bar at the bottom; the editor is the scroller.
+   Panel states: data-preview / data-terminal = auto | open | closed. "auto" = closed below the
+   breakpoint where it fits (preview: 80rem, terminal: 64rem) — same queries as IdeShell.tsx.
+   ===================================================================== */
+
+.ide {
+    --ide-bar-h: 3.25rem;
+    --ide-row: 2rem;
+    --ide-panel-bg: var(--bg-1);
+    --ide-current: color-mix(in oklab, var(--accent-1) 22%, transparent);
+    --ide-hover: color-mix(in oklab, var(--text-1) 7%, transparent);
+    flex: 1 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+        "titlebar"
+        "workbench"
+        "status";
+    min-width: 0;
+    min-height: 100dvh;
+    background: var(--bg-0);
+}
+@media (pointer: coarse) {
+    .ide {
+        --ide-row: 2.75rem; /* touch targets */
+    }
+}
+
+/* Visually hidden, still read (accessible names of files, address label…). */
+.ide-sr,
+.ide-skip:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+.ide-skip:focus {
+    position: fixed;
+    z-index: 100;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-1);
+    color: var(--btn-fg);
+    font-weight: 600;
+}
+
+/* Generic icon button of the shell. */
+.ide-btn {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--text-2);
+    cursor: pointer;
+}
+.ide-btn:hover {
+    background: var(--ide-hover);
+    color: var(--text-1);
+}
+.ide :is(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: -2px;
+}
+
+/* ===== Title bar (header landmark) ===== */
+.ide-titlebar {
+    grid-area: titlebar;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    min-height: var(--ide-bar-h);
+    padding: 0.25rem 0.75rem;
+    border-bottom: 1px solid var(--border-1);
+    background: var(--bg-1);
+}
+.ide-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+}
+.ide-titlebar__tagline {
+    min-width: 0;
+    margin: 0;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--border-2);
+    overflow: hidden;
+    color: var(--text-2);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ide-titlebar__tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+@media (max-width: 47.99rem) {
+    .ide-titlebar__tagline {
+        display: none;
+    }
+}
+@media (max-width: 29.99rem) {
+    /* Logo only: the link keeps aria-label={SITE_NAME}. */
+    .ide-brand__name {
+        display: none;
+    }
+    .ide-titlebar .lang__btn {
+        font-size: 0;
+    }
+    .ide-titlebar .lang__flag,
+    .ide-titlebar .lang__caret {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== Activity bar (desktop only) ===== */
+.ide-activity {
+    display: none;
+}
+.ide-activity__item {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 3rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+}
+.ide-activity__item:hover,
+.ide-activity__item.is-active {
+    color: var(--text-1);
+}
+.ide-activity__item.is-active::before {
+    content: "";
+    position: absolute;
+    inset: 0.5rem auto 0.5rem 0;
+    width: 2px;
+    background: var(--accent-2);
+}
+.ide-activity__item--end {
+    margin-top: auto;
+}
+
+/* ===== Explorer ===== */
+.ide-explorer {
+    min-width: 0;
+    background: var(--ide-panel-bg);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+}
+.ide-explorer__title {
+    margin: 0;
+    padding: 0.75rem 1rem 0.5rem;
+    color: var(--text-2);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.ide-tree,
+.ide-tree__group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ide-tree {
+    padding-bottom: 1rem;
+}
+.ide-tree__group.is-collapsed {
+    display: none;
+}
+.ide-tree__folder:focus-visible > .ide-tree__row {
+    outline: 2px solid var(--accent-2);
+    outline-offset: -2px;
+}
+.ide-tree__folder:focus-visible {
+    outline: none;
+}
+.ide-tree__item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: var(--ide-row);
+    padding: 0 0.75rem 0 calc(0.4rem + (var(--ide-depth) - 1) * 0.85rem);
+    color: var(--text-2);
+    cursor: pointer;
+    user-select: none;
+}
+.ide-tree__file {
+    padding-left: calc(0.4rem + (var(--ide-depth) - 1) * 0.85rem + 1.2rem);
+}
+.ide-tree__item:hover {
+    background: var(--ide-hover);
+    color: var(--text-1);
+}
+.ide-tree__file.is-current {
+    background: var(--ide-current);
+    color: var(--text-1);
+    box-shadow: inset 2px 0 0 var(--accent-2); /* not colour alone: a bar marks the current file */
+}
+.ide-tree__name {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ide-tree__chevron {
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+}
+.ide-tree__chevron.is-open {
+    transform: rotate(90deg);
+}
+.ide-icon {
+    flex-shrink: 0;
+}
+.ide-icon--folder,
+.ide-icon--folderOpen {
+    color: var(--accent-2);
+}
+.ide-icon--tsx {
+    color: var(--accent-1);
+}
+.ide-icon--md {
+    color: var(--muted);
+}
+
+/* Drawer (< 64rem): off-canvas, hidden from the a11y tree when closed (visibility). */
+.ide-explorer {
+    position: fixed;
+    z-index: 25;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: min(20rem, 86vw);
+    padding-top: var(--ide-bar-h);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-right: 1px solid var(--border-1);
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition:
+        transform 0.2s ease,
+        visibility 0.2s;
+}
+.ide.is-drawer-open .ide-explorer {
+    transform: none;
+    visibility: visible;
+    /* Visible at once on open (so the focus can move in), hidden only after the slide on close. */
+    transition:
+        transform 0.2s ease,
+        visibility 0s;
+}
+.ide-backdrop {
+    display: none;
+}
+.ide.is-drawer-open .ide-backdrop {
+    display: block;
+    position: fixed;
+    z-index: 24;
+    inset: 0;
+    border: 0;
+    background: rgb(2 6 16 / 0.55);
+}
+
+/* ===== Workbench: tabs, editor, preview, terminal ===== */
+.ide-workbench {
+    grid-area: workbench;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.ide-editor-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.ide-tabs {
+    position: sticky;
+    top: var(--ide-bar-h);
+    z-index: 20;
+    background: var(--ide-panel-bg);
+}
+.ide-tabs .tabs__tab {
+    max-width: 16rem;
+}
+.ide-tabs .tabs__trigger {
+    min-height: 2.5rem;
+    font-family: var(--font-mono);
+}
+.ide-split {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.ide-editor {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.ide-editor:focus {
+    outline: none;
+}
+
+/* Panels (preview, terminal): the bar stays, the body collapses. */
+.ide-panel {
+    min-width: 0;
+    border-top: 1px solid var(--border-1);
+    background: var(--ide-panel-bg);
+}
+.ide-panel__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-height: 2.5rem;
+    padding: 0 0.5rem 0 0.9rem;
+}
+.ide-panel__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    margin: 0;
+    color: var(--text-2);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.ide-panel__body {
+    min-width: 0;
+    padding: 0 0.9rem 0.9rem;
+}
+.ide-panel__chevron {
+    transform: rotate(-90deg); /* open: "collapse up" */
+    transition: transform 0.15s ease;
+}
+.ide-panel[data-state="closed"] .ide-panel__body {
+    display: none;
+}
+.ide-panel[data-state="closed"] .ide-panel__chevron {
+    transform: rotate(90deg);
+}
+@media (max-width: 79.99rem) {
+    .ide-panel--preview[data-state="auto"] .ide-panel__body {
+        display: none;
+    }
+    .ide-panel--preview[data-state="auto"] .ide-panel__chevron {
+        transform: rotate(90deg);
+    }
+}
+@media (max-width: 63.99rem) {
+    .ide-panel--terminal[data-state="auto"] .ide-panel__body {
+        display: none;
+    }
+    .ide-panel--terminal[data-state="auto"] .ide-panel__chevron {
+        transform: rotate(90deg);
+    }
+}
+.ide-panel--terminal .terminal {
+    border-radius: var(--radius-sm);
+}
+
+/* Preview body */
+.ide-preview {
+    display: grid;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+.ide-preview__empty {
+    margin: 0;
+    color: var(--muted);
+}
+.ide-preview__address {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-width: 0;
+    padding: 0.2rem 0.2rem 0.2rem 0.75rem;
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    background: var(--bg-0);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+.ide-preview__url {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--text-2);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ide-preview__caption {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.ide-serp {
+    margin: 0;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+}
+.ide-serp p {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+.ide-serp__url {
+    color: var(--text-2);
+    font-size: 0.8rem;
+}
+.ide-serp__title {
+    margin-top: 0.2rem !important;
+    color: var(--accent-1);
+    font-size: 1.05rem;
+    line-height: 1.3;
+}
+[data-theme="dark"] .ide-serp__title {
+    color: #7fb0ff; /* 7.4:1 on --surface-1 */
+}
+.ide-serp__desc {
+    margin-top: 0.3rem !important;
+    color: var(--text-2);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.ide-preview__langs ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.ide-preview__langs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0.15rem 0.65rem;
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    color: var(--text-1);
+}
+.ide-preview__langs a:hover {
+    border-color: var(--accent-2);
+}
+
+/* ===== Status bar (contentinfo) ===== */
+.ide-statusbar {
+    grid-area: status;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    min-width: 0;
+    padding: 0.35rem 0.9rem;
+    border-top: 1px solid var(--border-1);
+    background: var(--bg-1);
+    color: var(--text-2);
+    font-size: 0.8rem;
+}
+.ide-statusbar__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.9rem;
+    min-width: 0;
+}
+.ide-statusbar__links a,
+.ide-statusbar__btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+.ide-statusbar__links a:hover,
+.ide-statusbar__btn:hover {
+    color: var(--text-1);
+    text-decoration: underline;
+}
+.ide-statusbar__meta {
+    margin: 0;
+    color: var(--muted);
+}
+@media (pointer: coarse) {
+    .ide-statusbar__links a,
+    .ide-statusbar__btn {
+        min-height: 2.75rem;
+    }
+}
+
+/* ===== Desktop: full-height application ===== */
+@media (min-width: 64rem) {
+    .ide {
+        height: 100dvh;
+        min-height: 0;
+        grid-template-columns: 3rem minmax(13rem, 17rem) minmax(0, 1fr);
+        grid-template-areas:
+            "titlebar titlebar titlebar"
+            "activity explorer workbench"
+            "status status status";
+    }
+    .ide[data-sidebar="closed"] {
+        grid-template-columns: 3rem 0 minmax(0, 1fr);
+    }
+    .ide-titlebar__menu,
+    .ide-backdrop,
+    .ide.is-drawer-open .ide-backdrop {
+        display: none;
+    }
+    .ide-activity {
+        grid-area: activity;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        border-right: 1px solid var(--border-1);
+        background: var(--bg-1);
+    }
+    .ide-explorer,
+    .ide.is-drawer-open .ide-explorer {
+        grid-area: explorer;
+        position: static;
+        width: auto;
+        padding-top: 0;
+        transform: none;
+        visibility: visible;
+        transition: none;
+    }
+    .ide[data-sidebar="closed"] .ide-explorer {
+        display: none;
+    }
+    .ide-workbench {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        min-height: 0;
+        border-left: 1px solid var(--border-1);
+    }
+    .ide-editor-group {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        min-height: 0;
+    }
+    .ide-tabs {
+        position: static;
+    }
+    .ide-split {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        min-height: 0;
+    }
+    .ide-editor {
+        min-height: 0;
+        overflow-y: auto;
+    }
+    /* Preview = right column; closed = a slim strip with its toggle. */
+    .ide-panel--preview {
+        display: flex;
+        flex-direction: column;
+        width: clamp(17rem, 26vw, 25rem);
+        min-height: 0;
+        border-top: 0;
+        border-left: 1px solid var(--border-1);
+    }
+    .ide-panel--preview .ide-panel__body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+    }
+    .ide-panel--preview .ide-panel__chevron {
+        transform: none; /* open: points right, "collapse to the right" */
+    }
+    .ide-panel--preview[data-state="closed"] {
+        width: 2.75rem;
+    }
+    .ide-panel--preview[data-state="closed"] .ide-panel__bar {
+        padding: 0.25rem;
+        justify-content: center;
+    }
+    .ide-panel--preview[data-state="closed"] .ide-panel__title {
+        display: none;
+    }
+    .ide-panel--preview[data-state="closed"] .ide-panel__chevron {
+        transform: rotate(180deg);
+    }
+    .ide-panel--terminal .ide-panel__body {
+        max-height: 30vh;
+        overflow-y: auto;
+    }
+}
+@media (min-width: 64rem) and (max-width: 79.99rem) {
+    .ide-panel--preview[data-state="auto"] {
+        width: 2.75rem;
+    }
+    .ide-panel--preview[data-state="auto"] .ide-panel__bar {
+        padding: 0.25rem;
+        justify-content: center;
+    }
+    .ide-panel--preview[data-state="auto"] .ide-panel__title {
+        display: none;
+    }
+    .ide-panel--preview[data-state="auto"] .ide-panel__chevron {
+        transform: rotate(180deg);
+    }
+}
+
+/* ===== Editor (reading zone, spec §6.3): pages render inside, flattened ===== */
+.ide-editor .static-page,
+.ide-editor .ez-home,
+.ide-editor .not-found {
+    max-width: 52rem;
+    margin: 0;
+    padding: 1.25rem clamp(1rem, 3vw, 2.5rem) 3rem;
+}
+.ide-editor .static-page__card {
+    margin-top: 0.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+}
+.ide-editor .static-page__body {
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+/* Line numbers in the gutter, one per block: staging only (spec §6.3), not read aloud
+   (alternative text "" on the generated content). Starting at 1 on every page. */
+.ide-editor {
+    counter-reset: ide-line;
+}
+.ide-editor :is(.static-page__card, .ez-home__doc) {
+    position: relative;
+    padding-left: 3rem;
+}
+.ide-editor :is(.static-page__card, .ez-home__doc) :is(h1, h2, h3, p, li, pre, blockquote, table)::before {
+    counter-increment: ide-line;
+    content: counter(ide-line) / "";
+    position: absolute;
+    left: 0;
+    width: 2rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: inherit;
+    text-align: right;
+    opacity: 0.75;
+}
+.ide-editor :is(.static-page__card, .ez-home__doc) :is(li, pre, blockquote, table) :is(p, li, pre)::before {
+    content: none; /* nested blocks share their parent's number */
+}
+@media (max-width: 29.99rem) {
+    .ide-editor :is(.static-page__card, .ez-home__doc) {
+        padding-left: 0;
+    }
+    .ide-editor :is(.static-page__card, .ez-home__doc) :is(h1, h2, h3, p, li, pre, blockquote, table)::before {
+        content: none;
+    }
+}
+
+/* Home body */
+.ez-home__intro {
+    margin-bottom: 1.5rem;
+}
+.ez-home__kicker {
+    margin: 0;
+    color: var(--accent-2);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+}
+.ez-home__title {
+    margin: 0.35rem 0 0.75rem;
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+    line-height: 1.2;
+}
+.ez-home__lead {
+    margin: 0;
+    color: var(--text-2);
+    font-size: 1.05rem;
+    line-height: 1.65;
+}
+.ide-editor .ez-home .section {
+    margin: 0;
+    padding: 1.25rem 0 0;
+}
+.ez-home__expertise ul {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--text-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ide-explorer,
+    .ide-tree__chevron,
+    .ide-panel__chevron {
+        transition: none;
+    }
+}

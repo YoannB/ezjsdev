@@ -1,3 +1,6 @@
+/* The IDE shell (page frame) has its own file; @import must precede every rule. */
+@import "./ide.css";
+
 /* =====================================================================
    ezjsdev — site identity styles (imported LAST by app/globals.css, so these rules win over
    Axons' styles/tokens.css and styles/ui/logo.css at equal specificity). Owned by the site; MUI is kept

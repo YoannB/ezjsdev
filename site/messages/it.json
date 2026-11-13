@@ -20,5 +20,62 @@
             "publishedOn": "Pubblicato il {date}",
             "onlyIn": "Disponibile solo in {language}"
         }
+    },
+    "ide": {
+        "skip": "Vai al contenuto",
+        "explorer": "Esplora risorse",
+        "files": "File del sito",
+        "openExplorer": "Apri l'esplora risorse",
+        "closeExplorer": "Chiudi l'esplora risorse",
+        "activity": "Barra delle attività",
+        "tabs": "File aperti",
+        "closeTab": "Chiudi {label}",
+        "preview": "Anteprima",
+        "showPreview": "Mostra l'anteprima",
+        "hidePreview": "Nascondi l'anteprima",
+        "previewEmpty": "Nessun file aperto.",
+        "previewUrl": "Indirizzo della pagina:",
+        "openInNewTab": "Apri la pagina in una nuova scheda",
+        "searchPreview": "Anteprima in un motore di ricerca",
+        "previewLanguages": "Disponibile anche in",
+        "terminal": "Terminale",
+        "showTerminal": "Mostra il terminale",
+        "hideTerminal": "Nascondi il terminale",
+        "terminalLog": "Output del terminale",
+        "statusbar": "Link del sito",
+        "tree": {
+            "home": "Home",
+            "about": "Chi-sono",
+            "services": "Servizi",
+            "projects": "Progetti",
+            "seoTools": "Strumenti-SEO",
+            "contact": "Contatti",
+            "articles": "Articoli",
+            "reminders": "Promemoria",
+            "sitemap": "Mappa-del-sito",
+            "legal": "Note-legali",
+            "privacy": "Privacy",
+            "cookies": "Cookie"
+        }
+    },
+    "siteHome": {
+        "kicker": "Yoann Barbier · Nantes, Francia",
+        "title": "Lead Full-Stack Senior — React, TypeScript, Node.js",
+        "lead": "Sviluppatore full-stack indipendente con sede a Nantes, affianco aziende e team di prodotto nella progettazione, nell'architettura e nell'evoluzione di applicazioni web moderne. Lavoro principalmente con JavaScript e TypeScript, con particolare attenzione alla qualità del codice, alle prestazioni e alla solidità delle soluzioni.",
+        "expertiseTitle": "Competenze",
+        "expertise": [
+            "Sviluppo front-end e full-stack",
+            "React.js e TypeScript",
+            "Node.js e NestJS",
+            "Architettura e rifacimento di applicazioni web",
+            "Applicazioni SaaS, web e mobile",
+            "Ottimizzazione delle prestazioni e scalabilità",
+            "Leadership tecnica, coordinamento e mentoring",
+            "Integrazione continua e pipeline CI/CD",
+            "Qualità del codice, test e documentazione",
+            "Vue / Nuxt, Angular, HTML e CSS"
+        ],
+        "remindersTitle": "Ultimi promemoria",
+        "remindersAll": "Tutti i promemoria"
     }
 }
