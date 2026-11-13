@@ -5,6 +5,7 @@ const NAMES: IdeIconName[] = [
     "files",
     "article",
     "note",
+    "mail",
     "tree",
     "github",
     "preview",

@@ -5,7 +5,7 @@ import type { LogicalHref } from "@/lib/seo";
 // opens (logical hrefs of routing.pathnames, Axons' + site/config.ts). Folder names live in
 // site/messages/<locale>.json under `ide.tree`; page titles/descriptions reuse the pages' messages.
 // Model and rules: components/site/ide/tree-model.ts. Spec v0.2 §5 (tree) and §6.1 (no file
-// without a real page): the future pages are declared `planned` and stay hidden until they exist.
+// without a real page): a future page (SEO tools) is declared `planned` and stays hidden until it exists.
 export const EXPLORER = [
     {
         kind: "folder",
@@ -23,13 +23,60 @@ export const EXPLORER = [
             },
         ],
     },
-    // Planned (spec §5.2–§5.6): add the route to site/config.ts `pathnames`, the page, then a
-    // `page` child here and drop `planned`.
-    { kind: "folder", id: "about", labelKey: "about", planned: true, children: [] },
-    { kind: "folder", id: "services", labelKey: "services", planned: true, children: [] },
-    { kind: "folder", id: "projects", labelKey: "projects", planned: true, children: [] },
+    // About is staged as the Markdown document of spec §5 ("A-propos/contenu.md"), its name
+    // localized like the folder's (`ide.fileNames.about`).
+    {
+        kind: "folder",
+        id: "about",
+        labelKey: "about",
+        defaultOpen: true,
+        children: [
+            {
+                kind: "page",
+                id: "about/page",
+                name: "contenu.md",
+                nameKey: "ide.fileNames.about",
+                route: "/about",
+                titleKey: "pages.about.title",
+                descriptionKey: "pages.about.intro",
+            },
+        ],
+    },
+    {
+        kind: "folder",
+        id: "services",
+        labelKey: "services",
+        defaultOpen: true,
+        children: [
+            {
+                kind: "page",
+                id: "services/page",
+                name: "page.tsx",
+                route: "/services",
+                titleKey: "pages.services.title",
+                descriptionKey: "pages.services.intro",
+            },
+        ],
+    },
+    {
+        kind: "folder",
+        id: "projects",
+        labelKey: "projects",
+        defaultOpen: true,
+        children: [
+            {
+                kind: "page",
+                id: "projects/page",
+                name: "page.tsx",
+                route: "/projects",
+                titleKey: "pages.projects.title",
+                descriptionKey: "pages.projects.intro",
+            },
+        ],
+    },
+    // Planned (spec §5.5): no real SEO tool exists yet. Add the route to site/config.ts
+    // `pathnames`, the page, then a `page` child here and drop `planned`.
     { kind: "folder", id: "seo-tools", labelKey: "seoTools", planned: true, children: [] },
-    { kind: "folder", id: "contact", labelKey: "contact", planned: true, children: [] },
     {
         kind: "folder",
         id: "articles",
@@ -60,6 +107,22 @@ export const EXPLORER = [
                 descriptionKey: "pages.reminders.intro",
             },
             { kind: "collection", id: "reminders", collection: "reminders" },
+        ],
+    },
+    {
+        kind: "folder",
+        id: "contact",
+        labelKey: "contact",
+        defaultOpen: true,
+        children: [
+            {
+                kind: "page",
+                id: "contact/page",
+                name: "page.tsx",
+                route: "/contact",
+                titleKey: "pages.contact.title",
+                descriptionKey: "pages.contact.intro",
+            },
         ],
     },
     {
