@@ -746,3 +746,34 @@
         transition: none;
     }
 }
+
+/* ===== Storybook harnesses (components/site/ide/*.stories.tsx): a shell fragment in normal flow ===== */
+.ide.ide--story {
+    display: block;
+    min-height: 0;
+    max-width: 24rem;
+    padding: 0.5rem;
+}
+.ide--story .ide-explorer {
+    position: static;
+    width: auto;
+    padding-top: 0;
+    transform: none;
+    visibility: visible;
+}
+.ide-icon-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--text-1);
+}
+.ide-icon-gallery li {
+    display: grid;
+    justify-items: center;
+    gap: 0.35rem;
+    width: 4.5rem;
+    font-size: 0.75rem;
+}
