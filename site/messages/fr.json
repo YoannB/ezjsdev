@@ -1,6 +1,7 @@
 {
     "nav": {
-        "tagline": "Sites web & applications — React, TypeScript, Node.js"
+        "tagline": "Sites web & applications — React, TypeScript, Node.js",
+        "reminders": "Pense-bêtes"
     },
     "footer": {
         "tagline": "Développement full-stack indépendant, basé à Nantes."
@@ -9,6 +10,15 @@
         "home": {
             "title": "ezjsdev — Développeur full-stack React, TypeScript, Node.js à Nantes",
             "description": "Yoann Barbier, développeur full-stack indépendant basé à Nantes : conception, architecture et évolution d'applications web avec React, TypeScript et Node.js."
+        }
+    },
+    "pages": {
+        "reminders": {
+            "title": "Pense-bêtes",
+            "intro": "Aide-mémoire techniques rédigés entre 2013 et 2017, conservés tels quels en archive.",
+            "empty": "Aucun pense-bête pour le moment.",
+            "publishedOn": "Publié le {date}",
+            "onlyIn": "Disponible uniquement en {language}"
         }
     }
 }

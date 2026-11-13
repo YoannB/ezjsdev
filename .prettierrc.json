@@ -11,7 +11,7 @@
     "endOfLine": "lf",
     "overrides": [
         {
-            "files": "content/articles/**/*.md",
+            "files": "content/**/*.md",
             "options": {
                 "embeddedLanguageFormatting": "off"
             }

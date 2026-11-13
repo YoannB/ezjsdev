@@ -4,8 +4,25 @@ import type { SiteConfig } from "@/lib/site-extension";
 // locales, layout constants) stays in Axons' constants/site.ts, which re-exports these values.
 // Contract and merge rules: lib/site-extension.ts; guide: docs/architecture.md → Deriving a site.
 
-// The site's own localized routes (none yet: the IDE shell pages come later).
-const pathnames = {} as const;
+// The site's own localized routes. [slug] = the TRANSLATED slug of the entry (front matter).
+const pathnames = {
+    "/reminders": {
+        fr: "/pense-betes",
+        en: "/reminders",
+        es: "/recordatorios",
+        de: "/merkzettel",
+        it: "/promemoria",
+        pt: "/lembretes",
+    },
+    "/reminders/[slug]": {
+        fr: "/pense-betes/[slug]",
+        en: "/reminders/[slug]",
+        es: "/recordatorios/[slug]",
+        de: "/merkzettel/[slug]",
+        it: "/promemoria/[slug]",
+        pt: "/lembretes/[slug]",
+    },
+} as const;
 
 export const SITE = {
     name: "ezjsdev",
@@ -57,9 +74,18 @@ export const SITE = {
     ],
     heroVideoId: "jzdTBDmCAKE",
     pathnames,
-    nav: [],
-    // Markdown collections besides the articles (the reminders come in their own PR).
-    collections: [],
+    nav: [{ href: "/reminders", key: "nav.reminders" }],
+    // Markdown collections besides the articles: the old site's "pense-bêtes" (2013–2017 archives).
+    collections: [
+        {
+            id: "reminders",
+            enabled: true,
+            href: "/reminders",
+            itemHref: "/reminders/[slug]",
+            namespace: "pages.reminders",
+            schemaType: "TechArticle",
+        },
+    ],
     // Axons copy replaced on purpose by site/messages/<locale>.json.
     messageOverrides: ["meta.home", "footer.tagline"],
 } as const satisfies SiteConfig<typeof pathnames>;

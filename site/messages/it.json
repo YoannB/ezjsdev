@@ -1,6 +1,7 @@
 {
     "nav": {
-        "tagline": "Siti web e applicazioni — React, TypeScript, Node.js"
+        "tagline": "Siti web e applicazioni — React, TypeScript, Node.js",
+        "reminders": "Promemoria"
     },
     "footer": {
         "tagline": "Sviluppo full-stack freelance, con sede a Nantes (Francia)."
@@ -9,6 +10,15 @@
         "home": {
             "title": "ezjsdev — Sviluppatore full-stack React, TypeScript, Node.js a Nantes",
             "description": "Yoann Barbier, sviluppatore full-stack freelance con sede a Nantes (Francia): progettazione, architettura ed evoluzione di applicazioni web con React, TypeScript e Node.js."
+        }
+    },
+    "pages": {
+        "reminders": {
+            "title": "Promemoria",
+            "intro": "Appunti tecnici scritti tra il 2013 e il 2017, conservati così come sono, come archivio.",
+            "empty": "Ancora nessun promemoria.",
+            "publishedOn": "Pubblicato il {date}",
+            "onlyIn": "Disponibile solo in {language}"
         }
     }
 }
