@@ -1,8 +1,8 @@
 {
-    "name": "axons",
+    "name": "ezjsdev",
     "author": "Yoann Barbier (EZJSDEV)",
     "license": "AGPL-3.0-only",
-    "version": "0.9.0",
+    "version": "0.1.0",
     "private": true,
     "type": "module",
     "engines": {
