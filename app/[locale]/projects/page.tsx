@@ -1,13 +1,12 @@
 import { StaticPage } from "@/components/content/StaticPage";
-import { visibleFigures } from "@/components/site/content/profile-model";
 import { Link } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
-import { PROJECT_SETTINGS, PROJECTS } from "@/site/profile";
-import { getFormatter, getTranslations } from "next-intl/server";
+import { PROJECTS } from "@/site/profile";
+import { getTranslations } from "next-intl/server";
 
-// EZJSDEV — Projects (spec v0.2 §5.4): context, exact role, contribution, real technologies, and a
-// result ONLY when documented and cleared for publication (site/profile.ts `publishFigures`).
-// No other client reference (§3.4). Copy: site/messages → `pages.projects.items.<id>`.
+// EZJSDEV — Projects (spec v0.2 §5.4): context, exact role, contribution, real technologies and
+// links. No figure (user decision: none of the CV figures is published) and no other client
+// reference (§3.4). Copy: site/messages → `pages.projects.items.<id>`.
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
@@ -20,7 +19,6 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
     const t = await getTranslations({ locale, namespace: "pages.projects" });
     const tn = await getTranslations({ locale, namespace: "nav" });
     const ts = await getTranslations({ locale, namespace: "showcase" });
-    const format = await getFormatter({ locale });
     return (
         <StaticPage
             title={t("title")}
@@ -31,15 +29,6 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                     {PROJECTS.map((project) => {
                         const p = (key: string) => t(`items.${project.id}.${key}`);
                         const contribution = t.raw(`items.${project.id}.contribution`) as string[];
-                        const figures = visibleFigures(project, PROJECT_SETTINGS.publishFigures);
-                        const values = Object.fromEntries(
-                            figures.map((f) => [
-                                f.key,
-                                f.style === "percent"
-                                    ? format.number(f.value, { style: "percent" })
-                                    : format.number(f.value),
-                            ]),
-                        );
                         const headingId = `project-${project.id}`;
                         return (
                             <section
@@ -69,12 +58,6 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                                         <li key={tech}>{tech}</li>
                                     ))}
                                 </ul>
-                                {figures.length ? (
-                                    <>
-                                        <h3>{t("result")}</h3>
-                                        <p className="ez-project__result">{t(`items.${project.id}.result`, values)}</p>
-                                    </>
-                                ) : null}
                                 {project.links.length ? (
                                     <>
                                         <h3>{t("linksTitle")}</h3>

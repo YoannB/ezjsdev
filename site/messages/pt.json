@@ -124,7 +124,6 @@
             "role": "Papel",
             "contribution": "Contributo",
             "stack": "Tecnologias",
-            "result": "Resultado",
             "linksTitle": "Ligações",
             "newTab": "(abre num novo separador)",
             "links": {
@@ -155,8 +154,7 @@
                         "Desenvolvimento do produto, do protótipo a uma versão escalável",
                         "Microsserviços, Socket.IO, cache em memória e balanceamento de carga",
                         "Geração de documentos PDF"
-                    ],
-                    "result": "Mais de {users} utilizadores e uma taxa de participação de {participation}."
+                    ]
                 }
             },
             "nextTitle": "Para continuar"

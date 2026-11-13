@@ -1,7 +1,7 @@
 import type { ProjectDecl } from "@/components/site/content/profile-model";
 
 // EZJSDEV — the facts behind the content pages (About, Projects, Contact) that are NOT copy:
-// links, contact details, technology names and the CV figures. The copy itself (6 locales) lives
+// links, contact details and technology names. The copy itself (6 locales) lives
 // in site/messages/<locale>.json under `pages.about`, `pages.projects`, `pages.contact`.
 // Sources: spec v0.2 §3.1, §3.3, §5.4, §5.6 and the user's decisions (pro e-mail, LinkedIn first).
 
@@ -16,16 +16,8 @@ export const PROFILE = {
     knowsAbout: ["React", "TypeScript", "Node.js", "NestJS", "Vue.js", "Nuxt", "Angular"],
 } as const;
 
-export const PROJECT_SETTINGS = {
-    /**
-     * Publish the myKeople figures of the CV (spec §3.1, §5.4: "sous réserve que la publication de
-     * ces informations soit toujours autorisée"). Kept OUT of the messages on purpose: messages are
-     * sent to the client, so a figure stored there would ship in every page even when hidden.
-     */
-    publishFigures: false,
-} as const;
-
-// Order = display order (Projects page, home preview). Copy: `pages.projects.items.<id>`.
+// Order = display order (Projects page, home preview): Axons first, myKeople presented soberly
+// (context, role, stack) with NO figure (user decision). Copy: `pages.projects.items.<id>`.
 export const PROJECTS = [
     {
         id: "axons",
@@ -46,7 +38,6 @@ export const PROJECTS = [
             { key: "source", href: "https://github.com/YoannB/axons" },
             { key: "preview", href: "https://axons-preview.netlify.app/fr" },
         ],
-        figures: [],
     },
     {
         id: "mykeople",
@@ -54,10 +45,5 @@ export const PROJECTS = [
         // Spec §3.3: "Architecture MEAN … microservices, Socket.IO".
         stack: ["MongoDB", "Express", "Angular", "Node.js", "Socket.IO"],
         links: [],
-        // Spec §3.1 / §3.3 (CV): "plus de 16 000 utilisateurs", "93 % de taux de participation".
-        figures: [
-            { key: "users", value: 16000, style: "integer" },
-            { key: "participation", value: 0.93, style: "percent" },
-        ],
     },
 ] as const satisfies readonly ProjectDecl[];

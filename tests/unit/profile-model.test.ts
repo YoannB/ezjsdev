@@ -1,27 +1,9 @@
-import { profileJsonLd, visibleFigures, type ProjectDecl } from "@/components/site/content/profile-model";
-import { PROFILE, PROJECT_SETTINGS, PROJECTS } from "@/site/profile";
+import { profileJsonLd } from "@/components/site/content/profile-model";
+import { PROFILE, PROJECTS } from "@/site/profile";
 import { describe, expect, it } from "vitest";
 
-// PURE rules of ezjsdev's content pages (components/site/content/profile-model.ts) and the facts
-// declared in site/profile.ts (spec v0.2 §3.1, §3.4, §5.4, §5.6).
-
-const project: ProjectDecl = {
-    id: "p",
-    current: false,
-    stack: ["Node.js"],
-    links: [],
-    figures: [{ key: "users", value: 10, style: "integer" }],
-};
-
-describe("visibleFigures", () => {
-    it("hides every figure until their publication is enabled", () => {
-        expect(visibleFigures(project, false)).toEqual([]);
-    });
-
-    it("returns the documented figures once publication is enabled", () => {
-        expect(visibleFigures(project, true)).toEqual(project.figures);
-    });
-});
+// schema.org data of the About page (components/site/content/profile-model.ts) and the facts
+// declared in site/profile.ts (spec v0.2 §3.1, §3.4, §5.4, §5.6; no CV figure is published).
 
 describe("profileJsonLd", () => {
     const facts = {
@@ -64,13 +46,12 @@ describe("profileJsonLd", () => {
 });
 
 describe("site/profile.ts — the published facts", () => {
-    it("keeps the myKeople figures unpublished by default (spec §5.4: publication to confirm)", () => {
-        expect(PROJECT_SETTINGS.publishFigures).toBe(false);
-        for (const p of PROJECTS) expect(visibleFigures(p, PROJECT_SETTINGS.publishFigures)).toEqual([]);
+    it("presents Axons first, then myKeople, and nothing else (no client reference: spec §3.4)", () => {
+        expect(PROJECTS.map((p) => p.id)).toEqual(["axons", "mykeople"]);
     });
 
-    it("presents only Axons and myKeople (no client reference: spec §3.4)", () => {
-        expect(PROJECTS.map((p) => p.id)).toEqual(["axons", "mykeople"]);
+    it("declares no figure for any project (none of the CV figures is published)", () => {
+        for (const p of PROJECTS) expect(Object.keys(p)).toEqual(["id", "current", "stack", "links"]);
     });
 
     it("contacts through LinkedIn and the professional e-mail only", () => {
