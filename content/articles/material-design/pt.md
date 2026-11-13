@@ -6,7 +6,7 @@ description: "Material Design: um template simples para começar."
 image: /articles/material-design/material-design.css.png
 ---
 
-Criação de um arquivo css para usar facilmente todas as cores do Material Design, disponível com bower [AQUI][3], e de um arquivo para o Design [AQUI][4].
+Criação de um ficheiro css para utilizar facilmente todas as cores do Material Design, disponível com bower [AQUI][3], e de um ficheiro para o Design [AQUI][4].
 
 Montagem de uma página Material Design simples com Angular, UI Bootstrap, Bootstrap e Font-Awesome:
 

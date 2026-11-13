@@ -19,7 +19,7 @@ Primeiros passos com os módulos
     var conf = require('./config');
     // conf.prop1
     // conf.prop2
-    /* arquivo /config/index.js ou /PATH/config.js */
+    /* ficheiro /config/index.js ou /PATH/config.js */
     module.exports = {
         prop1:"val1",
         prop2:"val2"
@@ -31,7 +31,7 @@ Primeiros passos com os módulos
     ```javascript
     var server = require('./server');
     server.newMethod();
-    /* arquivo /server/index.js ou /PATH/server.js */
+    /* ficheiro /server/index.js ou /PATH/server.js */
     var app = express();
     app.newMethod = function () {
 
@@ -44,7 +44,7 @@ Primeiros passos com os módulos
     ```javascript
     var db = require('./db');
     var handler = require('./handler')(db);
-    /* arquivo /handler/index.js ou /PATH/handler.js */
+    /* ficheiro /handler/index.js ou /PATH/handler.js */
     module.exports = function (db) {
         console.log("db="+db);
     };
@@ -54,7 +54,7 @@ Primeiros passos com os módulos
 
     ```javascript
     var utils = require('./utils');
-    /* arquivo /utils/index.js ou /PATH/utils.js */
+    /* ficheiro /utils/index.js ou /PATH/utils.js */
     exports.method1 = function (arg) {
         console.log("arg="+arg);
     };
@@ -65,7 +65,7 @@ Primeiros passos com os módulos
 
 ## Projeto simples de exemplo
 
-É preciso criar um primeiro arquivo **package.json** contendo:
+É preciso criar um primeiro ficheiro **package.json** com:
 
 ```javascript
 {
@@ -89,7 +89,7 @@ Primeiros passos com os módulos
 }
 ```
 
-Em seguida, criar um segundo arquivo **hello-world-server.js** contendo:
+Em seguida, criar um segundo ficheiro **hello-world-server.js** com:
 
 ```javascript
 var http = require('http');
@@ -112,7 +112,7 @@ E o resultado pode ser visto diretamente em http://127.0.0.1:1337/.
 
 ## Testes
 
-O Node.JS permite fazer testes avançados; para isso, começamos instalando as dependências:
+O Node.JS permite fazer testes avançados; para isso, começamos por instalar as dependências:
 
 ```bash
 npm install -g karma
@@ -124,7 +124,7 @@ Exemplo em breve...
 
 ## Versionamento
 
-Uso do Git como ferramenta de versionamento, instalação das dependências:
+Utilização do Git como ferramenta de versionamento, instalação das dependências:
 
 ```bash
 sudo apt-get install git

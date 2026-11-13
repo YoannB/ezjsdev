@@ -31,7 +31,7 @@ Para começar, é preciso adicionar as tags script no fim do body:
     <script src="main.js"></script>
     ```
 
-> **Nota:** colocando os scripts no fim do body, o angular carrega sozinho.
+> **Nota:** ao colocar os scripts no fim do body, o angular carrega sozinho.
 
 ### A declaração
 
@@ -49,7 +49,7 @@ Em seguida, na página html, é preciso adicionar as diretivas:
     <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="angularApp">
     ```
 
-- ng-view (o contêiner no qual as páginas serão carregadas)
+- ng-view (o contentor no qual as páginas serão carregadas)
 
     ```html
     <div class="container" ng-view></div>
@@ -59,7 +59,7 @@ Em seguida, na página html, é preciso adicionar as diretivas:
 
 #### As rotas
 
-A página HTML está pronta; passemos à configuração da aplicação, as **rotas** (arquivo app.js)
+A página HTML está pronta; passemos à configuração da aplicação, as **rotas** (ficheiro app.js)
 
 ```javascript
 'use strict';
@@ -86,7 +86,7 @@ angular.module('angularApp', [
 
 #### Os controladores
 
-Agora que as **rotas** estão criadas, faltam os controladores a programar no arquivo main.js; um simples array de objetos é criado e colocado no **$scope** da página:
+Agora que as **rotas** estão criadas, faltam os controladores a programar no ficheiro main.js; um simples array de objetos é criado e colocado no **$scope** da página:
 
 ```javascript
 'use strict';
@@ -101,7 +101,7 @@ angular.module('angularApp')
 });
 ```
 
-E no arquivo menu.js é adicionado um método que permite destacar o menu selecionado:
+E no ficheiro menu.js é adicionado um método que permite destacar o menu selecionado:
 
 ```javascript
 'use strict';
@@ -248,7 +248,7 @@ O que dá como página index.html:
 
 O código **completo** do projeto está no [github][4] e a demo está [aqui][5].
 
-Para a demo, fui ao [bootsnipp][6] buscar um exemplo de páginas **sobre** e **contato** feitas para Bootstrap.
+Para a demo, fui ao [bootsnipp][6] buscar um exemplo de páginas **sobre** e **contacto** feitas para Bootstrap.
 
 [pb1]: /pt/lembretes/angular-fullstack
 [1]: http://angularjs.org/

@@ -1,16 +1,16 @@
 ---
-title: "TCO 2015 - Rodada 1 - SmallPolygons"
-slug: tco-2015-rodada-1-small-polygons
+title: "TCO 2015 - Ronda 1 - SmallPolygons"
+slug: tco-2015-ronda-1-small-polygons
 date: 2015-06-20
-description: "Top Coder Open 2015 Rodada 1: o problema SmallPolygons."
+description: "Top Coder Open 2015 Ronda 1: o problema SmallPolygons."
 image: /articles/tco-2015-round-1-small-polygons/seed-5-np-1368-n-6-polygonization-180sec.png
 ---
 
 _TopCoder TCO 2015 (20-04-2015)_
 
-## Rodada 1: SmallPolygons
+## Ronda 1: SmallPolygons
 
-O enunciado completo do problema proposto na primeira rodada do TCO 2015 está disponível [aqui][1].
+O enunciado completo do problema proposto na primeira ronda do TCO 2015 está disponível [aqui][1].
 
 Pequeno resumo do problema, temos:
 
@@ -27,7 +27,7 @@ A fórmula de cálculo da pontuação é **soma das áreas dos polígonos**.
 - points: corresponde à lista de pontos
 - N: corresponde ao máximo de polígonos
 
-O método **choosePolygons** deve retornar cada polígono, na forma de um array dos índices dos pontos que devem formar um polígono.
+O método **choosePolygons** deve devolver cada polígono, na forma de um array dos índices dos pontos que devem formar um polígono.
 
 > a ordem dos pontos da lista deve ser conservada para permitir identificar cada ponto mais adiante
 
@@ -61,7 +61,7 @@ Eis o resultado do meu algoritmo para alguns casos de teste:
 
 ## Solução
 
-> Deixei passar uma coisa, a "polygonization", o algoritmo que permitia construir um polígono simples "rapidamente" (em vez disso usei uma ordenação polar dos pontos -> o que dá uma estrela mais difícil de otimizar e de recortar depois...)
+> Deixei passar uma coisa, a "polygonization", o algoritmo que permitia construir um polígono simples "rapidamente" (em vez disso utilizei uma ordenação polar dos pontos -> o que dá uma estrela mais difícil de otimizar e de recortar depois...)
 
 ![Captura seed 5 sortclockwise](/articles/tco-2015-round-1-small-polygons/smallpolygons-seed5-sortclockwise.png)
 
@@ -70,7 +70,7 @@ Eis o resultado do meu algoritmo para alguns casos de teste:
 > 1. cálculo do triângulo de área mínima na lista de pontos (são os 3 primeiros pontos ordenados)
 > 2. para cada "vértice" (lado do polígono formado pelos pontos i e i + 1), cálculo do ponto médio do vértice e, entre todos os pontos restantes, guarda-se o mais próximo de um vértice
 > 3. adição do ponto entre os 2 pontos do vértice do polígono
-> 4. repetir 2 e 3 até que todos os pontos tenham sido usados
+> 4. repetir 2 e 3 até que todos os pontos tenham sido utilizados
 
 Seed 5 com **polygonization**:
 
@@ -82,7 +82,7 @@ E a minha solução:
 
     ![Captura seed 3 sortClockWise](/articles/tco-2015-round-1-small-polygons/smallpolygons-seed3-sortclockwise.png)
 
-- uso do algoritmo K-Means para repartir os pontos em N listas de pontos e depois reordenação dos pontos com a ordenação polar
+- utilização do algoritmo K-Means para repartir os pontos em N listas de pontos e depois reordenação dos pontos com a ordenação polar
 
     ![Captura seed 3 k-means](/articles/tco-2015-round-1-small-polygons/smallpolygons-seed3-kmeans.png)
 
@@ -90,13 +90,13 @@ E a minha solução:
 
     ![Captura seed 3](/articles/tco-2015-round-1-small-polygons/smallpolygons-seed3.png)
 
-> para as grades _pequenas_, uso de um algoritmo Beam Search para encontrar _a_ melhor solução...
+> para as grelhas _pequenas_, utilização de um algoritmo Beam Search para encontrar _a_ melhor solução...
 
 Pontuação provisória do submit: 69,40 e final: **1 382,88**
 
 Melhor classificação no TCO: [46.º][4] e código-fonte da solução [aqui][5].
 
-Eis as minhas pontuações para as 10 primeiras grades:
+Eis as minhas pontuações para as 10 primeiras grelhas:
 
 - 0\) 8296.0
 - 1\) 28989.5

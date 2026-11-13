@@ -20,7 +20,7 @@ umount /dev/sdb1
 dd bs=4M if=YYYY-MM-DD-wheezy-raspbian.img of=/dev/sdb
 ```
 
-> Entre os problemas possíveis, se o raspberry mostrar uma tela preta, adicionar no arquivo **config.txt** do cartão SD a linha:
+> Entre os problemas possíveis, se o raspberry mostrar um ecrã preto, adicionar no ficheiro **config.txt** do cartão SD a linha:
 
 ```ini
 #help to boot
@@ -35,11 +35,11 @@ hdmi_group=1
 hdmi_mode=31
 ```
 
-> As outras opções estão descritas no arquivo de configuração do cartão SD.
+> As outras opções estão descritas no ficheiro de configuração do cartão SD.
 
 ## Configuração
 
-A janela de configuração abre automaticamente no primeiro arranque, mas também é possível abri-la de novo digitando no console o comando:
+A janela de configuração abre automaticamente no primeiro arranque, mas também é possível abri-la de novo introduzindo na consola o comando:
 
 ```bash
 sudo raspi-config
@@ -49,7 +49,7 @@ sudo raspi-config
 
 Para ter mais armazenamento e também para poupar a vida útil do cartão SD, é preferível configurar o armazenamento num disco rígido externo.
 
-> Antes de mais: configurar as partições do novo disco rígido com um utilitário (no ubuntu, usar o **gparted**, por exemplo):
+> Antes de mais: configurar as partições do novo disco rígido com um utilitário (no ubuntu, utilizar o **gparted**, por exemplo):
 >
 > - uma partição para o **home**
 > - uma partição para o armazenamento
@@ -73,7 +73,7 @@ sudo mount /dev/sda1 /mnt/new_home
 sudo cp -a /home/. /mnt/new_home/
 ```
 
-Terminar adicionando à tabela de partições do raspberry PI,
+Para terminar, adicionar à tabela de partições do raspberry PI,
 
 ```bash
 sudo vi /etc/fstab
@@ -90,7 +90,7 @@ As linhas seguintes:
 
 ## Configuração do **hostname**
 
-O nome que o Raspberry PI terá na rede pode ser configurado a partir da janela de configuração (sudo raspi-config), mas também pode ser editado à mão no arquivo **hosts**:
+O nome que o Raspberry PI terá na rede pode ser configurado a partir da janela de configuração (sudo raspi-config), mas também pode ser editado à mão no ficheiro **hosts**:
 
 ```bash
 sudo vi /etc/hosts
@@ -103,15 +103,15 @@ Adicionar as linhas:
 127.0.0.1 nome-da-maquina
 ```
 
-## Gestão de usuários
+## Gestão de utilizadores
 
-Para adicionar um usuário ao raspberry PI:
+Para adicionar um utilizador ao raspberry PI:
 
 ```bash
 sudo adduser username
 ```
 
-> Para que o novo usuário tenha os mesmos direitos que o usuário **pi** padrão, executar:
+> Para que o novo utilizador tenha os mesmos direitos que o utilizador **pi** predefinido, executar:
 
 ```bash
 sudo visudo
@@ -123,7 +123,7 @@ E adicionar a linha:
 username ALL=(ALL) NOPASSWD: ALL
 ```
 
-Depois pressionar **Ctrl+O**, **Enter**, **Ctrl+X**.
+Depois premir **Ctrl+O**, **Enter**, **Ctrl+X**.
 
 ## Instalação dos pacotes úteis ao servidor
 
@@ -166,13 +166,13 @@ Ver o lembrete correspondente, [aqui][samba].
 
 ## Fixar o ip do raspberry na rede
 
-Editar o arquivo **interfaces**:
+Editar o ficheiro **interfaces**:
 
 ```bash
 sudo gedit /etc/network/interfaces
 ```
 
-> Mais fácil de fazer em modo console; a partir do Wheezy, o _gedit_ deve ser substituído pelo editor _leafpad_
+> Mais fácil de fazer em modo consola; a partir do Wheezy, o _gedit_ deve ser substituído pelo editor _leafpad_
 
 E substituir
 
@@ -235,13 +235,13 @@ sudo /etc/init.d/ssh start (se necessário)
 sudo update-rc.d ssh defaults (se necessário)
 ```
 
-#### Criação de um novo usuário **git**:
+#### Criação de um novo utilizador **git**:
 
 ```bash
 sudo adduser --system --shell /bin/bash --gecos 'git version control by pi' --group --home /home/git git
 ```
 
-ou criação do grupo **git** e adição a um usuário
+ou criação do grupo **git** e adição a um utilizador
 
 ```bash
 sudo addgroup git
@@ -268,7 +268,7 @@ No seu espaço de trabalho, obter o projeto:
 git clone $USER@[hostname]:/home/$USER/git/default.git
 ```
 
-Criar um arquivo **test.txt**:
+Criar um ficheiro **test.txt**:
 
 ```bash
 git add test.txt
