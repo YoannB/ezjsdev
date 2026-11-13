@@ -75,10 +75,11 @@ test.describe("Reminders", () => {
         expect(xml).toContain(`${lp("de", "/merkzettel")}</loc>`);
     });
 
-    test("the footer nav links to the listing", async ({ page }) => {
+    test("the activity bar links to the listing", async ({ page, isMobile }) => {
+        test.skip(isMobile, "the activity bar is a desktop element (the drawer is covered by ide-shell.spec.ts)");
         await page.goto(at("en"));
         await ready(page);
-        await page.getByRole("contentinfo").getByRole("link", { name: "Reminders", exact: true }).click();
+        await page.getByRole("navigation", { name: "Activity bar" }).getByRole("link", { name: "Reminders" }).click();
         await expect(page).toHaveURL(lpRe("en", "/reminders"));
         await expect(page.getByRole("heading", { level: 1, name: "Reminders" })).toBeVisible();
     });

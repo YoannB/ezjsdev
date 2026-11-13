@@ -6,7 +6,7 @@ import { IdeIcon } from "./IdeIcon";
 import { treeKey, type TreeFile, type TreeFolder, type TreeNode, type VisibleNode } from "./tree-model";
 
 // WAI-ARIA "navigation treeview" (APG): folders are treeitems with aria-expanded and a group of
-// children; files are REAL links (<a href> with role="treeitem"), so crawlers, middle-click and
+// children, named by their label only (aria-labelledby, not the whole subtree); files are REAL links (<a href> with role="treeitem"), so crawlers, middle-click and
 // "open in a new tab" keep working. Roving tabindex: one treeitem is in the tab order (the focused
 // one, else the current file, else the first); arrows move the focus (tree-model.ts → treeKey).
 // The site's pages also stay reachable through ordinary links (status bar, HTML sitemap page).
@@ -94,6 +94,7 @@ export function ExplorerTree({
                     key={node.id}
                     id={domId(node.id)}
                     role="treeitem"
+                    aria-labelledby={`${domId(node.id)}-label`}
                     aria-level={level}
                     aria-expanded={open}
                     aria-selected={false}
@@ -123,7 +124,9 @@ export function ExplorerTree({
                     >
                         <IdeIcon name="chevron" size={14} className={cn("ide-tree__chevron", open && "is-open")} />
                         <IdeIcon name={open ? "folderOpen" : "folder"} size={16} />
-                        <span className="ide-tree__name">{node.label}</span>
+                        <span id={`${domId(node.id)}-label`} className="ide-tree__name">
+                            {node.label}
+                        </span>
                     </span>
                     <ul role="group" className={cn("ide-tree__group", !open && "is-collapsed")}>
                         {renderNodes(node.children, level + 1)}
