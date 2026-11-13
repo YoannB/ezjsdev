@@ -3,6 +3,10 @@ import { getCollection } from "../../constants/site";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption } from "./support/home";
 import { DEFAULT_LOCALE, lp, lpRe } from "./support/locale-path";
 
+// Explicit locale prefix for page.goto (as articles.spec.ts does): an unprefixed URL is subject to
+// next-intl locale detection (Accept-Language), "/fr/..." always serves FR (redirected when default).
+const at = (locale: string, path = "") => `/${locale}${path}`;
+
 // EZJSDEV "pense-bêtes" (reminders collection, site/config.ts): listing, highlighted code, language
 // switch onto the TRANSLATED slug, soft 404, sitemap.xml and nav entry. Relies on the 14 reminders
 // migrated from the old site (content/reminders/), translated in every supported locale; the newest
@@ -23,7 +27,7 @@ test.describe("Reminders", () => {
     test.skip(!ENABLED, "reminders collection disabled (site/config.ts)");
 
     test("the listing shows every reminder, newest first", async ({ page }) => {
-        await page.goto(lp("fr", "/pense-betes"));
+        await page.goto(at("fr", "/pense-betes"));
         await ready(page);
         await expect(page.getByRole("heading", { level: 1, name: "Pense-bêtes" })).toBeVisible();
         const titles = page.locator(".article-feed .article-teaser__title");
@@ -37,7 +41,7 @@ test.describe("Reminders", () => {
     });
 
     test("an entry renders its code highlighted on the server", async ({ page }) => {
-        await page.goto(lp("fr", "/pense-betes/creer-un-package-bower"));
+        await page.goto(at("fr", "/pense-betes/creer-un-package-bower"));
         const json = page.locator(".article-body pre code.language-json");
         await expect(json).toContainText('"devDependencies"');
         await expect(json.locator(".hljs-attr").first()).toBeVisible();
@@ -47,7 +51,7 @@ test.describe("Reminders", () => {
     });
 
     test("the language switch lands on the translated slug", async ({ page }) => {
-        await page.goto(lp("fr", "/pense-betes/pense-bete-github"));
+        await page.goto(at("fr", "/pense-betes/pense-bete-github"));
         await ready(page);
         await expect(page.getByRole("heading", { level: 1, name: "Pense-bête GitHub" })).toBeVisible();
         await languageButton(page).click();
@@ -58,7 +62,7 @@ test.describe("Reminders", () => {
 
     test("a slug from another language leads to the 404 page, not indexable", async ({ page }) => {
         // Soft 404 (HTTP 200 + robots noindex), as for the articles: see docs/articles.md.
-        await page.goto(lp("fr", "/pense-betes/github-cheat-sheet"));
+        await page.goto(at("fr", "/pense-betes/github-cheat-sheet"));
         await expect(page.getByRole("heading", { level: 1, name: "404" })).toBeVisible();
         await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content", /noindex/);
     });
@@ -72,7 +76,7 @@ test.describe("Reminders", () => {
     });
 
     test("the footer nav links to the listing", async ({ page }) => {
-        await page.goto(lp("en"));
+        await page.goto(at("en"));
         await ready(page);
         await page.getByRole("contentinfo").getByRole("link", { name: "Reminders", exact: true }).click();
         await expect(page).toHaveURL(lpRe("en", "/reminders"));
@@ -82,7 +86,7 @@ test.describe("Reminders", () => {
     test("an article links to the localized reminder", async ({ page }) => {
         // The Markdown links are written for the production default locale (fr, no prefix).
         test.skip(DEFAULT_LOCALE !== "fr", "article links assume NEXT_PUBLIC_DEFAULT_LOCALE=fr");
-        await page.goto(lp("fr", "/articles/blog-pour-github"));
+        await page.goto(at("fr", "/articles/blog-pour-github"));
         await ready(page);
         await page.locator(".article-body").getByRole("link", { name: "pense-bête" }).click();
         await expect(page).toHaveURL(lpRe("fr", "/pense-betes/pense-bete-github"));
