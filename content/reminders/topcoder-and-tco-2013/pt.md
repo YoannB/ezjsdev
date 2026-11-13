@@ -7,7 +7,7 @@ description: "Resumo da edição de 2013 do TopCoder Open."
 
 ![TopCoder](/reminders/topcoder-and-tco-2013/topcoder.png)
 
-Competição em 3 rodadas: os 4 primeiros de cada rodada foram convidados ao Google para participar de uma prova final.
+Competição em 3 rondas: os 4 primeiros de cada ronda foram convidados a ir à Google participar numa prova final.
 
 ## Round 1
 

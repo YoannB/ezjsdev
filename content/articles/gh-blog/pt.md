@@ -2,36 +2,36 @@
 title: "Blog para o GitHub"
 slug: blog-para-o-github
 date: 2014-05-25
-description: "Tutorial para criar um blog que pode ser hospedado nas páginas do GitHub."
+description: "Tutorial para criar um blog que pode ser alojado nas páginas do GitHub."
 ---
 
 Artigo original [aqui][original]
 
-Eis um blog para as páginas do GitHub. Basta fazer um [fork][0] do projeto e modificar os arquivos de configuração para ter o **seu** blog.
+Eis um blog para as páginas do GitHub. Basta fazer um [fork][0] do projeto e modificar os ficheiros de configuração para ter o **seu** blog.
 
-> Primeiro passo: no arquivo **index.html**, você deve substituir a linha
+> Primeiro passo: no ficheiro **index.html**, é preciso substituir a linha
 
 ```html
  <base href="http://yoannb.github.io/gh-blog/">
 ```
 
-Pela url das suas gh-pages:
+Pelo url das suas gh-pages:
 
 ```html
  <base href="http://[your.github.username].github.io/gh-blog/">
 ```
 
-Para mais informações sobre as gh-pages, vá [lá][gh-pages] e/ou veja o meu [lembrete][reminder].
+Para mais informações sobre as gh-pages, ir [lá][gh-pages] e/ou ver o meu [lembrete][reminder].
 
 ## Estrutura para personalizar o **seu** blog:
 
-Todos os arquivos que você precisa modificar estão no diretório **config**:
+Todos os ficheiros a modificar estão no diretório **config**:
 
 ```
 config
 |---json
     |---site.json       -> configuração do site (título,logo,foto,descrição...)
-    |---skills.json     -> as suas competências, exibidas na página inicial e no cv
+    |---skills.json     -> as suas competências, apresentadas na página inicial e no cv
     |---cv.json         -> as suas experiências e formações
     |---blog.json       -> a lista de artigos do blog
 |---md
@@ -40,9 +40,9 @@ config
     |---theme.css       -> o css para a personalização gráfica
 ```
 
-## O arquivo **site.json**
+## O ficheiro **site.json**
 
-É o arquivo principal, onde você pode ativar ou desativar cada parte do site:
+É o ficheiro principal, onde se pode ativar ou desativar cada parte do site:
 
 ```json
 "skills":true,
@@ -56,7 +56,7 @@ config
 
 ## Personalizar a sua foto
 
-Você tem três opções para a sua foto:
+Há três opções para a sua foto:
 
 1. Uma imagem no diretório **images**:
 
@@ -66,7 +66,7 @@ Você tem três opções para a sua foto:
     }
     ```
 
-2. O seu **nome de usuário do GitHub**:
+2. O seu **nome de utilizador do GitHub**:
 
     ```json
     "photo": {
@@ -84,33 +84,33 @@ Você tem três opções para a sua foto:
 
 ## O seu CV
 
-Basta editar o arquivo **cv.json**.
+Basta editar o ficheiro **cv.json**.
 
 ## As suas competências
 
-Da mesma forma, basta editar o arquivo **skills.json**.
+Da mesma forma, basta editar o ficheiro **skills.json**.
 
 ## Escrever um artigo
 
-Adicionar um elemento ao arquivo **blog.json** como no exemplo seguinte:
+Adicionar um elemento ao ficheiro **blog.json** como no exemplo seguinte:
 
 ```json
 {
     "id" : "the-id",
     "title": "O título",
     "date" : "05/05/2014", // data no formato americano MM/dd/yyyy
-    "file" : "config/md/blog/2014/05/my.blog.md", // o caminho do arquivo md
-    "visible" : false // usar visible para mostrar um artigo só quando estiver pronto
+    "file" : "config/md/blog/2014/05/my.blog.md", // o caminho do ficheiro md
+    "visible" : false // utilizar visible para mostrar um artigo só quando estiver pronto
 }
 ```
 
-Criar um novo arquivo no local indicado e redigir o seu artigo.
+Criar um novo ficheiro no local indicado e redigir o seu artigo.
 
 ## Configuração do Disqus
 
-Ir ao [site][4] e registrar uma nova conta se quiser usar o disqus no seu blog.
+Ir ao [site][4] e registar uma nova conta se quiser utilizar o disqus no seu blog.
 
-E adicionar o seu novo identificador de conta no arquivo **site.json**:
+E adicionar o seu novo identificador de conta no ficheiro **site.json**:
 
 ```json
 "disqus" : {
@@ -118,23 +118,23 @@ E adicionar o seu novo identificador de conta no arquivo **site.json**:
 },
 ```
 
-## Personalizar a exibição do Markdown
+## Personalizar a apresentação do Markdown
 
-Você pode mudar o estilo utilizado modificando o arquivo css no atributo **cssMarkdown**:
+É possível mudar o estilo utilizado modificando o ficheiro css no atributo **cssMarkdown**:
 
 ```json
 "cssMarkdown" : "github.css",
 ```
 
-> **Nota**: a lista de arquivos css disponíveis está na pasta **/bower_components/highlightjs/styles/**.
+> **Nota**: a lista de ficheiros css disponíveis está na pasta **/bower_components/highlightjs/styles/**.
 
 ## Mais informações sobre o projeto
 
-- Uso do [Angular.JS][1] versão 1.2.15.
-- Uso do [Bootstrap CSS][2] para os estilos.
-- Uso de [Markdown][3] para os artigos.
-- Uso do [Disqus][4] para os comentários.
-- Personalização por meio de arquivos JSON.
+- Utilização do [Angular.JS][1] versão 1.2.15.
+- Utilização do [Bootstrap CSS][2] para os estilos.
+- Utilização de [Markdown][3] para os artigos.
+- Utilização do [Disqus][4] para os comentários.
+- Personalização através de ficheiros JSON.
 - Gerado com Node.JS e Grunt/Bower/Yo.
 
 ## Fontes

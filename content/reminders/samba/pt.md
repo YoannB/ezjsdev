@@ -1,8 +1,8 @@
 ---
-title: "Servidor de compartilhamento Samba"
-slug: servidor-de-compartilhamento-samba
+title: "Servidor de partilha Samba"
+slug: servidor-de-partilha-samba
 date: 2014-09-22
-description: "Lembrete para criar um servidor de compartilhamento Samba."
+description: "Lembrete para criar um servidor de partilha Samba."
 ---
 
 ## Instalação
@@ -15,14 +15,14 @@ sudo apt-get install samba samba-common-bin
 
 ## Configuração
 
-Toda a configuração é feita no arquivo **smb.conf** (no Ubuntu /etc/samba/smb.conf). O arquivo de configuração é comentado e bastante simples de modificar.
+Toda a configuração é feita no ficheiro **smb.conf** (no Ubuntu /etc/samba/smb.conf). O ficheiro de configuração é comentado e bastante simples de modificar.
 
-Eis um exemplo com as linhas a acrescentar para criar um diretório **public** e um diretório **partage** (compartilhamento) protegido:
+Eis um exemplo com as linhas a acrescentar para criar um diretório **public** e um diretório **partage** (partilha) protegido:
 
 ```ini
 [Public]
 #
-# Diretório "pau para toda obra" com escrita permitida a todos
+# Diretório "pau para toda a obra" com escrita permitida a todos
 #
     comment = Partage Public
     path = /mnt/data/public
@@ -32,7 +32,7 @@ Eis um exemplo com as linhas a acrescentar para criar um diretório **public** e
     hide files = /lost+found/
 
 #
-# Compartilhamento de um diretório montado no servidor
+# Partilha de um diretório montado no servidor
 #
 [Partage]
     comment = Partage
@@ -48,11 +48,11 @@ Eis um exemplo com as linhas a acrescentar para criar um diretório **public** e
     hide files = /lost+found/
 ```
 
-> Nota: para quem prefere interfaces gráficas, é possível instalar o [webmin][1], que tem uma seção para administrar o servidor Samba.
+> Nota: para quem prefere interfaces gráficas, é possível instalar o [webmin][1], que tem uma secção para administrar o servidor Samba.
 
 ## Segurança
 
-Com a opção **encrypt passwords = true**, é preciso criar ou modificar os usuários que terão acesso aos diretórios.
+Com a opção **encrypt passwords = true**, é preciso criar ou modificar os utilizadores que terão acesso aos diretórios.
 
 Primeiro, se o grupo **samba** não tiver sido criado, adiciona-se:
 
@@ -62,14 +62,14 @@ sudo groupadd samba
 
 Depois é preciso:
 
-- criar um novo usuário samba:
+- criar um novo utilizador samba:
 
     ```bash
     sudo useradd -s /bin/false -d /dev/null -g samba [nome_usuario]
     sudo smbpasswd -a [nome_usuario]
     ```
 
-- ou modificar um usuário existente:
+- ou modificar um utilizador existente:
 
     ```bash
     sudo adduser [nome_usuario_existente] samba

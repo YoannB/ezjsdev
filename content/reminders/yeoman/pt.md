@@ -2,7 +2,7 @@
 title: "Grunt / Yo / Bower == Yeoman"
 slug: grunt-yo-bower-yeoman
 date: 2014-02-15
-description: "Lembrete para usar o Yeoman (grunt, yo, bower)."
+description: "Lembrete para utilizar o Yeoman (grunt, yo, bower)."
 ---
 
 Conjunto de 3 ferramentas que permitem montar aplicações web modernas, [site oficial][0].

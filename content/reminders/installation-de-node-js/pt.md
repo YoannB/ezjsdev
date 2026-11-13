@@ -23,7 +23,7 @@ sudo n stable
 
 > **NOTA:** em caso de erro ao obter pacotes, duas linhas úteis a executar:
 >
-> Configurar o registro:
+> Configurar o registo:
 >
 > ```bash
 > npm config set registry http://registry.npmjs.org/

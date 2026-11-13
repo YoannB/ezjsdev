@@ -7,13 +7,13 @@ description: "Alguns trunfos do Stylus / Nib."
 
 ## Instalação e configuração
 
-Ver o artigo [aqui][1] para usar Stylus com o Angular-fullstack.
+Ver o artigo [aqui][1] para utilizar o Stylus com o Angular-fullstack.
 
 ## Iconic
 
 As imagens para ícones estão ultrapassadas na Web já há algum tempo; o substituto: as **fontes**.
 
-Personalizáveis como o texto, é possível mudar a sua **cor** e o seu **tamanho** na hora e, conforme o navegador, o zoom nelas é otimizado para não se ver aliasing.
+Personalizáveis como o texto, é possível mudar a sua **cor** e o seu **tamanho** dinamicamente e, conforme o navegador, o zoom nelas é otimizado para não se ver aliasing.
 
 Além disso, a compatibilidade com os navegadores é excelente, mesmo nas versões mais antigas do Internet Explorer.
 

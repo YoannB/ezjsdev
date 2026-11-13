@@ -65,7 +65,7 @@ test.describe("Articles", () => {
         );
         await expect(page.locator('link[rel="alternate"][hreflang="pt"]')).toHaveAttribute(
             "href",
-            new RegExp(`${lp("pt", "/artigos/tco-2015-rodada-2-path-defense")}$`),
+            new RegExp(`${lp("pt", "/artigos/tco-2015-ronda-2-path-defense")}$`),
         );
         const jsonLd = JSON.parse((await page.locator('script[type="application/ld+json"]').textContent()) ?? "{}");
         expect(jsonLd).toMatchObject({ "@type": "BlogPosting", inLanguage: "fr", datePublished: "2015-07-20" });

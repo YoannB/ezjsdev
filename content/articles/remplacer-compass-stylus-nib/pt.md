@@ -2,14 +2,14 @@
 title: "Substituir o Compass por Stylus / Nib"
 slug: substituir-compass-por-stylus-nib
 date: 2014-03-23
-description: "Usar Stylus no lugar do Compass."
+description: "Utilizar o Stylus em vez do Compass."
 ---
 
 O artigo original está no [GitHub][1].
 
 Stylus é um pré-processador CSS expressivo, robusto e rico em funcionalidades http://learnboost.github.io/stylus/.
 
-E o Nib traz suporte a prefixos de navegador e outras funções incríveis http://visionmedia.github.io/nib/.
+E o Nib traz suporte para prefixos de navegador e outras funções incríveis http://visionmedia.github.io/nib/.
 
 Tarefas realizadas:
 
@@ -41,10 +41,10 @@ Tarefas realizadas:
           options: {
               paths: ['<%= yeoman.app %>/styles/**/*.styl'],
               use: [
-                  require('fluidity'), // usar o plugin stylus na compilação
+                  require('fluidity'), // utilizar o plugin stylus na compilação
                   require('nib')
               ],
-              import: [ // importado em cada arquivo stylus
+              import: [ // importado em cada ficheiro stylus
                   'nib',
                   '../function'
               ]
@@ -73,12 +73,12 @@ Tarefas realizadas:
     ```stylus
     /* definir uma variável de cor */
     $border-color=#e5e5e5
-    /* e usá-la assim */
+    /* e utilizá-la assim */
     .header
       border-bottom 1px solid $border-color
     ```
 
-- [bower.json][5] Adição do componente bootstrap-css-only no lugar do import do bootstrap pelo compass.
+- [bower.json][5] Adição do componente bootstrap-css-only em vez do import do bootstrap pelo compass.
 
     ```json
     --"sass-bootstrap": "~3.0.2",--
@@ -92,7 +92,7 @@ Tarefas realizadas:
     <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
     ```
 
-**Nota:** para usar as fontes do bootstrap, copiar todos os arquivos de bootstrap-css-only/fonts/ para uma pasta fonts e adicionar esta linha à tarefa de cópia geral:
+**Nota:** para utilizar as fontes do bootstrap, copiar todos os ficheiros de bootstrap-css-only/fonts/ para uma pasta fonts e adicionar esta linha à tarefa de cópia geral:
 
 ```javascript
 'fonts/**/*',
