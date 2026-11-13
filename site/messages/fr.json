@@ -19,6 +19,66 @@
             "empty": "Aucun pense-bête pour le moment.",
             "publishedOn": "Publié le {date}",
             "onlyIn": "Disponible uniquement en {language}"
+        },
+        "articles": {
+            "intro": "Articles techniques rédigés entre 2013 et 2015, conservés tels quels en archive."
         }
+    },
+    "ide": {
+        "skip": "Aller au contenu",
+        "explorer": "Explorateur",
+        "files": "Fichiers du site",
+        "openExplorer": "Ouvrir l'explorateur",
+        "closeExplorer": "Fermer l'explorateur",
+        "activity": "Barre d'activité",
+        "tabs": "Fichiers ouverts",
+        "closeTab": "Fermer {label}",
+        "preview": "Aperçu",
+        "showPreview": "Afficher l'aperçu",
+        "hidePreview": "Masquer l'aperçu",
+        "previewEmpty": "Aucun fichier ouvert.",
+        "previewUrl": "Adresse de la page :",
+        "openInNewTab": "Ouvrir la page dans un nouvel onglet",
+        "searchPreview": "Aperçu dans un moteur de recherche",
+        "previewLanguages": "Aussi disponible en",
+        "terminal": "Terminal",
+        "showTerminal": "Afficher le terminal",
+        "hideTerminal": "Masquer le terminal",
+        "terminalLog": "Sortie du terminal",
+        "statusbar": "Liens du site",
+        "tree": {
+            "home": "Accueil",
+            "about": "A-propos",
+            "services": "Services",
+            "projects": "Projets",
+            "seoTools": "Nos-Outils-SEO",
+            "contact": "Contact",
+            "articles": "Articles",
+            "reminders": "Pense-betes",
+            "sitemap": "Plan-du-site",
+            "legal": "Mentions-legales",
+            "privacy": "Confidentialite",
+            "cookies": "Cookies"
+        }
+    },
+    "siteHome": {
+        "kicker": "Yoann Barbier · Nantes",
+        "title": "Lead Full-Stack Senior — React, TypeScript, Node.js",
+        "lead": "Développeur full-stack indépendant basé à Nantes, j'accompagne les entreprises et les équipes produit dans la conception, l'architecture et l'évolution d'applications web modernes. J'interviens principalement sur les environnements JavaScript et TypeScript, avec une attention particulière portée à la qualité du code, aux performances et à la robustesse des solutions.",
+        "expertiseTitle": "Expertises",
+        "expertise": [
+            "Développement front-end et full-stack",
+            "React.js et TypeScript",
+            "Node.js et NestJS",
+            "Architecture et refonte d'applications web",
+            "Applications SaaS, web et mobiles",
+            "Optimisation des performances et évolutivité",
+            "Lead technique, coordination et mentoring",
+            "Intégration continue et pipelines CI/CD",
+            "Qualité du code, tests et documentation",
+            "Vue / Nuxt, Angular, HTML et CSS"
+        ],
+        "remindersTitle": "Derniers pense-bêtes",
+        "remindersAll": "Tous les pense-bêtes"
     }
 }

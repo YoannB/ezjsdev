@@ -19,6 +19,66 @@
             "empty": "Ainda não há lembretes.",
             "publishedOn": "Publicado em {date}",
             "onlyIn": "Disponível apenas em {language}"
+        },
+        "articles": {
+            "intro": "Artigos técnicos escritos entre 2013 e 2015, guardados tal como estavam, como arquivo."
         }
+    },
+    "ide": {
+        "skip": "Ir para o conteúdo",
+        "explorer": "Explorador",
+        "files": "Ficheiros do site",
+        "openExplorer": "Abrir o explorador",
+        "closeExplorer": "Fechar o explorador",
+        "activity": "Barra de atividade",
+        "tabs": "Ficheiros abertos",
+        "closeTab": "Fechar {label}",
+        "preview": "Pré-visualização",
+        "showPreview": "Mostrar a pré-visualização",
+        "hidePreview": "Ocultar a pré-visualização",
+        "previewEmpty": "Nenhum ficheiro aberto.",
+        "previewUrl": "Endereço da página:",
+        "openInNewTab": "Abrir a página num novo separador",
+        "searchPreview": "Pré-visualização num motor de pesquisa",
+        "previewLanguages": "Também disponível em",
+        "terminal": "Terminal",
+        "showTerminal": "Mostrar o terminal",
+        "hideTerminal": "Ocultar o terminal",
+        "terminalLog": "Saída do terminal",
+        "statusbar": "Ligações do site",
+        "tree": {
+            "home": "Inicio",
+            "about": "Sobre",
+            "services": "Servicos",
+            "projects": "Projetos",
+            "seoTools": "Ferramentas-SEO",
+            "contact": "Contacto",
+            "articles": "Artigos",
+            "reminders": "Lembretes",
+            "sitemap": "Mapa-do-site",
+            "legal": "Aviso-legal",
+            "privacy": "Privacidade",
+            "cookies": "Cookies"
+        }
+    },
+    "siteHome": {
+        "kicker": "Yoann Barbier · Nantes, França",
+        "title": "Lead Full-Stack Sénior — React, TypeScript, Node.js",
+        "lead": "Programador full-stack independente sediado em Nantes, acompanho empresas e equipas de produto na conceção, arquitetura e evolução de aplicações web modernas. Trabalho sobretudo com JavaScript e TypeScript, com especial atenção à qualidade do código, ao desempenho e à robustez das soluções.",
+        "expertiseTitle": "Competências",
+        "expertise": [
+            "Desenvolvimento front-end e full-stack",
+            "React.js e TypeScript",
+            "Node.js e NestJS",
+            "Arquitetura e reformulação de aplicações web",
+            "Aplicações SaaS, web e móveis",
+            "Otimização do desempenho e escalabilidade",
+            "Liderança técnica, coordenação e mentoria",
+            "Integração contínua e pipelines de CI/CD",
+            "Qualidade do código, testes e documentação",
+            "Vue / Nuxt, Angular, HTML e CSS"
+        ],
+        "remindersTitle": "Últimos lembretes",
+        "remindersAll": "Todos os lembretes"
     }
 }
