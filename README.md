@@ -4,15 +4,19 @@ Site de la micro-entreprise de Yoann Barbier, développeur full-stack indépenda
 Node.js). Portfolio présenté comme un environnement de développement inspiré de VS Code, avec les articles et
 pense-bêtes techniques écrits depuis 2013.
 
+Site en ligne : https://ezjsdev.netlify.app
+
 ## Ce que contient le site
 
+- **Interface IDE** : explorateur de fichiers relié aux pages, onglets synchronisés avec l'URL, zone de lecture avec
+  numéros de ligne, aperçu et terminal repliables, barre d'état ; drawer et panneaux empilés sur mobile.
 - **Identité** : logo `</>`, thèmes sombre (bleu nuit, accents cyan) et clair, six langues (français à la racine, puis
   `en`, `es`, `de`, `it`, `pt`).
 - **Articles** : 15 articles d'archives (2013-2015 : Node.js, Angular, Stylus, TopCoder TCO…), avec coloration du code
   au rendu serveur.
 - **Pense-bêtes** : 14 aide-mémoire techniques (2013-2017), une deuxième collection Markdown.
-- **À venir** : le shell de type IDE (explorateur, onglets, zone d'édition, aperçu, terminal), les pages À propos,
-  Services, Projets et Contact, et la démonstration « Générer un site SEO » (simulée, sans appel IA).
+- **À venir** : les pages À propos, Services, Projets et Contact, et la démonstration « Générer un site SEO » (simulée,
+  sans appel IA).
 
 La spécification de référence est [`specs/specification-site-ezjsdev-v0.2.md`](specs/specification-site-ezjsdev-v0.2.md) ;
 les maquettes du site sont dans [`mockups/ezjsdev/`](mockups/ezjsdev/).
@@ -22,8 +26,7 @@ les maquettes du site sont dans [`mockups/ezjsdev/`](mockups/ezjsdev/).
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : ezjsdev (pas encore de version publiée), basé sur Axons
-[v0.8.0](https://github.com/YoannB/axons/tree/v0.8.0).**
+**Version : ezjsdev 0.1.0, basé sur Axons [v0.9.0](https://github.com/YoannB/axons/tree/v0.9.0).**
 
 ezjsdev est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions et
 la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) d'Axons pour les
@@ -74,15 +77,17 @@ Référence complète et commentée : [`.env.example`](.env.example). Valeurs d'
 Un site dérivé d'Axons ne modifie que `site/` et ajoute ses propres fichiers (voir `docs/architecture.md` →
 _Deriving a site_).
 
-| Emplacement                                        | Contenu                                                                 |
-| -------------------------------------------------- | ----------------------------------------------------------------------- |
-| [`site/config.ts`](site/config.ts)                 | Nom, routes traduites, navigation, collection des pense-bêtes, palette. |
-| `site/messages/<locale>.json`                      | Textes propres à ezjsdev dans les six langues.                          |
-| `site/theme.css`, `site/logo.tsx`, `site/icon.svg` | Jetons de couleur, logo `</>` et favicon.                               |
-| `content/articles/`, `content/reminders/`          | Articles et pense-bêtes (un dossier par entrée, un fichier par langue). |
-| `public/articles/`, `public/reminders/`            | Images des contenus.                                                    |
-| `app/[locale]/reminders/`                          | Les deux pages de la collection des pense-bêtes.                        |
-| `tests/e2e/reminders.spec.ts`                      | Tests e2e des pense-bêtes.                                              |
+| Emplacement                                                           | Contenu                                                                 |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [`site/config.ts`](site/config.ts)                                    | Nom, routes traduites, navigation, collection des pense-bêtes, palette. |
+| `site/messages/<locale>.json`                                         | Textes propres à ezjsdev dans les six langues.                          |
+| `site/theme.css`, `site/logo.tsx`, `site/icon.svg`                    | Jetons de couleur, logo `</>` et favicon.                               |
+| `site/shell.tsx`, `site/home.tsx`, `site/explorer.ts`, `site/ide.css` | Cadre IDE, accueil et arborescence de l'explorateur.                    |
+| `components/site/`                                                    | Composants de l'interface IDE et de l'accueil.                          |
+| `content/articles/`, `content/reminders/`                             | Articles et pense-bêtes (un dossier par entrée, un fichier par langue). |
+| `public/articles/`, `public/reminders/`                               | Images des contenus.                                                    |
+| `app/[locale]/reminders/`                                             | Les deux pages de la collection des pense-bêtes.                        |
+| `tests/e2e/reminders.spec.ts`, `tests/e2e/ide-shell.spec.ts`          | Tests e2e des pense-bêtes et de l'interface IDE.                        |
 
 ## Contrôle qualité
 
