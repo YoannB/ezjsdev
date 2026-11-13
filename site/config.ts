@@ -73,6 +73,14 @@ export const SITE = {
         },
     ],
     heroVideoId: "jzdTBDmCAKE",
+    // MUI palette per mode (buttons, chips, focus rings…). CSS tokens (--accent-1, --bg-0, --btn-fg…)
+    // are overridden in site/theme.css; keep both in step when rebranding.
+    palette: {
+        // Outlined/text buttons use these as TEXT colour: lighter on dark, darker on light (AA on
+        // --bg-0 / --surface-*). contrastText = primary (blue → cyan gradient) label, as --btn-fg.
+        dark: { primary: "#5b9bff", secondary: "#22c3ee", contrastText: "#06101f" },
+        light: { primary: "#1d4ed8", secondary: "#0e7490", contrastText: "#ffffff" },
+    },
     pathnames,
     nav: [{ href: "/reminders", key: "nav.reminders" }],
     // Markdown collections besides the articles: the old site's "pense-bêtes" (2013–2017 archives).

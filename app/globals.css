@@ -37,6 +37,5 @@
 @import "../styles/text-tools.css";
 @import "../styles/ui/tabs.css";
 @import "../styles/ui/terminal.css";
-
-/* Derived-site identity (palette + logo), last so it wins. Axons itself ships no such file. */
+/* LAST: the derived site's own CSS (token overrides, brand rules). Empty in Axons. */
 @import "../site/theme.css";
