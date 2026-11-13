@@ -104,7 +104,7 @@ console.log('Server running at http://127.0.0.1:1337/');
 
 All that is left is to test the server by running the command:
 
-```shell
+```bash
 npm start
 ```
 
@@ -114,7 +114,7 @@ And the result can be seen right away at http://127.0.0.1:1337/.
 
 Node.JS makes advanced testing possible; to do so, start by installing the dependencies:
 
-```shell
+```bash
 npm install -g karma
 npm install -g mocha
 npm install karma-mocha --save-dev
@@ -126,7 +126,7 @@ Example coming soon...
 
 Using Git as the versioning tool, installing the dependencies:
 
-```shell
+```bash
 sudo apt-get install git
 Git to path (;C:\Program Files (x86)\Git\bin;C:\Program Files (x86)\Git\cmd)
 git config --global user.name "NAME"
@@ -139,26 +139,26 @@ git config --global user.email "NAME@GMAIL.COM"
 
 Mysql:
 
-```shell
+```bash
 sudo npm -g install node-mysql
 ```
 
 MongoDB:
 
-```shell
+```bash
 sudo apt-get install mongodb
 ```
 
 Inliner:
 
-```shell
+```bash
 sudo npm -g install inliner
 sudo inliner --verbose --nocompress http://localhost/ > inline.html
 ```
 
 Collaborative:
 
-```shell
+```bash
 npm install hackify -g
 cd /project_name
 hackify
@@ -166,7 +166,7 @@ hackify
 
 Livereload without a gruntfile:
 
-```shell
+```bash
 npm install -g livereload
 npm install livereload --save
 npm install express-livereload --save
@@ -174,7 +174,7 @@ npm install express-livereload --save
 
 Mail (https://github.com/andris9/nodemailer):
 
-```shell
+```bash
 npm install nodemailer --save
 ```
 
