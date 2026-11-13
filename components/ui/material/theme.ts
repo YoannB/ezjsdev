@@ -1,3 +1,5 @@
+import type { SitePaletteMode } from "@/lib/site-extension";
+import { SITE } from "@/site/config";
 import { createTheme, type Theme, type ThemeOptions } from "@mui/material/styles";
 
 // The mode IS PASSED AS A PARAMETER (no more hard-coded 'dark'): otherwise CssBaseline paints the
@@ -5,20 +7,16 @@ import { createTheme, type Theme, type ThemeOptions } from "@mui/material/styles
 //
 // background.default/paper = 'transparent' so that styles/tokens.css (--* tokens) keeps
 // control over backgrounds, with no cascade war against the Emotion-injected styles.
-export function buildTheme(mode: "light" | "dark"): Theme {
+//
+// Colours come from the SITE (site/config.ts `palette`, one entry per mode): a derived site
+// rebrands MUI without touching this adapter.
+export function buildTheme(mode: "light" | "dark", palette: SitePaletteMode = SITE.palette[mode]): Theme {
     return createTheme({
         cssVariables: true,
         palette: {
             mode,
-            // ezjsdev brand (site/theme.css tokens). MUI needs parsable colors (no var()), so the
-            // values are mirrored here, per mode: outlined/text buttons use them as TEXT color,
-            // hence lighter on dark and darker on light (AA on --bg-0 / --surface-*). contrastText is
-            // the label of the primary (blue → cyan gradient) button: navy on dark, white on light.
-            primary:
-                mode === "dark"
-                    ? { main: "#5b9bff", contrastText: "#06101f" }
-                    : { main: "#1d4ed8", contrastText: "#ffffff" },
-            secondary: { main: mode === "dark" ? "#22c3ee" : "#0e7490" },
+            primary: { main: palette.primary, contrastText: palette.contrastText },
+            secondary: { main: palette.secondary },
             background: {
                 default: "transparent",
                 paper: "transparent",
@@ -42,9 +40,13 @@ export function buildTheme(mode: "light" | "dark"): Theme {
                     },
                 },
             },
+            // CssBaseline injects `body { background-color: var(--mui-palette-background-default);
+            // color: var(--mui-palette-text-primary) }` AFTER styles/base.css (Emotion): the transparent
+            // background erased --bg-0, and a palette built for the other mode (Storybook) painted the
+            // text white on light. Re-point both at the tokens so styles/tokens.css stays authoritative.
             MuiCssBaseline: {
                 styleOverrides: {
-                    root: "html,body{margin:0}",
+                    root: "html,body{margin:0}body{background-color:var(--bg-0);color:var(--text-1)}",
                 },
             },
         },

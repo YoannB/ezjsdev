@@ -29,7 +29,7 @@ slug: writing-an-article
 
 > A quote, and ignored raw HTML: <b>not interpreted</b>.
 
-![Cover](/articles/material-design/material-design.css.png)
+![Cover](/storybook-assets/story-cover.svg)
 `;
 
 const meta = {
