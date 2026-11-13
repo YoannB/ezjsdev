@@ -5,7 +5,7 @@ date: 2015-03-28
 description: "Lista das cores do guia Material Design."
 ---
 
-Site do Google sobre o Material Design e seus princípios [aqui][1].
+Site do Google sobre o Material Design e os seus princípios [aqui][1].
 
 Lembrete da paleta de cores (versão completa [aqui][2]):
 
@@ -31,7 +31,7 @@ Lembrete da paleta de cores (versão completa [aqui][2]):
 | **grey**        | `#9e9e9e` |
 | **blue-grey**   | `#607d8b` |
 
-Criação de um arquivo CSS para usar facilmente todas as cores do Material Design, disponível via bower [AQUI][3], e uma [demo][4].
+Criação de um ficheiro CSS para utilizar facilmente todas as cores do Material Design, disponível via bower [AQUI][3], e uma [demo][4].
 
 [1]: http://www.google.com/design/spec/material-design/introduction.html
 [2]: http://www.google.com/design/spec/style/color.html#color-color-palette

@@ -51,7 +51,7 @@ git clone https://github.com/[your.github.username]/[your.new.repository]
     git merge gh-pages
     ```
 
-- **Commit**: fazer o commit dos arquivos no repositório GitHub
+- **Commit**: fazer o commit dos ficheiros no repositório GitHub
 
     ```bash
     git commit --all
@@ -69,7 +69,7 @@ git clone https://github.com/[your.github.username]/[your.new.repository]
     git push origin master
     ```
 
-- **Remove**: se um arquivo foi commitado no git mas agora está no .gitignore
+- **Remove**: se um ficheiro foi commitado no git mas agora está no .gitignore
 
     ```bash
     git rm --cached <file_name>
@@ -81,9 +81,9 @@ git clone https://github.com/[your.github.username]/[your.new.repository]
 > git status
 > ```
 >
-> Depois, abrir cada arquivo e resolver os conflitos; em seguida pode fazer o commit.
+> Depois, abrir cada ficheiro e resolver os conflitos; em seguida, pode fazer-se o commit.
 
-> **Dica:** cada comando pode receber como parâmetros a URL do projeto e o nome da branch:
+> **Dica:** cada comando pode receber como parâmetros o URL do projeto e o nome da branch:
 >
 > ```bash
 > git {pull,commit,push} {options} https://github.com/[your.github.username]/[your.new.repository] [branch.name]

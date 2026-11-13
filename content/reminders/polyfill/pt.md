@@ -5,7 +5,7 @@ date: 2014-09-05
 description: "Lembrete para homogeneizar os navegadores."
 ---
 
-Para começar bem o desenvolvimento de um site, é preciso partir dos navegadores-alvo, e o mais simples é tornar a exibição homogênea em cada navegador.
+Para começar bem o desenvolvimento de um site, é preciso partir dos navegadores-alvo, e o mais simples é tornar a apresentação homogénea em cada navegador.
 
 ## Os polyfills JavaScript
 
@@ -13,7 +13,7 @@ Os polyfills são um conjunto de funções que permitem simular, num navegador a
 
 Entre os mais úteis:
 
-- [json3][1]: para decodificar e fazer o parse de JSON.
+- [json3][1]: para descodificar e fazer o parse de JSON.
 - [es5][2]: implementação das funções do EcmaScript 5.
 - [Respond][3]: simulação das media queries com window.onresize.
 
@@ -34,12 +34,12 @@ No caso de um projeto Node.JS, eis a configuração com o [Bower][bower] (no bow
 
 ## Reset CSS
 
-O reset CSS é necessário para reiniciar em 0 o valor de certos elementos HTML, para obter uma exibição mais parecida nos diferentes navegadores.
+O reset CSS é necessário para repor a 0 o valor de certos elementos HTML, para obter uma apresentação mais parecida nos diferentes navegadores.
 
 Dependendo do projeto, há várias formas de incluir o reset CSS:
 
 - com um framework CSS (inclusão automática): [Bootstrap][4], [Pure][5], [Knacss][6], ...
-- com um arquivo .css de reset (a adicionar): [Normalize.css][7], [Reset CSS de Eric Meyer][8], [YUI CSS reset][9], ...
+- com um ficheiro .css de reset (a adicionar): [Normalize.css][7], [Reset CSS de Eric Meyer][8], [YUI CSS reset][9], ...
 - com Node.JS e Stylus: [Nib][10], escolhendo entre os resets disponíveis:
     - `global-reset()`
     - `nested-reset()`
