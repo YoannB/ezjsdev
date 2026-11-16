@@ -140,5 +140,5 @@ export const SITE = {
     messageOverrides: ["meta.home", "footer.tagline", "pages.articles.intro"],
     // Message paths read by ezjsdev's own Client Components (useTranslations); the rest of the
     // catalogue stays on the server (docs/i18n.md → Client messages).
-    clientMessages: ["ide"],
+    clientMessages: ["ide", "demo"],
 } as const satisfies SiteConfig<typeof pathnames>;

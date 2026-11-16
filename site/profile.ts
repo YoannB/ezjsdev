@@ -5,6 +5,9 @@ import type { ProjectDecl } from "@/components/site/content/profile-model";
 // in site/messages/<locale>.json under `pages.about`, `pages.projects`, `pages.contact`.
 // Sources: spec v0.2 §3.1, §3.3, §5.4, §5.6 and the user's decisions (pro e-mail, LinkedIn first).
 
+/** Live preview of Axons (Projects page link, result of the home demo — spec v0.2 §7.3). */
+export const AXONS_PREVIEW_URL = "https://axons-preview.netlify.app/fr";
+
 export const PROFILE = {
     name: "Yoann Barbier",
     linkedinUrl: "https://www.linkedin.com/in/yoann-barbier-89ba1810",
@@ -37,7 +40,7 @@ export const PROJECTS = [
         ],
         links: [
             { key: "source", href: "https://github.com/YoannB/axons" },
-            { key: "preview", href: "https://axons-preview.netlify.app/fr" },
+            { key: "preview", href: AXONS_PREVIEW_URL },
         ],
     },
     {

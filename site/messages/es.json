@@ -203,5 +203,38 @@
         "servicesAll": "Ver los servicios",
         "projectsTitle": "Proyectos",
         "projectsAll": "Ver los proyectos"
+    },
+    "demo": {
+        "trigger": "Generar un sitio",
+        "running": "Demostración en curso…",
+        "replay": "Repetir la demostración",
+        "replayShort": "Repetir",
+        "note": "Demostración simulada en el terminal: no se genera ni se despliega ningún sitio real.",
+        "terminalLabel": "Demostración: generación de un sitio",
+        "announceStart": "Demostración iniciada en el terminal.",
+        "announceDone": "Demostración terminada. Resultado presentado: Axons, el boilerplate de este sitio.",
+        "lines": [
+            "Demostración: simulación del proceso de creación de un sitio",
+            "Análisis de la necesidad",
+            "Preparación del proyecto",
+            "Creación de las páginas",
+            "Optimización SEO: meta, sitemap, robots.txt",
+            "Generación de las páginas estáticas",
+            "Finalización",
+            "Fin de la demostración. Ejemplo de resultado: Axons."
+        ],
+        "result": {
+            "title": "Ejemplo de resultado: Axons",
+            "text": "Axons es el boilerplate Next.js de código abierto en el que se basa ezjsdev. Este sitio ya existe: el botón abre su vista previa, sin generar ni desplegar nada.",
+            "facts": [
+                "Next.js 16 y React 19, en TypeScript",
+                "Seis idiomas con URL traducidas",
+                "Temas claro y oscuro"
+            ],
+            "open": "Abrir el sitio",
+            "newTab": "(nueva pestaña)",
+            "thumbAlt": "Captura de la página de inicio de Axons en francés: el título «Le boilerplate Next.js pour vos sites SEO» y los botones «Voir la démo» y «Plan du site».",
+            "thumbError": "Vista previa no disponible. El enlace «Abrir el sitio» sigue funcionando."
+        }
     }
 }

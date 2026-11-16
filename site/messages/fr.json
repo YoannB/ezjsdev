@@ -203,5 +203,38 @@
         "servicesAll": "Voir les services",
         "projectsTitle": "Projets",
         "projectsAll": "Voir les projets"
+    },
+    "demo": {
+        "trigger": "Générer un site",
+        "running": "Démonstration en cours…",
+        "replay": "Rejouer la démonstration",
+        "replayShort": "Rejouer",
+        "note": "Démonstration simulée dans le terminal : aucun site n'est réellement généré ni déployé.",
+        "terminalLabel": "Démonstration : génération d'un site",
+        "announceStart": "Démonstration lancée dans le terminal.",
+        "announceDone": "Démonstration terminée. Résultat présenté : Axons, le boilerplate de ce site.",
+        "lines": [
+            "Démonstration : simulation du processus de création d'un site",
+            "Analyse du besoin",
+            "Préparation du projet",
+            "Création des pages",
+            "Optimisation SEO : meta, sitemap, robots.txt",
+            "Génération des pages statiques",
+            "Finalisation",
+            "Fin de la démonstration. Exemple de résultat : Axons."
+        ],
+        "result": {
+            "title": "Exemple de résultat : Axons",
+            "text": "Axons est le boilerplate Next.js open source qui sert de base à ezjsdev. Ce site existe déjà : le bouton ouvre sa prévisualisation, sans rien générer ni déployer.",
+            "facts": [
+                "Next.js 16 et React 19, en TypeScript",
+                "Six langues avec URL traduites",
+                "Thèmes clair et sombre"
+            ],
+            "open": "Ouvrir le site",
+            "newTab": "(nouvel onglet)",
+            "thumbAlt": "Capture de la page d'accueil d'Axons en français : titre « Le boilerplate Next.js pour vos sites SEO » et boutons « Voir la démo » et « Plan du site ».",
+            "thumbError": "Aperçu indisponible. Le lien « Ouvrir le site » reste utilisable."
+        }
     }
 }

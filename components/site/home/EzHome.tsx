@@ -7,6 +7,7 @@ import { getEntries } from "@/lib/articles/source";
 import type { SiteHomeProps } from "@/lib/site-extension";
 import { PROJECTS } from "@/site/profile";
 import { getTranslations } from "next-intl/server";
+import { DemoTrigger } from "../demo/DemoTrigger";
 
 const LATEST_REMINDERS = 3;
 
@@ -35,6 +36,7 @@ export async function EzHome({ locale }: SiteHomeProps) {
                             {t("aboutCta")}
                         </Link>
                     </p>
+                    <DemoTrigger />
                 </header>
                 <Section id="expertise" title={t("expertiseTitle")} className="ez-home__expertise">
                     <ul>
