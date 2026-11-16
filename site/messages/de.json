@@ -1,7 +1,11 @@
 {
     "nav": {
         "tagline": "Websites & Webanwendungen — React, TypeScript, Node.js",
-        "reminders": "Merkzettel"
+        "reminders": "Merkzettel",
+        "about": "Über mich",
+        "services": "Leistungen",
+        "projects": "Projekte",
+        "contact": "Kontakt"
     },
     "footer": {
         "tagline": "Freiberufliche Full-Stack-Entwicklung aus Nantes (Frankreich)."
@@ -22,6 +26,117 @@
         },
         "articles": {
             "intro": "Technische Artikel aus den Jahren 2013 bis 2015, unverändert als Archiv aufbewahrt."
+        },
+        "about": {
+            "title": "Über mich",
+            "intro": "Yoann Barbier, seit 2021 freiberuflicher Full-Stack-Entwickler in Nantes (Frankreich): React, TypeScript, Node.js und Autor des Open-Source-Boilerplates Axons.",
+            "lead": "Als freiberuflicher Full-Stack-Entwickler in Nantes konzipiere und entwickle ich seit 2021 Webanwendungen mit React, TypeScript und Node.js. Ich bin der Autor von Axons, dem Open-Source-Boilerplate für Next.js, auf dem diese Website basiert.",
+            "summaryTitle": "Kurz gesagt",
+            "summary": [
+                "Freiberuflicher Full-Stack-Entwickler seit 2021.",
+                "React, TypeScript, Node.js.",
+                "Autor des Open-Source-Boilerplates Axons.",
+                "Ansässig in Nantes, je nach Projekt remote oder vor Ort verfügbar."
+            ],
+            "approachTitle": "Arbeitsweise",
+            "approach": [
+                "Ich arbeite vor allem mit JavaScript und TypeScript und achte besonders auf Codequalität, Performance und die Robustheit der Lösungen."
+            ],
+            "backgroundTitle": "Werdegang in Kürze",
+            "background": [
+                "Über 15 Jahre Berufserfahrung.",
+                "CTO von Keople (SaaS-HR-Plattform myKeople) von 2014 bis 2018, danach Full-Stack-Lead-Developer von 2018 bis 2021.",
+                "Freiberuflicher Full-Stack-Entwickler seit 2021.",
+                "Abschluss an der Polytech'Nantes 2008."
+            ],
+            "linkedinCta": "Vollständiger Werdegang auf LinkedIn",
+            "newTab": "(öffnet in neuem Tab)",
+            "nextTitle": "Weiterlesen"
+        },
+        "services": {
+            "title": "Leistungen",
+            "intro": "Leistungen von Yoann Barbier, freiberuflicher Full-Stack-Entwickler: React, TypeScript, Node.js, Architektur, technische Leitung, Qualität, Tests und CI/CD.",
+            "lead": "Leistungen, die direkt aus meinem Werdegang stammen: Entwicklung, Architektur, technische Leitung und Softwarequalität.",
+            "items": [
+                {
+                    "title": "React-/TypeScript-Expertise und Entwicklung",
+                    "body": "Entwicklung von Oberflächen und Webanwendungen mit React.js und TypeScript, in Zusammenarbeit mit Produkt- und Designteams."
+                },
+                {
+                    "title": "Full-Stack-Entwicklung mit Node.js",
+                    "body": "Serverseitige Entwicklung mit Node.js und NestJS bis zur Oberfläche, für SaaS-, Web- und Mobile-Anwendungen."
+                },
+                {
+                    "title": "Architektur, Neugestaltung und Weiterentwicklung von Webanwendungen",
+                    "body": "Architekturentscheidungen, Neugestaltung bestehender Anwendungen und Weiterentwicklung eines Produkts zu einer robusteren, skalierbaren Version."
+                },
+                {
+                    "title": "Technische Leitung, Begleitung und Mentoring",
+                    "body": "Teamführung, Technologieentscheidungen, Koordination und Mentoring von Entwicklern."
+                },
+                {
+                    "title": "Performance, Qualität, Tests und CI/CD",
+                    "body": "Optimierung von Performance und Skalierbarkeit, Best Practices, Tests, Dokumentation, Continuous Integration und CI/CD-Pipelines."
+                },
+                {
+                    "title": "Beratung zu den technischen Grundlagen eines Produkts",
+                    "body": "Begleitung bei den technischen Grundlagen eines SaaS-Produkts oder einer Webanwendung: Stack, Architektur, Codeorganisation und Tooling."
+                }
+            ],
+            "nextTitle": "Weiterlesen"
+        },
+        "projects": {
+            "title": "Projekte",
+            "intro": "Projekte von Yoann Barbier: Axons, das Open-Source-Boilerplate für Next.js, von dem diese Website abgeleitet ist, und die Neugestaltung von idealco.fr mit Next.js 14+.",
+            "lead": "Jedes Projekt wird mit seinem Kontext, meiner Rolle und den tatsächlich eingesetzten Technologien vorgestellt.",
+            "current": "Aktuelles Projekt",
+            "context": "Kontext",
+            "role": "Rolle",
+            "contribution": "Beitrag",
+            "stack": "Technologien",
+            "linksTitle": "Links",
+            "newTab": "(öffnet in neuem Tab)",
+            "links": {
+                "source": "Quellcode auf GitHub",
+                "preview": "Live-Vorschau von Axons",
+                "idealco": "Website idealco.fr"
+            },
+            "items": {
+                "axons": {
+                    "name": "Axons",
+                    "tagline": "Open-Source-Boilerplate für Next.js, Grundlage dieser Website",
+                    "context": "Axons ist eine wiederverwendbare Grundlage für mehrsprachige, suchmaschinenfreundliche Next.js-Websites und -Webanwendungen. Diese Website, ezjsdev, ist davon abgeleitet: Sie ergänzt nur ihre Identität, ihre Seiten und Inhalte und übernimmt alles andere von Axons.",
+                    "role": "Autor: Konzeption, Entwicklung und Pflege des Projekts.",
+                    "contribution": [
+                        "Next.js 16 (App Router) und React 19, in TypeScript",
+                        "Sechs Sprachen mit übersetzten URLs, hreflang-Tags, XML-Sitemap und strukturierten Daten",
+                        "Artikel und Sammlungen in Markdown, mit serverseitiger Syntaxhervorhebung",
+                        "Material-UI-Komponenten hinter einer neutralen API, helles und dunkles Theme",
+                        "Erweiterungspunkte, um eine Website abzuleiten, ohne die Grundlage zu ändern",
+                        "Unit- und End-to-End-Tests, Storybook, Continuous Integration und Deployment auf Netlify"
+                    ]
+                },
+                "idealco": {
+                    "name": "Idealco",
+                    "tagline": "Neugestaltung von idealco.fr mit Next.js 14+",
+                    "context": "Neugestaltung der Website idealco.fr mit Next.js 14+, von 2023 bis 2025, nach einer ersten Zusammenarbeit mit Idealco 2021–2022.",
+                    "role": "Freiberuflicher Full-Stack-Entwickler."
+                }
+            },
+            "nextTitle": "Weiterlesen"
+        },
+        "contact": {
+            "title": "Kontakt",
+            "intro": "Kontakt zu Yoann Barbier, freiberuflicher Full-Stack-Entwickler in Nantes (Frankreich): am liebsten über LinkedIn oder per E-Mail.",
+            "lead": "Für ein Gespräch über ein Projekt oder einen Auftrag erreichen Sie mich am einfachsten über LinkedIn.",
+            "linkedinTitle": "LinkedIn",
+            "linkedinBody": "Schreiben Sie mir eine Nachricht über mein Profil:",
+            "linkedinCta": "LinkedIn-Profil von Yoann Barbier",
+            "newTab": "(öffnet in neuem Tab)",
+            "emailTitle": "E-Mail",
+            "emailBody": "Sie können mir auch an diese Adresse schreiben:",
+            "locationTitle": "Standort",
+            "location": "Ansässig in Nantes (Frankreich), je nach Projekt remote oder vor Ort verfügbar."
         }
     },
     "ide": {
@@ -59,6 +174,9 @@
             "legal": "Impressum",
             "privacy": "Datenschutz",
             "cookies": "Cookies"
+        },
+        "fileNames": {
+            "about": "inhalt.md"
         }
     },
     "siteHome": {
@@ -79,6 +197,11 @@
             "Vue / Nuxt, Angular, HTML und CSS"
         ],
         "remindersTitle": "Neueste Merkzettel",
-        "remindersAll": "Alle Merkzettel"
+        "remindersAll": "Alle Merkzettel",
+        "contactCta": "Kontakt aufnehmen",
+        "aboutCta": "Mein Werdegang",
+        "servicesAll": "Zu den Leistungen",
+        "projectsTitle": "Projekte",
+        "projectsAll": "Zu den Projekten"
     }
 }

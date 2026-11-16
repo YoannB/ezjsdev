@@ -121,6 +121,10 @@ test.describe("IDE shell — desktop", () => {
         await expect(sitemap).toHaveAttribute("aria-expanded", "false");
         await page.keyboard.press("ArrowRight"); // open
         await expect(sitemap).toHaveAttribute("aria-expanded", "true");
+        await page.keyboard.press("ArrowUp"); // Contact/page.tsx (folder open by default)
+        await expect(fileItem(page, /^page\.tsx — Contact/)).toBeFocused();
+        await page.keyboard.press("ArrowUp"); // Contact folder
+        await expect(folder(page, "Contact")).toBeFocused();
         await page.keyboard.press("ArrowUp"); // Pense-betes folder (closed)
         const reminders = folder(page, "Pense-betes");
         await expect(reminders).toBeFocused();

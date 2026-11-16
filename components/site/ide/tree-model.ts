@@ -10,6 +10,8 @@ export interface PageFileDecl<R extends string = string> {
     readonly id: string;
     /** File name shown in the tree ("page.tsx"). */
     readonly name: string;
+    /** Full message path of a LOCALIZED file name ("ide.fileNames.about" -> "contenu.md"); wins over `name`. */
+    readonly nameKey?: string;
     readonly route: R;
     /** Full message paths of the page title and description (preview panel, accessible name). */
     readonly titleKey: string;
@@ -102,11 +104,12 @@ export function resolveTree(decls: readonly ExplorerDecl[], ctx: ResolveContext,
     const out: TreeNode[] = [];
     for (const decl of decls) {
         if (decl.kind === "page") {
+            const name = decl.nameKey ? ctx.message(decl.nameKey) : decl.name;
             out.push({
                 kind: "file",
                 id: decl.id,
-                name: decl.name,
-                tabLabel: folder ? `${folder}/${decl.name}` : decl.name,
+                name,
+                tabLabel: folder ? `${folder}/${name}` : name,
                 title: ctx.message(decl.titleKey),
                 description: ctx.message(decl.descriptionKey),
                 href: ctx.href(decl.route),

@@ -138,6 +138,33 @@ describe("resolveTree", () => {
         expect(file("notes/page").href).toBe("/fr/notes");
     });
 
+    it("localizes a file name declared with nameKey (folder prefix included)", () => {
+        const [docs] = resolveTree(
+            [
+                {
+                    kind: "folder",
+                    id: "docs",
+                    labelKey: "docs",
+                    children: [
+                        {
+                            kind: "page",
+                            id: "docs/page",
+                            name: "doc.md",
+                            nameKey: "ide.fileNames.doc",
+                            route: "/docs",
+                            titleKey: "t",
+                            descriptionKey: "d",
+                        },
+                    ],
+                },
+            ],
+            ctx,
+        );
+        const [doc] = treeFiles([docs]);
+        expect(doc.name).toBe("<ide.fileNames.doc>");
+        expect(doc.tabLabel).toBe("[docs]/<ide.fileNames.doc>");
+    });
+
     it("expands a collection into one <slug>.md file per entry, on the entry route", () => {
         expect(file("notes/e1")).toEqual({
             kind: "file",
@@ -305,7 +332,19 @@ describe("site/explorer.ts — the ezjsdev declaration", () => {
 
     it("opens the pages required by the shell, the home first", () => {
         const routes = pages(EXPLORER).flatMap((d) => (d.kind === "page" ? [d.route] : []));
-        expect(routes).toEqual(["/", "/articles", "/reminders", "/sitemap", "/legal", "/privacy", "/cookies"]);
+        expect(routes).toEqual([
+            "/",
+            "/about",
+            "/services",
+            "/projects",
+            "/articles",
+            "/reminders",
+            "/contact",
+            "/sitemap",
+            "/legal",
+            "/privacy",
+            "/cookies",
+        ]);
     });
 
     it("lists the articles and the reminders, one file per entry", () => {
@@ -313,10 +352,17 @@ describe("site/explorer.ts — the ezjsdev declaration", () => {
         expect(collections).toEqual(["articles", "reminders"]);
     });
 
-    it("reserves the future pages without showing them (planned, no file yet)", () => {
+    it("reserves the SEO tools page without showing it (planned, no real tool yet: spec §5.5)", () => {
         const planned = EXPLORER.filter((d) => "planned" in d && d.planned).map((d) => d.id);
-        expect(planned).toEqual(["about", "services", "projects", "seo-tools", "contact"]);
-        expect(resolveTree(EXPLORER, ctx).map((n) => n.id)).not.toContain("about");
+        expect(planned).toEqual(["seo-tools"]);
+        const shown = resolveTree(EXPLORER, ctx).map((n) => n.id);
+        expect(shown).not.toContain("seo-tools");
+        expect(shown).toEqual(expect.arrayContaining(["about", "services", "projects", "contact"]));
+    });
+
+    it("stages About as a localized Markdown document (spec §5: A-propos/contenu.md)", () => {
+        const about = treeFiles(resolveTree(EXPLORER, ctx)).find((f) => f.route === "/about");
+        expect(about?.name).toBe("<ide.fileNames.about>");
     });
 
     it("uses unique page and folder ids (they key the tabs and the expanded state)", () => {

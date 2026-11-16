@@ -1,7 +1,11 @@
 {
     "nav": {
         "tagline": "Websites & web apps — React, TypeScript, Node.js",
-        "reminders": "Reminders"
+        "reminders": "Reminders",
+        "about": "About",
+        "services": "Services",
+        "projects": "Projects",
+        "contact": "Contact"
     },
     "footer": {
         "tagline": "Freelance full-stack development, based in Nantes, France."
@@ -22,6 +26,117 @@
         },
         "articles": {
             "intro": "Technical articles written between 2013 and 2015, kept as they were as an archive."
+        },
+        "about": {
+            "title": "About",
+            "intro": "Yoann Barbier, freelance full-stack developer in Nantes, France, since 2021: React, TypeScript, Node.js, and author of the open-source Axons boilerplate.",
+            "lead": "A freelance full-stack developer in Nantes since 2021, I design and evolve web applications with React, TypeScript and Node.js. I am the author of Axons, the open-source Next.js boilerplate this site is built on.",
+            "summaryTitle": "At a glance",
+            "summary": [
+                "Freelance full-stack developer since 2021.",
+                "React, TypeScript, Node.js.",
+                "Author of the open-source Axons boilerplate.",
+                "Based in Nantes, available remotely or on site depending on the project."
+            ],
+            "approachTitle": "Approach",
+            "approach": [
+                "I work mainly with JavaScript and TypeScript, with particular attention to code quality, performance and the robustness of the solutions."
+            ],
+            "backgroundTitle": "Background in brief",
+            "background": [
+                "Over 15 years of professional experience.",
+                "CTO of Keople (myKeople SaaS HR platform) from 2014 to 2018, then full-stack lead developer from 2018 to 2021.",
+                "Freelance full-stack developer since 2021.",
+                "Graduated from Polytech'Nantes in 2008."
+            ],
+            "linkedinCta": "Full background on LinkedIn",
+            "newTab": "(opens in a new tab)",
+            "nextTitle": "Read next"
+        },
+        "services": {
+            "title": "Services",
+            "intro": "Services by Yoann Barbier, freelance full-stack developer: React, TypeScript, Node.js, architecture, technical leadership, quality, testing and CI/CD.",
+            "lead": "Services that come straight from my experience: development, architecture, technical leadership and software quality.",
+            "items": [
+                {
+                    "title": "React / TypeScript expertise and development",
+                    "body": "Building user interfaces and web applications with React.js and TypeScript, in collaboration with product and design teams."
+                },
+                {
+                    "title": "Full-stack Node.js development",
+                    "body": "Server-side development with Node.js and NestJS, all the way to the interface, for SaaS, web and mobile applications."
+                },
+                {
+                    "title": "Architecture, redesign and evolution of web applications",
+                    "body": "Architecture choices, redesign of existing applications and evolution of a product towards a more robust, scalable version."
+                },
+                {
+                    "title": "Technical leadership, support and mentoring",
+                    "body": "Team supervision, technology choices, coordination and mentoring of developers."
+                },
+                {
+                    "title": "Performance, quality, testing and CI/CD",
+                    "body": "Performance and scalability optimisation, good practices, testing, documentation, continuous integration and CI/CD pipelines."
+                },
+                {
+                    "title": "Advice on a product's technical foundations",
+                    "body": "Guidance on the technical foundations of a SaaS product or a web application: stack, architecture, code organisation and tooling."
+                }
+            ],
+            "nextTitle": "Read next"
+        },
+        "projects": {
+            "title": "Projects",
+            "intro": "Projects by Yoann Barbier: Axons, the open-source Next.js boilerplate this site derives from, and the redesign of idealco.fr in Next.js 14+.",
+            "lead": "Each project is shown with its context, my role and the technologies actually used.",
+            "current": "Current project",
+            "context": "Context",
+            "role": "Role",
+            "contribution": "Contribution",
+            "stack": "Technologies",
+            "linksTitle": "Links",
+            "newTab": "(opens in a new tab)",
+            "links": {
+                "source": "Source code on GitHub",
+                "preview": "Axons live preview",
+                "idealco": "idealco.fr website"
+            },
+            "items": {
+                "axons": {
+                    "name": "Axons",
+                    "tagline": "Open-source Next.js boilerplate, the foundation of this site",
+                    "context": "Axons is a reusable foundation for building multilingual, search-friendly Next.js websites and web applications. This site, ezjsdev, derives from it: it only adds its identity, pages and content, and takes everything else from Axons.",
+                    "role": "Author: design, development and maintenance of the project.",
+                    "contribution": [
+                        "Next.js 16 (App Router) and React 19, in TypeScript",
+                        "Six languages with translated URLs, hreflang tags, an XML sitemap and structured data",
+                        "Markdown articles and collections, with server-side code highlighting",
+                        "Material UI components isolated behind a neutral API, light and dark themes",
+                        "Extension points to derive a site without modifying the foundation",
+                        "Unit and end-to-end tests, Storybook, continuous integration and deployment on Netlify"
+                    ]
+                },
+                "idealco": {
+                    "name": "Idealco",
+                    "tagline": "Redesign of idealco.fr in Next.js 14+",
+                    "context": "Redesign of the idealco.fr website in Next.js 14+, from 2023 to 2025, after a first collaboration with Idealco in 2021-2022.",
+                    "role": "Freelance full-stack developer."
+                }
+            },
+            "nextTitle": "Read next"
+        },
+        "contact": {
+            "title": "Contact",
+            "intro": "Contact Yoann Barbier, freelance full-stack developer in Nantes, France: preferably on LinkedIn, or by email.",
+            "lead": "To discuss a project or an assignment, LinkedIn is the easiest way to reach me.",
+            "linkedinTitle": "LinkedIn",
+            "linkedinBody": "Send me a message from my profile:",
+            "linkedinCta": "Yoann Barbier's LinkedIn profile",
+            "newTab": "(opens in a new tab)",
+            "emailTitle": "Email",
+            "emailBody": "You can also write to me at this address:",
+            "locationTitle": "Location",
+            "location": "Based in Nantes, France, available remotely or on site depending on the project."
         }
     },
     "ide": {
@@ -59,6 +174,9 @@
             "legal": "Legal-notice",
             "privacy": "Privacy",
             "cookies": "Cookies"
+        },
+        "fileNames": {
+            "about": "content.md"
         }
     },
     "siteHome": {
@@ -79,6 +197,11 @@
             "Vue / Nuxt, Angular, HTML and CSS"
         ],
         "remindersTitle": "Latest reminders",
-        "remindersAll": "All reminders"
+        "remindersAll": "All reminders",
+        "contactCta": "Get in touch",
+        "aboutCta": "My background",
+        "servicesAll": "See the services",
+        "projectsTitle": "Projects",
+        "projectsAll": "See the projects"
     }
 }
