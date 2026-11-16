@@ -22,10 +22,14 @@
             "intro": "Notas técnicas de referência escritas entre 2013 e 2017, guardadas tal como estavam, como arquivo.",
             "empty": "Ainda não há lembretes.",
             "publishedOn": "Publicado em {date}",
-            "onlyIn": "Disponível apenas em {language}"
+            "onlyIn": "Disponível apenas em {language}",
+            "latestTitle": "Últimos lembretes",
+            "archivesTitle": "Lembretes (arquivo)",
+            "viewAll": "Todos os lembretes"
         },
         "articles": {
-            "intro": "Artigos técnicos escritos entre 2013 e 2015, guardados tal como estavam, como arquivo."
+            "intro": "Artigos técnicos escritos entre 2013 e 2015, guardados tal como estavam, como arquivo.",
+            "archivesTitle": "Artigos (arquivo)"
         },
         "about": {
             "title": "Sobre mim",
@@ -196,8 +200,6 @@
             "Qualidade do código, testes e documentação",
             "Vue / Nuxt, Angular, HTML e CSS"
         ],
-        "remindersTitle": "Últimos lembretes",
-        "remindersAll": "Todos os lembretes",
         "contactCta": "Contactar-me",
         "aboutCta": "O meu percurso",
         "servicesAll": "Ver os serviços",
