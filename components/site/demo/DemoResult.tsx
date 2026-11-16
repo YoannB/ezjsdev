@@ -11,10 +11,11 @@ import { demoThumbnail } from "./demo-model";
 // in the painted theme (public/demo/, fixed 640×400 → no layout shift); if it fails to load, a
 // plain fallback box keeps the card usable. Only facts already published on the Projects page.
 // `focusOnMount`: the title takes the focus when the card appears at the end of a run.
-export function DemoResult({ focusOnMount = false }: { focusOnMount?: boolean }) {
+// `thumbnail`: overrides the image URL (stories: the load-error state).
+export function DemoResult({ focusOnMount = false, thumbnail }: { focusOnMount?: boolean; thumbnail?: string }) {
     const t = useTranslations("demo.result");
     const { effective } = useTheme();
-    const src = demoThumbnail(effective);
+    const src = thumbnail ?? demoThumbnail(effective);
     const [failed, setFailed] = useState<string | null>(null);
     const facts = t.raw("facts") as string[];
     return (
