@@ -115,12 +115,13 @@ export const SITE = {
         light: { primary: "#1d4ed8", secondary: "#0e7490", contrastText: "#ffffff" },
     },
     pathnames,
-    // Inserted after Home by Axons (buildNav); Axons' own entries (Articles, Sitemap, legal pages)
-    // follow, so "Articles" cannot sit between Projects and Reminders without an Axons change.
+    // Order of the header, footer and HTML sitemap: site entries follow Home; { axons: "/articles" }
+    // places Axons' Articles entry among them. Sitemap and legal pages (Axons) come last.
     nav: [
         { href: "/about", key: "nav.about" },
         { href: "/services", key: "nav.services" },
         { href: "/projects", key: "nav.projects" },
+        { axons: "/articles" },
         { href: "/reminders", key: "nav.reminders" },
         { href: "/contact", key: "nav.contact" },
     ],
@@ -137,4 +138,7 @@ export const SITE = {
     ],
     // Axons copy replaced on purpose by site/messages/<locale>.json.
     messageOverrides: ["meta.home", "footer.tagline", "pages.articles.intro"],
+    // Message paths read by ezjsdev's own Client Components (useTranslations); the rest of the
+    // catalogue stays on the server (docs/i18n.md → Client messages).
+    clientMessages: ["ide"],
 } as const satisfies SiteConfig<typeof pathnames>;
