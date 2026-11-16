@@ -5,7 +5,7 @@ import { PROFILE } from "@/site/profile";
 import { getTranslations } from "next-intl/server";
 
 // EZJSDEV — Contact (spec v0.2 §5.6): LinkedIn first, then the professional e-mail as a mailto
-// link. The LinkedIn call to action is Axons' `Button` as a link (same tab: it has no `target`).
+// link. The LinkedIn call to action is Axons' `Button` as an `external` link (new tab, hidden notice).
 // No phone, no form (nothing is collected by the site). Copy: site/messages → `pages.contact`.
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -29,7 +29,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                         <h2>{t("linkedinTitle")}</h2>
                         <p>{t("linkedinBody")}</p>
                         <p>
-                            <Button href={PROFILE.linkedinUrl} className="ez-cta">
+                            <Button href={PROFILE.linkedinUrl} external className="ez-cta">
                                 {t("linkedinCta")}
                             </Button>
                         </p>

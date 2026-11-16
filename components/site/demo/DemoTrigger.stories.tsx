@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 
 /** Initial: "Generate a site". */
 export const Idle: Story = { args: { status: "idle" } };
-/** Running: Axons' loading state (spinner, disabled: no double launch). */
+/** Running: Axons' busy state (spinner, aria-disabled + aria-busy, focusable, clicks ignored). */
 export const Running: Story = { args: { status: "running" } };
 /** Done: "Replay the demo". */
 export const Done: Story = { args: { status: "done" } };

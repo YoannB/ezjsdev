@@ -69,9 +69,12 @@ test.describe("SEO site demo — desktop", () => {
 
         const open = card(page).getByRole("link", { name: /Ouvrir le site/ });
         await expect(open).toHaveAttribute("href", AXONS);
-        // Axons' Button as a link: a real <a> with the button classes, same tab (it has no target).
+        // Axons' Button as an `external` link: a real <a> with the button classes, new tab, safe rel,
+        // and the hidden localized "(new tab)" in its accessible name.
         await expect(open).toHaveClass(/MuiButton-root/);
-        await expect(open).not.toHaveAttribute("target", /.+/);
+        await expect(open).toHaveAttribute("target", "_blank");
+        await expect(open).toHaveAttribute("rel", "noopener noreferrer");
+        await expect(open).toHaveAccessibleName(/Ouvrir le site.*\(nouvel onglet\)/);
         await expect(card(page).getByText(AXONS, { exact: true })).toBeVisible();
         const img = card(page).getByRole("img");
         await expect(img).toHaveAttribute("src", /\/demo\/axons-preview-fr-(dark|light)\.webp$/);
@@ -91,16 +94,21 @@ test.describe("SEO site demo — desktop", () => {
         await expect(homeButton(page)).toHaveJSProperty("tagName", "BUTTON");
         await expect(terminalButton(page)).toHaveClass(/MuiButton-sizeSmall/);
         await homeButton(page).click();
-        // Axons' loading state: disabled (no double launch) with the "running" label.
-        await expect(homeButton(page)).toBeDisabled();
+        // Axons' busy state: aria-disabled + aria-busy, still enabled and focused, clicks ignored.
+        await expect(homeButton(page)).toHaveAttribute("aria-busy", "true");
+        await expect(homeButton(page)).toHaveAttribute("aria-disabled", "true");
+        await expect(homeButton(page)).toBeEnabled();
+        await expect(homeButton(page)).toBeFocused();
         await expect(homeButton(page)).toHaveText("Démonstration en cours…");
-        await expect(terminalButton(page)).toBeDisabled();
+        await expect(terminalButton(page)).toHaveAttribute("aria-busy", "true");
         await expect(lines(page).nth(1)).toBeVisible();
         const before = await lines(page).count();
-        await homeButton(page).click({ force: true }); // disabled: ignored, no restart
+        await homeButton(page).click(); // busy: ignored, no restart
+        await page.keyboard.press("Enter");
         expect(await lines(page).count()).toBeGreaterThanOrEqual(before);
         await expect(card(page)).toBeVisible();
-        await expect(homeButton(page)).toBeEnabled();
+        await expect(cardTitle(page)).toBeFocused();
+        await expect(homeButton(page)).not.toHaveAttribute("aria-busy", "true");
 
         // Replay from the terminal bar: a fresh run, the card comes back at the end.
         await expect(terminalButton(page)).toHaveText("Rejouer");
@@ -175,7 +183,7 @@ test.describe("SEO site demo — desktop", () => {
         await ready(page);
         await homeButton(page).click();
         await expect(lines(page).nth(1)).toBeVisible();
-        await expect(homeButton(page)).toBeDisabled(); // still running
+        await expect(homeButton(page)).toHaveAttribute("aria-busy", "true"); // still running
         await page.getByRole("contentinfo").getByRole("link", { name: "Plan du site" }).click();
         await expect(page).toHaveURL(/plan-du-site/);
         await expect(demoLog(page)).toHaveCount(0);
