@@ -87,7 +87,7 @@ test.describe("SEO site demo — desktop", () => {
         );
     });
 
-    test("the button is disabled while running (no double launch), then replays", async ({ page }) => {
+    test("the button is busy while running (focus kept, no double launch), then replays", async ({ page }) => {
         await ready(page);
         // Axons' Button: a real <button> with its classes (not a hand-made one).
         await expect(homeButton(page)).toHaveClass(/MuiButton-root/);
@@ -97,14 +97,18 @@ test.describe("SEO site demo — desktop", () => {
         // Axons' busy state: aria-disabled + aria-busy, still enabled and focused, clicks ignored.
         await expect(homeButton(page)).toHaveAttribute("aria-busy", "true");
         await expect(homeButton(page)).toHaveAttribute("aria-disabled", "true");
-        await expect(homeButton(page)).toBeEnabled();
+        // Not natively disabled (Playwright's toBeEnabled() reads aria-disabled, so check the property).
+        await expect(homeButton(page)).toHaveJSProperty("disabled", false);
         await expect(homeButton(page)).toBeFocused();
         await expect(homeButton(page)).toHaveText("Démonstration en cours…");
         await expect(terminalButton(page)).toHaveAttribute("aria-busy", "true");
         await expect(lines(page).nth(1)).toBeVisible();
         const before = await lines(page).count();
-        await homeButton(page).click(); // busy: ignored, no restart
+        // Busy: a pointer click (forced: the busy button has no pointer events, Playwright would
+        // otherwise wait for the run to end) and Enter on the focused button are both ignored.
+        await homeButton(page).click({ force: true });
         await page.keyboard.press("Enter");
+        await expect(homeButton(page)).toHaveAttribute("aria-busy", "true");
         expect(await lines(page).count()).toBeGreaterThanOrEqual(before);
         await expect(card(page)).toBeVisible();
         await expect(cardTitle(page)).toBeFocused();
