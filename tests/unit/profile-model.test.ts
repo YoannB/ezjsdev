@@ -46,8 +46,8 @@ describe("profileJsonLd", () => {
 });
 
 describe("site/profile.ts — the published facts", () => {
-    it("presents Axons first, then myKeople, and nothing else (no client reference: spec §3.4)", () => {
-        expect(PROJECTS.map((p) => p.id)).toEqual(["axons", "mykeople"]);
+    it("presents Axons first, then Idealco, and nothing else (no other client reference)", () => {
+        expect(PROJECTS.map((p) => p.id)).toEqual(["axons", "idealco"]);
     });
 
     it("declares no figure for any project (none of the CV figures is published)", () => {

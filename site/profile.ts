@@ -16,22 +16,23 @@ export const PROFILE = {
     knowsAbout: ["React", "TypeScript", "Node.js", "NestJS", "Vue.js", "Nuxt", "Angular"],
 } as const;
 
-// Order = display order (Projects page, home preview): Axons first, myKeople presented soberly
-// (context, role, stack) with NO figure (user decision). Copy: `pages.projects.items.<id>`.
+// Order = display order (Projects page, home preview): Axons first (the flagship project), then the
+// idealco.fr redesign (the only client the user allows to name). No figure, no other client.
+// Copy: `pages.projects.items.<id>`.
 export const PROJECTS = [
     {
         id: "axons",
         current: true,
-        // Technologies of the repository itself (package.json of Axons / this site).
+        // Technologies of the repository itself (package.json / README / AGENTS.md of Axons).
         stack: [
             "Next.js 16",
             "React 19",
             "TypeScript",
-            "Material UI",
-            "next-intl",
+            "Material UI 9",
+            "next-intl 4",
             "Vitest",
             "Playwright",
-            "Storybook",
+            "Storybook 10",
             "Netlify",
         ],
         links: [
@@ -40,10 +41,10 @@ export const PROJECTS = [
         ],
     },
     {
-        id: "mykeople",
+        id: "idealco",
         current: false,
-        // Spec §3.3: "Architecture MEAN … microservices, Socket.IO".
-        stack: ["MongoDB", "Express", "Angular", "Node.js", "Socket.IO"],
-        links: [],
+        // Only what the user stated: a redesign of idealco.fr in Next.js 14+.
+        stack: ["Next.js 14+"],
+        links: [{ key: "idealco", href: "https://idealco.fr" }],
     },
 ] as const satisfies readonly ProjectDecl[];

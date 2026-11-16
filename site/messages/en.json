@@ -29,58 +29,28 @@
         },
         "about": {
             "title": "About",
-            "intro": "Background of Yoann Barbier, freelance full-stack developer based in Nantes, France: over 15 years of experience with React, TypeScript and Node.js.",
-            "lead": "As a freelance full-stack developer based in Nantes, I help companies and product teams design, architect and evolve modern web applications.",
+            "intro": "Yoann Barbier, freelance full-stack developer in Nantes, France, since 2021: React, TypeScript, Node.js, and author of the open-source Axons boilerplate.",
+            "lead": "A freelance full-stack developer in Nantes since 2021, I design and evolve web applications with React, TypeScript and Node.js. I am the author of Axons, the open-source Next.js boilerplate this site is built on.",
             "summaryTitle": "At a glance",
             "summary": [
-                "Over 15 years of professional experience.",
-                "Freelance full-stack developer since June 2021.",
-                "Graduated from Polytech'Nantes in 2008.",
+                "Freelance full-stack developer since 2021.",
+                "React, TypeScript, Node.js.",
+                "Author of the open-source Axons boilerplate.",
                 "Based in Nantes, available remotely or on site depending on the project."
             ],
             "approachTitle": "Approach",
             "approach": [
-                "I work mainly with JavaScript and TypeScript, with particular attention to code quality, performance and the robustness of the solutions.",
-                "My work covers architecture, good practices, testing, continuous integration and CI/CD pipelines, in collaboration with product and design teams."
+                "I work mainly with JavaScript and TypeScript, with particular attention to code quality, performance and the robustness of the solutions."
             ],
-            "expertiseTitle": "Expertise",
-            "experienceTitle": "Experience",
-            "stackLabel": "Technologies:",
-            "experience": [
-                {
-                    "period": "Since June 2021",
-                    "role": "Full-stack Developer",
-                    "company": "Freelance",
-                    "summary": "Front-end and full-stack expertise around React.js, TypeScript and Node.js: architecture, performance, good practices, continuous integration, testing and CI/CD pipelines, in collaboration with product and design teams."
-                },
-                {
-                    "period": "June 2018 – June 2021",
-                    "role": "Lead Developer FullStack",
-                    "company": "Lone Stone",
-                    "summary": "Technical lead on SaaS, web and mobile projects: team supervision, technology choices, architecture, development, performance, scalability, CI/CD and mentoring.",
-                    "stack": "Angular, React, React Native, Vue / Nuxt, Node.js, NestJS, TypeORM, GitLab CI"
-                },
-                {
-                    "period": "September 2014 – May 2018",
-                    "role": "CTO",
-                    "company": "Keople",
-                    "summary": "Technical leadership and design of the myKeople SaaS platform, an online HR tool: MEAN architecture, product development from prototype to a scalable version, microservices, Socket.IO, in-memory caching, load balancing, PDF generation and team management."
-                },
-                {
-                    "period": "June 2013 – August 2014",
-                    "role": "Development Engineer",
-                    "company": "Bull",
-                    "summary": "User interfaces for a satellite set-top box: 3D UI, TV guide, VOD, media player, interactive components, middleware and remote debugging."
-                },
-                {
-                    "period": "July 2008 – October 2012",
-                    "role": "Software Engineer",
-                    "company": "ODAXYS / Infotel",
-                    "summary": "Projects for large corporate clients: redesign of business applications, front-end development, ExtJS upgrades, technical supervision and continuous integration."
-                }
+            "backgroundTitle": "Background in brief",
+            "background": [
+                "Over 15 years of professional experience.",
+                "CTO of Keople (myKeople SaaS HR platform) from 2014 to 2018, then full-stack lead developer from 2018 to 2021.",
+                "Freelance full-stack developer since 2021.",
+                "Graduated from Polytech'Nantes in 2008."
             ],
-            "educationTitle": "Education",
-            "education": "Degree from Polytech'Nantes, Software Systems and Networks major (\"Système Informatique Logicielle et Réseaux\"), 2008.",
+            "linkedinCta": "Full background on LinkedIn",
+            "newTab": "(opens in a new tab)",
             "nextTitle": "Read next"
         },
         "services": {
@@ -117,8 +87,8 @@
         },
         "projects": {
             "title": "Projects",
-            "intro": "Projects by Yoann Barbier: Axons, the open-source Next.js boilerplate this site is built on, and myKeople, a SaaS HR platform designed at Keople.",
-            "lead": "Each project is shown with its context, my exact role and the technologies actually used.",
+            "intro": "Projects by Yoann Barbier: Axons, the open-source Next.js boilerplate this site derives from, and the redesign of idealco.fr in Next.js 14+.",
+            "lead": "Each project is shown with its context, my role and the technologies actually used.",
             "current": "Current project",
             "context": "Context",
             "role": "Role",
@@ -128,33 +98,29 @@
             "newTab": "(opens in a new tab)",
             "links": {
                 "source": "Source code on GitHub",
-                "preview": "Axons live preview"
+                "preview": "Axons live preview",
+                "idealco": "idealco.fr website"
             },
             "items": {
                 "axons": {
                     "name": "Axons",
-                    "tagline": "Open-source Next.js boilerplate this site is built on",
-                    "context": "A reusable foundation for building multilingual Next.js websites and web applications. This site, ezjsdev, is built on it.",
-                    "role": "Design and development of the project.",
+                    "tagline": "Open-source Next.js boilerplate, the foundation of this site",
+                    "context": "Axons is a reusable foundation for building multilingual, search-friendly Next.js websites and web applications. This site, ezjsdev, derives from it: it only adds its identity, pages and content, and takes everything else from Axons.",
+                    "role": "Author: design, development and maintenance of the project.",
                     "contribution": [
-                        "Next.js (App Router) architecture with React and TypeScript",
-                        "Six languages with translated URLs, hreflang tags and an XML sitemap",
-                        "Material UI component library isolated behind a neutral API",
-                        "Unit and end-to-end tests, Storybook and continuous integration",
-                        "Deployment on Netlify"
+                        "Next.js 16 (App Router) and React 19, in TypeScript",
+                        "Six languages with translated URLs, hreflang tags, an XML sitemap and structured data",
+                        "Markdown articles and collections, with server-side code highlighting",
+                        "Material UI components isolated behind a neutral API, light and dark themes",
+                        "Extension points to derive a site without modifying the foundation",
+                        "Unit and end-to-end tests, Storybook, continuous integration and deployment on Netlify"
                     ]
                 },
-                "mykeople": {
-                    "name": "myKeople",
-                    "tagline": "Online SaaS HR platform, designed at Keople",
-                    "context": "myKeople is an online HR tool offered as SaaS by Keople, where I was CTO from September 2014 to May 2018.",
-                    "role": "CTO: technical leadership, platform design and team management.",
-                    "contribution": [
-                        "Design of the platform and its MEAN architecture",
-                        "Product development, from prototype to a scalable version",
-                        "Microservices, Socket.IO, in-memory caching and load balancing",
-                        "PDF document generation"
-                    ]
+                "idealco": {
+                    "name": "Idealco",
+                    "tagline": "Redesign of idealco.fr in Next.js 14+",
+                    "context": "Redesign of the idealco.fr website in Next.js 14+, from 2023 to 2025, after a first collaboration with Idealco in 2021-2022.",
+                    "role": "Freelance full-stack developer."
                 }
             },
             "nextTitle": "Read next"

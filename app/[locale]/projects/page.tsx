@@ -4,9 +4,9 @@ import { pageMetadata } from "@/lib/seo";
 import { PROJECTS } from "@/site/profile";
 import { getTranslations } from "next-intl/server";
 
-// EZJSDEV — Projects (spec v0.2 §5.4): context, exact role, contribution, real technologies and
-// links. No figure (user decision: none of the CV figures is published) and no other client
-// reference (§3.4). Copy: site/messages → `pages.projects.items.<id>`.
+// EZJSDEV — Projects (spec v0.2 §5.4, revised by the user): Axons first (flagship), then the
+// idealco.fr redesign. Context, exact role, contribution when documented, real technologies, links.
+// No figure and no other client reference. Copy: site/messages → `pages.projects.items.<id>`.
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
@@ -28,7 +28,9 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                 <div className="ez-page ez-projects">
                     {PROJECTS.map((project) => {
                         const p = (key: string) => t(`items.${project.id}.${key}`);
-                        const contribution = t.raw(`items.${project.id}.contribution`) as string[];
+                        const contributionKey = `items.${project.id}.contribution`;
+                        // Optional: a project shows only what is documented (no invented detail).
+                        const contribution = t.has(contributionKey) ? (t.raw(contributionKey) as string[]) : [];
                         const headingId = `project-${project.id}`;
                         return (
                             <section
@@ -46,12 +48,16 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                                 <p>{p("context")}</p>
                                 <h3>{t("role")}</h3>
                                 <p>{p("role")}</p>
-                                <h3>{t("contribution")}</h3>
-                                <ul>
-                                    {contribution.map((c) => (
-                                        <li key={c}>{c}</li>
-                                    ))}
-                                </ul>
+                                {contribution.length ? (
+                                    <>
+                                        <h3>{t("contribution")}</h3>
+                                        <ul>
+                                            {contribution.map((c) => (
+                                                <li key={c}>{c}</li>
+                                            ))}
+                                        </ul>
+                                    </>
+                                ) : null}
                                 <h3>{t("stack")}</h3>
                                 <ul className="ez-tags">
                                     {project.stack.map((tech) => (

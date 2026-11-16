@@ -29,58 +29,28 @@
         },
         "about": {
             "title": "À propos",
-            "intro": "Parcours de Yoann Barbier, développeur full-stack indépendant basé à Nantes : plus de 15 ans d'expérience autour de React, TypeScript et Node.js.",
-            "lead": "Développeur full-stack indépendant basé à Nantes, j'accompagne les entreprises et les équipes produit dans la conception, l'architecture et l'évolution d'applications web modernes.",
+            "intro": "Yoann Barbier, développeur full-stack indépendant à Nantes depuis 2021 : React, TypeScript, Node.js, et auteur du boilerplate open source Axons.",
+            "lead": "Développeur full-stack indépendant à Nantes depuis 2021, je conçois et fais évoluer des applications web avec React, TypeScript et Node.js. Je suis l'auteur d'Axons, le boilerplate Next.js open source sur lequel repose ce site.",
             "summaryTitle": "En bref",
             "summary": [
-                "Plus de 15 ans d'expérience professionnelle.",
-                "Développeur full-stack indépendant depuis juin 2021.",
-                "Diplômé de Polytech'Nantes en 2008.",
-                "Basé à Nantes, disponible en télétravail ou sur site selon les projets."
+                "Développeur full-stack indépendant depuis 2021.",
+                "React, TypeScript, Node.js.",
+                "Auteur du boilerplate open source Axons.",
+                "Basé à Nantes, en télétravail ou sur site selon les projets."
             ],
             "approachTitle": "Approche",
             "approach": [
-                "J'interviens principalement sur les environnements JavaScript et TypeScript, avec une attention particulière portée à la qualité du code, aux performances et à la robustesse des solutions.",
-                "Mes interventions couvrent l'architecture, les bonnes pratiques, les tests, l'intégration continue et les pipelines CI/CD, en collaboration avec les équipes produit et design."
+                "J'interviens principalement sur les environnements JavaScript et TypeScript, avec une attention particulière portée à la qualité du code, aux performances et à la robustesse des solutions."
             ],
-            "expertiseTitle": "Expertises",
-            "experienceTitle": "Parcours",
-            "stackLabel": "Environnements :",
-            "experience": [
-                {
-                    "period": "Depuis juin 2021",
-                    "role": "Développeur full-stack",
-                    "company": "Indépendant",
-                    "summary": "Interventions d'expertise front-end et full-stack autour de React.js, TypeScript et Node.js : architecture, performances, bonnes pratiques, intégration continue, tests et pipelines CI/CD, en collaboration avec les équipes produit et design."
-                },
-                {
-                    "period": "Juin 2018 – juin 2021",
-                    "role": "Lead Developer FullStack",
-                    "company": "Lone Stone",
-                    "summary": "Lead technique sur des projets SaaS, web et mobiles : supervision d'équipes, choix technologiques, architecture, développement, performances, scalabilité, CI/CD et mentoring.",
-                    "stack": "Angular, React, React Native, Vue / Nuxt, Node.js, NestJS, TypeORM, GitLab CI"
-                },
-                {
-                    "period": "Septembre 2014 – mai 2018",
-                    "role": "CTO",
-                    "company": "Keople",
-                    "summary": "Direction technique et conception de la plateforme SaaS myKeople, outil RH en ligne : architecture MEAN, développement du produit du prototype à une version scalable, microservices, Socket.IO, cache mémoire, load balancing, génération PDF et gestion d'équipe."
-                },
-                {
-                    "period": "Juin 2013 – août 2014",
-                    "role": "Ingénieur développement",
-                    "company": "Bull",
-                    "summary": "Développement d'interfaces pour une box satellite : UI 3D, guide TV, VOD, lecteur multimédia, composants interactifs, middleware et débogage à distance."
-                },
-                {
-                    "period": "Juillet 2008 – octobre 2012",
-                    "role": "Ingénieur d'études",
-                    "company": "ODAXYS / Infotel",
-                    "summary": "Participation à des projets grands comptes : refonte d'applications métiers, développement front-end, évolution ExtJS, encadrement technique et intégration continue."
-                }
+            "backgroundTitle": "Parcours en bref",
+            "background": [
+                "Plus de 15 ans d'expérience professionnelle.",
+                "CTO de Keople (plateforme SaaS RH myKeople) de 2014 à 2018, puis lead developer full-stack de 2018 à 2021.",
+                "Développeur full-stack indépendant depuis 2021.",
+                "Diplômé de Polytech'Nantes en 2008."
             ],
-            "educationTitle": "Formation",
-            "education": "Diplôme de Polytech'Nantes, spécialité Système Informatique Logicielle et Réseaux, obtenu en 2008.",
+            "linkedinCta": "Parcours complet sur LinkedIn",
+            "newTab": "(nouvel onglet)",
             "nextTitle": "Pour continuer"
         },
         "services": {
@@ -117,8 +87,8 @@
         },
         "projects": {
             "title": "Projets",
-            "intro": "Projets de Yoann Barbier : Axons, boilerplate Next.js open source à la base de ce site, et myKeople, plateforme SaaS RH conçue chez Keople.",
-            "lead": "Chaque projet est présenté avec son contexte, mon rôle exact et les technologies réellement utilisées.",
+            "intro": "Projets de Yoann Barbier : Axons, boilerplate Next.js open source dont dérive ce site, et la refonte du site idealco.fr en Next.js 14+.",
+            "lead": "Chaque projet est présenté avec son contexte, mon rôle et les technologies réellement utilisées.",
             "current": "Projet actuel",
             "context": "Contexte",
             "role": "Rôle",
@@ -128,33 +98,29 @@
             "newTab": "(nouvel onglet)",
             "links": {
                 "source": "Code source sur GitHub",
-                "preview": "Aperçu en ligne d'Axons"
+                "preview": "Aperçu en ligne d'Axons",
+                "idealco": "Site idealco.fr"
             },
             "items": {
                 "axons": {
                     "name": "Axons",
-                    "tagline": "Boilerplate Next.js open source qui sert de base à ce site",
-                    "context": "Un socle réutilisable pour créer des sites et applications web Next.js multilingues. Ce site, ezjsdev, est construit dessus.",
-                    "role": "Conception et développement du projet.",
+                    "tagline": "Boilerplate Next.js open source, socle de ce site",
+                    "context": "Axons est un socle réutilisable pour créer des sites et applications web Next.js multilingues et bien référencés. Ce site, ezjsdev, en dérive : il n'ajoute que son identité, ses pages et ses contenus, et reprend tout le reste d'Axons.",
+                    "role": "Auteur : conception, développement et maintenance du projet.",
                     "contribution": [
-                        "Architecture Next.js (App Router) avec React et TypeScript",
-                        "Six langues avec URL traduites, balises hreflang et sitemap XML",
-                        "Bibliothèque de composants Material UI isolée derrière une API neutre",
-                        "Tests unitaires et end-to-end, Storybook et intégration continue",
-                        "Déploiement sur Netlify"
+                        "Next.js 16 (App Router) et React 19, en TypeScript",
+                        "Six langues avec URL traduites, balises hreflang, sitemap XML et données structurées",
+                        "Articles et collections en Markdown, avec coloration du code au rendu serveur",
+                        "Composants Material UI isolés derrière une API neutre, thèmes clair et sombre",
+                        "Points d'extension pour dériver un site sans modifier le socle",
+                        "Tests unitaires et end-to-end, Storybook, intégration continue et déploiement sur Netlify"
                     ]
                 },
-                "mykeople": {
-                    "name": "myKeople",
-                    "tagline": "Plateforme SaaS RH en ligne, conçue chez Keople",
-                    "context": "myKeople est un outil RH en ligne proposé en SaaS par Keople, où j'ai été CTO de septembre 2014 à mai 2018.",
-                    "role": "CTO : direction technique, conception de la plateforme et gestion de l'équipe.",
-                    "contribution": [
-                        "Conception de la plateforme et de son architecture MEAN",
-                        "Développement du produit, du prototype à une version scalable",
-                        "Microservices, Socket.IO, cache mémoire et load balancing",
-                        "Génération de documents PDF"
-                    ]
+                "idealco": {
+                    "name": "Idealco",
+                    "tagline": "Refonte du site idealco.fr en Next.js 14+",
+                    "context": "Refonte du site idealco.fr en Next.js 14+, de 2023 à 2025, après une première collaboration avec Idealco en 2021-2022.",
+                    "role": "Développeur full-stack indépendant."
                 }
             },
             "nextTitle": "Pour continuer"

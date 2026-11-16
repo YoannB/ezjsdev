@@ -115,14 +115,15 @@ test.describe("Content pages", () => {
             expect(await page.locator("body").innerText()).not.toMatch(/93\s?%/);
         }
         await page.goto("/fr/projets");
-        const mykeople = page.locator('[data-project="mykeople"]');
-        await expect(mykeople.getByRole("heading", { level: 2, name: "myKeople" })).toBeVisible();
-        await expect(mykeople.getByRole("heading", { name: "Résultat" })).toHaveCount(0);
-        // Axons comes first, myKeople second.
+        // Axons first (flagship), then Idealco; myKeople is not a project of this page.
+        await expect(page.getByRole("main").getByText(/myKeople/)).toHaveCount(0);
+        await expect(
+            page.locator('[data-project="idealco"] a[href="https://idealco.fr"][target="_blank"]'),
+        ).toHaveAttribute("rel", /noopener/);
         const order = await page
             .locator("[data-project]")
             .evaluateAll((els) => els.map((e) => e.getAttribute("data-project")));
-        expect(order).toEqual(["axons", "mykeople"]);
+        expect(order).toEqual(["axons", "idealco"]);
     });
 
     test("projects: Axons links to its source and preview, in a new tab", async ({ page }) => {
@@ -133,6 +134,16 @@ test.describe("Content pages", () => {
             await expect(link).toHaveAttribute("target", "_blank");
             await expect(link).toHaveAttribute("rel", /noopener/);
         }
+    });
+
+    test("About is short and links to the full background on LinkedIn", async ({ page }) => {
+        await page.goto("/fr/a-propos");
+        const main = page.getByRole("main");
+        const linkedin = main.getByRole("link", { name: /Parcours complet sur LinkedIn/ });
+        await expect(linkedin).toHaveAttribute("href", PROFILE.linkedinUrl);
+        await expect(linkedin).toHaveAttribute("target", "_blank");
+        await expect(linkedin).toHaveAttribute("rel", /noopener/);
+        await expect(main.getByText(/Keople/)).toHaveCount(1);
     });
 
     test("About carries a ProfilePage / Person JSON-LD with exact facts", async ({ page }) => {
@@ -158,7 +169,7 @@ test.describe("Content pages", () => {
         const main = page.getByRole("main");
         await expect(main.getByRole("link", { name: "Me contacter" })).toHaveAttribute("href", lp("fr", "/contact"));
         await expect(main.getByRole("link", { name: "Mon parcours" })).toBeVisible();
-        await expect(main.getByText("myKeople")).toBeVisible();
+        await expect(main.getByText("Idealco")).toBeVisible();
         await main.getByRole("link", { name: /Voir les projets/ }).click();
         await expect(page).toHaveURL(lpRe("fr", "/projets"));
     });
