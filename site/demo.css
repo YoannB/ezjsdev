@@ -1,0 +1,172 @@
+/* =====================================================================
+   ezjsdev — "Generate an SEO site" demo (components/site/demo/*, spec v0.2 §7). Imported by
+   site/theme.css. The terminal panel shows the scripted lines, then the result card: beside the
+   lines when the panel is wide enough, below otherwise (container queries: the panel width, not
+   the viewport, decides — it depends on the explorer and the preview column).
+   ===================================================================== */
+
+/* Triggers: the home button (styled as a home action) and the terminal bar button. */
+.ez-demo-btn {
+    font: inherit;
+    cursor: pointer;
+}
+.ez-demo-btn[aria-disabled="true"] {
+    cursor: progress;
+    opacity: 0.75;
+}
+.ez-home__action--demo {
+    background: none;
+}
+.ez-home__demo {
+    display: grid;
+    justify-items: start;
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+.ez-home__demo-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.875rem;
+}
+.ide-panel__actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+.ide-panel__action {
+    min-height: 2rem;
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--accent-2);
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--accent-2);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.ide-panel__action:hover {
+    background: var(--ide-hover);
+}
+@media (pointer: coarse) {
+    .ide-panel__action {
+        min-height: 2.75rem;
+    }
+}
+
+/* Below 64rem the terminal is scrolled into view on start: keep it under the sticky title bar and tabs. */
+.ide-panel--terminal {
+    scroll-margin-top: calc(var(--ide-bar-h) + 2.75rem);
+}
+@media (min-width: 64rem) {
+    /* Desktop: a bit more room for the lines and the card while the demo is shown. */
+    .ide[data-demo="running"] .ide-panel--terminal .ide-panel__body,
+    .ide[data-demo="done"] .ide-panel--terminal .ide-panel__body {
+        max-height: 42vh;
+    }
+}
+
+/* Lines + card */
+.ez-demo {
+    container-type: inline-size;
+    display: grid;
+    gap: 0.9rem;
+    align-items: start;
+}
+@container (min-width: 46rem) {
+    .ez-demo[data-status="done"] {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    }
+}
+
+.ez-demo-card {
+    container-type: inline-size;
+    display: grid;
+    gap: 0.9rem;
+    min-width: 0;
+    padding: 0.9rem;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-sm);
+    background: var(--bg-0);
+}
+@container (min-width: 30rem) {
+    .ez-demo-card {
+        grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
+        align-items: start;
+    }
+}
+.ez-demo-card__thumb {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    margin: 0;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+}
+.ez-demo-card__thumb--error {
+    display: grid;
+    place-items: center;
+    padding: 0.75rem;
+    background: var(--bg-1);
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
+.ez-demo-card__body {
+    display: grid;
+    gap: 0.45rem;
+    min-width: 0;
+    justify-items: start;
+}
+.ez-demo-card__title {
+    margin: 0;
+    color: var(--ok);
+    font-size: 1rem;
+}
+.ez-demo-card__title:focus-visible,
+.ez-demo-card__title:focus {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 2px;
+}
+.ez-demo-card__url {
+    margin: 0;
+    color: var(--accent-2);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+.ez-demo-card__text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+.ez-demo-card__facts {
+    display: grid;
+    gap: 0.2rem;
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: 0.875rem;
+}
+.ez-demo-card__open {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.5rem;
+    margin-top: 0.25rem;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-sm);
+    background: var(--accent-1);
+    color: var(--btn-fg);
+    font-weight: 600;
+    text-decoration: none;
+}
+.ez-demo-card__open:hover,
+.ez-demo-card__open:focus-visible {
+    text-decoration: underline;
+}
+@media (pointer: coarse) {
+    .ez-demo-card__open {
+        min-height: 2.75rem;
+    }
+}

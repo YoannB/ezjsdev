@@ -203,5 +203,38 @@
         "servicesAll": "Zu den Leistungen",
         "projectsTitle": "Projekte",
         "projectsAll": "Zu den Projekten"
+    },
+    "demo": {
+        "trigger": "SEO-Website generieren",
+        "running": "Demo läuft…",
+        "replay": "Demo wiederholen",
+        "replayShort": "Wiederholen",
+        "note": "Simulierte Demo im Terminal: Es wird keine Website tatsächlich generiert oder bereitgestellt.",
+        "terminalLabel": "Demo: Generierung einer SEO-Website",
+        "announceStart": "Demo im Terminal gestartet.",
+        "announceDone": "Demo beendet. Gezeigtes Ergebnis: Axons, das Boilerplate dieser Website.",
+        "lines": [
+            "Demo: Simulation des Erstellungsprozesses einer Website",
+            "Analyse des Bedarfs",
+            "Vorbereitung des Projekts",
+            "Erstellung der Seiten",
+            "SEO-Optimierung: Meta, Sitemap, robots.txt",
+            "Generierung der statischen Seiten",
+            "Abschluss",
+            "Ende der Demo. Beispielergebnis: Axons."
+        ],
+        "result": {
+            "title": "Beispielergebnis: Axons",
+            "text": "Axons ist das Open-Source-Next.js-Boilerplate, auf dem ezjsdev aufbaut. Diese Website existiert bereits: Die Schaltfläche öffnet ihre Vorschau, ohne etwas zu generieren oder bereitzustellen.",
+            "facts": [
+                "Next.js 16 und React 19, in TypeScript",
+                "Sechs Sprachen mit übersetzten URLs",
+                "Helles und dunkles Design"
+            ],
+            "open": "Website öffnen",
+            "newTab": "(neuer Tab)",
+            "thumbAlt": "Screenshot der Axons-Startseite auf Französisch: Titel „Le boilerplate Next.js pour vos sites SEO“ und die Schaltflächen „Voir la démo“ und „Plan du site“.",
+            "thumbError": "Vorschau nicht verfügbar. Der Link „Website öffnen“ funktioniert weiterhin."
+        }
     }
 }

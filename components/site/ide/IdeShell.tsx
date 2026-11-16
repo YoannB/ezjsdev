@@ -8,6 +8,9 @@ import { cn } from "@/lib/cn";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { DemoContext, DemoButton } from "../demo/DemoTrigger";
+import { DemoTerminal } from "../demo/DemoTerminal";
+import { useSeoDemo } from "../demo/use-seo-demo";
 import { ExplorerTree } from "./ExplorerTree";
 import { IdeIcon } from "./IdeIcon";
 import { IdePanel, type PanelState } from "./IdePanel";
@@ -41,6 +44,7 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
     const tn = useTranslations("nav");
     const tc = useTranslations("cookie");
     const tf = useTranslations("footer");
+    const td = useTranslations("demo");
     const router = useRouter();
     const route = usePathname();
     const params = useParams<{ slug?: string }>();
@@ -104,6 +108,28 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
     const previewOpen = preview === "auto" ? wide : preview === "open";
     const terminalOpen = terminal === "auto" ? desktop : terminal === "open";
 
+    // "Generate an SEO site" demo (spec §7): a scripted simulation shown in the terminal, owned here
+    // so the home button and the terminal bar reach the same run (DemoContext). Navigation cancels it.
+    const demoScript = td.raw("lines") as string[];
+    const demo = useSeoDemo(demoScript.length, locationKey);
+    const startDemo = () => {
+        setTerminal("open");
+        demo.start();
+        // Below 64rem the terminal sits under the page: bring it into view (user intent, after the
+        // panel opened — React has flushed the click's update by the next frame).
+        if (!desktop) {
+            const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+            requestAnimationFrame(() =>
+                document
+                    .getElementById("ide-terminal")
+                    ?.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" }),
+            );
+        }
+    };
+    const demoControls = { status: demo.status, start: startDemo };
+    const demoAnnounce =
+        demo.status === "running" ? td("announceStart") : demo.status === "done" ? td("announceDone") : "";
+
     // Real status only: the file the URL opened and its public address (nothing on a 404).
     const lines = current
         ? [
@@ -126,183 +152,195 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
     const tagline = tn.has("tagline") ? tn("tagline") : null;
 
     return (
-        <div
-            className={cn("ide", drawerOpen && "is-drawer-open")}
-            data-sidebar={sidebar ? "open" : "closed"}
-            data-preview={preview}
-            data-terminal={terminal}
-        >
-            <a className="ide-skip" href="#main">
-                {t("skip")}
-            </a>
-            <header className="ide-titlebar">
-                <button
-                    ref={burgerRef}
-                    type="button"
-                    className="ide-btn ide-titlebar__menu"
-                    aria-expanded={drawerOpen}
-                    aria-controls="ide-explorer"
-                    aria-label={drawerOpen ? t("closeExplorer") : t("openExplorer")}
-                    onClick={() => (drawerOpen ? closeDrawer() : setDrawerFor(locationKey))}
-                >
-                    <IdeIcon name={drawerOpen ? "close" : "menu"} size={22} />
-                </button>
-                <Link href="/" className="ide-brand" aria-label={SITE_NAME}>
-                    <Logo size={28} />
-                    <span className="ide-brand__name">{SITE_NAME}</span>
-                </Link>
-                {tagline ? <p className="ide-titlebar__tagline">{tagline}</p> : null}
-                <div className="ide-titlebar__tools">
-                    <LanguageSwitcher />
-                    <ThemeToggle />
-                </div>
-            </header>
-
-            <nav className="ide-activity" aria-label={t("activity")} inert={drawerOpen || undefined}>
-                <button
-                    type="button"
-                    className={cn("ide-activity__item", sidebar && "is-active")}
-                    aria-expanded={sidebar}
-                    aria-controls="ide-explorer"
-                    aria-label={t("explorer")}
-                    title={t("explorer")}
-                    onClick={() => setSidebar((s) => !s)}
-                >
-                    <IdeIcon name="files" size={24} />
-                </button>
-                <Link
-                    href="/articles"
-                    className={cn("ide-activity__item", route.startsWith("/articles") && "is-active")}
-                    aria-label={tn("articles")}
-                    title={tn("articles")}
-                >
-                    <IdeIcon name="article" size={24} />
-                </Link>
-                <Link
-                    href="/reminders"
-                    className={cn("ide-activity__item", route.startsWith("/reminders") && "is-active")}
-                    aria-label={tn("reminders")}
-                    title={tn("reminders")}
-                >
-                    <IdeIcon name="note" size={24} />
-                </Link>
-                <Link
-                    href="/sitemap"
-                    className={cn("ide-activity__item", route === "/sitemap" && "is-active")}
-                    aria-label={tn("sitemap")}
-                    title={tn("sitemap")}
-                >
-                    <IdeIcon name="tree" size={24} />
-                </Link>
-                <Link
-                    href="/contact"
-                    className={cn("ide-activity__item", route === "/contact" && "is-active")}
-                    aria-label={tn("contact")}
-                    title={tn("contact")}
-                >
-                    <IdeIcon name="mail" size={24} />
-                </Link>
-                {GITHUB_LINK_ENABLED ? (
-                    <a
-                        href={GITHUB_URL}
-                        className="ide-activity__item ide-activity__item--end"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={tn("github")}
-                        title={tn("github")}
-                    >
-                        <IdeIcon name="github" size={24} />
-                    </a>
-                ) : null}
-            </nav>
-
-            <aside
-                id="ide-explorer"
-                ref={explorerRef}
-                className="ide-explorer"
-                aria-label={t("explorer")}
-                onKeyDown={(e) => {
-                    if (e.key === "Escape" && drawerOpen) closeDrawer();
-                }}
+        <DemoContext value={demoControls}>
+            <div
+                className={cn("ide", drawerOpen && "is-drawer-open")}
+                data-sidebar={sidebar ? "open" : "closed"}
+                data-preview={preview}
+                data-terminal={terminal}
+                data-demo={demo.status}
             >
-                <h2 className="ide-explorer__title">{t("explorer")}</h2>
-                <ExplorerTree
-                    nodes={tree}
-                    visible={visible}
-                    currentId={currentId}
-                    expanded={expanded}
-                    onToggle={onToggleFolder}
-                    onOpenFile={() => setDrawerFor(null)}
-                    ariaLabel={t("files")}
-                />
-            </aside>
-            <button type="button" className="ide-backdrop" tabIndex={-1} aria-hidden="true" onClick={closeDrawer} />
-
-            <div className="ide-workbench" inert={drawerOpen || undefined}>
-                <div className="ide-editor-group">
-                    <Tabs
-                        items={tabItems}
-                        activeId={currentId ?? ""}
-                        ariaLabel={t("tabs")}
-                        onClose={onCloseTab}
-                        closeLabel={(label) => t("closeTab", { label })}
-                        className="ide-tabs"
-                    />
-                    <div className="ide-split">
-                        <main id="main" ref={editorRef} className="ide-editor" tabIndex={-1}>
-                            {children}
-                        </main>
-                        <IdePanel
-                            id="ide-preview"
-                            className="ide-panel--preview"
-                            title={t("preview")}
-                            icon="preview"
-                            state={preview}
-                            open={previewOpen}
-                            onToggle={() => setPreview(previewOpen ? "closed" : "open")}
-                            showLabel={t("showPreview")}
-                            hideLabel={t("hidePreview")}
-                        >
-                            <PagePreview file={current} siteUrl={siteUrl} />
-                        </IdePanel>
+                <a className="ide-skip" href="#main">
+                    {t("skip")}
+                </a>
+                <header className="ide-titlebar">
+                    <button
+                        ref={burgerRef}
+                        type="button"
+                        className="ide-btn ide-titlebar__menu"
+                        aria-expanded={drawerOpen}
+                        aria-controls="ide-explorer"
+                        aria-label={drawerOpen ? t("closeExplorer") : t("openExplorer")}
+                        onClick={() => (drawerOpen ? closeDrawer() : setDrawerFor(locationKey))}
+                    >
+                        <IdeIcon name={drawerOpen ? "close" : "menu"} size={22} />
+                    </button>
+                    <Link href="/" className="ide-brand" aria-label={SITE_NAME}>
+                        <Logo size={28} />
+                        <span className="ide-brand__name">{SITE_NAME}</span>
+                    </Link>
+                    {tagline ? <p className="ide-titlebar__tagline">{tagline}</p> : null}
+                    <div className="ide-titlebar__tools">
+                        <LanguageSwitcher />
+                        <ThemeToggle />
                     </div>
-                </div>
-                <IdePanel
-                    id="ide-terminal"
-                    className="ide-panel--terminal"
-                    title={t("terminal")}
-                    icon="terminal"
-                    state={terminal}
-                    open={terminalOpen}
-                    onToggle={() => setTerminal(terminalOpen ? "closed" : "open")}
-                    showLabel={t("showTerminal")}
-                    hideLabel={t("hideTerminal")}
-                >
-                    <StatusTerminal lines={lines} ariaLabel={t("terminalLog")} />
-                </IdePanel>
-            </div>
+                </header>
 
-            <footer className="ide-statusbar" inert={drawerOpen || undefined}>
-                <nav className="ide-statusbar__links" aria-label={t("statusbar")}>
-                    <Link href="/sitemap">{tn("sitemap")}</Link>
-                    <Link href="/legal">{tn("legal")}</Link>
-                    <Link href="/privacy">{tn("privacy")}</Link>
-                    <Link href="/cookies">{tn("cookies")}</Link>
-                    {CONSENT_REQUIRED ? (
-                        <button type="button" className="ide-statusbar__btn" onClick={reopen}>
-                            {tc("manage")}
-                        </button>
-                    ) : null}
+                <nav className="ide-activity" aria-label={t("activity")} inert={drawerOpen || undefined}>
+                    <button
+                        type="button"
+                        className={cn("ide-activity__item", sidebar && "is-active")}
+                        aria-expanded={sidebar}
+                        aria-controls="ide-explorer"
+                        aria-label={t("explorer")}
+                        title={t("explorer")}
+                        onClick={() => setSidebar((s) => !s)}
+                    >
+                        <IdeIcon name="files" size={24} />
+                    </button>
+                    <Link
+                        href="/articles"
+                        className={cn("ide-activity__item", route.startsWith("/articles") && "is-active")}
+                        aria-label={tn("articles")}
+                        title={tn("articles")}
+                    >
+                        <IdeIcon name="article" size={24} />
+                    </Link>
+                    <Link
+                        href="/reminders"
+                        className={cn("ide-activity__item", route.startsWith("/reminders") && "is-active")}
+                        aria-label={tn("reminders")}
+                        title={tn("reminders")}
+                    >
+                        <IdeIcon name="note" size={24} />
+                    </Link>
+                    <Link
+                        href="/sitemap"
+                        className={cn("ide-activity__item", route === "/sitemap" && "is-active")}
+                        aria-label={tn("sitemap")}
+                        title={tn("sitemap")}
+                    >
+                        <IdeIcon name="tree" size={24} />
+                    </Link>
+                    <Link
+                        href="/contact"
+                        className={cn("ide-activity__item", route === "/contact" && "is-active")}
+                        aria-label={tn("contact")}
+                        title={tn("contact")}
+                    >
+                        <IdeIcon name="mail" size={24} />
+                    </Link>
                     {GITHUB_LINK_ENABLED ? (
-                        <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
-                            {tn("github")}
+                        <a
+                            href={GITHUB_URL}
+                            className="ide-activity__item ide-activity__item--end"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={tn("github")}
+                            title={tn("github")}
+                        >
+                            <IdeIcon name="github" size={24} />
                         </a>
                     ) : null}
                 </nav>
-                <p className="ide-statusbar__meta">
-                    {tf("rights", { year: new Date().getFullYear(), site: SITE_NAME })}
-                </p>
-            </footer>
-        </div>
+
+                <aside
+                    id="ide-explorer"
+                    ref={explorerRef}
+                    className="ide-explorer"
+                    aria-label={t("explorer")}
+                    onKeyDown={(e) => {
+                        if (e.key === "Escape" && drawerOpen) closeDrawer();
+                    }}
+                >
+                    <h2 className="ide-explorer__title">{t("explorer")}</h2>
+                    <ExplorerTree
+                        nodes={tree}
+                        visible={visible}
+                        currentId={currentId}
+                        expanded={expanded}
+                        onToggle={onToggleFolder}
+                        onOpenFile={() => setDrawerFor(null)}
+                        ariaLabel={t("files")}
+                    />
+                </aside>
+                <button type="button" className="ide-backdrop" tabIndex={-1} aria-hidden="true" onClick={closeDrawer} />
+
+                <div className="ide-workbench" inert={drawerOpen || undefined}>
+                    <div className="ide-editor-group">
+                        <Tabs
+                            items={tabItems}
+                            activeId={currentId ?? ""}
+                            ariaLabel={t("tabs")}
+                            onClose={onCloseTab}
+                            closeLabel={(label) => t("closeTab", { label })}
+                            className="ide-tabs"
+                        />
+                        <div className="ide-split">
+                            <main id="main" ref={editorRef} className="ide-editor" tabIndex={-1}>
+                                {children}
+                            </main>
+                            <IdePanel
+                                id="ide-preview"
+                                className="ide-panel--preview"
+                                title={t("preview")}
+                                icon="preview"
+                                state={preview}
+                                open={previewOpen}
+                                onToggle={() => setPreview(previewOpen ? "closed" : "open")}
+                                showLabel={t("showPreview")}
+                                hideLabel={t("hidePreview")}
+                            >
+                                <PagePreview file={current} siteUrl={siteUrl} />
+                            </IdePanel>
+                        </div>
+                    </div>
+                    <IdePanel
+                        id="ide-terminal"
+                        className="ide-panel--terminal"
+                        title={t("terminal")}
+                        icon="terminal"
+                        state={terminal}
+                        open={terminalOpen}
+                        onToggle={() => setTerminal(terminalOpen ? "closed" : "open")}
+                        showLabel={t("showTerminal")}
+                        hideLabel={t("hideTerminal")}
+                        actions={<DemoButton short className="ide-panel__action" />}
+                    >
+                        {demo.status === "idle" ? (
+                            <StatusTerminal lines={lines} ariaLabel={t("terminalLog")} />
+                        ) : (
+                            <DemoTerminal status={demo.status} shown={demo.shown} run={demo.run} />
+                        )}
+                    </IdePanel>
+                    {/* Announces the start and the end of the demo only (never each line). */}
+                    <p className="ide-sr" role="status">
+                        {demoAnnounce}
+                    </p>
+                </div>
+
+                <footer className="ide-statusbar" inert={drawerOpen || undefined}>
+                    <nav className="ide-statusbar__links" aria-label={t("statusbar")}>
+                        <Link href="/sitemap">{tn("sitemap")}</Link>
+                        <Link href="/legal">{tn("legal")}</Link>
+                        <Link href="/privacy">{tn("privacy")}</Link>
+                        <Link href="/cookies">{tn("cookies")}</Link>
+                        {CONSENT_REQUIRED ? (
+                            <button type="button" className="ide-statusbar__btn" onClick={reopen}>
+                                {tc("manage")}
+                            </button>
+                        ) : null}
+                        {GITHUB_LINK_ENABLED ? (
+                            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">
+                                {tn("github")}
+                            </a>
+                        ) : null}
+                    </nav>
+                    <p className="ide-statusbar__meta">
+                        {tf("rights", { year: new Date().getFullYear(), site: SITE_NAME })}
+                    </p>
+                </footer>
+            </div>
+        </DemoContext>
     );
 }

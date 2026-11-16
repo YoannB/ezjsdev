@@ -19,6 +19,7 @@ export function IdePanel({
     onToggle,
     showLabel,
     hideLabel,
+    actions,
     children,
 }: {
     id: string;
@@ -30,6 +31,8 @@ export function IdePanel({
     onToggle: () => void;
     showLabel: string;
     hideLabel: string;
+    /** Extra controls in the bar, before the toggle (stay reachable when the panel is collapsed). */
+    actions?: ReactNode;
     children: ReactNode;
 }) {
     const bodyId = `${id}-body`;
@@ -40,6 +43,7 @@ export function IdePanel({
                     <IdeIcon name={icon} size={16} />
                     <span>{title}</span>
                 </h2>
+                {actions ? <div className="ide-panel__actions">{actions}</div> : null}
                 <button
                     type="button"
                     className="ide-btn ide-panel__toggle"
