@@ -1,22 +1,8 @@
 /* =====================================================================
    ezjsdev — content pages (About, Services, Projects, Contact: app/[locale]/<page>/page.tsx) and
    the home's links to them. Imported by site/theme.css after ide.css. Pages render inside the IDE
-   editor (site/ide.css → "Editor"): flattened StaticPage, line-number gutter per block.
+   editor (site/ide.css → "Editor"): flattened StaticPage.
    ===================================================================== */
-
-/* Gutter: a list item holding headings/paragraphs numbers its blocks, not itself (two numbers
-   would overlap); tags sit on one line and are not numbered. */
-.ide-editor .static-page__card :is(.ez-services__item, .ez-tags li)::before {
-    content: none;
-}
-.ide-editor .static-page__card .ez-services__item p::before {
-    content: counter(ide-line) / "";
-}
-@media (max-width: 29.99rem) {
-    .ide-editor .static-page__card .ez-services__item p::before {
-        content: none;
-    }
-}
 
 .ez-page h2 {
     margin: 1.75rem 0 0.6rem;
@@ -32,7 +18,8 @@
 .ez-page ol {
     padding-left: 1.1rem;
 }
-.ez-page a {
+/* Text links only: Axons Buttons rendered as links (`.ez-cta`) keep their own colours. */
+.ez-page a:not(.ez-cta) {
     color: var(--accent-2);
     overflow-wrap: anywhere;
 }
@@ -124,42 +111,12 @@
     margin-top: 0.75rem;
 }
 
-/* Button-like links (home actions, LinkedIn CTA): real links, 2.75rem targets on touch. */
+/* Home actions: Axons Buttons (components/ui/Button) as links; only their row is laid out here. */
 .ez-home__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
     margin: 1.1rem 0 0;
-}
-.ez-home__action,
-.ez-page a.ez-contact__cta {
-    display: inline-flex;
-    align-items: center;
-    min-height: 2.5rem;
-    padding: 0.4rem 1rem;
-    border: 1px solid var(--accent-2);
-    border-radius: var(--radius-sm);
-    color: var(--accent-2);
-    font-weight: 600;
-    text-decoration: none;
-}
-.ez-home__action--primary,
-.ez-page a.ez-contact__cta {
-    border-color: transparent;
-    background: var(--accent-1);
-    color: var(--btn-fg);
-}
-.ez-home__action:hover,
-.ez-home__action:focus-visible,
-.ez-page a.ez-contact__cta:hover,
-.ez-page a.ez-contact__cta:focus-visible {
-    text-decoration: underline;
-}
-@media (pointer: coarse) {
-    .ez-home__action,
-    .ez-page a.ez-contact__cta {
-        min-height: 2.75rem;
-    }
 }
 .ez-contact__email {
     font-family: var(--font-mono);

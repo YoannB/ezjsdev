@@ -132,7 +132,6 @@
             "linkedinTitle": "LinkedIn",
             "linkedinBody": "Envoyez-moi un message depuis mon profil :",
             "linkedinCta": "Profil LinkedIn de Yoann Barbier",
-            "newTab": "(nouvel onglet)",
             "emailTitle": "E-mail",
             "emailBody": "Vous pouvez aussi m'écrire à cette adresse :",
             "locationTitle": "Localisation",
@@ -145,6 +144,8 @@
         "files": "Fichiers du site",
         "openExplorer": "Ouvrir l'explorateur",
         "closeExplorer": "Fermer l'explorateur",
+        "showExplorer": "Afficher l'explorateur",
+        "hideExplorer": "Masquer l'explorateur",
         "activity": "Barre d'activité",
         "tabs": "Fichiers ouverts",
         "closeTab": "Fermer {label}",
@@ -232,7 +233,6 @@
                 "Thèmes clair et sombre"
             ],
             "open": "Ouvrir le site",
-            "newTab": "(nouvel onglet)",
             "thumbAlt": "Capture de la page d'accueil d'Axons en français : titre « Le boilerplate Next.js pour vos sites SEO » et boutons « Voir la démo » et « Plan du site ».",
             "thumbError": "Aperçu indisponible. Le lien « Ouvrir le site » reste utilisable."
         }

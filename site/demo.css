@@ -5,18 +5,8 @@
    the viewport, decides — it depends on the explorer and the preview column).
    ===================================================================== */
 
-/* Triggers: the home button (styled as a home action) and the terminal bar button. */
-.ez-demo-btn {
-    font: inherit;
-    cursor: pointer;
-}
-.ez-demo-btn[aria-disabled="true"] {
-    cursor: progress;
-    opacity: 0.75;
-}
-.ez-home__action--demo {
-    background: none;
-}
+/* Triggers: Axons Buttons (components/ui/Button) — the home one and the compact one of the
+   terminal bar. Only their placement is styled here. */
 .ez-home__demo {
     display: grid;
     justify-items: start;
@@ -34,22 +24,11 @@
     margin-left: auto;
 }
 .ide-panel__action {
-    min-height: 2rem;
-    padding: 0.2rem 0.7rem;
-    border: 1px solid var(--accent-2);
-    border-radius: var(--radius-sm);
-    background: none;
-    color: var(--accent-2);
-    font-size: 0.8rem;
-    font-weight: 600;
     white-space: nowrap;
-}
-.ide-panel__action:hover {
-    background: var(--ide-hover);
 }
 @media (pointer: coarse) {
     .ide-panel__action {
-        min-height: 2.75rem;
+        min-height: 2.75rem; /* touch target (Axons' small button is shorter) */
     }
 }
 
@@ -158,22 +137,6 @@
     margin: 0;
     padding-left: 1.1rem;
     font-size: 0.875rem;
-}
-.ez-demo-card__open {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-height: 2.5rem;
-    padding: 0.4rem 1rem;
-    border-radius: var(--radius-sm);
-    background: var(--accent-1);
-    color: var(--btn-fg);
-    font-weight: 600;
-    text-decoration: none;
-}
-.ez-demo-card__open:hover,
-.ez-demo-card__open:focus-visible {
-    text-decoration: underline;
 }
 @media (pointer: coarse) {
     .ez-demo-card__open {
