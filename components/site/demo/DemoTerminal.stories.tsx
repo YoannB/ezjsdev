@@ -7,7 +7,7 @@ import { DemoTerminal } from "./DemoTerminal";
 import { DemoButton, DemoContext } from "./DemoTrigger";
 
 // The terminal panel during the demo (states of spec v0.2 §7.4), with the terminal-bar button in
-// the matching state. Static snapshots: no timer runs here.
+// the matching state (Axons `Button`, size sm). Static snapshots: no timer runs here.
 const withTranslations = (Story: ComponentType) => (
     <NextIntlClientProvider locale="en" messages={{ demo: en.demo }}>
         <div className="ide ide--story">
@@ -44,7 +44,7 @@ type Story = StoryObj<typeof meta>;
 
 /** Initial: only the button (the terminal shows the page status). */
 export const Idle: Story = { args: { status: "idle", shown: 0 } };
-/** Running: lines appear one by one, the button is aria-disabled. */
+/** Running: lines appear one by one, the button is in Axons' loading state (spinner, disabled). */
 export const Running: Story = { args: { status: "running", shown: 4 } };
 /** Done: every line, the result card, the button replays. */
 export const Done: Story = { args: { status: "done", shown: LINES } };

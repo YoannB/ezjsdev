@@ -83,14 +83,15 @@ test.describe("Content pages", () => {
         await expect(page.getByRole("heading", { level: 1, name: "Projekte" })).toBeVisible();
     });
 
-    test("LinkedIn comes first, as a safe external link; then the mailto", async ({ page }) => {
+    test("LinkedIn comes first, as an Axons Button link; then the mailto", async ({ page }) => {
         await page.goto("/fr/contact");
         const main = page.getByRole("main");
         const linkedin = main.getByRole("link", { name: /Profil LinkedIn de Yoann Barbier/ });
         await expect(linkedin).toHaveAttribute("href", PROFILE.linkedinUrl);
-        await expect(linkedin).toHaveAttribute("target", "_blank");
-        const rel = (await linkedin.getAttribute("rel")) ?? "";
-        expect(rel.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
+        // Axons' Button rendered as a real <a> (its classes, no nested <button>), same tab.
+        await expect(linkedin).toHaveClass(/MuiButton-root/);
+        await expect(linkedin.locator("button")).toHaveCount(0);
+        await expect(linkedin).not.toHaveAttribute("target", /.+/);
 
         const mail = main.getByRole("link", { name: PROFILE.email });
         await expect(mail).toHaveAttribute("href", `mailto:${PROFILE.email}`);
