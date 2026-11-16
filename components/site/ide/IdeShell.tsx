@@ -108,7 +108,7 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
     const previewOpen = preview === "auto" ? wide : preview === "open";
     const terminalOpen = terminal === "auto" ? desktop : terminal === "open";
 
-    // "Generate an SEO site" demo (spec §7): a scripted simulation shown in the terminal, owned here
+    // "Generate a site" demo (spec §7): a scripted simulation shown in the terminal, owned here
     // so the home button and the terminal bar reach the same run (DemoContext). Navigation cancels it.
     const demoScript = td.raw("lines") as string[];
     const demo = useSeoDemo(demoScript.length, locationKey);

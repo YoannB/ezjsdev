@@ -641,9 +641,12 @@
     .ide-panel--preview[data-state="closed"] .ide-panel__chevron {
         transform: rotate(180deg);
     }
+    /* FIXED height in every state (page status, demo running, demo result): the editor and the
+       preview above never change size when the terminal content grows; it scrolls inside. */
     .ide-panel--terminal .ide-panel__body {
-        max-height: 30vh;
+        height: clamp(10rem, 32vh, 15rem);
         overflow-y: auto;
+        overscroll-behavior: contain;
     }
 }
 @media (min-width: 64rem) and (max-width: 79.99rem) {

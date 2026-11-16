@@ -13,7 +13,7 @@ export interface DemoControls {
 export const DemoContext = createContext<DemoControls | null>(null);
 
 /**
- * "Generate an SEO site" button. A real <button>; while the demo runs it stays focusable but is
+ * "Generate a site" button. A real <button>; while the demo runs it stays focusable but is
  * `aria-disabled` and ignores clicks (no double launch, focus is not lost), then becomes "Replay".
  */
 export function DemoButton({ className, short = false }: { className?: string; short?: boolean }) {

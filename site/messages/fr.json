@@ -205,12 +205,12 @@
         "projectsAll": "Voir les projets"
     },
     "demo": {
-        "trigger": "Générer un site SEO",
+        "trigger": "Générer un site",
         "running": "Démonstration en cours…",
         "replay": "Rejouer la démonstration",
         "replayShort": "Rejouer",
         "note": "Démonstration simulée dans le terminal : aucun site n'est réellement généré ni déployé.",
-        "terminalLabel": "Démonstration : génération d'un site SEO",
+        "terminalLabel": "Démonstration : génération d'un site",
         "announceStart": "Démonstration lancée dans le terminal.",
         "announceDone": "Démonstration terminée. Résultat présenté : Axons, le boilerplate de ce site.",
         "lines": [

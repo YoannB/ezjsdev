@@ -36,7 +36,7 @@ function renderHook<P, R>(
     };
 }
 
-// ezjsdev "Generate an SEO site" demo: pure transitions (100% branches) and the timer hook.
+// ezjsdev "Generate a site" demo: pure transitions (100% branches) and the timer hook.
 const HOME = "/|";
 const running = (shown: number, run = 1): DemoState => ({ status: "running", shown, at: HOME, run });
 

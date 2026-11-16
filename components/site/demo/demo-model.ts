@@ -1,6 +1,6 @@
 import type { AppTerminalLine, AppTerminalLineKind } from "@/components/ui/types";
 
-// Pure model of the "Generate an SEO site" demo (spec v0.2 §7): a SCRIPTED simulation, no network,
+// Pure model of the "Generate a site" demo (spec v0.2 §7): a SCRIPTED simulation, no network,
 // no AI call, nothing persisted. The hook (use-seo-demo.ts) only adds the timer and the location.
 //   idle ──start──▶ running (1 line shown) ──step × n──▶ done (every line shown, result card)
 //   idle ──start + reduced motion──▶ done at once

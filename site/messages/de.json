@@ -205,12 +205,12 @@
         "projectsAll": "Zu den Projekten"
     },
     "demo": {
-        "trigger": "SEO-Website generieren",
+        "trigger": "Website generieren",
         "running": "Demo läuft…",
         "replay": "Demo wiederholen",
         "replayShort": "Wiederholen",
         "note": "Simulierte Demo im Terminal: Es wird keine Website tatsächlich generiert oder bereitgestellt.",
-        "terminalLabel": "Demo: Generierung einer SEO-Website",
+        "terminalLabel": "Demo: Generierung einer Website",
         "announceStart": "Demo im Terminal gestartet.",
         "announceDone": "Demo beendet. Gezeigtes Ergebnis: Axons, das Boilerplate dieser Website.",
         "lines": [

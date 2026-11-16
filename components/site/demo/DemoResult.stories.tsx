@@ -4,7 +4,7 @@ import type { ComponentType } from "react";
 import en from "../../../site/messages/en.json";
 import { DemoResult } from "./DemoResult";
 
-// Result card of the "Generate an SEO site" demo: the Axons preview (static thumbnail in the
+// Result card of the "Generate a site" demo: the Axons preview (static thumbnail in the
 // painted theme, URL, "Open the site" in a new tab). One column below 30rem of card width.
 const withTranslations = (Story: ComponentType) => (
     <NextIntlClientProvider locale="en" messages={{ demo: en.demo }}>

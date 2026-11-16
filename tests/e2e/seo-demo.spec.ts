@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
 
-// EZJSDEV "Generate an SEO site" demo (components/site/demo/*, spec v0.2 §7): a SCRIPTED simulation
+// EZJSDEV "Generate a site" demo (components/site/demo/*, spec v0.2 §7): a SCRIPTED simulation
 // in the IDE terminal, then a result card presenting the Axons preview. No network beyond the local
 // thumbnail, no /api/ call. Pages are opened with an explicit "/fr" prefix so labels are known.
 const AXONS = "https://axons-preview.netlify.app/fr";
@@ -18,10 +18,32 @@ async function ready(page: Page, path = "/fr") {
 
 const homeButton = (page: Page) => page.getByRole("main").locator(".ez-home__action--demo");
 const terminalButton = (page: Page) => page.locator("#ide-terminal .ide-panel__action");
-const demoLog = (page: Page) => page.getByRole("region", { name: "Démonstration : génération d'un site SEO" });
+const demoLog = (page: Page) => page.getByRole("region", { name: "Démonstration : génération d'un site" });
 const card = (page: Page) => page.getByRole("article", { name: "Exemple de résultat : Axons" });
 const cardTitle = (page: Page) => page.getByRole("heading", { name: "Exemple de résultat : Axons" });
 const lines = (page: Page) => demoLog(page).locator(".terminal__line");
+
+// Heights of the shell areas and the document overflow (the terminal must not grow with the demo).
+const layout = (page: Page) =>
+    page.evaluate(() => {
+        const h = (sel: string) => document.querySelector(sel)?.getBoundingClientRect().height ?? -1;
+        const body = document.querySelector<HTMLElement>("#ide-terminal .ide-panel__body");
+        return {
+            editor: h("#main"),
+            preview: h("#ide-preview"),
+            terminal: h("#ide-terminal"),
+            terminalBody: h("#ide-terminal .ide-panel__body"),
+            bodyScrolls: body ? body.scrollHeight > body.clientHeight : false,
+            docOverflow: document.documentElement.scrollHeight - window.innerHeight,
+        };
+    });
+type Layout = Awaited<ReturnType<typeof layout>>;
+function expectSameLayout(actual: Layout, ref: Layout) {
+    for (const key of ["editor", "preview", "terminal", "terminalBody"] as const) {
+        expect(Math.abs(actual[key] - ref[key]), key).toBeLessThanOrEqual(2);
+    }
+    expect(actual.docOverflow).toBeLessThanOrEqual(0);
+}
 
 test.describe("SEO site demo — desktop", () => {
     test.use({ viewport: { width: 1440, height: 900 } });
@@ -29,7 +51,7 @@ test.describe("SEO site demo — desktop", () => {
     test("click → scripted sequence → result card with the Axons preview link", async ({ page }) => {
         await ready(page);
         const button = homeButton(page);
-        await expect(button).toHaveText("Générer un site SEO");
+        await expect(button).toHaveText("Générer un site");
         await expect(page.getByText("Démonstration simulée dans le terminal")).toBeVisible();
         await button.click();
 
@@ -119,6 +141,30 @@ test.describe("SEO site demo — desktop", () => {
         await expect(card(page).getByRole("link", { name: /Ouvrir le site/ })).toHaveAttribute("href", AXONS);
     });
 
+    test("fixed terminal height: editor, preview and terminal keep their size in every state", async ({ page }) => {
+        await ready(page);
+        const before = await layout(page);
+        expect(before.docOverflow).toBeLessThanOrEqual(0);
+        expect(before.terminalBody).toBeGreaterThan(150);
+
+        await homeButton(page).click();
+        await expect(lines(page).nth(2)).toBeVisible();
+        expectSameLayout(await layout(page), before); // running
+
+        await expect(card(page)).toBeVisible();
+        const done = await layout(page);
+        expectSameLayout(done, before); // result
+        expect(done.bodyScrolls).toBe(true); // the content scrolls inside the panel
+
+        // Thumbnail error state, same size.
+        await page.route("**/demo/*.webp", (route) => route.abort());
+        await page.reload();
+        await expect(page.locator("#app-splash")).toHaveClass(/is-leaving/);
+        await homeButton(page).click();
+        await expect(card(page).getByText("Aperçu indisponible")).toBeVisible();
+        expectSameLayout(await layout(page), before);
+    });
+
     test("navigating away cancels the run; the terminal shows the page status again", async ({ page }) => {
         await ready(page);
         await homeButton(page).click();
@@ -129,7 +175,7 @@ test.describe("SEO site demo — desktop", () => {
         await expect(demoLog(page)).toHaveCount(0);
         await expect(page.locator("#ide-terminal")).toContainText("open Plan-du-site/page.tsx");
         await page.goBack();
-        await expect(homeButton(page)).toHaveText("Générer un site SEO");
+        await expect(homeButton(page)).toHaveText("Générer un site");
         await expect(demoLog(page)).toHaveCount(0);
     });
 });
@@ -156,5 +202,9 @@ test.describe("SEO site demo — mobile (375px)", () => {
         const img = await card(page).getByRole("img").boundingBox();
         const title = await cardTitle(page).boundingBox();
         expect(img && title && img.y + img.height <= title.y).toBe(true);
+        // Bounded panel (spec §8.2): the card scrolls inside instead of pushing the page down.
+        const { terminalBody, bodyScrolls } = await layout(page);
+        expect(terminalBody).toBeLessThanOrEqual(26 * 16 + 1);
+        expect(bodyScrolls).toBe(true);
     });
 });
