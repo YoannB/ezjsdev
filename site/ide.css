@@ -644,7 +644,7 @@
     /* FIXED height in every state (page status, demo running, demo result): the editor and the
        preview above never change size when the terminal content grows; it scrolls inside. */
     .ide-panel--terminal .ide-panel__body {
-        height: clamp(10rem, 32vh, 15rem);
+        height: clamp(10rem, 32vh, 16rem);
         overflow-y: auto;
         overscroll-behavior: contain;
     }

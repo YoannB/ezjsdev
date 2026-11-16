@@ -10,6 +10,7 @@ import { demoThumbnail } from "./demo-model";
 // preview URL and an "Open the site" link (new tab, no deployment). A static thumbnail of the preview
 // in the painted theme (public/demo/, fixed 640×400 → no layout shift); if it fails to load, a
 // plain fallback box keeps the card usable. Only facts already published on the Projects page.
+// The link comes right after the URL so the action is visible without scrolling the fixed-height panel.
 // `focusOnMount`: the title takes the focus when the card appears at the end of a run.
 // `thumbnail`: overrides the image URL (stories: the load-error state).
 export function DemoResult({ focusOnMount = false, thumbnail }: { focusOnMount?: boolean; thumbnail?: string }) {
@@ -47,12 +48,6 @@ export function DemoResult({ focusOnMount = false, thumbnail }: { focusOnMount?:
                     <p className="ez-demo-card__url" translate="no">
                         {AXONS_PREVIEW_URL}
                     </p>
-                    <p className="ez-demo-card__text">{t("text")}</p>
-                    <ul className="ez-demo-card__facts">
-                        {facts.map((fact) => (
-                            <li key={fact}>{fact}</li>
-                        ))}
-                    </ul>
                     <a
                         className="ez-demo-card__open"
                         href={AXONS_PREVIEW_URL}
@@ -63,6 +58,12 @@ export function DemoResult({ focusOnMount = false, thumbnail }: { focusOnMount?:
                         <span className="ide-sr"> {t("newTab")}</span>
                         <IdeIcon name="external" size={16} />
                     </a>
+                    <p className="ez-demo-card__text">{t("text")}</p>
+                    <ul className="ez-demo-card__facts">
+                        {facts.map((fact) => (
+                            <li key={fact}>{fact}</li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </article>

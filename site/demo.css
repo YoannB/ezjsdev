@@ -164,7 +164,6 @@
     align-items: center;
     gap: 0.45rem;
     min-height: 2.5rem;
-    margin-top: 0.25rem;
     padding: 0.4rem 1rem;
     border-radius: var(--radius-sm);
     background: var(--accent-1);
