@@ -81,18 +81,18 @@ breaks the AI handlers, a too-narrow one leaks unlocalized traffic. This is the 
 A derived site (a repo that merges Axons tags from an `upstream` remote) must not edit Axons
 files, or every upstream merge conflicts. It owns ONE folder, `site/`, and replaces its files:
 
-| File                           | Holds                                                                                                                                                                                                                                              |
-| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `site/config.ts`               | `SITE` (`satisfies SiteConfig`): name, root title/description fallbacks, GitHub URL, brand accent, chrome switches, `articlesEnabled`, SEO resources + hero video, `pathnames`, `nav`, `collections`, `messageOverrides`, MUI `palette` (per mode) |
-| `content/<collection>/`        | a site's own Markdown collections (declared in `SITE.collections`; docs/articles.md → Collections)                                                                                                                                                 |
-| `site/theme.css`               | the site's CSS, imported LAST by `app/globals.css` (token overrides such as `--accent-1`, `--bg-0`, `--btn-fg`); empty in Axons                                                                                                                    |
-| `site/logo.tsx`                | the logo DRAWING (`LOGO_VIEWBOX` + `LogoMark`); `components/ui/Logo.tsx` keeps the frame and `aria-label={SITE_NAME}`                                                                                                                              |
-| `site/icon.svg`                | the favicon, served by `app/icon.tsx` (SVG, generated at build)                                                                                                                                                                                    |
-| `site/shell.tsx`               | `SiteShell`: the page FRAME around every page (header, `<main>`, footer); Axons re-exports `DefaultShell`. Props `SiteShellProps`                                                                                                                  |
-| `site/home.tsx`                | `SiteHome`: the home BODY (metadata stays `meta.home`); Axons re-exports `AxonsHome`. Props `SiteHomeProps`                                                                                                                                        |
-| `site/messages/<locale>.json`  | the site's own copy, one file per SUPPORTED locale (`{}` = nothing to add)                                                                                                                                                                         |
-| `site/storage.ts`              | `SITE_STORAGE_KEYS`: the site's own localStorage keys by name (`{}` in Axons), merged into `STORAGE_KEYS`                                                                                                                                          |
-| `app/[locale]/<page>/page.tsx` | the site's own pages (new files: no conflict)                                                                                                                                                                                                      |
+| File                           | Holds                                                                                                                                                                                                                                                                |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `site/config.ts`               | `SITE` (`satisfies SiteConfig`): name, root title/description fallbacks, GitHub URL, brand accent, chrome switches, `articlesEnabled`, SEO resources + hero video, `pathnames`, `nav`, `collections`, `messageOverrides`, `clientMessages`, MUI `palette` (per mode) |
+| `content/<collection>/`        | a site's own Markdown collections (declared in `SITE.collections`; docs/articles.md → Collections)                                                                                                                                                                   |
+| `site/theme.css`               | the site's CSS, imported LAST by `app/globals.css` (token overrides such as `--accent-1`, `--bg-0`, `--btn-fg`); empty in Axons                                                                                                                                      |
+| `site/logo.tsx`                | the logo DRAWING (`LOGO_VIEWBOX` + `LogoMark`); `components/ui/Logo.tsx` keeps the frame and `aria-label={SITE_NAME}`                                                                                                                                                |
+| `site/icon.svg`                | the favicon, served by `app/icon.tsx` (SVG, generated at build)                                                                                                                                                                                                      |
+| `site/shell.tsx`               | `SiteShell`: the page FRAME around every page (header, `<main>`, footer); Axons re-exports `DefaultShell`. Props `SiteShellProps`                                                                                                                                    |
+| `site/home.tsx`                | `SiteHome`: the home BODY (metadata stays `meta.home`); Axons re-exports `AxonsHome`. Props `SiteHomeProps`                                                                                                                                                          |
+| `site/messages/<locale>.json`  | the site's own copy, one file per SUPPORTED locale (`{}` = nothing to add)                                                                                                                                                                                           |
+| `site/storage.ts`              | `SITE_STORAGE_KEYS`: the site's own localStorage keys by name (`{}` in Axons), merged into `STORAGE_KEYS`                                                                                                                                                            |
+| `app/[locale]/<page>/page.tsx` | the site's own pages (new files: no conflict)                                                                                                                                                                                                                        |
 
 The contract (`SiteConfig`) and the merges are PURE code in `lib/site-extension.ts`
 (100%-branch unit tests in `tests/unit/site-extension.test.ts`); Axons-owned files only consume
@@ -112,6 +112,15 @@ them, so a new `SiteConfig` field shows up in a derived site as a TYPE ERROR in 
   `SITE.pathnames`) are inserted after Home in the footer and the HTML sitemap page, and in the
   header unless `header: false`. A disabled collection (`ARTICLES_ENABLED`, a site collection's `enabled`) drops its entry. Labels live in
   `site/messages/<locale>.json` under `nav`.
+- Nav order: Home first, then `SITE.nav` in order, then Axons' other entries (articles, sitemap,
+  legal pages). To interleave an Axons entry with the site's, put a reference `{ axons: "/articles" }`
+  where it belongs in `SITE.nav`: that entry (its own label, route and header visibility) moves
+  there and leaves the tail. One ordered list reads exactly as rendered (no `before`/`after`
+  chains to resolve); with no reference the order is Axons' default. `buildNav` THROWS (build
+  fails) on an href that is not an Axons nav entry or one referenced twice; a reference to a
+  disabled collection stays hidden. Header, footer and HTML sitemap share the order (`NAV`,
+  `HEADER_NAV`). Example — Home, About, Services, Projects, Articles, Reminders, Contact, then
+  Sitemap and legal: `nav: [about, services, projects, { axons: "/articles" }, reminders, contact]`.
 - Storage: `site/storage.ts` declares `SITE_STORAGE_KEYS` (`{ ideTabs: "mysite-ide-tabs" }`, keys
   prefixed with the site name); `lib/storage.ts` merges them with Axons' (`usage`, `themeMode`)
   into `STORAGE_KEYS` via `mergeStorageKeys`, which THROWS on a name Axons declares, a key already
@@ -131,6 +140,9 @@ them, so a new `SiteConfig` field shows up in a derived site as a TYPE ERROR in 
   THROWS (build fails, path named) unless that path or a parent is listed in
   `SITE.messageOverrides` (e.g. `"meta.home"`, `"hero"`): replacing Axons copy is always an
   explicit, greppable choice. The legal `{placeholders}` are interpolated after the merge.
+  Only the paths in `CLIENT_MESSAGES` (Axons' + `SITE.clientMessages`) reach the client provider:
+  a site whose Client Components read their own namespace lists it there, the unit tests name any
+  forgotten one (`docs/i18n.md` → Client messages).
 
 Axons ITSELF keeps `pathnames: {}`, `nav: []`, `collections: []`, `messageOverrides: []` and empty
 `site/messages/*.json`, so its behavior is unchanged. Do not put Axons features in `site/`.
