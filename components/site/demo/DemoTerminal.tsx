@@ -12,16 +12,18 @@ export function DemoTerminal({ status, shown, run }: { status: DemoStatus; shown
     const t = useTranslations("demo");
     const script = t.raw("lines") as string[];
     return (
-        <div className="ez-demo" data-status={status}>
-            <Terminal
-                ariaLabel={t("terminalLabel")}
-                lines={demoLines(script, shown)}
-                running={status === "running"}
-                live={false}
-                rows={script.length + 1}
-                className="ez-demo__log"
-            />
-            {status === "done" ? <DemoResult key={run} focusOnMount /> : null}
+        <div className="ez-demo">
+            <div className="ez-demo__grid" data-status={status}>
+                <Terminal
+                    ariaLabel={t("terminalLabel")}
+                    lines={demoLines(script, shown)}
+                    running={status === "running"}
+                    live={false}
+                    rows={script.length * 2}
+                    className="ez-demo__log"
+                />
+                {status === "done" ? <DemoResult key={run} focusOnMount /> : null}
+            </div>
         </div>
     );
 }

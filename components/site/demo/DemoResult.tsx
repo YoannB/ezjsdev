@@ -19,43 +19,50 @@ export function DemoResult({ focusOnMount = false }: { focusOnMount?: boolean })
     const facts = t.raw("facts") as string[];
     return (
         <article className="ez-demo-card" aria-labelledby="ez-demo-card-title">
-            {failed === src ? (
-                <p className="ez-demo-card__thumb ez-demo-card__thumb--error">{t("thumbError")}</p>
-            ) : (
-                // eslint-disable-next-line @next/next/no-img-element -- small static public asset, fixed size
-                <img
-                    className="ez-demo-card__thumb"
-                    src={src}
-                    width={640}
-                    height={400}
-                    alt={t("thumbAlt")}
-                    decoding="async"
-                    onError={() => setFailed(src)}
-                />
-            )}
-            <div className="ez-demo-card__body">
-                <h3
-                    id="ez-demo-card-title"
-                    className="ez-demo-card__title"
-                    tabIndex={-1}
-                    ref={focusOnMount ? (el) => el?.focus() : undefined}
-                >
-                    {t("title")}
-                </h3>
-                <p className="ez-demo-card__url" translate="no">
-                    {AXONS_PREVIEW_URL}
-                </p>
-                <p className="ez-demo-card__text">{t("text")}</p>
-                <ul className="ez-demo-card__facts">
-                    {facts.map((fact) => (
-                        <li key={fact}>{fact}</li>
-                    ))}
-                </ul>
-                <a className="ez-demo-card__open" href={AXONS_PREVIEW_URL} target="_blank" rel="noopener noreferrer">
-                    {t("open")}
-                    <span className="ide-sr"> {t("newTab")}</span>
-                    <IdeIcon name="external" size={16} />
-                </a>
+            <div className="ez-demo-card__inner">
+                {failed === src ? (
+                    <p className="ez-demo-card__thumb ez-demo-card__thumb--error">{t("thumbError")}</p>
+                ) : (
+                    // eslint-disable-next-line @next/next/no-img-element -- small static public asset, fixed size
+                    <img
+                        className="ez-demo-card__thumb"
+                        src={src}
+                        width={640}
+                        height={400}
+                        alt={t("thumbAlt")}
+                        decoding="async"
+                        onError={() => setFailed(src)}
+                    />
+                )}
+                <div className="ez-demo-card__body">
+                    <h3
+                        id="ez-demo-card-title"
+                        className="ez-demo-card__title"
+                        tabIndex={-1}
+                        ref={focusOnMount ? (el) => el?.focus() : undefined}
+                    >
+                        {t("title")}
+                    </h3>
+                    <p className="ez-demo-card__url" translate="no">
+                        {AXONS_PREVIEW_URL}
+                    </p>
+                    <p className="ez-demo-card__text">{t("text")}</p>
+                    <ul className="ez-demo-card__facts">
+                        {facts.map((fact) => (
+                            <li key={fact}>{fact}</li>
+                        ))}
+                    </ul>
+                    <a
+                        className="ez-demo-card__open"
+                        href={AXONS_PREVIEW_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {t("open")}
+                        <span className="ide-sr"> {t("newTab")}</span>
+                        <IdeIcon name="external" size={16} />
+                    </a>
+                </div>
             </div>
         </article>
     );

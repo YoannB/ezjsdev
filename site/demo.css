@@ -68,28 +68,32 @@
 /* Lines + card */
 .ez-demo {
     container-type: inline-size;
+}
+.ez-demo__grid {
     display: grid;
     gap: 0.9rem;
     align-items: start;
 }
 @container (min-width: 46rem) {
-    .ez-demo[data-status="done"] {
+    .ez-demo__grid[data-status="done"] {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     }
 }
 
 .ez-demo-card {
     container-type: inline-size;
-    display: grid;
-    gap: 0.9rem;
     min-width: 0;
     padding: 0.9rem;
     border: 1px solid var(--border-1);
     border-radius: var(--radius-sm);
     background: var(--bg-0);
 }
+.ez-demo-card__inner {
+    display: grid;
+    gap: 0.9rem;
+}
 @container (min-width: 30rem) {
-    .ez-demo-card {
+    .ez-demo-card__inner {
         grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr);
         align-items: start;
     }
