@@ -186,63 +186,70 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
                     </div>
                 </header>
 
-                <nav className="ide-activity" aria-label={t("activity")} inert={drawerOpen || undefined}>
+                {/* Activity bar: the explorer SWITCH first, set apart by a separator, then the navigation
+                    links. The switch is a <button> outside the <nav> (it shows/hides a panel, it goes
+                    nowhere): aria-expanded + aria-controls, an action label ("Hide/Show the explorer")
+                    and a panel icon whose chevron points the way it will move. */}
+                <div className="ide-activity" inert={drawerOpen || undefined}>
                     <button
                         type="button"
-                        className={cn("ide-activity__item", sidebar && "is-active")}
+                        className="ide-activity__toggle"
                         aria-expanded={sidebar}
                         aria-controls="ide-explorer"
-                        aria-label={t("explorer")}
-                        title={t("explorer")}
+                        aria-label={sidebar ? t("hideExplorer") : t("showExplorer")}
+                        title={sidebar ? t("hideExplorer") : t("showExplorer")}
                         onClick={() => setSidebar((s) => !s)}
                     >
-                        <IdeIcon name="files" size={24} />
+                        <IdeIcon name={sidebar ? "sidebarHide" : "sidebarShow"} size={24} />
                     </button>
-                    <Link
-                        href="/articles"
-                        className={cn("ide-activity__item", route.startsWith("/articles") && "is-active")}
-                        aria-label={tn("articles")}
-                        title={tn("articles")}
-                    >
-                        <IdeIcon name="article" size={24} />
-                    </Link>
-                    <Link
-                        href="/reminders"
-                        className={cn("ide-activity__item", route.startsWith("/reminders") && "is-active")}
-                        aria-label={tn("reminders")}
-                        title={tn("reminders")}
-                    >
-                        <IdeIcon name="note" size={24} />
-                    </Link>
-                    <Link
-                        href="/sitemap"
-                        className={cn("ide-activity__item", route === "/sitemap" && "is-active")}
-                        aria-label={tn("sitemap")}
-                        title={tn("sitemap")}
-                    >
-                        <IdeIcon name="tree" size={24} />
-                    </Link>
-                    <Link
-                        href="/contact"
-                        className={cn("ide-activity__item", route === "/contact" && "is-active")}
-                        aria-label={tn("contact")}
-                        title={tn("contact")}
-                    >
-                        <IdeIcon name="mail" size={24} />
-                    </Link>
-                    {GITHUB_LINK_ENABLED ? (
-                        <a
-                            href={GITHUB_URL}
-                            className="ide-activity__item ide-activity__item--end"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={tn("github")}
-                            title={tn("github")}
+                    <span className="ide-activity__sep" aria-hidden="true" />
+                    <nav className="ide-activity__nav" aria-label={t("activity")}>
+                        <Link
+                            href="/articles"
+                            className={cn("ide-activity__item", route.startsWith("/articles") && "is-active")}
+                            aria-label={tn("articles")}
+                            title={tn("articles")}
                         >
-                            <IdeIcon name="github" size={24} />
-                        </a>
-                    ) : null}
-                </nav>
+                            <IdeIcon name="article" size={24} />
+                        </Link>
+                        <Link
+                            href="/reminders"
+                            className={cn("ide-activity__item", route.startsWith("/reminders") && "is-active")}
+                            aria-label={tn("reminders")}
+                            title={tn("reminders")}
+                        >
+                            <IdeIcon name="note" size={24} />
+                        </Link>
+                        <Link
+                            href="/sitemap"
+                            className={cn("ide-activity__item", route === "/sitemap" && "is-active")}
+                            aria-label={tn("sitemap")}
+                            title={tn("sitemap")}
+                        >
+                            <IdeIcon name="tree" size={24} />
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className={cn("ide-activity__item", route === "/contact" && "is-active")}
+                            aria-label={tn("contact")}
+                            title={tn("contact")}
+                        >
+                            <IdeIcon name="mail" size={24} />
+                        </Link>
+                        {GITHUB_LINK_ENABLED ? (
+                            <a
+                                href={GITHUB_URL}
+                                className="ide-activity__item ide-activity__item--end"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={tn("github")}
+                                title={tn("github")}
+                            >
+                                <IdeIcon name="github" size={24} />
+                            </a>
+                        ) : null}
+                    </nav>
+                </div>
 
                 <aside
                     id="ide-explorer"

@@ -1,5 +1,5 @@
 import { LatestArticles } from "@/components/home/LatestArticles";
-import { Section } from "@/components/ui";
+import { Button, Section } from "@/components/ui";
 import { Link } from "@/i18n/routing";
 import type { SiteHomeProps } from "@/lib/site-extension";
 import { PROJECTS } from "@/site/profile";
@@ -8,8 +8,9 @@ import { DemoTrigger } from "../demo/DemoTrigger";
 
 // ezjsdev's home BODY (exported as `SiteHome` by site/home.tsx), shown in the IDE editor. Copy from
 // the CV-backed positioning of spec v0.2 §3.1–§3.2 (site/messages → `siteHome`), a direct access to
-// Contact and About, the expertise (→ Services), a preview of the projects (§5.1), then the latest
-// articles and reminders (Axons blocks: "archives" titles while every entry is an archive). Static Server Component.
+// Contact and About (Axons `Button` links), the expertise (→ Services), a preview of the projects
+// (§5.1), then the latest articles and reminders (Axons blocks: "archives" titles while every entry
+// is an archive). Static Server Component.
 export async function EzHome({ locale }: SiteHomeProps) {
     const t = await getTranslations({ locale, namespace: "siteHome" });
     const tp = await getTranslations({ locale, namespace: "pages.projects" });
@@ -22,12 +23,12 @@ export async function EzHome({ locale }: SiteHomeProps) {
                     <h1 className="ez-home__title">{t("title")}</h1>
                     <p className="ez-home__lead">{t("lead")}</p>
                     <p className="ez-home__actions">
-                        <Link href="/contact" className="ez-home__action ez-home__action--primary">
+                        <Button href="/contact" className="ez-cta">
                             {t("contactCta")}
-                        </Link>
-                        <Link href="/about" className="ez-home__action">
+                        </Button>
+                        <Button href="/about" variant="secondary" className="ez-cta">
                             {t("aboutCta")}
-                        </Link>
+                        </Button>
                     </p>
                     <DemoTrigger />
                 </header>

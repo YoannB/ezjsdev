@@ -17,6 +17,9 @@ const PATHS = {
         "M3 17.5v-11A1.5 1.5 0 0 1 4.5 5H9l2 2h7.5A1.5 1.5 0 0 1 20 8.5V10M3 17.5 5.5 11h16L19 19H4.5A1.5 1.5 0 0 1 3 17.5z",
     tsx: "M12 12m-2 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0M12 12m-9 0a9 3.6 0 1 0 18 0 9 3.6 0 1 0-18 0M12 12m-4.5-7.8a9 3.6 60 1 0 9 15.6 9 3.6 60 1 0-9-15.6M12 12m4.5-7.8a9 3.6 120 1 0-9 15.6 9 3.6 120 1 0 9-15.6",
     md: "M3 6h18v12H3zM6 15V9l2.5 3L11 9v6M15 9v6M13 13l2 2 2-2",
+    // Explorer switch: a window with its side panel; the chevron shows where the panel will go.
+    sidebarHide: "M3 5h18v14H3zM9 5v14M16 9.5 13.5 12l2.5 2.5",
+    sidebarShow: "M3 5h18v14H3zM9 5v14M13.5 9.5 16 12l-2.5 2.5",
     menu: "M4 7h16M4 12h16M4 17h16",
     close: "M6 6l12 12M18 6L6 18",
     external: "M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5",

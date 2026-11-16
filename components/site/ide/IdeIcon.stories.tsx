@@ -11,6 +11,8 @@ const NAMES: IdeIconName[] = [
     "preview",
     "terminal",
     "chevron",
+    "sidebarHide",
+    "sidebarShow",
     "folder",
     "folderOpen",
     "tsx",

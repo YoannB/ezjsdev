@@ -69,8 +69,12 @@ test.describe("SEO site demo — desktop", () => {
 
         const open = card(page).getByRole("link", { name: /Ouvrir le site/ });
         await expect(open).toHaveAttribute("href", AXONS);
+        // Axons' Button as an `external` link: a real <a> with the button classes, new tab, safe rel,
+        // and the hidden localized "(new tab)" in its accessible name.
+        await expect(open).toHaveClass(/MuiButton-root/);
         await expect(open).toHaveAttribute("target", "_blank");
         await expect(open).toHaveAttribute("rel", "noopener noreferrer");
+        await expect(open).toHaveAccessibleName(/Ouvrir le site.*\(nouvel onglet\)/);
         await expect(card(page).getByText(AXONS, { exact: true })).toBeVisible();
         const img = card(page).getByRole("img");
         await expect(img).toHaveAttribute("src", /\/demo\/axons-preview-fr-(dark|light)\.webp$/);
@@ -83,18 +87,32 @@ test.describe("SEO site demo — desktop", () => {
         );
     });
 
-    test("the button is disabled while running (no double launch), then replays", async ({ page }) => {
+    test("the button is busy while running (focus kept, no double launch), then replays", async ({ page }) => {
         await ready(page);
+        // Axons' Button: a real <button> with its classes (not a hand-made one).
+        await expect(homeButton(page)).toHaveClass(/MuiButton-root/);
+        await expect(homeButton(page)).toHaveJSProperty("tagName", "BUTTON");
+        await expect(terminalButton(page)).toHaveClass(/MuiButton-sizeSmall/);
         await homeButton(page).click();
+        // Axons' busy state: aria-disabled + aria-busy, still enabled and focused, clicks ignored.
+        await expect(homeButton(page)).toHaveAttribute("aria-busy", "true");
         await expect(homeButton(page)).toHaveAttribute("aria-disabled", "true");
+        // Not natively disabled (Playwright's toBeEnabled() reads aria-disabled, so check the property).
+        await expect(homeButton(page)).toHaveJSProperty("disabled", false);
+        await expect(homeButton(page)).toBeFocused();
         await expect(homeButton(page)).toHaveText("Démonstration en cours…");
-        await expect(terminalButton(page)).toHaveAttribute("aria-disabled", "true");
+        await expect(terminalButton(page)).toHaveAttribute("aria-busy", "true");
         await expect(lines(page).nth(1)).toBeVisible();
         const before = await lines(page).count();
-        await homeButton(page).click({ force: true }); // aria-disabled: ignored, no restart
+        // Busy: a pointer click (forced: the busy button has no pointer events, Playwright would
+        // otherwise wait for the run to end) and Enter on the focused button are both ignored.
+        await homeButton(page).click({ force: true });
+        await page.keyboard.press("Enter");
+        await expect(homeButton(page)).toHaveAttribute("aria-busy", "true");
         expect(await lines(page).count()).toBeGreaterThanOrEqual(before);
         await expect(card(page)).toBeVisible();
-        await expect(homeButton(page)).not.toHaveAttribute("aria-disabled");
+        await expect(cardTitle(page)).toBeFocused();
+        await expect(homeButton(page)).not.toHaveAttribute("aria-busy", "true");
 
         // Replay from the terminal bar: a fresh run, the card comes back at the end.
         await expect(terminalButton(page)).toHaveText("Rejouer");
@@ -169,7 +187,7 @@ test.describe("SEO site demo — desktop", () => {
         await ready(page);
         await homeButton(page).click();
         await expect(lines(page).nth(1)).toBeVisible();
-        await expect(homeButton(page)).toHaveAttribute("aria-disabled", "true"); // still running
+        await expect(homeButton(page)).toHaveAttribute("aria-busy", "true"); // still running
         await page.getByRole("contentinfo").getByRole("link", { name: "Plan du site" }).click();
         await expect(page).toHaveURL(/plan-du-site/);
         await expect(demoLog(page)).toHaveCount(0);

@@ -36,7 +36,7 @@
 }
 
 /* Every scroller of the shell is a containing block: an absolutely positioned descendant (the
-   visually hidden texts below, the line-number gutter) then stays INSIDE the panel that scrolls
+   visually hidden texts below) then stays INSIDE the panel that scrolls
    instead of resolving against the viewport and growing the document (a 70px page scroll that
    pushed the title bar and the tabs off screen on desktop). */
 .ide,
@@ -184,6 +184,48 @@
 }
 .ide-activity__item--end {
     margin-top: auto;
+}
+/* The explorer SWITCH (a <button aria-expanded>, not a link): a framed square, tinted while the
+   explorer is shown, set apart from the navigation links by a separator. Its state is never
+   colour alone: the icon's chevron flips and the accessible name says the action. */
+.ide-activity__toggle {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.4rem auto 0;
+    padding: 0;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--text-2);
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease;
+}
+.ide-activity__toggle:hover {
+    background: var(--ide-hover);
+    color: var(--text-1);
+}
+.ide-activity__toggle[aria-expanded="true"] {
+    border-color: var(--accent-2);
+    background: var(--ide-current);
+    color: var(--text-1);
+}
+.ide-activity__sep {
+    align-self: center;
+    width: 1.75rem;
+    height: 1px;
+    margin: 0.5rem 0 0.25rem;
+    background: var(--border-2);
+}
+.ide-activity__nav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
 }
 
 /* ===== Explorer ===== */
@@ -686,41 +728,6 @@
     line-height: 1.65;
 }
 
-/* Line numbers in the gutter, one per block: staging only (spec §6.3), not read aloud
-   (alternative text "" on the generated content). Starting at 1 on every page. */
-.ide-editor {
-    counter-reset: ide-line;
-}
-.ide-editor :is(.static-page__card, .ez-home__doc) {
-    position: relative;
-    padding-left: 3rem;
-}
-.ide-editor :is(.static-page__card, .ez-home__doc) :is(h1, h2, h3, p, li, pre, blockquote, table)::before {
-    counter-increment: ide-line;
-    content: counter(ide-line) / "";
-    position: absolute;
-    left: 0;
-    width: 2rem;
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: inherit;
-    text-align: right;
-    opacity: 0.75;
-}
-.ide-editor :is(.static-page__card, .ez-home__doc) :is(li, pre, blockquote, table) :is(p, li, pre)::before {
-    content: none; /* nested blocks share their parent's number */
-}
-@media (max-width: 29.99rem) {
-    .ide-editor :is(.static-page__card, .ez-home__doc) {
-        padding-left: 0;
-    }
-    .ide-editor :is(.static-page__card, .ez-home__doc) :is(h1, h2, h3, p, li, pre, blockquote, table)::before {
-        content: none;
-    }
-}
-
 /* Home body */
 .ez-home__intro {
     margin-bottom: 1.5rem;
@@ -755,6 +762,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .ide-activity__toggle,
     .ide-explorer,
     .ide-tree__chevron,
     .ide-panel__chevron {

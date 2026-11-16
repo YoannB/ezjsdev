@@ -1,13 +1,14 @@
 "use client";
+import { Button } from "@/components/ui";
 import { useTheme } from "@/hooks/use-theme";
 import { AXONS_PREVIEW_URL } from "@/site/profile";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { IdeIcon } from "../ide/IdeIcon";
 import { demoThumbnail } from "./demo-model";
 
 // Result card of the demo (spec v0.2 §7.3): the Axons boilerplate this site is built on, its live
-// preview URL and an "Open the site" link (new tab, no deployment). A static thumbnail of the preview
+// preview URL and an "Open the site" link (Axons `Button` as an `external` link: new tab, localized
+// hidden "(new tab)"; no deployment). A static thumbnail of the preview
 // in the painted theme (public/demo/, fixed 640×400 → no layout shift); if it fails to load, a
 // plain fallback box keeps the card usable. Only facts already published on the Projects page.
 // The link comes right after the URL so the action is visible without scrolling the fixed-height panel.
@@ -48,16 +49,9 @@ export function DemoResult({ focusOnMount = false, thumbnail }: { focusOnMount?:
                     <p className="ez-demo-card__url" translate="no">
                         {AXONS_PREVIEW_URL}
                     </p>
-                    <a
-                        className="ez-demo-card__open"
-                        href={AXONS_PREVIEW_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <Button href={AXONS_PREVIEW_URL} external size="sm" className="ez-demo-card__open">
                         {t("open")}
-                        <span className="ide-sr"> {t("newTab")}</span>
-                        <IdeIcon name="external" size={16} />
-                    </a>
+                    </Button>
                     <p className="ez-demo-card__text">{t("text")}</p>
                     <ul className="ez-demo-card__facts">
                         {facts.map((fact) => (

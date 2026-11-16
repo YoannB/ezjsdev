@@ -1,8 +1,8 @@
 // EZJSDEV LOGO MARK — the `</>` glyph stroked with the cyan → blue brand gradient (tokens, so it
 // follows both themes). components/ui/Logo.tsx wraps it in the <svg> (size, `logo` class,
 // role="img", aria-label={SITE_NAME}): only the CONTENT is drawn here, in LOGO_VIEWBOX
-// coordinates. Static by default; the Loader / splash animate it from site/theme.css, with a
-// static fallback under prefers-reduced-motion. Same system as the favicon (site/icon.svg).
+// coordinates. Animated from site/theme.css (Loader / splash, and a lighter idle in the shell's
+// title bar), with a static fallback under prefers-reduced-motion. Same system as the favicon (site/icon.svg).
 export const LOGO_VIEWBOX = "0 0 48 48";
 
 export function LogoMark() {

@@ -136,7 +136,6 @@
             "linkedinTitle": "LinkedIn",
             "linkedinBody": "Envie-me uma mensagem a partir do meu perfil:",
             "linkedinCta": "Perfil LinkedIn de Yoann Barbier",
-            "newTab": "(abre num novo separador)",
             "emailTitle": "E-mail",
             "emailBody": "Também me pode escrever para este endereço:",
             "locationTitle": "Localização",
@@ -149,6 +148,8 @@
         "files": "Ficheiros do site",
         "openExplorer": "Abrir o explorador",
         "closeExplorer": "Fechar o explorador",
+        "showExplorer": "Mostrar o explorador",
+        "hideExplorer": "Ocultar o explorador",
         "activity": "Barra de atividade",
         "tabs": "Ficheiros abertos",
         "closeTab": "Fechar {label}",
@@ -234,7 +235,6 @@
                 "Temas claro e escuro"
             ],
             "open": "Abrir o site",
-            "newTab": "(novo separador)",
             "thumbAlt": "Captura da página inicial do Axons em francês: o título «Le boilerplate Next.js pour vos sites SEO» e os botões «Voir la démo» e «Plan du site».",
             "thumbError": "Pré-visualização indisponível. A ligação «Abrir o site» continua a funcionar."
         }

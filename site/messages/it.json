@@ -136,7 +136,6 @@
             "linkedinTitle": "LinkedIn",
             "linkedinBody": "Scrivimi un messaggio dal mio profilo:",
             "linkedinCta": "Profilo LinkedIn di Yoann Barbier",
-            "newTab": "(si apre in una nuova scheda)",
             "emailTitle": "E-mail",
             "emailBody": "Puoi anche scrivermi a questo indirizzo:",
             "locationTitle": "Sede",
@@ -149,6 +148,8 @@
         "files": "File del sito",
         "openExplorer": "Apri l'esplora risorse",
         "closeExplorer": "Chiudi l'esplora risorse",
+        "showExplorer": "Mostra l'esplora risorse",
+        "hideExplorer": "Nascondi l'esplora risorse",
         "activity": "Barra delle attività",
         "tabs": "File aperti",
         "closeTab": "Chiudi {label}",
@@ -230,7 +231,6 @@
             "text": "Axons è il boilerplate Next.js open source su cui si basa ezjsdev. Questo sito esiste già: il pulsante ne apre l'anteprima, senza generare né pubblicare nulla.",
             "facts": ["Next.js 16 e React 19, in TypeScript", "Sei lingue con URL tradotti", "Temi chiaro e scuro"],
             "open": "Apri il sito",
-            "newTab": "(nuova scheda)",
             "thumbAlt": "Schermata della home page di Axons in francese: il titolo «Le boilerplate Next.js pour vos sites SEO» e i pulsanti «Voir la démo» e «Plan du site».",
             "thumbError": "Anteprima non disponibile. Il link «Apri il sito» resta utilizzabile."
         }
