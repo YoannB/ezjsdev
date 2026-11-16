@@ -22,10 +22,14 @@
             "intro": "Technical memos written between 2013 and 2017, kept as they were as an archive.",
             "empty": "No reminders yet.",
             "publishedOn": "Published on {date}",
-            "onlyIn": "Only available in {language}"
+            "onlyIn": "Only available in {language}",
+            "latestTitle": "Latest reminders",
+            "archivesTitle": "Reminders (archives)",
+            "viewAll": "All reminders"
         },
         "articles": {
-            "intro": "Technical articles written between 2013 and 2015, kept as they were as an archive."
+            "intro": "Technical articles written between 2013 and 2015, kept as they were as an archive.",
+            "archivesTitle": "Articles (archives)"
         },
         "about": {
             "title": "About",
@@ -197,8 +201,6 @@
             "Code quality, testing and documentation",
             "Vue / Nuxt, Angular, HTML and CSS"
         ],
-        "remindersTitle": "Latest reminders",
-        "remindersAll": "All reminders",
         "contactCta": "Get in touch",
         "aboutCta": "My background",
         "servicesAll": "See the services",

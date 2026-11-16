@@ -1,26 +1,20 @@
-import { ArticleFeed } from "@/components/content/ArticleFeed";
 import { LatestArticles } from "@/components/home/LatestArticles";
 import { Button, Section } from "@/components/ui";
-import { getCollection } from "@/constants/site";
 import { Link } from "@/i18n/routing";
-import { getEntries } from "@/lib/articles/source";
 import type { SiteHomeProps } from "@/lib/site-extension";
 import { PROJECTS } from "@/site/profile";
 import { getTranslations } from "next-intl/server";
 import { DemoTrigger } from "../demo/DemoTrigger";
 
-const LATEST_REMINDERS = 3;
-
 // ezjsdev's home BODY (exported as `SiteHome` by site/home.tsx), shown in the IDE editor. Copy from
 // the CV-backed positioning of spec v0.2 §3.1–§3.2 (site/messages → `siteHome`), a direct access to
-// Contact and About (Axons `Button` links), the expertise (→ Services), a preview of the projects (§5.1), then the latest
-// articles (Axons block) and the latest reminders. Static Server Component.
+// Contact and About (Axons `Button` links), the expertise (→ Services), a preview of the projects
+// (§5.1), then the latest articles and reminders (Axons blocks: "archives" titles while every entry
+// is an archive). Static Server Component.
 export async function EzHome({ locale }: SiteHomeProps) {
     const t = await getTranslations({ locale, namespace: "siteHome" });
     const tp = await getTranslations({ locale, namespace: "pages.projects" });
     const expertise = t.raw("expertise") as string[];
-    const reminders = getCollection("reminders");
-    const latest = reminders.enabled ? getEntries(reminders.id, locale, LATEST_REMINDERS) : [];
     return (
         <div className="ez-home">
             <div className="ez-home__doc">
@@ -61,20 +55,7 @@ export async function EzHome({ locale }: SiteHomeProps) {
                     </Link>
                 </Section>
                 <LatestArticles locale={locale} />
-                {latest.length ? (
-                    <Section id="latest-reminders" title={t("remindersTitle")} className="latest-articles">
-                        <ArticleFeed
-                            items={latest}
-                            locale={locale}
-                            headingLevel="h3"
-                            namespace={reminders.namespace}
-                            itemHref="/reminders/[slug]"
-                        />
-                        <Link href="/reminders" className="latest-articles__all">
-                            {t("remindersAll")} →
-                        </Link>
-                    </Section>
-                ) : null}
+                <LatestArticles locale={locale} collection="reminders" />
             </div>
         </div>
     );

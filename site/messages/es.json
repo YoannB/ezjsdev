@@ -22,10 +22,14 @@
             "intro": "Notas técnicas de referencia escritas entre 2013 y 2017, conservadas tal cual como archivo.",
             "empty": "Todavía no hay recordatorios.",
             "publishedOn": "Publicado el {date}",
-            "onlyIn": "Disponible solo en {language}"
+            "onlyIn": "Disponible solo en {language}",
+            "latestTitle": "Últimos recordatorios",
+            "archivesTitle": "Recordatorios (archivo)",
+            "viewAll": "Todos los recordatorios"
         },
         "articles": {
-            "intro": "Artículos técnicos escritos entre 2013 y 2015, conservados tal cual como archivo."
+            "intro": "Artículos técnicos escritos entre 2013 y 2015, conservados tal cual como archivo.",
+            "archivesTitle": "Artículos (archivo)"
         },
         "about": {
             "title": "Sobre mí",
@@ -197,8 +201,6 @@
             "Calidad del código, pruebas y documentación",
             "Vue / Nuxt, Angular, HTML y CSS"
         ],
-        "remindersTitle": "Últimos recordatorios",
-        "remindersAll": "Todos los recordatorios",
         "contactCta": "Contactar",
         "aboutCta": "Mi trayectoria",
         "servicesAll": "Ver los servicios",

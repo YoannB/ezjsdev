@@ -136,8 +136,12 @@ export const SITE = {
             schemaType: "TechArticle",
         },
     ],
+    // "New" badge for 90 days (3 months) on future entries; everything published before 2018 (the
+    // migrated 2013–2017 articles and reminders) is shown as an archive (docs/articles.md → New and
+    // archive badges).
+    collectionDefaults: { newForDays: 90, archiveBefore: "2018-01-01" },
     // Axons copy replaced on purpose by site/messages/<locale>.json.
-    messageOverrides: ["meta.home", "footer.tagline", "pages.articles.intro"],
+    messageOverrides: ["meta.home", "footer.tagline", "pages.articles.intro", "pages.articles.archivesTitle"],
     // Message paths read by ezjsdev's own Client Components (useTranslations); the rest of the
     // catalogue stays on the server (docs/i18n.md → Client messages).
     clientMessages: ["ide", "demo"],

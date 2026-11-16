@@ -22,10 +22,14 @@
             "intro": "Appunti tecnici scritti tra il 2013 e il 2017, conservati così come sono, come archivio.",
             "empty": "Ancora nessun promemoria.",
             "publishedOn": "Pubblicato il {date}",
-            "onlyIn": "Disponibile solo in {language}"
+            "onlyIn": "Disponibile solo in {language}",
+            "latestTitle": "Ultimi promemoria",
+            "archivesTitle": "Promemoria (archivio)",
+            "viewAll": "Tutti i promemoria"
         },
         "articles": {
-            "intro": "Articoli tecnici scritti tra il 2013 e il 2015, conservati così come sono, come archivio."
+            "intro": "Articoli tecnici scritti tra il 2013 e il 2015, conservati così come sono, come archivio.",
+            "archivesTitle": "Articoli (archivio)"
         },
         "about": {
             "title": "Chi sono",
@@ -197,8 +201,6 @@
             "Qualità del codice, test e documentazione",
             "Vue / Nuxt, Angular, HTML e CSS"
         ],
-        "remindersTitle": "Ultimi promemoria",
-        "remindersAll": "Tutti i promemoria",
         "contactCta": "Contattami",
         "aboutCta": "Il mio percorso",
         "servicesAll": "Vedi i servizi",

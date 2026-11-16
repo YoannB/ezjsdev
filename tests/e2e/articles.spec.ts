@@ -82,11 +82,12 @@ test.describe("Articles", () => {
         await expect(page).toHaveURL(lpRe("fr"));
     });
 
-    test("home shows the latest articles with a link to the list", async ({ page }) => {
+    test("home shows the most recent (archived) articles with a link to the list", async ({ page }) => {
         await page.goto("/fr");
         await ready(page);
         const block = page.locator("#latest-articles");
-        await expect(block.getByRole("heading", { level: 2, name: "Derniers articles" })).toBeVisible();
+        // Every migrated article is an archive (site/config.ts → archiveBefore): archives title.
+        await expect(block.getByRole("heading", { level: 2, name: "Articles (archives)" })).toBeVisible();
         await expect(block.locator(".article-teaser")).toHaveCount(3);
         await block.getByRole("link", { name: /Tous les articles/ }).click();
         await expect(page).toHaveURL(lpRe("fr", "/articles"));

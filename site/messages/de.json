@@ -22,10 +22,14 @@
             "intro": "Technische Gedächtnisstützen aus den Jahren 2013 bis 2017, unverändert als Archiv aufbewahrt.",
             "empty": "Noch keine Merkzettel.",
             "publishedOn": "Veröffentlicht am {date}",
-            "onlyIn": "Nur auf {language} verfügbar"
+            "onlyIn": "Nur auf {language} verfügbar",
+            "latestTitle": "Neueste Merkzettel",
+            "archivesTitle": "Merkzettel (Archiv)",
+            "viewAll": "Alle Merkzettel"
         },
         "articles": {
-            "intro": "Technische Artikel aus den Jahren 2013 bis 2015, unverändert als Archiv aufbewahrt."
+            "intro": "Technische Artikel aus den Jahren 2013 bis 2015, unverändert als Archiv aufbewahrt.",
+            "archivesTitle": "Artikel (Archiv)"
         },
         "about": {
             "title": "Über mich",
@@ -197,8 +201,6 @@
             "Codequalität, Tests und Dokumentation",
             "Vue / Nuxt, Angular, HTML und CSS"
         ],
-        "remindersTitle": "Neueste Merkzettel",
-        "remindersAll": "Alle Merkzettel",
         "contactCta": "Kontakt aufnehmen",
         "aboutCta": "Mein Werdegang",
         "servicesAll": "Zu den Leistungen",
