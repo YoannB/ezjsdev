@@ -145,4 +145,12 @@ export const SITE = {
     // Message paths read by ezjsdev's own Client Components (useTranslations); the rest of the
     // catalogue stays on the server (docs/i18n.md → Client messages).
     clientMessages: ["ide", "demo"],
+    // ezjsdev pages with their OWN social image (title + intro of their messages namespace);
+    // collections are automatic, other pages share the home card. Drawing: site/og-image.tsx.
+    ogPages: {
+        "/about": "pages.about",
+        "/services": "pages.services",
+        "/projects": "pages.projects",
+        "/contact": "pages.contact",
+    },
 } as const satisfies SiteConfig<typeof pathnames>;
