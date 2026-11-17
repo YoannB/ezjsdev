@@ -7,7 +7,7 @@
    ezjsdev — site identity styles (imported LAST by app/globals.css, so these rules win over
    Axons' styles/tokens.css and styles/ui/logo.css at equal specificity). Owned by the site; MUI is kept
    in step through site/config.ts `palette`. See docs/styles.md.
-   Palette from mockups/ezjsdev: navy/anthracite panels, blue actions, cyan accents.
+   Palette from mockups/ezjsdev-*.png: navy/anthracite panels, blue actions, cyan accents.
    Contrast targets (WCAG AA): body text >= 4.5:1 on --bg-0 and --surface-*, UI borders of
    interactive controls and icons >= 3:1. Light theme = its own tuned palette, not an inversion.
    ===================================================================== */

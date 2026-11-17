@@ -27,13 +27,24 @@ const lines = (page: Page) => demoLog(page).locator(".terminal__line");
 const layout = (page: Page) =>
     page.evaluate(() => {
         const h = (sel: string) => document.querySelector(sel)?.getBoundingClientRect().height ?? -1;
-        const body = document.querySelector<HTMLElement>("#ide-terminal .ide-panel__body");
+        const scrolls = (sel: string) => {
+            const el = document.querySelector<HTMLElement>(sel);
+            return el ? el.scrollHeight > el.clientHeight + 1 : false;
+        };
+        const overflowY = (sel: string) => {
+            const el = document.querySelector(sel);
+            return el ? getComputedStyle(el).overflowY : "";
+        };
         return {
             editor: h("#main"),
             preview: h("#ide-preview"),
             terminal: h("#ide-terminal"),
             terminalBody: h("#ide-terminal .ide-panel__body"),
-            bodyScrolls: body ? body.scrollHeight > body.clientHeight : false,
+            bodyScrolls: scrolls("#ide-terminal .ide-panel__body"),
+            bodyOverflowY: overflowY("#ide-terminal .ide-panel__body"),
+            logOverflowY: overflowY("#ide-terminal .ez-demo__log .terminal__body"),
+            cardOverflowY: overflowY("#ide-terminal .ez-demo-card"),
+            cardScrolls: scrolls("#ide-terminal .ez-demo-card"),
             docOverflow: document.documentElement.scrollHeight - window.innerHeight,
         };
     });
@@ -172,7 +183,38 @@ test.describe("SEO site demo — desktop", () => {
         await expect(card(page)).toBeVisible();
         const done = await layout(page);
         expectSameLayout(done, before); // result
-        expect(done.bodyScrolls).toBe(true); // the content scrolls inside the panel
+        // No common scroller: the panel body never scrolls; the log and the card scroll on their own.
+        expect(done.bodyScrolls).toBe(false);
+        expect(done.bodyOverflowY).toBe("hidden");
+        expect(done.logOverflowY).toBe("auto");
+        expect(done.cardOverflowY).toBe("auto");
+        // Log and card side by side, both inside the panel body.
+        const box = (sel: string) => page.locator(sel).boundingBox();
+        const [body, log, cardBox] = await Promise.all([
+            box("#ide-terminal .ide-panel__body"),
+            box("#ide-terminal .ez-demo__log"),
+            box("#ide-terminal .ez-demo-card"),
+        ]);
+        expect(body && log && cardBox).toBeTruthy();
+        if (body && log && cardBox) {
+            expect(log.x + log.width).toBeLessThanOrEqual(cardBox.x);
+            for (const b of [log, cardBox]) {
+                expect(b.y).toBeGreaterThanOrEqual(body.y - 1);
+                expect(b.y + b.height).toBeLessThanOrEqual(body.y + body.height + 1);
+            }
+        }
+        // Scrolling the card moves the card only, not the log.
+        if (done.cardScrolls) {
+            await page.locator("#ide-terminal .ez-demo-card").hover();
+            await page.mouse.wheel(0, 400);
+            await expect
+                .poll(() => page.locator("#ide-terminal .ez-demo-card").evaluate((el) => el.scrollTop))
+                .toBeGreaterThan(0);
+            expect(
+                await page.locator("#ide-terminal .ez-demo__log .terminal__body").evaluate((el) => el.scrollTop),
+            ).toBe(0);
+            expect(await page.locator("#ide-terminal .ide-panel__body").evaluate((el) => el.scrollTop)).toBe(0);
+        }
 
         // Thumbnail error state, same size.
         await page.route("**/demo/*.webp", (route) => route.abort());
@@ -220,9 +262,52 @@ test.describe("SEO site demo — mobile (375px)", () => {
         const img = await card(page).getByRole("img").boundingBox();
         const title = await cardTitle(page).boundingBox();
         expect(img && title && img.y + img.height <= title.y).toBe(true);
-        // Bounded panel (spec §8.2): the card scrolls inside instead of pushing the page down.
-        const { terminalBody, bodyScrolls } = await layout(page);
-        expect(terminalBody).toBeLessThanOrEqual(26 * 16 + 1);
-        expect(bodyScrolls).toBe(true);
+        // No scroller inside the page: the panel has its natural height, bounded by its fixed content.
+        const { terminalBody, bodyScrolls, bodyOverflowY, cardOverflowY } = await layout(page);
+        expect(bodyScrolls).toBe(false);
+        expect(bodyOverflowY).toBe("visible");
+        expect(cardOverflowY).toBe("visible");
+        expect(terminalBody).toBeLessThanOrEqual(64 * 16);
+    });
+
+    test.describe("touch", () => {
+        test.use({ hasTouch: true });
+
+        // Regression: a scroller with `overscroll-behavior: contain` inside the page kept the finger
+        // once it reached its end; the page only moved from a gesture started outside the terminal.
+        test("a wheel or touch scroll started in the terminal keeps scrolling the page", async ({ page }) => {
+            await ready(page);
+            await homeButton(page).click();
+            await expect(card(page)).toBeVisible();
+            const logBody = demoLog(page);
+            const scrollY = () => page.evaluate(() => window.scrollY);
+            // Log near the viewport top: the card, status bar and footer are still below.
+            const placeLog = () =>
+                logBody.evaluate((el) => {
+                    const top = el.getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({ top: Math.max(0, top - 120), behavior: "instant" });
+                });
+
+            await placeLog();
+            await logBody.hover();
+            const start = await scrollY();
+            await page.mouse.wheel(0, 300);
+            await expect.poll(scrollY).toBeGreaterThan(start);
+
+            // A finger drag from inside the log (CDP touch events: Playwright's touchscreen only taps).
+            await placeLog();
+            const box = await logBody.boundingBox();
+            expect(box).toBeTruthy();
+            const x = (box?.x ?? 0) + 40;
+            const y0 = (box?.y ?? 0) + Math.min(100, (box?.height ?? 0) - 10);
+            const before = await scrollY();
+            const cdp = await page.context().newCDPSession(page);
+            const touch = (type: "touchStart" | "touchMove" | "touchEnd", y: number) =>
+                cdp.send("Input.dispatchTouchEvent", { type, touchPoints: type === "touchEnd" ? [] : [{ x, y }] });
+            await touch("touchStart", y0);
+            for (let step = 1; step <= 10; step++) await touch("touchMove", y0 - step * 25);
+            await touch("touchEnd", y0 - 250);
+            await expect.poll(scrollY).toBeGreaterThan(before + 100);
+        });
     });
 });

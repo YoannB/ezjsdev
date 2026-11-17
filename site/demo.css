@@ -36,19 +36,36 @@
 .ide-panel--terminal {
     scroll-margin-top: calc(var(--ide-bar-h) + 2.75rem);
 }
-/* The terminal panel keeps its size whatever the demo shows (desktop: fixed height in ide.css).
-   Below 64rem the unfolded panel has a bounded height (spec §8.2) and scrolls inside, so the demo
-   never pushes the page down by the whole card. */
-@media (max-width: 63.99rem) {
-    .ide-panel--terminal .ide-panel__body {
-        max-height: min(26rem, 70dvh);
-        overflow-y: auto;
-        overscroll-behavior: contain;
-    }
-}
-/* One scroller only: the panel body. The log itself does not cap its height. */
+/* Scrolling.
+   - Below 64rem the DOCUMENT scrolls and the unfolded panel has its natural height: no scroller
+     inside the page, so a touch or wheel gesture started in the terminal always moves the page
+     (a nested scroller traps the finger once it reaches its end). The height stays bounded by its
+     content — a fixed script and one card with a fixed-ratio thumbnail — and the panel folds
+     (spec §8.2).
+   - From 64rem the panel body has a FIXED height (ide.css) and does not scroll itself: the log and
+     the result card are two separate scrollers, side by side. */
 .ez-demo__log .terminal__body {
     max-height: none !important; /* overrides the Terminal's inline `rows` cap */
+}
+@media (min-width: 64rem) {
+    .ide-panel--terminal .ez-demo,
+    .ide-panel--terminal .ez-demo__grid {
+        height: 100%;
+        min-height: 0;
+    }
+    .ide-panel--terminal .ez-demo__grid {
+        grid-template-rows: minmax(0, 1fr);
+    }
+    .ide-panel--terminal .ez-demo__grid[data-status="done"] {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    }
+    .ide-panel--terminal .ez-demo__log {
+        align-self: stretch;
+    }
+    .ide-panel--terminal .ez-demo-card {
+        max-height: 100%;
+        overflow-y: auto;
+    }
 }
 
 /* Lines + card */
@@ -114,10 +131,15 @@
     color: var(--ok);
     font-size: 1rem;
 }
-.ez-demo-card__title:focus-visible,
-.ez-demo-card__title:focus {
+/* The title takes the focus at the end of a run (DemoResult `focusOnMount`, for screen readers and
+   keyboard users). After a pointer click that programmatic focus draws no ring; after a keyboard
+   activation the browser matches :focus-visible and the ring shows. */
+.ez-demo-card__title:focus-visible {
     outline: 2px solid var(--accent-2);
     outline-offset: 2px;
+}
+.ez-demo-card__title:focus:not(:focus-visible) {
+    outline: none;
 }
 .ez-demo-card__url {
     margin: 0;

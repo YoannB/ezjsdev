@@ -19,7 +19,7 @@ Site en ligne : https://ezjsdev.netlify.app
   sans appel IA).
 
 La spécification de référence est [`specs/specification-site-ezjsdev-v0.2.md`](specs/specification-site-ezjsdev-v0.2.md) ;
-les maquettes du site sont dans [`mockups/ezjsdev/`](mockups/ezjsdev/).
+les maquettes du site sont dans [`mockups/`](mockups/).
 
 ## Stack
 
@@ -135,6 +135,7 @@ En cas de conflit :
 
 - garder la version ezjsdev de `site/**` (en y ajoutant les nouveaux champs exigés par Axons), de ce `README.md` et de
   la `version` de `package.json` / `package-lock.json` ;
+- garder la suppression des maquettes d'Axons (`mockups/axons-*`) : `mockups/` ne contient que celles d'ezjsdev ;
 - reprendre la version Axons de tout autre fichier, puis reporter dans `site/` ce qui doit l'être.
 
 Puis mettre à jour la ligne « basé sur Axons » en tête de ce README, relancer le contrôle qualité complet et ouvrir la

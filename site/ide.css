@@ -684,11 +684,23 @@
         transform: rotate(180deg);
     }
     /* FIXED height in every state (page status, demo running, demo result): the editor and the
-       preview above never change size when the terminal content grows; it scrolls inside. */
+       preview above never change size when the terminal content grows. The body itself never
+       scrolls: each log (and the demo card, site/demo.css) is its own scroller filling it. */
     .ide-panel--terminal .ide-panel__body {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr);
         height: clamp(10rem, 32vh, 16rem);
+        overflow: hidden;
+    }
+    .ide-panel--terminal .terminal {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+    .ide-panel--terminal .terminal__body {
+        flex: 1 1 auto;
+        min-height: 0;
         overflow-y: auto;
-        overscroll-behavior: contain;
     }
 }
 @media (min-width: 64rem) and (max-width: 79.99rem) {
