@@ -3,7 +3,7 @@ import { acceptCookiesButton, cookieBanner } from "./support/home";
 import { lp } from "./support/locale-path";
 
 // EZJSDEV shell chrome after the UI feedback: no line numbers in the reading zone, the explorer
-// switch of the activity bar, the animated title-bar logo (Axons' Logo + site/theme.css) and Axons'
+// switch of the activity bar, the title-bar logo's light sweep (Axons' Logo + site/theme.css) and Axons'
 // Button on the home, the demo and the contact page. Explicit "/fr" prefix so labels are known.
 
 async function ready(page: Page, path = "/fr") {
@@ -19,19 +19,38 @@ const explorer = (page: Page) => page.getByRole("complementary", { name: "Explor
 const activityNav = (page: Page) => page.getByRole("navigation", { name: "Barre d'activité" });
 const explorerSwitch = (page: Page) => page.locator(".ide-activity__toggle");
 
-// Computed animation names of the three glyphs of the title-bar logo.
+// Computed animation names of the three glyphs of the title-bar logo (they never animate).
 const brandAnimations = (page: Page) =>
     page.locator(".ide-brand .logo__glyph").evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
-const brandIterations = (page: Page) =>
-    page
-        .locator(".ide-brand .logo__glyph")
-        .evaluateAll((els) => els.map((el) => getComputedStyle(el).animationIterationCount));
+// The light sweep of the title-bar logo (site/logo.tsx .logo__sheen, site/theme.css).
+const brandSheen = (page: Page) =>
+    page.locator(".ide-brand .logo__sheen").evaluate((el) => {
+        const s = getComputedStyle(el);
+        return { name: s.animationName, iterations: s.animationIterationCount, transform: s.transform };
+    });
+// Position and transform of the three glyphs: must stay identical while the sweep runs.
+const brandGlyphGeometry = (page: Page) =>
+    page.locator(".ide-brand .logo__glyph").evaluateAll((els) =>
+        els.map((el) => {
+            const r = el.getBoundingClientRect();
+            const s = getComputedStyle(el);
+            return [r.x, r.y, r.width, r.height, s.transform, s.strokeDasharray, s.strokeDashoffset].join("|");
+        }),
+    );
 // Computed animation of the splash mark (#app-splash::before, site/theme.css). The node is never
 // removed (only hidden by .is-leaving), so its style stays measurable after hydration.
 const splashMark = (page: Page) =>
     page.locator("#app-splash").evaluate((el) => {
         const s = getComputedStyle(el, "::before");
-        return { content: s.content, width: s.width, animationName: s.animationName, mask: s.maskImage };
+        return {
+            content: s.content,
+            width: s.width,
+            animationName: s.animationName,
+            iterations: s.animationIterationCount,
+            mask: s.maskImage,
+            maskPosition: s.maskPosition,
+            transform: s.transform,
+        };
     });
 
 test.describe("IDE chrome — desktop", () => {
@@ -101,28 +120,46 @@ test.describe("IDE chrome — desktop", () => {
         await expect(activityNav(page).getByRole("link").first()).toBeFocused();
     });
 
-    test("the title-bar logo is Axons' Logo, looping the loader's animation without hover", async ({ page }) => {
+    test("the title-bar logo is Axons' Logo, swept by a light without hover, glyph still", async ({ page }) => {
         await ready(page);
         const logo = page.locator(".ide-brand svg.logo");
         await expect(logo).toHaveAttribute("role", "img");
         await expect(logo).toHaveAttribute("aria-label", "ezjsdev");
-        // Pointer away from the brand: the loop runs on its own, never a one-shot.
+        // Pointer away from the brand: the sweep loops on its own, never a one-shot.
         await page.mouse.move(700, 600);
-        expect(await brandAnimations(page)).toEqual(["ezBracketLeft", "ezSlashDraw", "ezBracketRight"]);
-        expect(await brandIterations(page)).toEqual(["infinite", "infinite", "infinite"]);
-        // Hovering changes nothing (no restarted animation).
+        // The former motion (brackets breathing, slash redrawing) is gone: no glyph animates.
+        expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
+        const sheen = await brandSheen(page);
+        expect(sheen.name).toBe("ezLogoSheen");
+        expect(sheen.iterations).toBe("infinite");
+        // The band really travels while the three glyphs keep the same place and transform.
+        const before = await brandGlyphGeometry(page);
+        expect(before.every((g) => g.endsWith("|none|none|0px"))).toBe(true);
+        const seen = new Set<string>();
+        for (let i = 0; i < 12; i++) {
+            seen.add((await brandSheen(page)).transform);
+            expect(await brandGlyphGeometry(page)).toEqual(before);
+            await page.waitForTimeout(150);
+        }
+        expect(seen.size).toBeGreaterThan(1);
+        // Hovering changes nothing (no restarted or extra animation).
         await logo.hover();
-        expect(await brandAnimations(page)).toEqual(["ezBracketLeft", "ezSlashDraw", "ezBracketRight"]);
+        expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
+        expect((await brandSheen(page)).name).toBe("ezLogoSheen");
     });
 
-    test("the splash shows the animated mark above the progress bar", async ({ page }) => {
+    test("the splash shows the still mark, swept by the same light, above the progress bar", async ({ page }) => {
         await ready(page);
         await expect(page.locator("#app-splash .loader__bar")).toHaveCount(1);
         const mark = await splashMark(page);
         expect(mark.content).toBe('""');
         expect(mark.width).toBe("120px");
         expect(mark.mask).toContain("data:image/svg+xml");
-        expect(mark.animationName).toBe("ezSplashBrackets, logoBreath");
+        // Same keyframes as the header; no former bracket motion nor Axons' breathing scale.
+        expect(mark.animationName).toBe("ezLogoSheen");
+        expect(mark.iterations).toBe("infinite");
+        expect(mark.transform).toBe("none");
+        expect(mark.maskPosition.replace(/,\s*/g, ",")).toBe("0px 0px,0px 0px,0px 0px");
     });
 
     test("the home and contact actions are Axons Buttons (links stay links)", async ({ page }) => {
@@ -148,12 +185,10 @@ test.describe("IDE chrome — reduced motion", () => {
         await page.emulateMedia({ reducedMotion: "reduce" });
         await ready(page);
         expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
+        expect((await brandSheen(page)).name).toBe("none");
         expect((await splashMark(page)).animationName).toBe("none");
-        // Fully drawn: the slash is not left erased.
-        const offset = await page
-            .locator(".ide-brand .logo__slash")
-            .evaluate((el) => getComputedStyle(el).strokeDashoffset);
-        expect(parseFloat(offset)).toBe(0);
+        // No sweep left on the mark: the band stays parked outside it (--ez-sheen = 0).
+        expect((await brandSheen(page)).transform).toBe("matrix(1, 0, 0, 1, 0, 0)");
     });
 });
 
@@ -174,7 +209,7 @@ test.describe("IDE chrome — mobile (375px)", () => {
         await burger.click();
         await expect(burger).toHaveAttribute("aria-expanded", "false");
         await expect(explorer(page)).toBeHidden();
-        // The logo animates on mobile too.
-        expect(await brandAnimations(page)).toContain("ezBracketLeft");
+        // The sweep runs on mobile too.
+        expect((await brandSheen(page)).name).toBe("ezLogoSheen");
     });
 });
