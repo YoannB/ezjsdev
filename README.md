@@ -26,7 +26,7 @@ les maquettes du site sont dans [`mockups/`](mockups/).
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : ezjsdev 0.1.0, basé sur Axons [v0.12.0](https://github.com/YoannB/axons/tree/v0.12.0).**
+**Version : ezjsdev 0.1.0, basé sur Axons [v0.13.0](https://github.com/YoannB/axons/tree/v0.13.0).**
 
 ezjsdev est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions et
 la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) d'Axons pour les
@@ -133,8 +133,9 @@ git merge --no-ff -m "chore: merge Axons vX.Y.Z" axons/vX.Y.Z
 
 En cas de conflit :
 
-- garder la version ezjsdev de `site/**` (en y ajoutant les nouveaux champs exigés par Axons), de ce `README.md` et de
-  la `version` de `package.json` / `package-lock.json` ;
+- garder la version ezjsdev de `site/**` (en y ajoutant les nouveaux champs exigés par Axons) et de ce `README.md` ;
+- `package.json` / `package-lock.json` : reprendre la version **Axons** (dépendances, correctifs de sécurité), puis y
+  remettre seulement le `name` et la `version` d'ezjsdev ;
 - garder la suppression des maquettes d'Axons (`mockups/axons-*`) : `mockups/` ne contient que celles d'ezjsdev ;
 - reprendre la version Axons de tout autre fichier, puis reporter dans `site/` ce qui doit l'être.
 
