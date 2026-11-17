@@ -14,8 +14,8 @@
 .ide {
     --ide-bar-h: 3.25rem;
     --ide-row: 2rem;
-    --ide-panel-bg: var(--bg-1);
-    --ide-current: color-mix(in oklab, var(--accent-1) 22%, transparent);
+    --ide-panel-bg: var(--ez-panel); /* site/theme.css */
+    --ide-current: var(--ez-selection);
     --ide-hover: color-mix(in oklab, var(--text-1) 7%, transparent);
     flex: 1 0 auto;
     display: grid;

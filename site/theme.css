@@ -8,46 +8,78 @@
    ezjsdev — site identity styles (imported LAST by app/globals.css, so these rules win over
    Axons' styles/tokens.css and styles/ui/logo.css at equal specificity). Owned by the site; MUI is kept
    in step through site/config.ts `palette`. See docs/styles.md.
-   Palette from mockups/ezjsdev-*.png: navy/anthracite panels, blue actions, cyan accents.
-   Contrast targets (WCAG AA): body text >= 4.5:1 on --bg-0 and --surface-*, UI borders of
-   interactive controls and icons >= 3:1. Light theme = its own tuned palette, not an inversion.
+   Palette sampled from mockups/ezjsdev-*.png (VS Code-like, flat): editor, explorer, tabs and
+   panels on one near-black, separated by thin borders; slightly lighter chrome (title, activity
+   and status bars); solid blue selection; blue actions, cyan accents, green terminal marks;
+   Dark+ syntax colours. Light theme: in the spirit of VS Code Light+ / Light Modern — white
+   editor, light grey sidebar and chrome, #005fb8 accent — tuned for AA, not an inversion.
+   Contrast (WCAG AA, checked): text >= 4.5:1 on --bg-*, --surface-* and --ez-selection; code
+   tokens >= 7:1 (dark) / >= 6:1 (light) on --bg-0, as Axons' own. Primary button label
+   (--btn-fg) >= 4.5:1 on both ends of Axons' --accent-1 → --accent-2 gradient.
+   Site tokens (--ez-*): --ez-panel = explorer, tabs and panels background (ide.css
+   --ide-panel-bg); --ez-selection = current file / pressed toggle (ide.css --ide-current).
    ===================================================================== */
 
 :root {
-    --bg-0: #0a1120;
-    --bg-1: #0d1628;
-    --surface-1: #111b2e;
-    --surface-2: #16223a;
-    --text-1: #e6edf7; /* 16:1 on --bg-0 */
-    --text-2: #a3b3cc; /* 7.5:1 on --surface-2 */
-    --muted: #8494ae; /* 5.2:1 on --surface-2 */
-    --border-1: #1d2a42;
-    --border-2: #2b3b5a;
-    --accent-1: #3b82f6; /* action blue: 5.1:1 on --bg-0; dark button text 5.3:1 */
-    --accent-2: #22c3ee; /* cyan: 7.6:1 as text on --surface-2 */
-    --btn-fg: #06101f; /* primary button label on the blue → cyan gradient: 5.2:1 / 9.2:1 */
-    --glow: 16%;
+    --bg-0: #07101e; /* editor (mockup) */
+    --bg-1: #0d1826; /* chrome: title, activity and status bars (mockup) */
+    --surface-1: #0a1524;
+    --surface-2: #0d1a2d; /* active tab (mockup) */
+    --text-1: #e1e6ec; /* 15.2:1 on --bg-0, 13.9:1 on --surface-2 */
+    --text-2: #9eb7cf; /* 8.4:1 on --surface-2 */
+    --muted: #7f9bbb; /* 6.1:1 on --surface-2, 4.65:1 on --ez-selection */
+    --border-1: #152132; /* mockup */
+    --border-2: #2a4060;
+    --accent-1: #0985ff; /* action blue (mockup button): 5.3:1 on --bg-0 */
+    --accent-2: #22bef8; /* cyan (mockup headings, links): 8.1:1 on --surface-2 */
+    --ok: #1df4a0; /* terminal check marks (mockup): 12:1 on --surface-2 */
+    --btn-fg: #04101e; /* on the blue → cyan gradient: 5.3:1 / 8.9:1 */
+    --glow: 0%; /* flat surfaces */
+    --ez-panel: var(--bg-0);
+    --ez-selection: #032e62; /* explorer selection (mockup) */
+    /* Dark+ syntax, sampled then lifted to >= 7:1 on --bg-0 */
+    --code-keyword: #c792c9; /* 7.6 */
+    --code-string: #d69d85; /* 8.2 */
+    --code-comment: #7fb36a; /* 7.8 */
+    --code-number: #b5cea8; /* 11.2 */
+    --code-title: #dcdcaa; /* 13.5 (functions) */
+    --code-attr: #9cdcfe; /* 12.8 */
+    --code-tag: #4fc1ff; /* 9.4 */
+    --code-meta: #4ec9b0; /* 9.4 (types) */
+    --code-deletion: #f48771; /* 7.8 */
 }
 
 [data-theme="light"] {
-    --bg-0: #eef2f7;
-    --bg-1: #f5f7fb;
-    --surface-1: #ffffff;
-    --surface-2: #f3f6fa;
-    --text-1: #0f172a; /* 15.9:1 on --bg-0 */
-    --text-2: #334155; /* 9.2:1 on --bg-0 */
-    --muted: #526075; /* 5.7:1 on --bg-0 */
-    --border-1: #d5dde8;
-    --border-2: #b8c4d4;
-    --accent-1: #1d4ed8; /* 6:1 on --bg-0, white text 6.7:1 */
-    --accent-2: #0e7490; /* 4.8:1 on --bg-0, white text 5.4:1 */
-    --ok: #047857;
-    --danger: #be123c;
-    --warn: #a14a07;
-    --shadow-1: 0 10px 28px rgba(15, 23, 42, 0.1), 0 2px 6px rgba(15, 23, 42, 0.06);
-    --shadow-2: 0 16px 40px rgba(15, 23, 42, 0.16), 0 4px 10px rgba(15, 23, 42, 0.08);
-    --btn-fg: #ffffff; /* >= 5.4:1 on both gradient ends */
-    --glow: 7%;
+    --bg-0: #ffffff; /* editor */
+    --bg-1: #f3f3f3; /* chrome */
+    --surface-1: #f8f8f8;
+    --surface-2: #ffffff; /* active tab */
+    --text-1: #1f1f1f; /* 14.9:1 on --bg-1 */
+    --text-2: #3b3b3b; /* 10.1:1 on --bg-1 */
+    --muted: #5f5f5f; /* 5.75:1 on --bg-1, 5.3:1 on --ez-selection */
+    --border-1: #e5e5e5;
+    --border-2: #8a8a8a; /* 3.1:1 on --ez-panel (control borders) */
+    --accent-1: #005fb8; /* 5.7:1 on --bg-1, white text 6.3:1 */
+    --accent-2: #00708c; /* 5.1:1 on --bg-1, white text 5.7:1 */
+    --ok: #0f7a3d; /* 4.9:1 on --bg-1 */
+    --danger: #b5200d;
+    --warn: #8a4b00;
+    --shadow-1: 0 6px 18px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-2: 0 12px 32px rgba(0, 0, 0, 0.12), 0 3px 8px rgba(0, 0, 0, 0.08);
+    --btn-fg: #ffffff; /* >= 5.7:1 on both gradient ends */
+    --glow: 0%;
+    --ez-panel: #f3f3f3; /* sidebar, tabs bar, panels */
+    --ez-selection: #dcebfc;
+    /* Light+ syntax, darkened where needed to >= 6:1 on --bg-0 */
+    --code-keyword: #9400bd; /* 7.0 */
+    --code-string: #a31515; /* 7.9 */
+    --code-comment: #21702a; /* 6.2 */
+    --code-number: #0b6e4f; /* 6.3 */
+    --code-title: #795e26; /* 6.1 */
+    --code-attr: #001080; /* 15.2 */
+    --code-tag: #800000; /* 11 */
+    --code-meta: #17606f; /* 7.1 */
+    --code-deletion: #b5200d; /* 6.6 */
 }
 
 /* ===== Logo: the `</>` mark (site/logo.tsx, wrapped by components/ui/Logo.tsx) ===== */

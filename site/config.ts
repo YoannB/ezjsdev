@@ -111,8 +111,8 @@ export const SITE = {
     palette: {
         // Outlined/text buttons use these as TEXT colour: lighter on dark, darker on light (AA on
         // --bg-0 / --surface-*). contrastText = primary (blue → cyan gradient) label, as --btn-fg.
-        dark: { primary: "#5b9bff", secondary: "#22c3ee", contrastText: "#06101f" },
-        light: { primary: "#1d4ed8", secondary: "#0e7490", contrastText: "#ffffff" },
+        dark: { primary: "#4daafc", secondary: "#22bef8", contrastText: "#04101e" },
+        light: { primary: "#005fb8", secondary: "#00708c", contrastText: "#ffffff" },
     },
     pathnames,
     // Order of the header, footer and HTML sitemap: site entries follow Home; { axons: "/articles" }
