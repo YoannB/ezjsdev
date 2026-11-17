@@ -2,6 +2,7 @@
 @import "./ide.css";
 @import "./pages.css";
 @import "./demo.css";
+@import "./preview.css";
 
 /* =====================================================================
    ezjsdev — site identity styles (imported LAST by app/globals.css, so these rules win over

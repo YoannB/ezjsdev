@@ -20,6 +20,9 @@ const NAMES: IdeIconName[] = [
     "menu",
     "close",
     "external",
+    "back",
+    "forward",
+    "reload",
 ];
 
 // Decorative line icons of the IDE shell (aria-hidden; the buttons and links carry the names).

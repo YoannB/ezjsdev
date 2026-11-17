@@ -1,61 +1,58 @@
 "use client";
-import { LOCALES } from "@/constants/site";
+import { PREVIEW } from "@/site/preview";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { IdeIcon } from "./IdeIcon";
+import { BrowserFrame } from "./BrowserFrame";
+import { previewMode, type OutlineItem, type PreviewDecl } from "./preview-model";
+import { PreviewOutline } from "./PreviewOutline";
+import { ShareCard } from "./ShareCard";
 import type { TreeFile } from "./tree-model";
+import { useOutline } from "./use-outline";
 
-// Body of the preview panel: how the OPEN page presents itself — its public URL, a search-result
-// snippet built from its real title and description, and the same page in the other languages.
-// Only data of the page itself (spec §6.4: a rendering panel, not a second navigation).
-export function PagePreview({ file, siteUrl }: { file: TreeFile | undefined; siteUrl: string }) {
+// Body of the preview panel, CONTEXTUAL like VS Code's side views (spec §6.4: a rendering panel,
+// not a second navigation). What it shows depends on the open page (site/preview.ts):
+// - long pages and every collection entry: the page's OUTLINE (its real h2/h3), the section being
+//   read highlighted while the editor scrolls; a page without headings falls back to the share card;
+// - the home and Projects: BROWSER FRAMES around static captures of the real sites;
+// - every other page: the SHARE CARD (how the page shows when its link is shared).
+export function PagePreview({
+    file,
+    siteUrl,
+    decl = PREVIEW,
+    editorId = "main",
+}: {
+    file: TreeFile | undefined;
+    siteUrl: string;
+    /** What each page shows (stories pass their own). */
+    decl?: PreviewDecl;
+    /** Id of the element whose headings make the outline (the editor's <main>). */
+    editorId?: string;
+}) {
     const t = useTranslations("ide");
-    if (!file) return <p className="ide-preview__empty">{t("previewEmpty")}</p>;
-    const url = new URL(file.href, siteUrl).toString();
-    const others = file.alternates.filter((a) => a.href !== file.href);
+    const mode = previewMode(file, decl);
+    if (mode.kind === "empty" || !file) return <p className="ide-preview__empty">{t("previewEmpty")}</p>;
     return (
-        <div className="ide-preview">
-            <div className="ide-preview__address">
-                <span className="ide-sr">{t("previewUrl")} </span>
-                <span className="ide-preview__url" translate="no">
-                    {url}
-                </span>
-                <a
-                    className="ide-btn"
-                    href={file.href}
-                    target="_blank"
-                    rel="noopener"
-                    aria-label={t("openInNewTab")}
-                    title={t("openInNewTab")}
-                >
-                    <IdeIcon name="external" size={16} />
-                </a>
-            </div>
-            <figure className="ide-serp">
-                <figcaption className="ide-preview__caption">{t("searchPreview")}</figcaption>
-                <p className="ide-serp__url" translate="no">
-                    {url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-                </p>
-                <p className="ide-serp__title">{file.title}</p>
-                <p className="ide-serp__desc">{file.description}</p>
-            </figure>
-            {others.length ? (
-                <div className="ide-preview__langs">
-                    <h3 className="ide-preview__caption">{t("previewLanguages")}</h3>
-                    <ul>
-                        {others.map((a) => {
-                            const meta = LOCALES.find((l) => l.code === a.locale);
-                            return (
-                                <li key={a.locale}>
-                                    <Link href={a.href} hrefLang={a.locale} lang={a.locale}>
-                                        <span aria-hidden="true">{meta?.flag}</span> {meta?.native ?? a.locale}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </div>
-            ) : null}
+        <div className="ide-preview" data-mode={mode.kind}>
+            {mode.kind === "browser" ? (
+                mode.captures.map((capture) => <BrowserFrame key={capture.id} capture={capture} />)
+            ) : mode.kind === "outline" ? (
+                <OutlineView file={file} siteUrl={siteUrl} editorId={editorId} />
+            ) : (
+                <ShareCard file={file} siteUrl={siteUrl} />
+            )}
         </div>
     );
+}
+
+/** The live outline of the editor; the share card when the page has no h2/h3. */
+function OutlineView({ file, siteUrl, editorId }: { file: TreeFile; siteUrl: string; editorId: string }) {
+    const { ready, items, active, headingOf } = useOutline(editorId);
+    // Before the first read (server render, hydration): an empty body, so a page WITH an outline
+    // never flashes its share card.
+    if (!ready) return null;
+    if (!items.length) return <ShareCard file={file} siteUrl={siteUrl} />;
+    const onSelect = (item: OutlineItem) => {
+        const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+        headingOf(item)?.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
+    };
+    return <PreviewOutline items={items} active={active} onSelect={onSelect} />;
 }

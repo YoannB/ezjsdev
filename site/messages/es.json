@@ -158,9 +158,15 @@
         "hidePreview": "Ocultar la vista previa",
         "previewEmpty": "Ningún archivo abierto.",
         "previewUrl": "Dirección de la página:",
-        "openInNewTab": "Abrir la página en una pestaña nueva",
-        "searchPreview": "Vista previa en un buscador",
         "previewLanguages": "También disponible en",
+        "outline": "Esquema de la página",
+        "shareCard": "Tarjeta para compartir",
+        "captureCaption": "Captura del sitio",
+        "captureAlt": {
+            "axons": "Captura de la página de inicio de Axons en francés: el título «Le boilerplate Next.js pour vos sites SEO» y los botones «Voir la démo» y «Plan du site».",
+            "idealco": "Captura de la página de inicio de idealco.fr en francés: el título «Réalisez vos projets territoriaux grâce à notre réseau d'entraide & nos formations» y los botones «Se connecter» y «Créer un compte»."
+        },
+        "openSite": "Abrir el sitio",
         "terminal": "Terminal",
         "showTerminal": "Mostrar el terminal",
         "hideTerminal": "Ocultar el terminal",
