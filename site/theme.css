@@ -95,40 +95,27 @@
    applies), transforms and dash offsets on the SVG children (no layout box moves), 0% = 100% =
    the static mark, so the reduced-motion kill-switch of styles/a11y.css (one ~0ms iteration)
    and the explicit rule below both end on the plain logo.
-   - Loader / splash ("loading"): the brackets breathe outward while the slash redraws.
-   - Title bar of the shell (.ide-brand): a lighter idle — the brackets breathe slowly with half
-     the amplitude; the slash draws once when the page opens and redraws on hover/focus. */
+   ONE animation, the page loader's (Axons' header has no animation of its own on a site's
+   drawing: the loader is the reference): the brackets breathe outward while the slash redraws,
+   looping. The shell's title bar (.ide-brand) plays it continuously, with no hover/focus trigger,
+   slower and with half the amplitude (the mark is small there). */
 .logo {
     --ez-logo-shift: 3px;
-}
-.loader .logo__bracket--left,
-.splash-logo .logo__bracket--left {
-    animation: ezBracketLeft 1.6s ease-in-out infinite;
-}
-.loader .logo__bracket--right,
-.splash-logo .logo__bracket--right {
-    animation: ezBracketRight 1.6s ease-in-out infinite;
-}
-.loader .logo__slash,
-.splash-logo .logo__slash {
-    stroke-dasharray: 1;
-    animation: ezSlashDraw 1.6s ease-in-out infinite;
+    --ez-logo-period: 1.6s;
 }
 .ide-brand .logo {
     --ez-logo-shift: 1.5px;
+    --ez-logo-period: 3.2s;
 }
-.ide-brand .logo__bracket--left {
-    animation: ezBracketLeft 4s ease-in-out infinite;
+:is(.loader, .splash-logo, .ide-brand) .logo__bracket--left {
+    animation: ezBracketLeft var(--ez-logo-period) ease-in-out infinite;
 }
-.ide-brand .logo__bracket--right {
-    animation: ezBracketRight 4s ease-in-out infinite;
+:is(.loader, .splash-logo, .ide-brand) .logo__bracket--right {
+    animation: ezBracketRight var(--ez-logo-period) ease-in-out infinite;
 }
-.ide-brand .logo__slash {
+:is(.loader, .splash-logo, .ide-brand) .logo__slash {
     stroke-dasharray: 1;
-    animation: ezSlashIn 0.9s ease-out 0.2s backwards;
-}
-.ide-brand:is(:hover, :focus-visible) .logo__slash {
-    animation: ezSlashDraw 1.2s ease-in-out;
+    animation: ezSlashDraw var(--ez-logo-period) ease-in-out infinite;
 }
 @keyframes ezBracketLeft {
     0%,
@@ -157,19 +144,56 @@
         stroke-dashoffset: 1;
     }
 }
-/* One-shot draw on load: starts erased, ends on the static mark (`backwards` = no flash before). */
-@keyframes ezSlashIn {
-    from {
-        stroke-dashoffset: 1;
+@media (prefers-reduced-motion: reduce) {
+    :is(.loader, .splash-logo, .ide-brand) .logo__glyph {
+        animation: none;
     }
-    to {
-        stroke-dashoffset: 0;
+}
+
+/* Pre-hydration splash (#app-splash, rendered by Axons' root layout with the progress bar only):
+   the mark is drawn by CSS above the bar, as Axons offers no option to put the Logo there (Axons
+   candidate, see the PR). A mask of the three glyphs (same paths as site/logo.tsx) filled with the
+   brand gradient tokens, so it follows the theme the boot script sets before paint. Same motion as
+   the loader within what a mask allows: the brackets breathe outward (mask-position per layer) and
+   the whole mark breathes with Axons' own splash keyframes (logoBreath, styles/ui/loader.css). */
+/* Two grid items now (mark + bar): keep them together at the centre (Axons' grid stretches its
+   implicit rows, which would push them to the quarters of the screen). */
+#app-splash {
+    align-content: center;
+}
+#app-splash::before {
+    content: "";
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+    mask-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M16 13 L6 24 L16 35'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M28 9 L20 39'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M32 13 L42 24 L32 35'/%3E%3C/svg%3E");
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-position: 0 0;
+    animation:
+        ezSplashBrackets 1.6s ease-in-out infinite,
+        logoBreath 2.6s ease-in-out infinite;
+}
+@keyframes ezSplashBrackets {
+    0%,
+    100% {
+        mask-position:
+            0 0,
+            0 0,
+            0 0;
+    }
+    50% {
+        mask-position:
+            -7px 0,
+            0 0,
+            7px 0;
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    .loader .logo__glyph,
-    .splash-logo .logo__glyph,
-    .ide-brand .logo__glyph {
+    #app-splash::before {
         animation: none;
     }
 }
