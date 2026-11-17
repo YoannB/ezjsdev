@@ -145,8 +145,7 @@
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    :is(.loader, .splash-logo, .ide-brand) .logo__glyph,
-    #app-splash::before {
+    :is(.loader, .splash-logo, .ide-brand) .logo__glyph {
         animation: none;
     }
 }
@@ -157,6 +156,11 @@
    brand gradient tokens, so it follows the theme the boot script sets before paint. Same motion as
    the loader within what a mask allows: the brackets breathe outward (mask-position per layer) and
    the whole mark breathes with Axons' own splash keyframes (logoBreath, styles/ui/loader.css). */
+/* Two grid items now (mark + bar): keep them together at the centre (Axons' grid stretches its
+   implicit rows, which would push them to the quarters of the screen). */
+#app-splash {
+    align-content: center;
+}
 #app-splash::before {
     content: "";
     width: 120px;
@@ -186,5 +190,10 @@
             -7px 0,
             0 0,
             7px 0;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    #app-splash::before {
+        animation: none;
     }
 }
