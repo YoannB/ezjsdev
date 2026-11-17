@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner, themeToggle } from "./support/home";
-import { lp, lpRe } from "./support/locale-path";
+import { lpRe } from "./support/locale-path";
 
 // EZJSDEV IDE shell (site/shell.tsx → components/site/ide/*): explorer tree, tabs derived from the
 // URL, panels, mobile drawer, overflow and themes. Pages are opened with an explicit locale prefix
@@ -142,9 +142,9 @@ test.describe("IDE shell — desktop", () => {
     test("preview and terminal show the open page and collapse", async ({ page }) => {
         await page.goto(at("/mentions-legales"));
         await ready(page);
+        // A long page: the preview is its outline (contextual modes: preview-panel.spec.ts).
         const preview = page.locator("#ide-preview");
-        await expect(preview).toContainText("Mentions légales");
-        await expect(preview.getByRole("link", { name: /English/ })).toHaveAttribute("href", lp("en", "/legal"));
+        await expect(preview.getByRole("navigation", { name: "Plan de la page" })).toBeVisible();
         const terminal = page.getByRole("group", { name: "Sortie du terminal" });
         await expect(terminal).toContainText("open Mentions-legales/page.tsx");
         // Not announced on navigation (Next's route announcer already does): no live region.
@@ -155,7 +155,7 @@ test.describe("IDE shell — desktop", () => {
         const togglePreview = page.getByRole("button", { name: "Masquer l'aperçu" });
         await togglePreview.click();
         await expect(page.getByRole("button", { name: "Afficher l'aperçu" })).toHaveAttribute("aria-expanded", "false");
-        await expect(preview.locator(".ide-serp")).toBeHidden();
+        await expect(preview.locator(".ide-outline")).toBeHidden();
 
         await page.getByRole("button", { name: "Masquer le terminal" }).click();
         await expect(terminal).toBeHidden();

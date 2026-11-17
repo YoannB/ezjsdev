@@ -37,6 +37,7 @@ export async function SiteShell({ children, locale }: SiteShellProps) {
                     alternates: routing.locales
                         .filter((l) => translations[l])
                         .map((l) => ({ locale: l, href: entryPath(itemHref, l, translations[l].slug) })),
+                    ...(article.image ? { image: article.image } : {}),
                 };
             });
     };

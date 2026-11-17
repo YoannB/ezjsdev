@@ -46,6 +46,7 @@ const ctx: ResolveContext = {
                       description: "Two",
                       href: `/fr/${collection}/second`,
                       alternates: [],
+                      image: `/${collection}/second/cover.png`,
                   },
               ],
     itemRoute: (collection) => `/${collection}/[slug]`,
@@ -179,6 +180,11 @@ describe("resolveTree", () => {
             alternates: [{ locale: "fr", href: "/fr/notes/first" }],
         });
         expect(file("notes/e2").slug).toBe("second");
+    });
+
+    it("carries an entry's cover image (its og:image) only when it has one", () => {
+        expect(file("notes/e1")).not.toHaveProperty("image");
+        expect(file("notes/e2").image).toBe("/notes/second/cover.png");
     });
 
     it("never shows a planned folder, nor a folder left empty (disabled collection)", () => {

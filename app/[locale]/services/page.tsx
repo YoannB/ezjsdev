@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 
 // EZJSDEV — Services (spec v0.2 §5.3): the six offers backed by the CV, nothing else (no SEO, no
 // showcase site or landing page until their scope is confirmed). Copy: site/messages → `pages.services`.
+// Headings carry stable ids (position, not translated text): the preview panel's outline links to them.
 
 type Service = { title: string; body: string };
 
@@ -28,15 +29,15 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
             body={
                 <div className="ez-page ez-services">
                     <ol className="ez-services__list">
-                        {items.map((s) => (
+                        {items.map((s, i) => (
                             <li key={s.title} className="ez-services__item">
-                                <h2>{s.title}</h2>
+                                <h2 id={`service-${i + 1}`}>{s.title}</h2>
                                 <p>{s.body}</p>
                             </li>
                         ))}
                     </ol>
                     <nav className="ez-next" aria-label={t("nextTitle")}>
-                        <h2>{t("nextTitle")}</h2>
+                        <h2 id="services-next">{t("nextTitle")}</h2>
                         <ul>
                             <li>
                                 <Link href="/projects">{tn("projects")}</Link>
