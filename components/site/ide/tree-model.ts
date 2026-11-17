@@ -57,6 +57,8 @@ export interface CollectionItem {
     readonly href: string;
     /** Locales the entry is translated into, with their localized href (preview panel). */
     readonly alternates: Alternates;
+    /** Site-absolute cover image (the entry's og:image), when the entry has one. */
+    readonly image?: string;
 }
 
 export interface ResolveContext {
@@ -87,6 +89,8 @@ export interface TreeFile {
     readonly route: string;
     readonly slug?: string;
     readonly alternates: Alternates;
+    /** Site-absolute image the page is shared with (og:image), when it has one (share card). */
+    readonly image?: string;
 }
 
 export interface TreeFolder {
@@ -131,6 +135,7 @@ export function resolveTree(decls: readonly ExplorerDecl[], ctx: ResolveContext,
                     route,
                     slug: item.slug,
                     alternates: item.alternates,
+                    ...(item.image ? { image: item.image } : {}),
                 });
             }
         } else if (!decl.planned) {

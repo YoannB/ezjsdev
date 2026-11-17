@@ -1,0 +1,213 @@
+/* =====================================================================
+   ezjsdev — body of the IDE shell's preview panel (components/site/ide/PagePreview.tsx and its
+   views: PreviewOutline, BrowserFrame, ShareCard). Imported by site/theme.css. The panel frame
+   itself (bar, collapse, widths per breakpoint) stays in site/ide.css.
+   ===================================================================== */
+
+.ide-preview {
+    display: grid;
+    gap: 1.25rem;
+    font-size: 0.9rem;
+}
+.ide-preview__empty {
+    margin: 0;
+    color: var(--muted);
+}
+.ide-preview__caption {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Anchors of the outline land a little below the editor's top edge; below 64rem the document
+   scrolls under the sticky title bar and tabs. */
+.ide-editor :is(h2, h3) {
+    scroll-margin-top: 1rem;
+}
+@media (max-width: 63.99rem) {
+    .ide-editor :is(h2, h3) {
+        scroll-margin-top: calc(var(--ide-bar-h) + 3.5rem);
+    }
+}
+
+/* ===== Outline (like VS Code's) ===== */
+.ide-outline__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-left: 1px solid var(--border-1);
+}
+.ide-outline__link {
+    display: block;
+    width: 100%;
+    margin-left: -1px;
+    padding: 0.3rem 0.6rem;
+    border: 0;
+    border-left: 2px solid transparent;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: none;
+    color: var(--text-2);
+    font: inherit;
+    line-height: 1.35;
+    text-align: left;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+}
+.ide-outline__item--sub .ide-outline__link {
+    padding-left: 1.4rem;
+    font-size: 0.85rem;
+}
+.ide-outline__link:hover {
+    background: var(--ide-hover);
+    color: var(--text-1);
+}
+.ide-outline__link[aria-current] {
+    border-left-color: var(--accent-1);
+    background: var(--ide-current);
+    color: var(--text-1);
+    font-weight: 600;
+}
+.ide-outline__link:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: -2px;
+}
+
+/* ===== Browser frame around a static capture ===== */
+.ide-browser {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+}
+.ide-browser__window {
+    overflow: hidden;
+    border: 1px solid var(--border-2);
+    border-radius: var(--radius-md);
+    background: var(--bg-0);
+}
+.ide-browser__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+    padding: 0.35rem 0.5rem;
+    border-bottom: 1px solid var(--border-1);
+    background: var(--surface-1);
+}
+.ide-browser__nav {
+    display: inline-flex;
+    flex: none;
+    gap: 0.3rem;
+    color: var(--muted);
+}
+.ide-browser__url {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.15rem 0.6rem;
+    overflow: hidden;
+    border: 1px solid var(--border-1);
+    border-radius: 999px;
+    background: var(--bg-0);
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.ide-browser__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 640 / 400;
+}
+/* Two captures of one site: the painted theme's only (light without a theme, i.e. no JS). */
+.ide-browser__image[data-theme-only="dark"],
+[data-theme="dark"] .ide-browser__image[data-theme-only="light"] {
+    display: none;
+}
+[data-theme="dark"] .ide-browser__image[data-theme-only="dark"] {
+    display: block;
+}
+.ide-browser__caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+}
+
+/* ===== Share card (the page as shared on a social network) ===== */
+.ide-share {
+    display: grid;
+    gap: 1rem;
+}
+.ide-share__figure {
+    margin: 0;
+}
+.ide-share__card {
+    overflow: hidden;
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-md);
+    background: var(--surface-1);
+}
+.ide-share__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-1);
+}
+.ide-share__body {
+    padding: 0.75rem 0.9rem;
+}
+.ide-share__body p {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+.ide-share__domain {
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.ide-share__title {
+    margin-top: 0.25rem !important;
+    color: var(--text-1);
+    font-weight: 600;
+    line-height: 1.3;
+}
+.ide-share__desc {
+    display: -webkit-box;
+    margin-top: 0.25rem !important;
+    overflow: hidden;
+    color: var(--text-2);
+    font-size: 0.85rem;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+/* The other languages: discreet, under the card. */
+.ide-share__langs ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15rem 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.85rem;
+}
+.ide-share__langs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 1.75rem;
+    color: var(--text-2);
+}
+.ide-share__langs a:hover {
+    color: var(--text-1);
+}

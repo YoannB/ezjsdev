@@ -9,6 +9,7 @@ import { getTranslations } from "next-intl/server";
 // EZJSDEV — About (spec v0.2 §5.2), staged as "A-propos/contenu.md" in the explorer. Short and
 // turned to today (independent full-stack developer, author of Axons); the full background lives
 // on LinkedIn, linked from here (user decision). Copy: site/messages → `pages.about`. No figure.
+// Headings carry stable ids: the preview panel's outline links to them (site/preview.ts).
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
@@ -56,14 +57,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         </aside>
 
                         <section className="static-page__section">
-                            <h2>{t("approachTitle")}</h2>
+                            <h2 id="about-approach">{t("approachTitle")}</h2>
                             {approach.map((p) => (
                                 <p key={p}>{p}</p>
                             ))}
                         </section>
 
                         <section className="static-page__section">
-                            <h2>{t("backgroundTitle")}</h2>
+                            <h2 id="about-background">{t("backgroundTitle")}</h2>
                             <ul>
                                 {background.map((item) => (
                                     <li key={item}>{item}</li>
@@ -78,7 +79,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                         </section>
 
                         <nav className="ez-next" aria-label={t("nextTitle")}>
-                            <h2>{t("nextTitle")}</h2>
+                            <h2 id="about-next">{t("nextTitle")}</h2>
                             <ul>
                                 <li>
                                     <Link href="/projects">{tn("projects")}</Link>

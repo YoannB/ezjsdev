@@ -145,10 +145,12 @@ test.describe("SEO site demo — desktop", () => {
         const origin = new URL(page.url()).origin;
         expect(requests.filter((u) => !u.startsWith(origin))).toEqual([]);
         expect(requests.filter((u) => new URL(u).pathname.startsWith("/api/"))).toEqual([]);
-        // The only asset fetched for the demo is the local thumbnail.
-        expect(requests.filter((u) => /\.(webp|png|jpe?g|avif)(\?|$)/.test(u)).map((u) => new URL(u).pathname)).toEqual(
-            expect.arrayContaining([expect.stringMatching(/^\/demo\/axons-preview-fr-(dark|light)\.webp$/)]),
-        );
+        // The card shows the local thumbnail. It may come from the cache: the home's preview panel
+        // already shows the same capture of Axons (site/preview.ts), so no new request is required.
+        const thumb = card(page).locator("img");
+        await expect
+            .poll(() => thumb.evaluate((img: HTMLImageElement) => img.complete && new URL(img.currentSrc).pathname))
+            .toMatch(/^\/demo\/axons-preview-fr-(dark|light)\.webp$/);
     });
 
     test("prefers-reduced-motion: the whole sequence and the result almost at once", async ({ page }) => {
