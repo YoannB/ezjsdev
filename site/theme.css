@@ -83,69 +83,55 @@
 }
 
 /* ===== Logo: the `</>` mark (site/logo.tsx, wrapped by components/ui/Logo.tsx) ===== */
-.logo__glyph {
+.logo__glyph,
+.logo__glyph-mask {
     fill: none;
     stroke-width: 4.5;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
 
-/* Animated like Axons' mark, through the SAME frame (components/ui/Logo.tsx: `.logo` + the site's
-   `logo__*` classes) and the same rules: CSS keyframes only (no SMIL, so prefers-reduced-motion
-   applies), transforms and dash offsets on the SVG children (no layout box moves), 0% = 100% =
-   the static mark, so the reduced-motion kill-switch of styles/a11y.css (one ~0ms iteration)
-   and the explicit rule below both end on the plain logo.
-   ONE animation, the page loader's (Axons' header has no animation of its own on a site's
-   drawing: the loader is the reference): the brackets breathe outward while the slash redraws,
-   looping. The shell's title bar (.ide-brand) plays it continuously, with no hover/focus trigger,
-   slower and with half the amplitude (the mark is small there). */
-.logo {
-    --ez-logo-shift: 3px;
-    --ez-logo-period: 1.6s;
+/* Light sweep: the glyph NEVER moves (no transform, no dash, no part going towards another); a
+   light highlight derived from the accent tokens crosses it diagonally, left to right, then pauses.
+   ONE rule and ONE period for the loader, the shell's title bar (continuous, no hover trigger) and
+   the pre-hydration splash: a single keyframes drives the registered number --ez-sheen from 0
+   (band parked left of the mark, invisible) to 1 (parked right of it), and each surface maps it on
+   what it can animate — the SVG band's translation (site/logo.tsx: a rect masked by the three
+   strokes) and the splash's background layer (a CSS mask cannot hold a second SVG layer).
+   CSS keyframes only (no SMIL, so prefers-reduced-motion applies); out of the animation, and under
+   the reduced-motion kill-switch of styles/a11y.css (one ~0ms iteration), --ez-sheen is 0: the
+   plain logo. */
+@property --ez-sheen {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
 }
-.ide-brand .logo {
-    --ez-logo-shift: 1.5px;
-    --ez-logo-period: 3.2s;
+:root {
+    --ez-logo-sheen-period: 4.5s;
+    --ez-logo-sheen: color-mix(in srgb, var(--accent-2) 30%, #fff);
 }
-:is(.loader, .splash-logo, .ide-brand) .logo__bracket--left {
-    animation: ezBracketLeft var(--ez-logo-period) ease-in-out infinite;
+.logo__sheen-stop {
+    stop-color: var(--ez-logo-sheen);
 }
-:is(.loader, .splash-logo, .ide-brand) .logo__bracket--right {
-    animation: ezBracketRight var(--ez-logo-period) ease-in-out infinite;
+.logo__sheen {
+    transform: translateX(calc(var(--ez-sheen) * 90px));
 }
-:is(.loader, .splash-logo, .ide-brand) .logo__slash {
-    stroke-dasharray: 1;
-    animation: ezSlashDraw var(--ez-logo-period) ease-in-out infinite;
+:is(.loader, .ide-brand) .logo__sheen,
+#app-splash::before {
+    animation: ezLogoSheen var(--ez-logo-sheen-period) ease-in-out infinite;
 }
-@keyframes ezBracketLeft {
-    0%,
+@keyframes ezLogoSheen {
+    0% {
+        --ez-sheen: 0;
+    }
+    35%,
     100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(calc(-1 * var(--ez-logo-shift)));
-    }
-}
-@keyframes ezBracketRight {
-    0%,
-    100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(var(--ez-logo-shift));
-    }
-}
-@keyframes ezSlashDraw {
-    0%,
-    100% {
-        stroke-dashoffset: 0;
-    }
-    45% {
-        stroke-dashoffset: 1;
+        --ez-sheen: 1;
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    :is(.loader, .splash-logo, .ide-brand) .logo__glyph {
+    :is(.loader, .ide-brand) .logo__sheen,
+    #app-splash::before {
         animation: none;
     }
 }
@@ -153,9 +139,8 @@
 /* Pre-hydration splash (#app-splash, rendered by Axons' root layout with the progress bar only):
    the mark is drawn by CSS above the bar, as Axons offers no option to put the Logo there (Axons
    candidate, see the PR). A mask of the three glyphs (same paths as site/logo.tsx) filled with the
-   brand gradient tokens, so it follows the theme the boot script sets before paint. Same motion as
-   the loader within what a mask allows: the brackets breathe outward (mask-position per layer) and
-   the whole mark breathes with Axons' own splash keyframes (logoBreath, styles/ui/loader.css). */
+   brand gradient tokens, so it follows the theme the boot script sets before paint; the sweep is
+   a second background layer (a 300%-wide band) moved by --ez-sheen, the mask itself stays still. */
 /* Two grid items now (mark + bar): keep them together at the centre (Axons' grid stretches its
    implicit rows, which would push them to the quarters of the screen). */
 #app-splash {
@@ -165,7 +150,15 @@
     content: "";
     width: 120px;
     height: 120px;
-    background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+    background:
+        linear-gradient(
+                110deg,
+                transparent 45%,
+                color-mix(in srgb, var(--ez-logo-sheen) 90%, transparent) 50%,
+                transparent 55%
+            )
+            calc(100% - var(--ez-sheen) * 100%) 0 / 300% 100% no-repeat,
+        linear-gradient(135deg, var(--accent-2), var(--accent-1));
     mask-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M16 13 L6 24 L16 35'/%3E%3C/svg%3E"),
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M28 9 L20 39'/%3E%3C/svg%3E"),
@@ -173,27 +166,4 @@
     mask-size: 100% 100%;
     mask-repeat: no-repeat;
     mask-position: 0 0;
-    animation:
-        ezSplashBrackets 1.6s ease-in-out infinite,
-        logoBreath 2.6s ease-in-out infinite;
-}
-@keyframes ezSplashBrackets {
-    0%,
-    100% {
-        mask-position:
-            0 0,
-            0 0,
-            0 0;
-    }
-    50% {
-        mask-position:
-            -7px 0,
-            0 0,
-            7px 0;
-    }
-}
-@media (prefers-reduced-motion: reduce) {
-    #app-splash::before {
-        animation: none;
-    }
 }
