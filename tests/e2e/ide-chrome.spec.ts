@@ -159,7 +159,7 @@ test.describe("IDE chrome — desktop", () => {
         expect(mark.animationName).toBe("ezLogoSheen");
         expect(mark.iterations).toBe("infinite");
         expect(mark.transform).toBe("none");
-        expect(mark.maskPosition.replace(/,\s*/g, ",")).toBe("0% 0%,0% 0%,0% 0%");
+        expect(mark.maskPosition.replace(/,\s*/g, ",")).toBe("0px 0px,0px 0px,0px 0px");
     });
 
     test("the home and contact actions are Axons Buttons (links stay links)", async ({ page }) => {
