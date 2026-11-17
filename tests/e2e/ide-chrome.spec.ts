@@ -22,6 +22,17 @@ const explorerSwitch = (page: Page) => page.locator(".ide-activity__toggle");
 // Computed animation names of the three glyphs of the title-bar logo.
 const brandAnimations = (page: Page) =>
     page.locator(".ide-brand .logo__glyph").evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
+const brandIterations = (page: Page) =>
+    page
+        .locator(".ide-brand .logo__glyph")
+        .evaluateAll((els) => els.map((el) => getComputedStyle(el).animationIterationCount));
+// Computed animation of the splash mark (#app-splash::before, site/theme.css). The node is never
+// removed (only hidden by .is-leaving), so its style stays measurable after hydration.
+const splashMark = (page: Page) =>
+    page.locator("#app-splash").evaluate((el) => {
+        const s = getComputedStyle(el, "::before");
+        return { content: s.content, width: s.width, animationName: s.animationName, mask: s.maskImage };
+    });
 
 test.describe("IDE chrome — desktop", () => {
     test.use({ viewport: { width: 1440, height: 900 } });
@@ -90,12 +101,28 @@ test.describe("IDE chrome — desktop", () => {
         await expect(activityNav(page).getByRole("link").first()).toBeFocused();
     });
 
-    test("the title-bar logo is Axons' Logo, animated lightly", async ({ page }) => {
+    test("the title-bar logo is Axons' Logo, looping the loader's animation without hover", async ({ page }) => {
         await ready(page);
         const logo = page.locator(".ide-brand svg.logo");
         await expect(logo).toHaveAttribute("role", "img");
         await expect(logo).toHaveAttribute("aria-label", "ezjsdev");
-        expect(await brandAnimations(page)).toEqual(["ezBracketLeft", "ezSlashIn", "ezBracketRight"]);
+        // Pointer away from the brand: the loop runs on its own, never a one-shot.
+        await page.mouse.move(700, 600);
+        expect(await brandAnimations(page)).toEqual(["ezBracketLeft", "ezSlashDraw", "ezBracketRight"]);
+        expect(await brandIterations(page)).toEqual(["infinite", "infinite", "infinite"]);
+        // Hovering changes nothing (no restarted animation).
+        await logo.hover();
+        expect(await brandAnimations(page)).toEqual(["ezBracketLeft", "ezSlashDraw", "ezBracketRight"]);
+    });
+
+    test("the splash shows the animated mark above the progress bar", async ({ page }) => {
+        await ready(page);
+        await expect(page.locator("#app-splash .loader__bar")).toHaveCount(1);
+        const mark = await splashMark(page);
+        expect(mark.content).toBe('""');
+        expect(mark.width).toBe("120px");
+        expect(mark.mask).toContain("data:image/svg+xml");
+        expect(mark.animationName).toBe("ezSplashBrackets, logoBreath");
     });
 
     test("the home and contact actions are Axons Buttons (links stay links)", async ({ page }) => {
@@ -117,10 +144,11 @@ test.describe("IDE chrome — desktop", () => {
 test.describe("IDE chrome — reduced motion", () => {
     test.use({ viewport: { width: 1440, height: 900 } });
 
-    test("the title-bar logo is static under prefers-reduced-motion", async ({ page }) => {
+    test("the title-bar logo and the splash mark are static under prefers-reduced-motion", async ({ page }) => {
         await page.emulateMedia({ reducedMotion: "reduce" });
         await ready(page);
         expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
+        expect((await splashMark(page)).animationName).toBe("none");
         // Fully drawn: the slash is not left erased.
         const offset = await page
             .locator(".ide-brand .logo__slash")
