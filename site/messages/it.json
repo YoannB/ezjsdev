@@ -13,7 +13,7 @@
     "meta": {
         "home": {
             "title": "ezjsdev — Sviluppatore full-stack React, TypeScript, Node.js a Nantes",
-            "description": "Yoann Barbier, sviluppatore full-stack freelance con sede a Nantes (Francia): progettazione, architettura ed evoluzione di applicazioni web con React, TypeScript e Node.js."
+            "description": "Yoann Barbier, sviluppatore full-stack indipendente a Nantes (Francia): siti e applicazioni web con React, TypeScript e Node.js, sviluppati con l'IA mantenendo il controllo sulla qualità."
         }
     },
     "pages": {
@@ -44,7 +44,8 @@
             ],
             "approachTitle": "Approccio",
             "approach": [
-                "Lavoro principalmente con JavaScript e TypeScript, con un'attenzione particolare alla qualità del codice, alle prestazioni e alla robustezza delle soluzioni."
+                "Lavoro principalmente con JavaScript e TypeScript, con un'attenzione particolare alla qualità del codice, alle prestazioni e alla robustezza delle soluzioni.",
+                "Mi piace capire e risolvere problemi, soprattutto di algoritmica: ho partecipato alle maratone del TopCoder Open, per il piacere di farlo."
             ],
             "backgroundTitle": "Percorso in breve",
             "background": [
@@ -59,32 +60,29 @@
         },
         "services": {
             "title": "Servizi",
-            "intro": "Servizi di Yoann Barbier, sviluppatore full-stack freelance: React, TypeScript, Node.js, architettura, lead tecnico, qualità, test e CI/CD.",
-            "lead": "Servizi che nascono direttamente dal mio percorso: sviluppo, architettura, lead tecnico e qualità del software.",
+            "intro": "Cosa può fare Yoann Barbier, sviluppatore full-stack indipendente: un sito a partire da Axons, sviluppo web con l'IA, un progetto pronto per gli agenti di codice, l'organizzazione di un progetto di gruppo, l'algoritmica.",
+            "lead": "Alcuni ambiti in cui oggi posso esserti utile.",
+            "listTitle": "Cosa posso fare",
             "items": [
                 {
-                    "title": "Consulenza e sviluppo React / TypeScript",
-                    "body": "Sviluppo di interfacce e applicazioni web con React.js e TypeScript, in collaborazione con i team di prodotto e di design."
+                    "title": "Un sito o una piccola applicazione web a partire da Axons",
+                    "body": "In pochi giorni, con un codice che ti appartiene e che la tua IA potrà far evolvere."
                 },
                 {
-                    "title": "Sviluppo full-stack con Node.js",
-                    "body": "Sviluppo lato server con Node.js e NestJS, fino all'interfaccia, per applicazioni SaaS, web e mobile."
+                    "title": "Sviluppo web con l'IA (React, TypeScript, Node.js)",
+                    "body": "L'IA scrive gran parte del codice, io mi occupo della cornice: contesto, regole, test, revisione."
                 },
                 {
-                    "title": "Architettura, rifacimento ed evoluzione di applicazioni web",
-                    "body": "Scelte architetturali, rifacimento di applicazioni esistenti ed evoluzione di un prodotto verso una versione più robusta e scalabile."
+                    "title": "Preparare un progetto per lavorare con agenti di codice",
+                    "body": "Convenzioni, documentazione per gli agenti, test automatici, come per Axons."
                 },
                 {
-                    "title": "Lead tecnico, affiancamento e mentoring",
-                    "body": "Supervisione dei team, scelte tecnologiche, coordinamento e mentoring degli sviluppatori."
+                    "title": "Organizzare un progetto di gruppo",
+                    "body": "Suddividere il lavoro, distribuirlo secondo ciò che ognuno preferisce fare, e andare avanti dando l'esempio."
                 },
                 {
-                    "title": "Prestazioni, qualità, test e CI/CD",
-                    "body": "Ottimizzazione delle prestazioni e della scalabilità, buone pratiche, test, documentazione, integrazione continua e pipeline CI/CD."
-                },
-                {
-                    "title": "Consulenza sulle fondamenta tecniche di un prodotto",
-                    "body": "Affiancamento sulle fondamenta tecniche di un prodotto SaaS o di un'applicazione web: stack, architettura, organizzazione del codice e strumenti."
+                    "title": "Un problema di algoritmica o di ottimizzazione",
+                    "body": "Quando bisogna trovare una buona soluzione tra moltissime possibilità."
                 }
             ],
             "nextTitle": "Per continuare"
@@ -110,6 +108,7 @@
                     "name": "Axons",
                     "tagline": "Boilerplate Next.js open source, base di questo sito",
                     "context": "Axons è una base riutilizzabile per creare siti e applicazioni web Next.js multilingue e ben indicizzati. Questo sito, ezjsdev, ne deriva: aggiunge solo la sua identità, le sue pagine e i suoi contenuti, e riprende tutto il resto da Axons.",
+                    "note": "Progettato e sviluppato interamente con l'assistenza dell'IA (ChatGPT, Qwen, Claude).",
                     "role": "Autore: progettazione, sviluppo e manutenzione del progetto.",
                     "contribution": [
                         "Next.js 16 (App Router) e React 19, in TypeScript",
@@ -131,13 +130,11 @@
         },
         "contact": {
             "title": "Contatti",
-            "intro": "Contattare Yoann Barbier, sviluppatore full-stack freelance a Nantes (Francia): preferibilmente su LinkedIn, oppure via e-mail.",
-            "lead": "Per parlare di un progetto o di un incarico, LinkedIn è il modo più semplice per raggiungermi.",
+            "intro": "Contattare Yoann Barbier, sviluppatore full-stack indipendente a Nantes (Francia), tramite LinkedIn.",
+            "lead": "Il modo più semplice per contattarmi è LinkedIn.",
             "linkedinTitle": "LinkedIn",
             "linkedinBody": "Scrivimi un messaggio dal mio profilo:",
             "linkedinCta": "Profilo LinkedIn di Yoann Barbier",
-            "emailTitle": "E-mail",
-            "emailBody": "Puoi anche scrivermi a questo indirizzo:",
             "locationTitle": "Sede",
             "location": "Con base a Nantes (Francia), disponibile da remoto o in sede a seconda del progetto."
         }
@@ -192,24 +189,19 @@
     },
     "siteHome": {
         "kicker": "Yoann Barbier · Nantes, Francia",
-        "title": "Lead Full-Stack Senior — React, TypeScript, Node.js",
-        "lead": "Sviluppatore full-stack indipendente con sede a Nantes, affianco aziende e team di prodotto nella progettazione, nell'architettura e nell'evoluzione di applicazioni web moderne. Lavoro principalmente con JavaScript e TypeScript, con particolare attenzione alla qualità del codice, alle prestazioni e alla solidità delle soluzioni.",
-        "expertiseTitle": "Competenze",
-        "expertise": [
-            "Sviluppo front-end e full-stack",
-            "React.js e TypeScript",
-            "Node.js e NestJS",
-            "Architettura e rifacimento di applicazioni web",
-            "Applicazioni SaaS, web e mobile",
-            "Ottimizzazione delle prestazioni e scalabilità",
-            "Leadership tecnica, coordinamento e mentoring",
-            "Integrazione continua e pipeline CI/CD",
-            "Qualità del codice, test e documentazione",
-            "Vue / Nuxt, Angular, HTML e CSS"
+        "title": "Sviluppatore full-stack — React, TypeScript, Node.js",
+        "lead": "Sviluppatore full-stack indipendente a Nantes, realizzo e faccio evolvere siti e applicazioni web in JavaScript e TypeScript, oggi con l'aiuto dell'IA. Faccio attenzione alla qualità del codice, ai test e alla solidità di ciò che consegno.",
+        "approachTitle": "Il mio modo di lavorare",
+        "approach": [
+            "Capire un problema prima di risolverlo, e cercare la soluzione più semplice che regga.",
+            "Anticipare invece di subire: definire un contesto chiaro fin dall'inizio, per evitare cambiamenti dell'ultimo minuto.",
+            "Fare bene le cose, anche a costo di metterci un po' più di tempo, per doverci tornare meno in seguito.",
+            "Sviluppare con l'IA (Claude Code, modelli locali) mantenendo il controllo su qualità, test e scelte tecniche.",
+            "I problemi di algoritmica e di ottimizzazione, come quelli del TopCoder Open, con approcci come la ricottura simulata o la beam search."
         ],
         "contactCta": "Contattami",
         "aboutCta": "Il mio percorso",
-        "servicesAll": "Vedi i servizi",
+        "servicesAll": "Vedi cosa posso fare",
         "projectsTitle": "Progetti",
         "projectsAll": "Vedi i progetti"
     },

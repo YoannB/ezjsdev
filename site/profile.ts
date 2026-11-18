@@ -3,7 +3,7 @@ import type { ProjectDecl } from "@/components/site/content/profile-model";
 // EZJSDEV — the facts behind the content pages (About, Projects, Contact) that are NOT copy:
 // links, contact details and technology names. The copy itself (6 locales) lives
 // in site/messages/<locale>.json under `pages.about`, `pages.projects`, `pages.contact`.
-// Sources: spec v0.2 §3.1, §3.3, §5.4, §5.6 and the user's decisions (pro e-mail, LinkedIn first).
+// Sources: spec v0.2 §3.1, §3.3, §5.4, §5.6 and the user's decisions (LinkedIn only, no e-mail published).
 
 /** Live preview of Axons (Projects page link, result of the home demo — spec v0.2 §7.3). */
 export const AXONS_PREVIEW_URL = "https://axons-preview.netlify.app/fr";
@@ -11,11 +11,10 @@ export const AXONS_PREVIEW_URL = "https://axons-preview.netlify.app/fr";
 export const PROFILE = {
     name: "Yoann Barbier",
     linkedinUrl: "https://www.linkedin.com/in/yoann-barbier-89ba1810",
-    email: "yoannbarbier44@gmail.com",
     locality: "Nantes",
     country: "FR",
     school: "Polytech'Nantes",
-    // Technologies of the expertise list (spec §3.2), for the Person's `knowsAbout`.
+    // Technologies he works with (spec §3.2), for the Person's `knowsAbout`.
     knowsAbout: ["React", "TypeScript", "Node.js", "NestJS", "Vue.js", "Nuxt", "Angular"],
 } as const;
 

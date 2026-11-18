@@ -7,14 +7,14 @@ import { getTranslations } from "next-intl/server";
 import { DemoTrigger } from "../demo/DemoTrigger";
 
 // ezjsdev's home BODY (exported as `SiteHome` by site/home.tsx), shown in the IDE editor. Copy from
-// the CV-backed positioning of spec v0.2 §3.1–§3.2 (site/messages → `siteHome`), a direct access to
-// Contact and About (Axons `Button` links), the expertise (→ Services), a preview of the projects
+// the positioning validated by the user (site/messages → `siteHome`), a direct access to
+// Contact and About (Axons `Button` links), how he works (→ Services), a preview of the projects
 // (§5.1), then the latest articles and reminders (Axons blocks: "archives" titles while every entry
 // is an archive). Static Server Component.
 export async function EzHome({ locale }: SiteHomeProps) {
     const t = await getTranslations({ locale, namespace: "siteHome" });
     const tp = await getTranslations({ locale, namespace: "pages.projects" });
-    const expertise = t.raw("expertise") as string[];
+    const approach = t.raw("approach") as string[];
     return (
         <div className="ez-home">
             <div className="ez-home__doc">
@@ -32,9 +32,9 @@ export async function EzHome({ locale }: SiteHomeProps) {
                     </p>
                     <DemoTrigger />
                 </header>
-                <Section id="expertise" title={t("expertiseTitle")} className="ez-home__expertise">
+                <Section id="approach" title={t("approachTitle")} className="ez-home__approach">
                     <ul>
-                        {expertise.map((item) => (
+                        {approach.map((item) => (
                             <li key={item}>{item}</li>
                         ))}
                     </ul>

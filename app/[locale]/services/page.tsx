@@ -3,8 +3,8 @@ import { Link } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 
-// EZJSDEV — Services (spec v0.2 §5.3): the six offers backed by the CV, nothing else (no SEO, no
-// showcase site or landing page until their scope is confirmed). Copy: site/messages → `pages.services`.
+// EZJSDEV — Services: "what I can do", the offers validated by the user (positioning of 2026-11), nothing
+// else, never a price. Copy: site/messages → `pages.services`.
 // Headings carry stable ids (position, not translated text): the preview panel's outline links to them.
 
 type Service = { title: string; body: string };
@@ -28,10 +28,11 @@ export default async function ServicesPage({ params }: { params: Promise<{ local
             crumbs={[{ label: ts("bcHome"), href: "/" }, { label: t("title") }]}
             body={
                 <div className="ez-page ez-services">
+                    <h2 id="services-list">{t("listTitle")}</h2>
                     <ol className="ez-services__list">
                         {items.map((s, i) => (
                             <li key={s.title} className="ez-services__item">
-                                <h2 id={`service-${i + 1}`}>{s.title}</h2>
+                                <h3 id={`service-${i + 1}`}>{s.title}</h3>
                                 <p>{s.body}</p>
                             </li>
                         ))}
