@@ -44,7 +44,7 @@
     padding: 0;
     list-style: none;
 }
-.ez-services__item h2 {
+.ez-services__item h3 {
     font-size: 1.15rem;
 }
 
@@ -117,9 +117,6 @@
     flex-wrap: wrap;
     gap: 0.6rem;
     margin: 1.1rem 0 0;
-}
-.ez-contact__email {
-    font-family: var(--font-mono);
 }
 
 /* Home: projects preview. */

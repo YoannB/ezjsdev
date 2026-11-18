@@ -54,8 +54,8 @@ describe("site/profile.ts — the published facts", () => {
         for (const p of PROJECTS) expect(Object.keys(p)).toEqual(["id", "current", "stack", "links"]);
     });
 
-    it("contacts through LinkedIn and the professional e-mail only", () => {
+    it("contacts through LinkedIn only: no e-mail address is published", () => {
         expect(PROFILE.linkedinUrl).toBe("https://www.linkedin.com/in/yoann-barbier-89ba1810");
-        expect(PROFILE.email).toBe("yoannbarbier44@gmail.com");
+        expect(Object.keys(PROFILE)).not.toContain("email");
     });
 });

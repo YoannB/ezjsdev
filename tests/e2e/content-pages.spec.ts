@@ -5,7 +5,8 @@ import { lp, lpRe } from "./support/locale-path";
 
 // EZJSDEV content pages (spec v0.2 §5.2–§5.6): About, Services, Projects, Contact — translated
 // routes (site/config.ts), explorer files (site/explorer.ts), sitemap.xml, language switch,
-// contact links, the absence of any myKeople figure and the 375px layout. Pages are
+// contact link (LinkedIn only), the absence of any myKeople figure and of the words the user does not
+// use about himself, and the 375px layout. Pages are
 // opened with an explicit locale prefix (redirected to the canonical URL for the default locale).
 
 const PAGES = [
@@ -83,7 +84,7 @@ test.describe("Content pages", () => {
         await expect(page.getByRole("heading", { level: 1, name: "Projekte" })).toBeVisible();
     });
 
-    test("LinkedIn comes first, as an external Axons Button link; then the mailto", async ({ page }) => {
+    test("Contact offers LinkedIn only, as an external Axons Button link (no e-mail)", async ({ page }) => {
         await page.goto("/fr/contact");
         const main = page.getByRole("main");
         const linkedin = main.getByRole("link", { name: /Profil LinkedIn de Yoann Barbier/ });
@@ -97,16 +98,11 @@ test.describe("Content pages", () => {
         expect(rel.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
         await expect(linkedin).toHaveAccessibleName(/\(nouvel onglet\)/);
 
-        const mail = main.getByRole("link", { name: PROFILE.email });
-        await expect(mail).toHaveAttribute("href", `mailto:${PROFILE.email}`);
-        await expect(mail).not.toHaveAttribute("target", /.+/);
+        await expect(main.getByText("Le plus simple pour me joindre est LinkedIn.")).toBeVisible();
 
-        // Order: the LinkedIn section precedes the e-mail one.
-        const hrefs = await main
-            .locator('a[href^="https://www.linkedin.com"], a[href^="mailto:"]')
-            .evaluateAll((els) => els.map((e) => e.getAttribute("href")));
-        expect(hrefs).toEqual([PROFILE.linkedinUrl, `mailto:${PROFILE.email}`]);
-        // No phone number, no form.
+        // No e-mail (no mailto, no address, not even the word), no phone number, no form.
+        await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
+        expect(await main.innerText()).not.toMatch(/@|e-?mail/i);
         await expect(main.locator('a[href^="tel:"], form')).toHaveCount(0);
     });
 
@@ -160,12 +156,43 @@ test.describe("Content pages", () => {
             mainEntity: {
                 "@type": "Person",
                 name: "Yoann Barbier",
-                jobTitle: "Lead Full-Stack Senior — React, TypeScript, Node.js",
+                jobTitle: "Développeur full-stack — React, TypeScript, Node.js",
                 sameAs: [PROFILE.linkedinUrl],
                 address: { addressLocality: "Nantes", addressCountry: "FR" },
             },
         });
         expect(JSON.stringify(jsonLd)).not.toMatch(/Ex-CTO|telephone|email/);
+    });
+
+    // The user never presents himself as an "expert" and does not use "mentoring": none of these words may
+    // appear in the HTML (RSC payload and metadata included) of the home and the four content pages.
+    for (const locale of ["fr", "en"] as const) {
+        test(`no "expert", "expertise" or "mentoring" on the content pages (${locale})`, async ({ request }) => {
+            const paths = ["/", ...PAGES.map((p) => p[locale].path)];
+            for (const path of paths) {
+                const response = await request.get(lp(locale, path));
+                expect(response.status(), path).toBe(200);
+                expect(await response.text(), path).not.toMatch(/expert|mentoring/i);
+            }
+        });
+    }
+
+    test("Services lists what he can do; Projects says Axons was built with AI", async ({ page }) => {
+        await page.goto("/fr/services");
+        const main = page.getByRole("main");
+        await expect(main.getByRole("heading", { level: 2, name: "Ce que je peux faire" })).toBeVisible();
+        await expect(main.locator(".ez-services__item h3")).toHaveText([
+            "Un site ou une petite application web à partir d'Axons",
+            "Du développement web avec l'IA (React, TypeScript, Node.js)",
+            "Préparer un projet pour travailler avec des agents de code",
+            "Organiser un projet à plusieurs",
+            "Un problème d'algorithmique ou d'optimisation",
+        ]);
+        await page.goto("/fr/projets");
+        await expect(page.locator('[data-project="axons"]')).toContainText(
+            "Conçu et développé entièrement avec l'assistance de l'IA (ChatGPT, Qwen, Claude).",
+        );
+        await expect(page.locator('[data-project="idealco"] .ez-project__note')).toHaveCount(0);
     });
 
     test("the home links to Contact, About and the projects", async ({ page }) => {
@@ -175,6 +202,11 @@ test.describe("Content pages", () => {
         await expect(main.getByRole("link", { name: "Me contacter" })).toHaveAttribute("href", lp("fr", "/contact"));
         await expect(main.getByRole("link", { name: "Mon parcours" })).toBeVisible();
         await expect(main.getByText("Idealco")).toBeVisible();
+        await expect(main.getByRole("heading", { level: 2, name: "Ma façon de travailler" })).toBeVisible();
+        await expect(main.getByRole("link", { name: /Voir ce que je peux faire/ })).toHaveAttribute(
+            "href",
+            lp("fr", "/services"),
+        );
         await main.getByRole("link", { name: /Voir les projets/ }).click();
         await expect(page).toHaveURL(lpRe("fr", "/projets"));
     });

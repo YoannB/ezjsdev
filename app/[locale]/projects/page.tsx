@@ -31,6 +31,8 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                         const contributionKey = `items.${project.id}.contribution`;
                         // Optional: a project shows only what is documented (no invented detail).
                         const contribution = t.has(contributionKey) ? (t.raw(contributionKey) as string[]) : [];
+                        const noteKey = `items.${project.id}.note`;
+                        const note = t.has(noteKey) ? t(noteKey) : null;
                         const headingId = `project-${project.id}`;
                         return (
                             <section
@@ -46,6 +48,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                                 <p className="ez-project__tagline">{p("tagline")}</p>
                                 <h3>{t("context")}</h3>
                                 <p>{p("context")}</p>
+                                {note ? <p className="ez-project__note">{note}</p> : null}
                                 <h3>{t("role")}</h3>
                                 <p>{p("role")}</p>
                                 {contribution.length ? (
