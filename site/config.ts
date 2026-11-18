@@ -138,8 +138,11 @@ export const SITE = {
     ],
     // "New" badge for 90 days (3 months) on future entries; everything published before 2018 (the
     // migrated 2013–2017 articles and reminders) is shown as an archive (docs/articles.md → New and
-    // archive badges).
-    collectionDefaults: { newForDays: 90, archiveBefore: "2018-01-01" },
+    // archive badges). `comments: true`: Disqus comments under every NON-archived entry (articles and
+    // reminders), active only when NEXT_PUBLIC_DISQUS_SHORTNAME is set (Netlify) — no shortname in
+    // the code (docs/articles.md → Comments).
+    collectionDefaults: { newForDays: 90, archiveBefore: "2018-01-01", comments: true },
+    comments: { provider: "disqus" },
     // Axons copy replaced on purpose by site/messages/<locale>.json.
     messageOverrides: ["meta.home", "footer.tagline", "pages.articles.intro", "pages.articles.archivesTitle"],
     // Message paths read by ezjsdev's own Client Components (useTranslations); the rest of the

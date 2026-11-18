@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { blockDisqus } from "./support/disqus";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
 
 // EZJSDEV archive rules (site/config.ts → collectionDefaults: { newForDays: 90, archiveBefore:
@@ -17,6 +18,10 @@ async function ready(page: Page) {
 }
 
 test.describe("Archive badges", () => {
+    // "Accept" also grants the comments purpose: never reach Disqus from a spec (comments.spec.ts).
+    test.beforeEach(async ({ page }) => {
+        await blockDisqus(page);
+    });
     test("every article card is an archive, none is new", async ({ page }) => {
         await page.goto(at("fr", "/articles"));
         await ready(page);
