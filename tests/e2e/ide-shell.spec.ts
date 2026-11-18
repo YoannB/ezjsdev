@@ -145,7 +145,11 @@ test.describe("IDE shell — desktop", () => {
         // A long page: the preview is its outline (contextual modes: preview-panel.spec.ts).
         const preview = page.locator("#ide-preview");
         await expect(preview.getByRole("navigation", { name: "Plan de la page" })).toBeVisible();
+        // The terminal starts collapsed on desktop too: open it by hand.
         const terminal = page.getByRole("group", { name: "Sortie du terminal" });
+        await expect(terminal).toBeHidden();
+        await page.getByRole("button", { name: "Afficher le terminal" }).click();
+        await expect(terminal).toBeVisible();
         await expect(terminal).toContainText("open Mentions-legales/page.tsx");
         // Not announced on navigation (Next's route announcer already does): no live region.
         await expect(
@@ -157,10 +161,14 @@ test.describe("IDE shell — desktop", () => {
         await expect(page.getByRole("button", { name: "Afficher l'aperçu" })).toHaveAttribute("aria-expanded", "false");
         await expect(preview.locator(".ide-outline")).toBeHidden();
 
+        // Opened by hand, the terminal stays open while navigating (same page session) until
+        // collapsed again.
+        await fileItem(page, /Plan du site/).click();
+        await expect(page).toHaveURL(lpRe("fr", "/plan-du-site"));
+        await expect(terminal).toBeVisible();
+        await expect(terminal).toContainText("open Plan-du-site/page.tsx");
         await page.getByRole("button", { name: "Masquer le terminal" }).click();
         await expect(terminal).toBeHidden();
-        await page.getByRole("button", { name: "Afficher le terminal" }).click();
-        await expect(terminal).toBeVisible();
     });
 
     test("an unknown URL keeps the shell with no active tab nor terminal output", async ({ page }) => {
@@ -168,6 +176,7 @@ test.describe("IDE shell — desktop", () => {
         await ready(page);
         await expect(page.locator(".not-found")).toBeVisible();
         await expect(activeTab(page)).toHaveCount(0);
+        await page.getByRole("button", { name: "Afficher le terminal" }).click();
         await expect(page.getByRole("group", { name: "Sortie du terminal" })).toHaveText("");
     });
 
