@@ -26,7 +26,7 @@ les maquettes du site sont dans [`mockups/`](mockups/).
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : ezjsdev 0.1.0, basé sur Axons [v0.14.0](https://github.com/YoannB/axons/tree/v0.14.0).**
+**Version : ezjsdev 0.1.0, basé sur Axons [v0.15.0](https://github.com/YoannB/axons/tree/v0.15.0).**
 
 ezjsdev est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions et
 la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) d'Axons pour les
@@ -61,16 +61,17 @@ Et ouvrir http://localhost:3000.
 
 Référence complète et commentée : [`.env.example`](.env.example). Valeurs d'ezjsdev (en local comme sur Netlify) :
 
-| Variable                     | Valeur ezjsdev                                                                                              |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_DEFAULT_LOCALE` | `fr` : le français est servi à la racine. **Indispensable** : les liens internes des contenus en dépendent. |
-| `NEXT_PUBLIC_LOCALES`        | `fr,en,es,de,it,pt` (ou vide = les six).                                                                    |
-| `NEXT_PUBLIC_SITE_URL`       | URL publique du site (canonical, hreflang, sitemap).                                                        |
-| `NEXT_PUBLIC_AI_DAILY_LIMIT` | `0` : ezjsdev ne fait aucun appel IA.                                                                       |
-| `OPENROUTER_API_KEY`         | **Ne pas définir** (IA coupée).                                                                             |
-| `NEXT_PUBLIC_ADS_ENABLED`    | `false`.                                                                                                    |
-| `NEXT_PUBLIC_GTM_ID`         | Vide : pas de mesure d'audience, donc pas de bandeau cookies.                                               |
-| `LEGAL_*`                    | Informations éditeur des mentions légales (serveur uniquement) ; jamais de vraies valeurs dans le dépôt.    |
+| Variable                       | Valeur ezjsdev                                                                                              |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_DEFAULT_LOCALE`   | `fr` : le français est servi à la racine. **Indispensable** : les liens internes des contenus en dépendent. |
+| `NEXT_PUBLIC_LOCALES`          | `fr,en,es,de,it,pt` (ou vide = les six).                                                                    |
+| `NEXT_PUBLIC_SITE_URL`         | URL publique du site (canonical, hreflang, sitemap).                                                        |
+| `NEXT_PUBLIC_AI_DAILY_LIMIT`   | `0` : ezjsdev ne fait aucun appel IA.                                                                       |
+| `OPENROUTER_API_KEY`           | **Ne pas définir** (IA coupée).                                                                             |
+| `NEXT_PUBLIC_ADS_ENABLED`      | `false`.                                                                                                    |
+| `NEXT_PUBLIC_GTM_ID`           | Vide : pas de mesure d'audience (le bandeau cookies n'apparaît que si les commentaires sont actifs).        |
+| `NEXT_PUBLIC_DISQUS_SHORTNAME` | Shortname Disqus ; vide = commentaires désactivés. Seules les entrées non archivées en affichent.           |
+| `LEGAL_*`                      | Informations éditeur des mentions légales (serveur uniquement) ; jamais de vraies valeurs dans le dépôt.    |
 
 ## Où vit le code propre à ezjsdev
 

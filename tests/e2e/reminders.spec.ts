@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { getCollection } from "../../constants/site";
+import { blockDisqus } from "./support/disqus";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption } from "./support/home";
 import { DEFAULT_LOCALE, lp, lpRe } from "./support/locale-path";
 
@@ -25,6 +26,10 @@ async function ready(page: Page) {
 
 test.describe("Reminders", () => {
     test.skip(!ENABLED, "reminders collection disabled (site/config.ts)");
+    // "Accept" also grants the comments purpose: never reach Disqus from a spec (comments.spec.ts).
+    test.beforeEach(async ({ page }) => {
+        await blockDisqus(page);
+    });
 
     test("the listing shows every reminder, newest first", async ({ page }) => {
         await page.goto(at("fr", "/pense-betes"));
