@@ -7,8 +7,9 @@
      and terminal as collapsible panels stacked below the editor, the DOCUMENT scrolls.
    - >= 64rem (desktop): full-height app — activity bar | explorer | editor (+ preview) over the
      terminal, status bar at the bottom; the editor is the scroller.
-   Panel states: data-preview / data-terminal = auto | open | closed. "auto" = closed below the
-   breakpoint where it fits (preview: 80rem, terminal: 64rem) — same queries as IdeShell.tsx.
+   Panel states: data-preview / data-terminal = auto | open | closed. Preview "auto" = closed
+   below 80rem (same query as IdeShell.tsx); terminal "auto" = closed at every width (opened by
+   the demo or the visitor).
    ===================================================================== */
 
 .ide {
@@ -437,13 +438,13 @@
         transform: rotate(90deg);
     }
 }
-@media (max-width: 63.99rem) {
-    .ide-panel--terminal[data-state="auto"] .ide-panel__body {
-        display: none;
-    }
-    .ide-panel--terminal[data-state="auto"] .ide-panel__chevron {
-        transform: rotate(90deg);
-    }
+/* The terminal is collapsed by default at EVERY width (its bar keeps "Generate a site", which
+   opens it): "auto" behaves as closed. */
+.ide-panel--terminal[data-state="auto"] .ide-panel__body {
+    display: none;
+}
+.ide-panel--terminal[data-state="auto"] .ide-panel__chevron {
+    transform: rotate(90deg);
 }
 .ide-panel--terminal .terminal {
     border-radius: var(--radius-sm);

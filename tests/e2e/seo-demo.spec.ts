@@ -172,8 +172,42 @@ test.describe("SEO site demo — desktop", () => {
         await expect(card(page).getByRole("link", { name: /Ouvrir le site/ })).toHaveAttribute("href", AXONS);
     });
 
+    test("the terminal is collapsed at load and opened by “Générer un site”", async ({ page }) => {
+        await ready(page);
+        const toggle = page.getByRole("button", { name: "Afficher le terminal" });
+        await expect(toggle).toHaveAttribute("aria-expanded", "false");
+        await expect(page.locator("#ide-terminal .ide-panel__body")).toBeHidden();
+        // The collapsed bar keeps its own "Generate a site" action.
+        await expect(terminalButton(page)).toBeVisible();
+        await expect(terminalButton(page)).toHaveText("Générer un site");
+        const collapsed = await layout(page);
+        expect(collapsed.docOverflow).toBeLessThanOrEqual(0);
+
+        await homeButton(page).click();
+        await expect(page.getByRole("button", { name: "Masquer le terminal" })).toHaveAttribute(
+            "aria-expanded",
+            "true",
+        );
+        await expect(demoLog(page)).toBeVisible();
+        await expect(card(page)).toBeVisible();
+    });
+
+    test("the collapsed bar's own button opens the terminal and runs the demo", async ({ page }) => {
+        await ready(page);
+        await terminalButton(page).click();
+        await expect(page.getByRole("button", { name: "Masquer le terminal" })).toHaveAttribute(
+            "aria-expanded",
+            "true",
+        );
+        await expect(demoLog(page)).toBeVisible();
+        await expect(card(page)).toBeVisible();
+    });
+
     test("fixed terminal height: editor, preview and terminal keep their size in every state", async ({ page }) => {
         await ready(page);
+        // Collapsed at load: open it by hand to measure the page-status state.
+        await page.getByRole("button", { name: "Afficher le terminal" }).click();
+        await expect(page.locator("#ide-terminal .ide-panel__body")).toBeVisible();
         const before = await layout(page);
         expect(before.docOverflow).toBeLessThanOrEqual(0);
         expect(before.terminalBody).toBeGreaterThan(150);

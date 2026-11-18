@@ -153,4 +153,7 @@ export const SITE = {
         "/projects": "pages.projects",
         "/contact": "pages.contact",
     },
+    // Pre-hydration splash: the real `</>` logo (.splash-logo, light sweep from site/theme.css)
+    // above Axons' progress bar (docs/seo-layout.md → Pre-hydration splash).
+    splash: { logo: true },
 } as const satisfies SiteConfig<typeof pathnames>;

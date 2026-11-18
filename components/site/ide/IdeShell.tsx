@@ -106,7 +106,9 @@ export function IdeShell({ tree, siteUrl, children }: { tree: TreeNode[]; siteUr
     const [preview, setPreview] = useState<PanelState>("auto");
     const [terminal, setTerminal] = useState<PanelState>("auto");
     const previewOpen = preview === "auto" ? wide : preview === "open";
-    const terminalOpen = terminal === "auto" ? desktop : terminal === "open";
+    // The terminal starts collapsed at every width ("auto" = closed, site/ide.css); the demo or the
+    // visitor opens it, and that choice lasts for the page session (IdeShell outlives navigations).
+    const terminalOpen = terminal === "open";
 
     // "Generate a site" demo (spec §7): a scripted simulation shown in the terminal, owned here
     // so the home button and the terminal bar reach the same run (DemoContext). Navigation cancels it.

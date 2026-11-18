@@ -19,38 +19,33 @@ const explorer = (page: Page) => page.getByRole("complementary", { name: "Explor
 const activityNav = (page: Page) => page.getByRole("navigation", { name: "Barre d'activité" });
 const explorerSwitch = (page: Page) => page.locator(".ide-activity__toggle");
 
-// Computed animation names of the three glyphs of the title-bar logo (they never animate).
-const brandAnimations = (page: Page) =>
-    page.locator(".ide-brand .logo__glyph").evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
-// The light sweep of the title-bar logo (site/logo.tsx .logo__sheen, site/theme.css).
-const brandSheen = (page: Page) =>
-    page.locator(".ide-brand .logo__sheen").evaluate((el) => {
+// Computed animation names of the three glyphs of a logo (they never animate). `scope` is the
+// logo's container: the title bar (.ide-brand) or the pre-hydration splash (.splash-logo, the real
+// Logo rendered by Axons through SITE.splash.logo).
+const glyphAnimations = (page: Page, scope = ".ide-brand") =>
+    page.locator(`${scope} .logo__glyph`).evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
+// The light sweep of a logo (site/logo.tsx .logo__sheen, site/theme.css).
+const sheen = (page: Page, scope = ".ide-brand") =>
+    page.locator(`${scope} .logo__sheen`).evaluate((el) => {
         const s = getComputedStyle(el);
         return { name: s.animationName, iterations: s.animationIterationCount, transform: s.transform };
     });
 // Position and transform of the three glyphs: must stay identical while the sweep runs.
-const brandGlyphGeometry = (page: Page) =>
-    page.locator(".ide-brand .logo__glyph").evaluateAll((els) =>
+const glyphGeometry = (page: Page, scope = ".ide-brand") =>
+    page.locator(`${scope} .logo__glyph`).evaluateAll((els) =>
         els.map((el) => {
             const r = el.getBoundingClientRect();
             const s = getComputedStyle(el);
             return [r.x, r.y, r.width, r.height, s.transform, s.strokeDasharray, s.strokeDashoffset].join("|");
         }),
     );
-// Computed animation of the splash mark (#app-splash::before, site/theme.css). The node is never
-// removed (only hidden by .is-leaving), so its style stays measurable after hydration.
-const splashMark = (page: Page) =>
-    page.locator("#app-splash").evaluate((el) => {
-        const s = getComputedStyle(el, "::before");
-        return {
-            content: s.content,
-            width: s.width,
-            animationName: s.animationName,
-            iterations: s.animationIterationCount,
-            mask: s.maskImage,
-            maskPosition: s.maskPosition,
-            transform: s.transform,
-        };
+// The whole splash logo (Axons breathes it with logoBreath; ezjsdev keeps it still) and the former
+// CSS-mask workaround (#app-splash::before), which must stay gone.
+const splashLogo = (page: Page) =>
+    page.locator("#app-splash svg.splash-logo").evaluate((el) => {
+        const s = getComputedStyle(el);
+        const before = getComputedStyle(el.closest("#app-splash")!, "::before");
+        return { animationName: s.animationName, transform: s.transform, beforeContent: before.content };
     });
 
 test.describe("IDE chrome — desktop", () => {
@@ -128,38 +123,24 @@ test.describe("IDE chrome — desktop", () => {
         // Pointer away from the brand: the sweep loops on its own, never a one-shot.
         await page.mouse.move(700, 600);
         // The former motion (brackets breathing, slash redrawing) is gone: no glyph animates.
-        expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
-        const sheen = await brandSheen(page);
-        expect(sheen.name).toBe("ezLogoSheen");
-        expect(sheen.iterations).toBe("infinite");
+        expect(await glyphAnimations(page)).toEqual(["none", "none", "none"]);
+        const band = await sheen(page);
+        expect(band.name).toBe("ezLogoSheen");
+        expect(band.iterations).toBe("infinite");
         // The band really travels while the three glyphs keep the same place and transform.
-        const before = await brandGlyphGeometry(page);
+        const before = await glyphGeometry(page);
         expect(before.every((g) => g.endsWith("|none|none|0px"))).toBe(true);
         const seen = new Set<string>();
         for (let i = 0; i < 12; i++) {
-            seen.add((await brandSheen(page)).transform);
-            expect(await brandGlyphGeometry(page)).toEqual(before);
+            seen.add((await sheen(page)).transform);
+            expect(await glyphGeometry(page)).toEqual(before);
             await page.waitForTimeout(150);
         }
         expect(seen.size).toBeGreaterThan(1);
         // Hovering changes nothing (no restarted or extra animation).
         await logo.hover();
-        expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
-        expect((await brandSheen(page)).name).toBe("ezLogoSheen");
-    });
-
-    test("the splash shows the still mark, swept by the same light, above the progress bar", async ({ page }) => {
-        await ready(page);
-        await expect(page.locator("#app-splash .loader__bar")).toHaveCount(1);
-        const mark = await splashMark(page);
-        expect(mark.content).toBe('""');
-        expect(mark.width).toBe("120px");
-        expect(mark.mask).toContain("data:image/svg+xml");
-        // Same keyframes as the header; no former bracket motion nor Axons' breathing scale.
-        expect(mark.animationName).toBe("ezLogoSheen");
-        expect(mark.iterations).toBe("infinite");
-        expect(mark.transform).toBe("none");
-        expect(mark.maskPosition.replace(/,\s*/g, ",")).toBe("0px 0px,0px 0px,0px 0px");
+        expect(await glyphAnimations(page)).toEqual(["none", "none", "none"]);
+        expect((await sheen(page)).name).toBe("ezLogoSheen");
     });
 
     test("the home and contact actions are Axons Buttons (links stay links)", async ({ page }) => {
@@ -178,17 +159,62 @@ test.describe("IDE chrome — desktop", () => {
     });
 });
 
+test.describe("IDE chrome — pre-hydration splash", () => {
+    test.use({ viewport: { width: 1440, height: 900 } });
+
+    test("the splash shows the real logo, still, swept by the same light, above the bar", async ({ page }) => {
+        await page.goto("/fr");
+        const splash = page.locator("#app-splash");
+        await expect(splash.locator("svg.splash-logo")).toHaveCount(1);
+        await expect(splash.locator(".loader__bar")).toHaveCount(1);
+        // The logo comes before the bar (grid rows: logo, then bar).
+        expect(await splash.evaluate((el) => [...el.children].map((c) => c.getAttribute("class")))).toEqual([
+            "logo splash-logo",
+            "loader__bar",
+        ]);
+        const logo = await splashLogo(page);
+        // No CSS redraw of the mark any more, and no breathing scale on the whole logo.
+        expect(["none", "normal"]).toContain(logo.beforeContent);
+        expect(logo.animationName).toBe("none");
+        expect(logo.transform).toBe("none");
+        expect(await glyphAnimations(page, ".splash-logo")).toEqual(["none", "none", "none"]);
+        const band = await sheen(page, ".splash-logo");
+        expect(band.name).toBe("ezLogoSheen");
+        expect(band.iterations).toBe("infinite");
+    });
+
+    test.describe("before hydration (JS disabled: the splash stays on screen)", () => {
+        test.use({ javaScriptEnabled: false });
+
+        test("only the sweep band moves; the three strokes keep their place", async ({ page }) => {
+            await page.goto("/fr");
+            await expect(page.locator("#app-splash svg.splash-logo")).toBeVisible();
+            const before = await glyphGeometry(page, ".splash-logo");
+            expect(before).toHaveLength(3);
+            expect(before.every((g) => g.endsWith("|none|none|0px"))).toBe(true);
+            const seen = new Set<string>();
+            for (let i = 0; i < 12; i++) {
+                seen.add((await sheen(page, ".splash-logo")).transform);
+                expect(await glyphGeometry(page, ".splash-logo")).toEqual(before);
+                await page.waitForTimeout(150);
+            }
+            expect(seen.size).toBeGreaterThan(1);
+        });
+    });
+});
+
 test.describe("IDE chrome — reduced motion", () => {
     test.use({ viewport: { width: 1440, height: 900 } });
 
-    test("the title-bar logo and the splash mark are static under prefers-reduced-motion", async ({ page }) => {
+    test("the title-bar and splash logos are static under prefers-reduced-motion", async ({ page }) => {
         await page.emulateMedia({ reducedMotion: "reduce" });
         await ready(page);
-        expect(await brandAnimations(page)).toEqual(["none", "none", "none"]);
-        expect((await brandSheen(page)).name).toBe("none");
-        expect((await splashMark(page)).animationName).toBe("none");
+        expect(await glyphAnimations(page)).toEqual(["none", "none", "none"]);
+        expect((await sheen(page)).name).toBe("none");
+        expect((await sheen(page, ".splash-logo")).name).toBe("none");
+        expect((await splashLogo(page)).animationName).toBe("none");
         // No sweep left on the mark: the band stays parked outside it (--ez-sheen = 0).
-        expect((await brandSheen(page)).transform).toBe("matrix(1, 0, 0, 1, 0, 0)");
+        expect((await sheen(page)).transform).toBe("matrix(1, 0, 0, 1, 0, 0)");
     });
 });
 
@@ -210,6 +236,6 @@ test.describe("IDE chrome — mobile (375px)", () => {
         await expect(burger).toHaveAttribute("aria-expanded", "false");
         await expect(explorer(page)).toBeHidden();
         // The sweep runs on mobile too.
-        expect((await brandSheen(page)).name).toBe("ezLogoSheen");
+        expect((await sheen(page)).name).toBe("ezLogoSheen");
     });
 });
