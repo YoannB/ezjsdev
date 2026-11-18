@@ -124,9 +124,9 @@ test.describe("IDE chrome — desktop", () => {
         await page.mouse.move(700, 600);
         // The former motion (brackets breathing, slash redrawing) is gone: no glyph animates.
         expect(await glyphAnimations(page)).toEqual(["none", "none", "none"]);
-        const sheen = await sheen(page);
-        expect(sheen.name).toBe("ezLogoSheen");
-        expect(sheen.iterations).toBe("infinite");
+        const band = await sheen(page);
+        expect(band.name).toBe("ezLogoSheen");
+        expect(band.iterations).toBe("infinite");
         // The band really travels while the three glyphs keep the same place and transform.
         const before = await glyphGeometry(page);
         expect(before.every((g) => g.endsWith("|none|none|0px"))).toBe(true);
