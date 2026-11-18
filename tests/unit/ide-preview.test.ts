@@ -4,6 +4,7 @@ import {
     displayUrl,
     extractOutline,
     previewMode,
+    readingLine,
     sameOutline,
     type PreviewDecl,
 } from "@/components/site/ide/preview-model";
@@ -120,6 +121,32 @@ describe("activeSection", () => {
     it("above the first heading → -1; no heading → -1", () => {
         expect(activeSection([150, 400], 100)).toBe(-1);
         expect(activeSection([], 100)).toBe(-1);
+    });
+});
+
+describe("readingLine", () => {
+    // Scroller 1000 px tall, line at 30 % (300 px): the ramp is at most 700 px long.
+    it("a page that does not scroll (or a zero-height scroller) keeps the plain line", () => {
+        expect(readingLine(1000, 0, 0, 0.3)).toBe(300);
+        expect(readingLine(0, 0, 500, 0.3)).toBe(0);
+    });
+
+    it("a long page: the plain line until the last 700 px of the range", () => {
+        expect(readingLine(1000, 0, 3000, 0.3)).toBe(300);
+        expect(readingLine(1000, 2300, 3000, 0.3)).toBe(300);
+    });
+
+    it("then the line slides down to the bottom edge, reached at the end of the range", () => {
+        expect(readingLine(1000, 2650, 3000, 0.3)).toBe(650);
+        expect(readingLine(1000, 3000, 3000, 0.3)).toBe(1000);
+        // Overscroll (elastic scrolling) never pushes it past the edge.
+        expect(readingLine(1000, 3200, 3000, 0.3)).toBe(1000);
+    });
+
+    it("a short range is a ramp from its very top: the line sweeps the whole scroller", () => {
+        expect(readingLine(1000, 0, 200, 0.3)).toBe(300);
+        expect(readingLine(1000, 100, 200, 0.3)).toBe(650);
+        expect(readingLine(1000, 200, 200, 0.3)).toBe(1000);
     });
 });
 
