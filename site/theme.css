@@ -47,6 +47,11 @@
     --code-tag: #4fc1ff; /* 9.4 */
     --code-meta: #4ec9b0; /* 9.4 (types) */
     --code-deletion: #f48771; /* 7.8 */
+    /* Scrollbars (Axons' styles/scrollbars.css; tokens only, docs/styles.md → Scrollbars), VS Code
+       style: a quiet blue-grey slider on a transparent track, brightened when the pointer is over
+       the pane. Thumb >= 3:1 on --bg-0, --bg-1 and --surface-*; hover >= 5.2:1. */
+    --scrollbar-thumb: color-mix(in srgb, var(--muted) 60%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--text-2) 75%, transparent);
 }
 
 [data-theme="light"] {
@@ -80,6 +85,9 @@
     --code-tag: #800000; /* 11 */
     --code-meta: #17606f; /* 7.1 */
     --code-deletion: #b5200d; /* 6.6 */
+    /* Scrollbars, Light Modern spirit: grey slider >= 3.1:1 on white / --ez-panel, hover >= 4.3:1. */
+    --scrollbar-thumb: color-mix(in srgb, var(--muted) 72%, transparent);
+    --scrollbar-thumb-hover: color-mix(in srgb, var(--text-2) 70%, transparent);
 }
 
 /* ===== Logo: the `</>` mark (site/logo.tsx, wrapped by components/ui/Logo.tsx) ===== */
@@ -93,14 +101,13 @@
 
 /* Light sweep: the glyph NEVER moves (no transform, no dash, no part going towards another); a
    light highlight derived from the accent tokens crosses it diagonally, left to right, then pauses.
-   ONE rule and ONE period for the loader, the shell's title bar (continuous, no hover trigger) and
-   the pre-hydration splash: a single keyframes drives the registered number --ez-sheen from 0
-   (band parked left of the mark, invisible) to 1 (parked right of it), and each surface maps it on
-   what it can animate — the SVG band's translation (site/logo.tsx: a rect masked by the three
-   strokes) and the splash's background layer (a CSS mask cannot hold a second SVG layer).
-   CSS keyframes only (no SMIL, so prefers-reduced-motion applies); out of the animation, and under
-   the reduced-motion kill-switch of styles/a11y.css (one ~0ms iteration), --ez-sheen is 0: the
-   plain logo. */
+   ONE rule and ONE period for the loader, the shell's title bar and the pre-hydration splash
+   (.splash-logo: the real Logo, rendered by Axons through SITE.splash.logo), continuous, no hover
+   trigger: a single keyframes drives the registered number --ez-sheen from 0 (band parked left of
+   the mark, invisible) to 1 (parked right of it), mapped on the translation of the SVG band
+   (site/logo.tsx: a rect masked by the three strokes). CSS keyframes only (no SMIL, so
+   prefers-reduced-motion applies); out of the animation, and under the reduced-motion kill-switch
+   of styles/a11y.css (one ~0ms iteration), --ez-sheen is 0: the plain logo. */
 @property --ez-sheen {
     syntax: "<number>";
     inherits: false;
@@ -116,8 +123,7 @@
 .logo__sheen {
     transform: translateX(calc(var(--ez-sheen) * 90px));
 }
-:is(.loader, .ide-brand) .logo__sheen,
-#app-splash::before {
+:is(.loader, .ide-brand, .splash-logo) .logo__sheen {
     animation: ezLogoSheen var(--ez-logo-sheen-period) ease-in-out infinite;
 }
 @keyframes ezLogoSheen {
@@ -130,40 +136,13 @@
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    :is(.loader, .ide-brand) .logo__sheen,
-    #app-splash::before {
+    :is(.loader, .ide-brand, .splash-logo) .logo__sheen {
         animation: none;
     }
 }
 
-/* Pre-hydration splash (#app-splash, rendered by Axons' root layout with the progress bar only):
-   the mark is drawn by CSS above the bar, as Axons offers no option to put the Logo there (Axons
-   candidate, see the PR). A mask of the three glyphs (same paths as site/logo.tsx) filled with the
-   brand gradient tokens, so it follows the theme the boot script sets before paint; the sweep is
-   a second background layer (a 300%-wide band) moved by --ez-sheen, the mask itself stays still. */
-/* Two grid items now (mark + bar): keep them together at the centre (Axons' grid stretches its
-   implicit rows, which would push them to the quarters of the screen). */
-#app-splash {
-    align-content: center;
-}
-#app-splash::before {
-    content: "";
-    width: 120px;
-    height: 120px;
-    background:
-        linear-gradient(
-                110deg,
-                transparent 45%,
-                color-mix(in srgb, var(--ez-logo-sheen) 90%, transparent) 50%,
-                transparent 55%
-            )
-            calc(100% - var(--ez-sheen) * 100%) 0 / 300% 100% no-repeat,
-        linear-gradient(135deg, var(--accent-2), var(--accent-1));
-    mask-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M16 13 L6 24 L16 35'/%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M28 9 L20 39'/%3E%3C/svg%3E"),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath fill='none' stroke='%23000' stroke-width='4.5' stroke-linecap='round' stroke-linejoin='round' d='M32 13 L42 24 L32 35'/%3E%3C/svg%3E");
-    mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    mask-position: 0 0;
+/* Splash logo: Axons breathes it (logoBreath, a scale + fade of the whole mark); here the mark
+   stays still and only the sweep above moves. */
+.splash-logo {
+    animation: none;
 }
