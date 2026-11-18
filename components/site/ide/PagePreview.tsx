@@ -45,12 +45,15 @@ export function PagePreview({
 
 /** The live outline of the editor; the share card when the page has no h2/h3. */
 function OutlineView({ file, siteUrl, editorId }: { file: TreeFile; siteUrl: string; editorId: string }) {
-    const { ready, items, active, headingOf } = useOutline(editorId);
+    const { ready, items, active, headingOf, select } = useOutline(editorId);
     // Before the first read (server render, hydration): an empty body, so a page WITH an outline
     // never flashes its share card.
     if (!ready) return null;
     if (!items.length) return <ShareCard file={file} siteUrl={siteUrl} />;
     const onSelect = (item: OutlineItem) => {
+        select(item);
+        // A heading with an id is a link: the browser scrolls to its anchor by itself.
+        if (item.id) return;
         const smooth = !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
         headingOf(item)?.scrollIntoView({ block: "start", behavior: smooth ? "smooth" : "auto" });
     };

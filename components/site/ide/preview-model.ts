@@ -105,6 +105,21 @@ export function activeSection(tops: readonly number[], line: number): number {
     return active;
 }
 
+/**
+ * The reading line, in px from the scroller's top: `ratio` of its height, then, over the last
+ * stretch of the scroll range (at most the distance from the line to the bottom edge), it slides
+ * down to the bottom edge. At the end of the page every heading in view has therefore been
+ * passed: the last sections, which the scroll can never bring up to a fixed line (a short page in
+ * a tall editor), still become active. A page that does not scroll keeps the plain line.
+ */
+export function readingLine(height: number, scrollTop: number, maxScroll: number, ratio: number): number {
+    const base = height * ratio;
+    const ramp = Math.min(maxScroll, height - base);
+    if (ramp <= 0) return base;
+    const progress = Math.min(1, Math.max(0, (scrollTop - (maxScroll - ramp)) / ramp));
+    return base + (height - base) * progress;
+}
+
 /** Host + path of a URL as shown in an address bar or a share card ("ezjs.dev/fr/contact"). */
 export function displayUrl(url: string): string {
     return url.replace(/^https?:\/\//, "").replace(/\/$/, "");

@@ -16,7 +16,7 @@ export function PreviewOutline({
     items: readonly OutlineItem[];
     /** Position in `items` of the section being read (-1: none). */
     active: number;
-    /** A heading WITHOUT id was chosen. */
+    /** An item was chosen (a link scrolls to its anchor by itself; a button must be scrolled to). */
     onSelect: (item: OutlineItem) => void;
 }) {
     const t = useTranslations("ide");
@@ -34,7 +34,12 @@ export function PreviewOutline({
                             className={cn("ide-outline__item", item.level === 3 && "ide-outline__item--sub")}
                         >
                             {item.id ? (
-                                <a className="ide-outline__link" href={`#${item.id}`} aria-current={current}>
+                                <a
+                                    className="ide-outline__link"
+                                    href={`#${item.id}`}
+                                    aria-current={current}
+                                    onClick={() => onSelect(item)}
+                                >
                                     {item.text}
                                 </a>
                             ) : (
