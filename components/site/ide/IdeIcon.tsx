@@ -1,7 +1,7 @@
 import { cn } from "@/lib/cn";
 
-// Line icons of the IDE shell (24x24, stroke = currentColor, decorative: aria-hidden). Axons'
-// Icon set has no file/folder/panel glyphs, and adding names to it would edit an Axons file.
+// Line icons of the IDE shell (24x24, stroke = currentColor, decorative: aria-hidden). The
+// shared Icon set (components/ui) has no file/folder/panel glyphs; this set keeps them out of it.
 const PATHS = {
     files: "M14 3H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7zM14 3v4h4M9 21h9a2 2 0 0 0 2-2V9",
     article: "M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7",

@@ -63,7 +63,7 @@ test.describe("Preview panel — desktop", () => {
         expect(headings.length).toBeGreaterThan(2);
         await expect(outlineLinks(page)).toHaveText(headings);
 
-        // Markdown headings (rendered by Axons) have no id: the item scrolls to the element.
+        // Markdown headings (rendered by the generic components) have no id: the item scrolls to the element.
         const index = 2;
         const target = editorHeadings(page).nth(index);
         await expect(target).not.toBeInViewport();

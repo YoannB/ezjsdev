@@ -5,7 +5,7 @@ import en from "../../../messages/en.json";
 import type { DemoStatus } from "./demo-model";
 import { DemoContext, DemoTrigger } from "./DemoTrigger";
 
-// The home's "Generate a site" block: Axons' `Button` (secondary, its halo/sheen animation) and the
+// The home's "Generate a site" block: the `Button` (secondary, its halo/sheen animation) and the
 // note saying it is a simulation, in each state of the demo. Static snapshots: no timer runs here.
 const withTranslations = (Story: ComponentType) => (
     <NextIntlClientProvider locale="en" messages={{ demo: en.demo }}>
@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 
 /** Initial: "Generate a site". */
 export const Idle: Story = { args: { status: "idle" } };
-/** Running: Axons' busy state (spinner, aria-disabled + aria-busy, focusable, clicks ignored). */
+/** Running: the Button's busy state (spinner, aria-disabled + aria-busy, focusable, clicks ignored). */
 export const Running: Story = { args: { status: "running" } };
 /** Done: "Replay the demo". */
 export const Done: Story = { args: { status: "done" } };

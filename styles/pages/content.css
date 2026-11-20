@@ -18,7 +18,7 @@
 .ez-page ol {
     padding-left: 1.1rem;
 }
-/* Text links only: Axons Buttons rendered as links (`.ez-cta`) keep their own colours. */
+/* Text links only: Buttons rendered as links (`.ez-cta`) keep their own colours. */
 .ez-page a:not(.ez-cta) {
     color: var(--accent-2);
     overflow-wrap: anywhere;
@@ -111,7 +111,7 @@
     margin-top: 0.75rem;
 }
 
-/* Home actions: Axons Buttons (components/ui/Button) as links; only their row is laid out here. */
+/* Home actions: Buttons (components/ui/Button) as links; only their row is laid out here. */
 .ez-home__actions {
     display: flex;
     flex-wrap: wrap;

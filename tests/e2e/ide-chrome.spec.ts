@@ -3,7 +3,7 @@ import { acceptCookiesButton, cookieBanner } from "./support/home";
 import { lp } from "./support/locale-path";
 
 // EZJSDEV shell chrome after the UI feedback: no line numbers in the reading zone, the explorer
-// switch of the activity bar, the title-bar logo's light sweep (components/ui/Logo.tsx + styles/ui/logo.css) and Axons'
+// switch of the activity bar, the title-bar logo's light sweep (components/ui/Logo.tsx + styles/ui/logo.css) and the
 // Button on the home, the demo and the contact page. Explicit "/fr" prefix so labels are known.
 
 async function ready(page: Page, path = "/fr") {
@@ -21,7 +21,7 @@ const explorerSwitch = (page: Page) => page.locator(".ide-activity__toggle");
 
 // Computed animation names of the three glyphs of a logo (they never animate). `scope` is the
 // logo's container: the title bar (.ide-brand) or the pre-hydration splash (.splash-logo, the real
-// Logo rendered by Axons through SITE.splash.logo).
+// Logo rendered through SPLASH.logo).
 const glyphAnimations = (page: Page, scope = ".ide-brand") =>
     page.locator(`${scope} .logo__glyph`).evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
 // The light sweep of a logo (components/ui/Logo.tsx .logo__sheen, styles/ui/logo.css).
@@ -39,7 +39,7 @@ const glyphGeometry = (page: Page, scope = ".ide-brand") =>
             return [r.x, r.y, r.width, r.height, s.transform, s.strokeDasharray, s.strokeDashoffset].join("|");
         }),
     );
-// The whole splash logo (Axons breathes it with logoBreath; ezjsdev keeps it still) and the former
+// The whole splash logo (the generic splash breathes it; ezjsdev keeps it still) and the former
 // CSS-mask workaround (#app-splash::before), which must stay gone.
 const splashLogo = (page: Page) =>
     page.locator("#app-splash svg.splash-logo").evaluate((el) => {
@@ -115,7 +115,7 @@ test.describe("IDE chrome — desktop", () => {
         await expect(activityNav(page).getByRole("link").first()).toBeFocused();
     });
 
-    test("the title-bar logo is Axons' Logo, swept by a light without hover, glyph still", async ({ page }) => {
+    test("the title-bar logo is the shared Logo, swept by a light without hover, glyph still", async ({ page }) => {
         await ready(page);
         const logo = page.locator(".ide-brand svg.logo");
         await expect(logo).toHaveAttribute("role", "img");
@@ -143,7 +143,7 @@ test.describe("IDE chrome — desktop", () => {
         expect((await sheen(page)).name).toBe("ezLogoSheen");
     });
 
-    test("the home and contact actions are Axons Buttons (links stay links)", async ({ page }) => {
+    test("the home and contact actions are Buttons (links stay links)", async ({ page }) => {
         await ready(page);
         const main = page.getByRole("main");
         const contact = main.getByRole("link", { name: "Me contacter" });

@@ -6,7 +6,7 @@ import type { OutlineItem } from "./preview-model";
 // The page's outline, like VS Code's "Outline" view: its h2/h3 headings in order, h3 indented,
 // the section being read marked `aria-current="location"`. A heading with an id is a real link to
 // its anchor (#id: the browser scrolls the editor, the URL can be shared); a heading the page
-// renders without an id (Markdown and legal pages, rendered by Axons) is a button that scrolls to
+// renders without an id (Markdown and legal pages, rendered by the generic components) is a button that scrolls to
 // it. Presentational: the items and the scrolling come from PagePreview (use-outline.ts).
 export function PreviewOutline({
     items,

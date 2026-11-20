@@ -58,7 +58,7 @@ test.describe("Site configuration", () => {
         await expect(cookieBanner(page)).toBeHidden();
     });
 
-    // The Axons home showcase (scripted terminal, tabs) was removed with the demo home: ezjsdev's
+    // The demo home showcase (scripted terminal, tabs) was removed with the demo home: ezjsdev's
     // own terminal demo is covered by tests/e2e/seo-demo.spec.ts.
 
     test("no ad placeholder in a production build", async ({ page }) => {

@@ -84,12 +84,12 @@ test.describe("Content pages", () => {
         await expect(page.getByRole("heading", { level: 1, name: "Projekte" })).toBeVisible();
     });
 
-    test("Contact offers LinkedIn only, as an external Axons Button link (no e-mail)", async ({ page }) => {
+    test("Contact offers LinkedIn only, as an external Button link (no e-mail)", async ({ page }) => {
         await page.goto("/fr/contact");
         const main = page.getByRole("main");
         const linkedin = main.getByRole("link", { name: /Profil LinkedIn de Yoann Barbier/ });
         await expect(linkedin).toHaveAttribute("href", PROFILE.linkedinUrl);
-        // Axons' Button rendered as a real <a> (its classes, no nested <button>), `external`: new tab,
+        // The Button rendered as a real <a> (its classes, no nested <button>), `external`: new tab,
         // safe rel, hidden localized "(new tab)" in the accessible name.
         await expect(linkedin).toHaveClass(/MuiButton-root/);
         await expect(linkedin.locator("button")).toHaveCount(0);

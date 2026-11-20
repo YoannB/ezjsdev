@@ -80,7 +80,7 @@ test.describe("SEO site demo — desktop", () => {
 
         const open = card(page).getByRole("link", { name: /Ouvrir le site/ });
         await expect(open).toHaveAttribute("href", AXONS);
-        // Axons' Button as an `external` link: a real <a> with the button classes, new tab, safe rel,
+        // The Button as an `external` link: a real <a> with the button classes, new tab, safe rel,
         // and the hidden localized "(new tab)" in its accessible name.
         await expect(open).toHaveClass(/MuiButton-root/);
         await expect(open).toHaveAttribute("target", "_blank");
@@ -100,12 +100,12 @@ test.describe("SEO site demo — desktop", () => {
 
     test("the button is busy while running (focus kept, no double launch), then replays", async ({ page }) => {
         await ready(page);
-        // Axons' Button: a real <button> with its classes (not a hand-made one).
+        // The Button: a real <button> with its classes (not a hand-made one).
         await expect(homeButton(page)).toHaveClass(/MuiButton-root/);
         await expect(homeButton(page)).toHaveJSProperty("tagName", "BUTTON");
         await expect(terminalButton(page)).toHaveClass(/MuiButton-sizeSmall/);
         await homeButton(page).click();
-        // Axons' busy state: aria-disabled + aria-busy, still enabled and focused, clicks ignored.
+        // The Button's busy state: aria-disabled + aria-busy, still enabled and focused, clicks ignored.
         await expect(homeButton(page)).toHaveAttribute("aria-busy", "true");
         await expect(homeButton(page)).toHaveAttribute("aria-disabled", "true");
         // Not natively disabled (Playwright's toBeEnabled() reads aria-disabled, so check the property).

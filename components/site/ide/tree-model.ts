@@ -22,7 +22,7 @@ export interface PageFileDecl<R extends string = string> {
 export interface CollectionFilesDecl {
     readonly kind: "collection";
     readonly id: string;
-    /** Collection id (constants/site.ts `collections`, or Axons' "articles"). */
+    /** Collection id (constants/site.ts `COLLECTIONS`: "articles", "reminders"). */
     readonly collection: string;
 }
 

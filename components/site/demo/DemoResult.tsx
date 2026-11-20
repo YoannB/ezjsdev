@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { demoThumbnail } from "./demo-model";
 
-// Result card of the demo (spec v0.2 §7.3): the Axons boilerplate this site is built on, its live
-// preview URL and an "Open the site" link (Axons `Button` as an `external` link: new tab, localized
+// Result card of the demo (spec v0.2 §7.3): Axons, the open source boilerplate this site is built on, its live
+// preview URL and an "Open the site" link (`Button` as an `external` link: new tab, localized
 // hidden "(new tab)"; no deployment). A static thumbnail of the preview
 // in the painted theme (public/demo/, fixed 640×400 → no layout shift); if it fails to load, a
 // plain fallback box keeps the card usable. Only facts already published on the Projects page.

@@ -13,8 +13,8 @@ export interface DemoControls {
 export const DemoContext = createContext<DemoControls | null>(null);
 
 /**
- * "Generate a site" button: Axons' `Button` (its gradient/halo animation, a real <button>). While
- * the demo runs it is in Axons' `busy` state (spinner, `aria-disabled` + `aria-busy`, no native
+ * "Generate a site" button: the `Button` (its gradient/halo animation, a real <button>). While
+ * the demo runs it is in the Button's `busy` state (spinner, `aria-disabled` + `aria-busy`, no native
  * `disabled`: it KEEPS the focus and ignores clicks, so no double launch), then becomes "Replay". `short`: the compact label and size of the terminal bar.
  */
 export function DemoButton({ className, short = false }: { className?: string; short?: boolean }) {
