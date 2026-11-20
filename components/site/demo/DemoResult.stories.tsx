@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ComponentType } from "react";
 import axonsEn from "../../../messages/en.json";
-import en from "../../../site/messages/en.json";
+import en from "../../../messages/en.json";
 import { DemoResult } from "./DemoResult";
 
 // Result card of the "Generate a site" demo: the Axons preview (static thumbnail in the

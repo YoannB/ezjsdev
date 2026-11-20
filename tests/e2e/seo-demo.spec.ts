@@ -146,7 +146,7 @@ test.describe("SEO site demo — desktop", () => {
         expect(requests.filter((u) => !u.startsWith(origin))).toEqual([]);
         expect(requests.filter((u) => new URL(u).pathname.startsWith("/api/"))).toEqual([]);
         // The card shows the local thumbnail. It may come from the cache: the home's preview panel
-        // already shows the same capture of Axons (site/preview.ts), so no new request is required.
+        // already shows the same capture of Axons (constants/preview.ts), so no new request is required.
         const thumb = card(page).locator("img");
         await expect
             .poll(() => thumb.evaluate((img: HTMLImageElement) => img.complete && new URL(img.currentSrc).pathname))

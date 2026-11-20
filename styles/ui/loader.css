@@ -23,23 +23,11 @@
 body:has(.root-not-found) #app-splash {
     display: none;
 }
-/* Logo of the splash (SITE.splash.logo): a site restyles/re-animates it from site/theme.css;
-   the global prefers-reduced-motion rule (styles/a11y.css) freezes any CSS animation on it. */
+/* Logo of the splash (SPLASH.logo, constants/site.ts). ezjsdev: the mark stays still, only the
+   light sweep of styles/ui/logo.css moves (the glyph never moves: no breath, no scale). */
 .splash-logo {
     width: 120px;
     height: 120px;
-    animation: logoBreath 2.6s ease-in-out infinite;
-}
-@keyframes logoBreath {
-    0%,
-    100% {
-        transform: scale(0.96);
-        opacity: 0.92;
-    }
-    50% {
-        transform: scale(1.04);
-        opacity: 1;
-    }
 }
 .loader {
     display: flex;

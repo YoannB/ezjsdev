@@ -8,7 +8,7 @@ import { displayUrl, type ShownCapture } from "./preview-model";
 // decorative (non-interactive) back/forward/reload glyphs, the image, an honest caption ("Site
 // capture": not a live preview) and an "Open the site" link (Axons `Button`, `external`: new tab,
 // rel="noopener noreferrer", localized hidden "(new tab)"). A site with two themes ships two
-// captures: CSS shows the one of the painted theme (site/preview.css), and the hidden one, being
+// captures: CSS shows the one of the painted theme (styles/layout/ide-preview.css), and the hidden one, being
 // `loading="lazy"` and `display: none`, is never downloaded. Fixed 640×400 ratio: no layout shift.
 export function BrowserFrame({ capture }: { capture: ShownCapture }) {
     const t = useTranslations("ide");

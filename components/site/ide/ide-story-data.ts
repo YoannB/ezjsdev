@@ -1,7 +1,7 @@
 // Storybook fixtures of the IDE shell (no fs, no server): a small resolved tree as SiteShell.tsx
 // would hand it to the client, and the English `ide` messages of the site.
 import axonsEn from "@/messages/en.json";
-import en from "@/site/messages/en.json";
+import en from "@/messages/en.json";
 import type { TreeFile, TreeNode } from "./tree-model";
 
 // `common`: Axons' Button reads `common.newTab` for its external links.

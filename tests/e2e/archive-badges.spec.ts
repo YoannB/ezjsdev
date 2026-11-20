@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { blockDisqus } from "./support/disqus";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
 
-// EZJSDEV archive rules (site/config.ts → collectionDefaults: { newForDays: 90, archiveBefore:
+// EZJSDEV archive rules (constants/site.ts → collectionDefaults: { newForDays: 90, archiveBefore:
 // "2018-01-01" }): every migrated article (2013–2015) and reminder (2013–2017) is an archive, none
 // is "New", and the home blocks are titled as archives instead of "latest". A future entry (dated
 // within 90 days) will carry "New": covered by Axons' unit tests (lib/articles/status.ts).

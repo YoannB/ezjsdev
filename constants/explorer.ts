@@ -2,8 +2,8 @@ import type { ExplorerDecl } from "@/components/site/ide/tree-model";
 import type { LogicalHref } from "@/lib/seo";
 
 // EZJSDEV — the explorer tree of the IDE shell: which "files" exist and which REAL route each one
-// opens (logical hrefs of routing.pathnames, Axons' + site/config.ts). Folder names live in
-// site/messages/<locale>.json under `ide.tree`; page titles/descriptions reuse the pages' messages.
+// opens (logical hrefs of routing.pathnames, Axons' + constants/site.ts). Folder names live in
+// messages/<locale>.json under `ide.tree`; page titles/descriptions reuse the pages' messages.
 // Model and rules: components/site/ide/tree-model.ts. Spec v0.2 §5 (tree) and §6.1 (no file
 // without a real page): a future page (SEO tools) is declared `planned` and stays hidden until it exists.
 export const EXPLORER = [
@@ -74,7 +74,7 @@ export const EXPLORER = [
             },
         ],
     },
-    // Planned (spec §5.5): no real SEO tool exists yet. Add the route to site/config.ts
+    // Planned (spec §5.5): no real SEO tool exists yet. Add the route to constants/site.ts
     // `pathnames`, the page, then a `page` child here and drop `planned`.
     { kind: "folder", id: "seo-tools", labelKey: "seoTools", planned: true, children: [] },
     {

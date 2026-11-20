@@ -1,12 +1,12 @@
 import { StaticPage } from "@/components/content/StaticPage";
 import { Link } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
-import { PROJECTS } from "@/site/profile";
+import { PROJECTS } from "@/constants/profile";
 import { getTranslations } from "next-intl/server";
 
 // EZJSDEV — Projects (spec v0.2 §5.4, revised by the user): Axons first (flagship), then the
 // idealco.fr redesign. Context, exact role, contribution when documented, real technologies, links.
-// No figure and no other client reference. Copy: site/messages → `pages.projects.items.<id>`.
+// No figure and no other client reference. Copy: messages → `pages.projects.items.<id>`.
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;

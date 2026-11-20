@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 
 // EZJSDEV — Services: "what I can do", the offers validated by the user (positioning of 2026-11), nothing
-// else, never a price. Copy: site/messages → `pages.services`.
+// else, never a price. Copy: messages → `pages.services`.
 // Headings carry stable ids (position, not translated text): the preview panel's outline links to them.
 
 type Service = { title: string; body: string };

@@ -1,10 +1,10 @@
 import { expect, test, type Page } from "@playwright/test";
-import { PROFILE } from "../../site/profile";
+import { PROFILE } from "../../constants/profile";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption } from "./support/home";
 import { lp, lpRe } from "./support/locale-path";
 
 // EZJSDEV content pages (spec v0.2 §5.2–§5.6): About, Services, Projects, Contact — translated
-// routes (site/config.ts), explorer files (site/explorer.ts), sitemap.xml, language switch,
+// routes (constants/site.ts), explorer files (constants/explorer.ts), sitemap.xml, language switch,
 // contact link (LinkedIn only), the absence of any myKeople figure and of the words the user does not
 // use about himself, and the 375px layout. Pages are
 // opened with an explicit locale prefix (redirected to the canonical URL for the default locale).

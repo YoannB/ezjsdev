@@ -39,5 +39,9 @@
 @import "../styles/text-tools.css";
 @import "../styles/ui/tabs.css";
 @import "../styles/ui/terminal.css";
-/* LAST: the derived site's own CSS (token overrides, brand rules). Empty in Axons. */
-@import "../site/theme.css";
+/* ezjsdev's own blocks, LAST (they win over the generic rules at equal specificity): the IDE
+   shell (page frame), the content pages, the home demo, the preview panel. */
+@import "../styles/layout/ide.css";
+@import "../styles/pages/content.css";
+@import "../styles/home/demo.css";
+@import "../styles/layout/ide-preview.css";

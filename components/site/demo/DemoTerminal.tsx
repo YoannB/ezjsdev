@@ -7,7 +7,7 @@ import { DemoResult } from "./DemoResult";
 // Body of the terminal panel while the demo is shown: the scripted lines (Axons `Terminal`,
 // `live={false}`: lines are NOT announced one by one — the shell's role="status" region announces
 // the start and the result) and, once done, the result card (beside the lines when the panel is
-// wide enough, below otherwise: container query in site/demo.css).
+// wide enough, below otherwise: container query in styles/home/demo.css).
 export function DemoTerminal({ status, shown, run }: { status: DemoStatus; shown: number; run: number }) {
     const t = useTranslations("demo");
     const script = t.raw("lines") as string[];

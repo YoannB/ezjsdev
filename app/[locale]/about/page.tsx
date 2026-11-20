@@ -3,13 +3,13 @@ import { profileJsonLd } from "@/components/site/content/profile-model";
 import { SITE_URL } from "@/constants/site";
 import { getPathname, Link } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
-import { PROFILE } from "@/site/profile";
+import { PROFILE } from "@/constants/profile";
 import { getTranslations } from "next-intl/server";
 
 // EZJSDEV — About (spec v0.2 §5.2), staged as "A-propos/contenu.md" in the explorer. Short and
 // turned to today (independent full-stack developer, author of Axons); the full background lives
-// on LinkedIn, linked from here (user decision). Copy: site/messages → `pages.about`. No figure.
-// Headings carry stable ids: the preview panel's outline links to them (site/preview.ts).
+// on LinkedIn, linked from here (user decision). Copy: messages → `pages.about`. No figure.
+// Headings carry stable ids: the preview panel's outline links to them (constants/preview.ts).
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;

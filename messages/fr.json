@@ -7,7 +7,13 @@
         "privacy": "Confidentialité",
         "cookies": "Cookies",
         "github": "GitHub",
-        "menu": "Menu"
+        "menu": "Menu",
+        "tagline": "Sites web & applications — React, TypeScript, Node.js",
+        "reminders": "Pense-bêtes",
+        "about": "À propos",
+        "services": "Services",
+        "projects": "Projets",
+        "contact": "Contact"
     },
     "hero": {
         "badge": "Votre assistant IA, prêt en un clic",
@@ -165,7 +171,7 @@
         ]
     },
     "footer": {
-        "tagline": "Votre base pour des apps IA modernes",
+        "tagline": "Développement full-stack indépendant, basé à Nantes.",
         "rights": "© {year} {site}. Tous droits réservés.",
         "builtWith": "Construit avec Next.js, Material UI, next-intl et OpenRouter"
     },
@@ -459,13 +465,130 @@
         },
         "articles": {
             "title": "Articles",
-            "intro": "Guides et notes de fond sur le site, publiés en Markdown.",
+            "intro": "Articles techniques rédigés entre 2013 et 2015, conservés tels quels en archive.",
             "latestTitle": "Derniers articles",
-            "archivesTitle": "Dans les archives",
+            "archivesTitle": "Articles (archives)",
             "viewAll": "Tous les articles",
             "publishedOn": "Publié le {date}",
             "onlyIn": "Disponible uniquement en {language}",
             "empty": "Aucun article pour le moment."
+        },
+        "reminders": {
+            "title": "Pense-bêtes",
+            "intro": "Aide-mémoire techniques rédigés entre 2013 et 2017, conservés tels quels en archive.",
+            "empty": "Aucun pense-bête pour le moment.",
+            "publishedOn": "Publié le {date}",
+            "onlyIn": "Disponible uniquement en {language}",
+            "latestTitle": "Derniers pense-bêtes",
+            "archivesTitle": "Pense-bêtes (archives)",
+            "viewAll": "Tous les pense-bêtes"
+        },
+        "about": {
+            "title": "À propos",
+            "intro": "Yoann Barbier, développeur full-stack indépendant à Nantes depuis 2021 : React, TypeScript, Node.js, et auteur du boilerplate open source Axons.",
+            "lead": "Développeur full-stack indépendant à Nantes depuis 2021, je conçois et fais évoluer des applications web avec React, TypeScript et Node.js. Je suis l'auteur d'Axons, le boilerplate Next.js open source sur lequel repose ce site.",
+            "summaryTitle": "En bref",
+            "summary": [
+                "Développeur full-stack indépendant depuis 2021.",
+                "React, TypeScript, Node.js.",
+                "Auteur du boilerplate open source Axons.",
+                "Basé à Nantes, en télétravail ou sur site selon les projets."
+            ],
+            "approachTitle": "Approche",
+            "approach": [
+                "J'interviens principalement sur les environnements JavaScript et TypeScript, avec une attention particulière portée à la qualité du code, aux performances et à la robustesse des solutions.",
+                "J'aime comprendre et résoudre des problèmes, en particulier d'algorithmique : j'ai participé aux marathons des TopCoder Open, pour le plaisir."
+            ],
+            "backgroundTitle": "Parcours en bref",
+            "background": [
+                "Plus de 15 ans d'expérience professionnelle.",
+                "CTO de Keople (plateforme SaaS RH myKeople) de 2014 à 2018, puis lead developer full-stack de 2018 à 2021.",
+                "Développeur full-stack indépendant depuis 2021.",
+                "Diplômé de Polytech'Nantes en 2008."
+            ],
+            "linkedinCta": "Parcours complet sur LinkedIn",
+            "newTab": "(nouvel onglet)",
+            "nextTitle": "Pour continuer"
+        },
+        "services": {
+            "title": "Services",
+            "intro": "Ce que Yoann Barbier, développeur full-stack indépendant, peut faire : un site à partir d'Axons, du développement web avec l'IA, un projet prêt pour les agents de code, l'organisation d'un projet à plusieurs, l'algorithmique.",
+            "lead": "Quelques sujets sur lesquels je peux vous être utile aujourd'hui.",
+            "listTitle": "Ce que je peux faire",
+            "items": [
+                {
+                    "title": "Un site ou une petite application web à partir d'Axons",
+                    "body": "En quelques jours, avec un code qui vous appartient et que votre propre IA pourra faire évoluer."
+                },
+                {
+                    "title": "Du développement web avec l'IA (React, TypeScript, Node.js)",
+                    "body": "L'IA écrit une grande partie du code, je m'occupe du cadre : contexte, règles, tests, relecture."
+                },
+                {
+                    "title": "Préparer un projet pour travailler avec des agents de code",
+                    "body": "Conventions, documentation pour les agents, tests automatiques, comme pour Axons."
+                },
+                {
+                    "title": "Organiser un projet à plusieurs",
+                    "body": "Découper le travail, le répartir selon ce que chacun préfère faire, et avancer en montrant l'exemple."
+                },
+                {
+                    "title": "Un problème d'algorithmique ou d'optimisation",
+                    "body": "Quand il faut trouver une bonne solution parmi beaucoup de possibilités."
+                }
+            ],
+            "nextTitle": "Pour continuer"
+        },
+        "projects": {
+            "title": "Projets",
+            "intro": "Projets de Yoann Barbier : Axons, boilerplate Next.js open source dont dérive ce site, et la refonte du site idealco.fr en Next.js 14+.",
+            "lead": "Chaque projet est présenté avec son contexte, mon rôle et les technologies réellement utilisées.",
+            "current": "Projet actuel",
+            "context": "Contexte",
+            "role": "Rôle",
+            "contribution": "Contribution",
+            "stack": "Technologies",
+            "linksTitle": "Liens",
+            "newTab": "(nouvel onglet)",
+            "links": {
+                "source": "Code source sur GitHub",
+                "preview": "Aperçu en ligne d'Axons",
+                "idealco": "Site idealco.fr"
+            },
+            "items": {
+                "axons": {
+                    "name": "Axons",
+                    "tagline": "Boilerplate Next.js open source, socle de ce site",
+                    "context": "Axons est un socle réutilisable pour créer des sites et applications web Next.js multilingues et bien référencés. Ce site, ezjsdev, en dérive : il n'ajoute que son identité, ses pages et ses contenus, et reprend tout le reste d'Axons.",
+                    "note": "Conçu et développé entièrement avec l'assistance de l'IA (ChatGPT, Qwen, Claude).",
+                    "role": "Auteur : conception, développement et maintenance du projet.",
+                    "contribution": [
+                        "Next.js 16 (App Router) et React 19, en TypeScript",
+                        "Six langues avec URL traduites, balises hreflang, sitemap XML et données structurées",
+                        "Articles et collections en Markdown, avec coloration du code au rendu serveur",
+                        "Composants Material UI isolés derrière une API neutre, thèmes clair et sombre",
+                        "Points d'extension pour dériver un site sans modifier le socle",
+                        "Tests unitaires et end-to-end, Storybook, intégration continue et déploiement sur Netlify"
+                    ]
+                },
+                "idealco": {
+                    "name": "Idealco",
+                    "tagline": "Refonte du site idealco.fr en Next.js 14+",
+                    "context": "Refonte du site idealco.fr en Next.js 14+, de 2023 à 2025, après une première collaboration avec Idealco en 2021-2022.",
+                    "role": "Développeur full-stack indépendant."
+                }
+            },
+            "nextTitle": "Pour continuer"
+        },
+        "contact": {
+            "title": "Contact",
+            "intro": "Contacter Yoann Barbier, développeur full-stack indépendant à Nantes, par LinkedIn.",
+            "lead": "Le plus simple pour me joindre est LinkedIn.",
+            "linkedinTitle": "LinkedIn",
+            "linkedinBody": "Envoyez-moi un message depuis mon profil :",
+            "linkedinCta": "Profil LinkedIn de Yoann Barbier",
+            "locationTitle": "Localisation",
+            "location": "Basé à Nantes, disponible en télétravail ou sur site selon les projets."
         }
     },
     "notFound": {
@@ -474,8 +597,8 @@
     },
     "meta": {
         "home": {
-            "title": "Axons — le boilerplate Next.js pour vos agents IA",
-            "description": "Un socle Next.js 16 moderne, rapide et SEO pour créer des applications IA multilingues, déployables sur Netlify."
+            "title": "ezjsdev — Développeur full-stack React, TypeScript, Node.js à Nantes",
+            "description": "Yoann Barbier, développeur full-stack indépendant à Nantes : sites et applications web avec React, TypeScript et Node.js, développés avec l'IA en gardant la main sur la qualité."
         }
     },
     "entryStatus": {
@@ -490,5 +613,103 @@
         "show": "Afficher les commentaires",
         "always": "Toujours afficher les commentaires",
         "loading": "Chargement des commentaires…"
+    },
+    "ide": {
+        "skip": "Aller au contenu",
+        "explorer": "Explorateur",
+        "files": "Fichiers du site",
+        "openExplorer": "Ouvrir l'explorateur",
+        "closeExplorer": "Fermer l'explorateur",
+        "showExplorer": "Afficher l'explorateur",
+        "hideExplorer": "Masquer l'explorateur",
+        "activity": "Barre d'activité",
+        "tabs": "Fichiers ouverts",
+        "closeTab": "Fermer {label}",
+        "preview": "Aperçu",
+        "showPreview": "Afficher l'aperçu",
+        "hidePreview": "Masquer l'aperçu",
+        "previewEmpty": "Aucun fichier ouvert.",
+        "previewUrl": "Adresse de la page :",
+        "previewLanguages": "Aussi disponible en",
+        "outline": "Plan de la page",
+        "shareCard": "Carte de partage",
+        "captureCaption": "Capture du site",
+        "captureAlt": {
+            "axons": "Capture de la page d'accueil d'Axons en français : titre « Le boilerplate Next.js pour vos sites SEO » et boutons « Voir la démo » et « Plan du site ».",
+            "idealco": "Capture de la page d'accueil d'idealco.fr : titre « Réalisez vos projets territoriaux grâce à notre réseau d'entraide & nos formations » et boutons « Se connecter » et « Créer un compte »."
+        },
+        "openSite": "Ouvrir le site",
+        "terminal": "Terminal",
+        "showTerminal": "Afficher le terminal",
+        "hideTerminal": "Masquer le terminal",
+        "terminalLog": "Sortie du terminal",
+        "statusbar": "Liens du site",
+        "tree": {
+            "home": "Accueil",
+            "about": "A-propos",
+            "services": "Services",
+            "projects": "Projets",
+            "seoTools": "Nos-Outils-SEO",
+            "contact": "Contact",
+            "articles": "Articles",
+            "reminders": "Pense-betes",
+            "sitemap": "Plan-du-site",
+            "legal": "Mentions-legales",
+            "privacy": "Confidentialite",
+            "cookies": "Cookies"
+        },
+        "fileNames": {
+            "about": "contenu.md"
+        }
+    },
+    "siteHome": {
+        "kicker": "Yoann Barbier · Nantes",
+        "title": "Développeur full-stack — React, TypeScript, Node.js",
+        "lead": "Développeur full-stack indépendant à Nantes, je conçois et fais évoluer des sites et des applications web en JavaScript et TypeScript, aujourd'hui avec l'aide de l'IA. Je reste attentif à la qualité du code, aux tests et à la solidité de ce qui est livré.",
+        "approachTitle": "Ma façon de travailler",
+        "approach": [
+            "Comprendre un problème avant de le résoudre, et chercher la solution la plus simple qui tienne.",
+            "Anticiper plutôt que subir : poser un contexte clair dès le départ, pour éviter les changements de dernière minute.",
+            "Bien faire les choses, quitte à y passer un peu plus de temps, pour moins devoir y revenir ensuite.",
+            "Développer avec l'IA (Claude Code, modèles locaux) en gardant la main sur la qualité, les tests et les choix techniques.",
+            "Les problèmes d'algorithmique et d'optimisation, comme ceux des TopCoder Open, avec des approches comme le recuit simulé ou le beam search."
+        ],
+        "contactCta": "Me contacter",
+        "aboutCta": "Mon parcours",
+        "servicesAll": "Voir ce que je peux faire",
+        "projectsTitle": "Projets",
+        "projectsAll": "Voir les projets"
+    },
+    "demo": {
+        "trigger": "Générer un site",
+        "running": "Démonstration en cours…",
+        "replay": "Rejouer la démonstration",
+        "replayShort": "Rejouer",
+        "note": "Démonstration simulée dans le terminal : aucun site n'est réellement généré ni déployé.",
+        "terminalLabel": "Démonstration : génération d'un site",
+        "announceStart": "Démonstration lancée dans le terminal.",
+        "announceDone": "Démonstration terminée. Résultat présenté : Axons, le boilerplate de ce site.",
+        "lines": [
+            "Démonstration : simulation du processus de création d'un site",
+            "Analyse du besoin",
+            "Préparation du projet",
+            "Création des pages",
+            "Optimisation SEO : meta, sitemap, robots.txt",
+            "Génération des pages statiques",
+            "Finalisation",
+            "Fin de la démonstration. Exemple de résultat : Axons."
+        ],
+        "result": {
+            "title": "Exemple de résultat : Axons",
+            "text": "Axons est le boilerplate Next.js open source qui sert de base à ezjsdev. Ce site existe déjà : le bouton ouvre sa prévisualisation, sans rien générer ni déployer.",
+            "facts": [
+                "Next.js 16 et React 19, en TypeScript",
+                "Six langues avec URL traduites",
+                "Thèmes clair et sombre"
+            ],
+            "open": "Ouvrir le site",
+            "thumbAlt": "Capture de la page d'accueil d'Axons en français : titre « Le boilerplate Next.js pour vos sites SEO » et boutons « Voir la démo » et « Plan du site ».",
+            "thumbError": "Aperçu indisponible. Le lien « Ouvrir le site » reste utilisable."
+        }
     }
 }

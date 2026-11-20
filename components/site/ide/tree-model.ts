@@ -1,6 +1,6 @@
 // PURE module (no React, no next-intl, no fs): the explorer tree of the ezjsdev IDE shell and the
 // tab <-> URL derivation. The DECLARATION (which "files" exist, which route each one opens) lives
-// in site/explorer.ts; components/site/ide/SiteShell.tsx resolves it on the server (labels,
+// in constants/explorer.ts; components/site/ide/SiteShell.tsx resolves it on the server (labels,
 // localized hrefs, collection entries) through the callbacks of `ResolveContext`, and the client
 // shell only derives state from the URL with the helpers below. Unit tests: tests/unit/ide-tree.test.ts.
 
@@ -22,7 +22,7 @@ export interface PageFileDecl<R extends string = string> {
 export interface CollectionFilesDecl {
     readonly kind: "collection";
     readonly id: string;
-    /** Collection id (site/config.ts `collections`, or Axons' "articles"). */
+    /** Collection id (constants/site.ts `collections`, or Axons' "articles"). */
     readonly collection: string;
 }
 
@@ -41,7 +41,7 @@ export interface FolderDecl<R extends string = string> {
     readonly children: readonly ExplorerDecl<R>[];
 }
 
-/** `R` = the logical routes a page may open (site/explorer.ts passes routing's static hrefs). */
+/** `R` = the logical routes a page may open (constants/explorer.ts passes routing's static hrefs). */
 export type ExplorerDecl<R extends string = string> = PageFileDecl<R> | CollectionFilesDecl | FolderDecl<R>;
 
 /** The same page in every served locale where it exists (preview panel language links). */

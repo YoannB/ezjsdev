@@ -1,5 +1,5 @@
 // PURE module (no React, no next-intl): the types of ezjsdev's projects and the schema.org data of
-// the About page. Data: site/profile.ts. Unit tests: tests/unit/profile-model.test.ts.
+// the About page. Data: constants/profile.ts. Unit tests: tests/unit/profile-model.test.ts.
 
 export interface ProjectLink {
     /** Label key under `pages.projects.links`. */

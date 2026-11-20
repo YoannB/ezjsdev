@@ -1,6 +1,6 @@
 /* =====================================================================
    ezjsdev — "Generate a site" demo (components/site/demo/*, spec v0.2 §7). Imported by
-   site/theme.css. The terminal panel shows the scripted lines, then the result card: beside the
+   app/globals.css. The terminal panel shows the scripted lines, then the result card: beside the
    lines when the panel is wide enough, below otherwise (container queries: the panel width, not
    the viewport, decides — it depends on the explorer and the preview column).
    ===================================================================== */

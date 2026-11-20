@@ -3,7 +3,7 @@ import { acceptCookiesButton, cookieBanner } from "./support/home";
 import { lp } from "./support/locale-path";
 
 // EZJSDEV shell chrome after the UI feedback: no line numbers in the reading zone, the explorer
-// switch of the activity bar, the title-bar logo's light sweep (Axons' Logo + site/theme.css) and Axons'
+// switch of the activity bar, the title-bar logo's light sweep (components/ui/Logo.tsx + styles/ui/logo.css) and Axons'
 // Button on the home, the demo and the contact page. Explicit "/fr" prefix so labels are known.
 
 async function ready(page: Page, path = "/fr") {
@@ -24,7 +24,7 @@ const explorerSwitch = (page: Page) => page.locator(".ide-activity__toggle");
 // Logo rendered by Axons through SITE.splash.logo).
 const glyphAnimations = (page: Page, scope = ".ide-brand") =>
     page.locator(`${scope} .logo__glyph`).evaluateAll((els) => els.map((el) => getComputedStyle(el).animationName));
-// The light sweep of a logo (site/logo.tsx .logo__sheen, site/theme.css).
+// The light sweep of a logo (components/ui/Logo.tsx .logo__sheen, styles/ui/logo.css).
 const sheen = (page: Page, scope = ".ide-brand") =>
     page.locator(`${scope} .logo__sheen`).evaluate((el) => {
         const s = getComputedStyle(el);

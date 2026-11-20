@@ -1,7 +1,7 @@
 /* =====================================================================
    ezjsdev — body of the IDE shell's preview panel (components/site/ide/PagePreview.tsx and its
-   views: PreviewOutline, BrowserFrame, ShareCard). Imported by site/theme.css. The panel frame
-   itself (bar, collapse, widths per breakpoint) stays in site/ide.css.
+   views: PreviewOutline, BrowserFrame, ShareCard). Imported by app/globals.css. The panel frame
+   itself (bar, collapse, widths per breakpoint) stays in styles/layout/ide.css.
    ===================================================================== */
 
 .ide-preview {

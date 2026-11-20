@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui";
 import { useTheme } from "@/hooks/use-theme";
-import { AXONS_PREVIEW_URL } from "@/site/profile";
+import { AXONS_PREVIEW_URL } from "@/constants/profile";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { demoThumbnail } from "./demo-model";

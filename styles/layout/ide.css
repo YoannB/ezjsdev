@@ -1,6 +1,6 @@
 /* =====================================================================
-   ezjsdev — IDE shell (components/site/ide/*, components/site/home/*). Imported by site/theme.css,
-   itself imported LAST by app/globals.css: these rules win over Axons' styles at equal specificity.
+   ezjsdev — IDE shell (components/site/ide/*, components/home/Home.tsx). Imported near the END of
+   app/globals.css (ezjsdev's blocks): these rules win over the generic styles at equal specificity.
    Layout (spec v0.2 §8): CSS Grid, rem breakpoints (browser zoom switches layouts like a narrower
    screen), panels scroll inside, never a horizontal page scroll.
    - < 64rem (tablet/mobile): compact title bar, explorer in a drawer, editor full width, preview
@@ -15,7 +15,7 @@
 .ide {
     --ide-bar-h: 3.25rem;
     --ide-row: 2rem;
-    --ide-panel-bg: var(--ez-panel); /* site/theme.css */
+    --ide-panel-bg: var(--ez-panel); /* styles/tokens.css */
     --ide-current: var(--ez-selection);
     --ide-hover: color-mix(in oklab, var(--text-1) 7%, transparent);
     flex: 1 0 auto;
@@ -450,7 +450,7 @@
     border-radius: var(--radius-sm);
 }
 
-/* Preview body: site/preview.css. */
+/* Preview body: styles/layout/ide-preview.css. */
 
 /* ===== Status bar (contentinfo) ===== */
 .ide-statusbar {
@@ -596,7 +596,7 @@
     }
     /* FIXED height in every state (page status, demo running, demo result): the editor and the
        preview above never change size when the terminal content grows. The body itself never
-       scrolls: each log (and the demo card, site/demo.css) is its own scroller filling it. */
+       scrolls: each log (and the demo card, styles/home/demo.css) is its own scroller filling it. */
     .ide-panel--terminal .ide-panel__body {
         display: grid;
         grid-template-rows: minmax(0, 1fr);

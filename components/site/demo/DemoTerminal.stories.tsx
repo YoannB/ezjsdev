@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { NextIntlClientProvider } from "next-intl";
 import type { ComponentType } from "react";
 import axonsEn from "../../../messages/en.json";
-import en from "../../../site/messages/en.json";
+import en from "../../../messages/en.json";
 import type { DemoStatus } from "./demo-model";
 import { DemoTerminal } from "./DemoTerminal";
 import { DemoButton, DemoContext } from "./DemoTrigger";

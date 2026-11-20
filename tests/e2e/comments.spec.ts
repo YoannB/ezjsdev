@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { COMMENTS, COMMENTS_ENABLED } from "../../constants/site";
+import { COOKIE_CONSENT } from "../../lib/cookies";
 import { blockDisqus } from "./support/disqus";
 import { cookieBanner } from "./support/home";
 import { lp } from "./support/locale-path";
@@ -8,7 +9,7 @@ import { lp } from "./support/locale-path";
 // shortname: CI sets a FAKE NEXT_PUBLIC_DISQUS_SHORTNAME, and every request to Disqus is
 // intercepted and aborted (support/disqus.ts), so the specs check what the page TRIES to load.
 // ezjsdev: every entry published so far (2013–2017 articles and reminders) is archived
-// (collectionDefaults.archiveBefore), so only the archived cases run. When the first non-archived
+// (constants/site.ts → COLLECTION_DEFAULTS.archiveBefore), so only the archived cases run. When the first non-archived
 // entry is published, set ENTRY and OTHER_ENTRY to two of them and the live cases run again.
 
 const ENTRY: string = "";
@@ -25,7 +26,7 @@ async function open(page: Page, path: string) {
 const embedUrl = () => `https://${COMMENTS?.shortname}.disqus.com/embed.js`;
 
 test.describe("Comments (Disqus)", () => {
-    test.skip(!COMMENTS_ENABLED, "comments off (no SITE.comments, no shortname or no collection with comments)");
+    test.skip(!COMMENTS_ENABLED, "comments off (no shortname or no collection with comments)");
 
     test("the cookie banner offers the comments purpose", async ({ page }) => {
         await blockDisqus(page);
@@ -91,7 +92,7 @@ test.describe("Comments (Disqus)", () => {
         await page.getByRole("button", { name: "Toujours afficher les commentaires" }).click();
         await expect.poll(() => attempts).toContain(embedUrl());
         const cookies = await page.context().cookies();
-        const consent = JSON.parse(decodeURIComponent(cookies.find((c) => c.name === "axons-consent")!.value));
+        const consent = JSON.parse(decodeURIComponent(cookies.find((c) => c.name === COOKIE_CONSENT)!.value));
         expect(consent).toMatchObject({ analytics: false, ads: false, comments: true });
         attempts.length = 0;
         await open(page, OTHER_ENTRY);

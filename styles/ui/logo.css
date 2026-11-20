@@ -1,23 +1,53 @@
-/* ===== Logo ===== */
+/* ===== Logo: the `</>` mark (components/ui/Logo.tsx) ===== */
 .logo {
     display: block;
 }
-.logo__orbit {
+.logo__glyph,
+.logo__glyph-mask {
     fill: none;
-    stroke: color-mix(in oklab, var(--accent-2) 50%, transparent);
-    stroke-width: 1.2;
-    opacity: 0.6;
+    stroke-width: 4.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
-.logo__axon {
-    fill: none;
-    stroke: var(--accent-2);
-    stroke-width: 1.4;
-    opacity: 0.5;
+
+/* Light sweep: the glyph NEVER moves (no transform, no dash, no part going towards another); a
+   light highlight derived from the accent tokens crosses it diagonally, left to right, then pauses.
+   ONE rule and ONE period for the loader, the shell's title bar and the pre-hydration splash
+   (.splash-logo: the real Logo, rendered through SPLASH.logo), continuous, no hover trigger: a
+   single keyframes drives the registered number --ez-sheen from 0 (band parked left of the mark,
+   invisible) to 1 (parked right of it), mapped on the translation of the SVG band (a rect masked by
+   the three strokes). CSS keyframes only (no SMIL, so prefers-reduced-motion applies); out of the
+   animation, and under the reduced-motion kill-switch of styles/a11y.css (one ~0ms iteration),
+   --ez-sheen is 0: the plain logo. */
+@property --ez-sheen {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
 }
-.logo__pulse {
-    fill: var(--accent-2);
-    filter: drop-shadow(0 0 6px var(--accent-2));
+:root {
+    --ez-logo-sheen-period: 4.5s;
+    --ez-logo-sheen: color-mix(in srgb, var(--accent-2) 30%, #fff);
 }
-.logo__core {
-    filter: drop-shadow(0 0 10px color-mix(in oklab, var(--accent-1) 60%, transparent));
+.logo__sheen-stop {
+    stop-color: var(--ez-logo-sheen);
+}
+.logo__sheen {
+    transform: translateX(calc(var(--ez-sheen) * 90px));
+}
+:is(.loader, .ide-brand, .splash-logo) .logo__sheen {
+    animation: ezLogoSheen var(--ez-logo-sheen-period) ease-in-out infinite;
+}
+@keyframes ezLogoSheen {
+    0% {
+        --ez-sheen: 0;
+    }
+    35%,
+    100% {
+        --ez-sheen: 1;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    :is(.loader, .ide-brand, .splash-logo) .logo__sheen {
+        animation: none;
+    }
 }

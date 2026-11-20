@@ -8,7 +8,7 @@ import { DEFAULT_LOCALE, lp, lpRe } from "./support/locale-path";
 // next-intl locale detection (Accept-Language), "/fr/..." always serves FR (redirected when default).
 const at = (locale: string, path = "") => `/${locale}${path}`;
 
-// EZJSDEV "pense-bêtes" (reminders collection, site/config.ts): listing, highlighted code, language
+// EZJSDEV "pense-bêtes" (reminders collection, constants/site.ts): listing, highlighted code, language
 // switch onto the TRANSLATED slug, soft 404, sitemap.xml and nav entry. Relies on the 14 reminders
 // migrated from the old site (content/reminders/), translated in every supported locale; the newest
 // is babel (2017-01-05), then bower (2015-03-30).
@@ -25,7 +25,7 @@ async function ready(page: Page) {
 }
 
 test.describe("Reminders", () => {
-    test.skip(!ENABLED, "reminders collection disabled (site/config.ts)");
+    test.skip(!ENABLED, "reminders collection disabled (constants/site.ts)");
     // "Accept" also grants the comments purpose: never reach Disqus from a spec (comments.spec.ts).
     test.beforeEach(async ({ page }) => {
         await blockDisqus(page);

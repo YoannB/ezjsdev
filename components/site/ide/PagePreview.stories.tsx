@@ -5,7 +5,7 @@ import { storyFile, storyMessages } from "./ide-story-data";
 import { PagePreview } from "./PagePreview";
 import type { TreeFile } from "./tree-model";
 
-// Body of the preview panel, contextual (site/preview.ts): the page's OUTLINE (long pages and
+// Body of the preview panel, contextual (constants/preview.ts): the page's OUTLINE (long pages and
 // collection entries), BROWSER FRAMES around static site captures (home, Projects), or the SHARE
 // CARD (every other page). The outline reads the real headings of the element `editorId`: the
 // stories render a small page next to the panel for it.

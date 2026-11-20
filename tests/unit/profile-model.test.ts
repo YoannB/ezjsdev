@@ -1,9 +1,9 @@
 import { profileJsonLd } from "@/components/site/content/profile-model";
-import { PROFILE, PROJECTS } from "@/site/profile";
+import { PROFILE, PROJECTS } from "@/constants/profile";
 import { describe, expect, it } from "vitest";
 
 // schema.org data of the About page (components/site/content/profile-model.ts) and the facts
-// declared in site/profile.ts (spec v0.2 §3.1, §3.4, §5.4, §5.6; no CV figure is published).
+// declared in constants/profile.ts (spec v0.2 §3.1, §3.4, §5.4, §5.6; no CV figure is published).
 
 describe("profileJsonLd", () => {
     const facts = {
@@ -45,7 +45,7 @@ describe("profileJsonLd", () => {
     });
 });
 
-describe("site/profile.ts — the published facts", () => {
+describe("constants/profile.ts — the published facts", () => {
     it("presents Axons first, then Idealco, and nothing else (no other client reference)", () => {
         expect(PROJECTS.map((p) => p.id)).toEqual(["axons", "idealco"]);
     });

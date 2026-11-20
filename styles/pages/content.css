@@ -1,7 +1,7 @@
 /* =====================================================================
    ezjsdev — content pages (About, Services, Projects, Contact: app/[locale]/<page>/page.tsx) and
-   the home's links to them. Imported by site/theme.css after ide.css. Pages render inside the IDE
-   editor (site/ide.css → "Editor"): flattened StaticPage.
+   the home's links to them. Imported by app/globals.css after ide.css. Pages render inside the IDE
+   editor (styles/layout/ide.css → "Editor"): flattened StaticPage.
    ===================================================================== */
 
 .ez-page h2 {

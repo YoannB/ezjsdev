@@ -2,7 +2,7 @@ import { expect, test, type Locator, type Page } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
 import { lp } from "./support/locale-path";
 
-// EZJSDEV — the CONTEXTUAL preview panel (components/site/ide/PagePreview.tsx, site/preview.ts):
+// EZJSDEV — the CONTEXTUAL preview panel (components/site/ide/PagePreview.tsx, constants/preview.ts):
 // the outline of long pages and entries, browser frames around static captures (home, Projects),
 // the share card everywhere else. Pages are opened with an explicit locale prefix ("/fr/...",
 // redirected to the canonical URL when fr is the default) so labels are known.
