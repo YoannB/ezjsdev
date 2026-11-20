@@ -24,6 +24,8 @@
 @import "../styles/ui/language-switcher.css";
 @import "../styles/ui/theme-toggle.css";
 @import "../styles/ui/limit-badge.css";
+/* Kept: the .article-card / .dur look reused by ArticleTeaser (collection listings, home blocks). */
+@import "../styles/home/seo-resources.css";
 @import "../styles/pages/cookie-banner.css";
 @import "../styles/pages/static.css";
 @import "../styles/pages/not-found.css";
