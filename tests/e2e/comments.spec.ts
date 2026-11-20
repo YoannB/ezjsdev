@@ -16,7 +16,9 @@ const ENTRY: string = "";
 const OTHER_ENTRY: string = "";
 const NO_LIVE_ENTRY = "no non-archived ezjsdev entry yet (all are before archiveBefore): set ENTRY and OTHER_ENTRY";
 const ARCHIVED = lp("fr", "/articles/tco-2015-round-2-path-defense");
-const ARCHIVED_REMINDER = lp("fr", "/pense-betes/pense-bete-github");
+// Explicit "/fr" prefix: the French slug differs from the English one, and an unprefixed path is
+// redirected by the browser language (Playwright: en-US) when fr is the default locale.
+const ARCHIVED_REMINDER = "/fr/pense-betes/pense-bete-github";
 
 async function open(page: Page, path: string) {
     await page.goto(path);
