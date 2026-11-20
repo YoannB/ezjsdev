@@ -1,10 +1,10 @@
 import { expect, test, type Page } from "@playwright/test";
-import { PROFILE } from "../../site/profile";
+import { PROFILE } from "../../constants/profile";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption } from "./support/home";
 import { lp, lpRe } from "./support/locale-path";
 
 // EZJSDEV content pages (spec v0.2 §5.2–§5.6): About, Services, Projects, Contact — translated
-// routes (site/config.ts), explorer files (site/explorer.ts), sitemap.xml, language switch,
+// routes (constants/site.ts), explorer files (constants/explorer.ts), sitemap.xml, language switch,
 // contact link (LinkedIn only), the absence of any myKeople figure and of the words the user does not
 // use about himself, and the 375px layout. Pages are
 // opened with an explicit locale prefix (redirected to the canonical URL for the default locale).
@@ -84,12 +84,12 @@ test.describe("Content pages", () => {
         await expect(page.getByRole("heading", { level: 1, name: "Projekte" })).toBeVisible();
     });
 
-    test("Contact offers LinkedIn only, as an external Axons Button link (no e-mail)", async ({ page }) => {
+    test("Contact offers LinkedIn only, as an external Button link (no e-mail)", async ({ page }) => {
         await page.goto("/fr/contact");
         const main = page.getByRole("main");
         const linkedin = main.getByRole("link", { name: /Profil LinkedIn de Yoann Barbier/ });
         await expect(linkedin).toHaveAttribute("href", PROFILE.linkedinUrl);
-        // Axons' Button rendered as a real <a> (its classes, no nested <button>), `external`: new tab,
+        // The Button rendered as a real <a> (its classes, no nested <button>), `external`: new tab,
         // safe rel, hidden localized "(new tab)" in the accessible name.
         await expect(linkedin).toHaveClass(/MuiButton-root/);
         await expect(linkedin.locator("button")).toHaveCount(0);

@@ -8,8 +8,8 @@ import type { TreeFile } from "./tree-model";
 // The open page as a social network or a messaging app shows it when the link is shared: its
 // og:image when it has one, its domain, title and description (the page's own metadata). The
 // image slot is not rendered without an image (no placeholder, no fake picture): today only an
-// entry with a cover has one; per-page OpenGraph images, once Axons provides them, reach this
-// card through `TreeFile.image`. Then, discreetly, the same page in the other languages.
+// entry with a cover has one; the per-page OpenGraph images (app/og) are not wired here yet;
+// they would reach this card through `TreeFile.image`. Then, discreetly, the same page in the other languages.
 export function ShareCard({ file, siteUrl }: { file: TreeFile; siteUrl: string }) {
     const t = useTranslations("ide");
     const others = file.alternates.filter((a) => a.href !== file.href);

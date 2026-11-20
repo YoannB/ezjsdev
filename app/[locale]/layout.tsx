@@ -1,19 +1,19 @@
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { GtmScript } from "@/components/layout/GtmScript";
+import { SiteShell } from "@/components/site/ide/SiteShell";
 import { SplashLoader } from "@/components/ui";
 import { CLIENT_MESSAGES } from "@/i18n/client-messages";
 import { routing } from "@/i18n/routing";
-import { pickMessages } from "@/lib/client-messages";
-import type { Messages } from "@/lib/site-extension";
+import { pickMessages, type Messages } from "@/lib/client-messages";
 import { AppProviders } from "@/providers/AppProviders";
-import { SiteShell } from "@/site/shell";
 import { hasLocale } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 
 // Segment layout: validates the locale, loads messages, sets up the providers and the chrome.
-// The page FRAME (header, <main>, footer) is the site's `SiteShell` (site/shell.tsx; Axons: DefaultShell).
+// The page FRAME is ezjsdev's IDE shell (components/site/ide/SiteShell: title bar, explorer, tabs,
+// the editor = <main>, preview, terminal, status bar) in place of Header / <main> / Footer.
 // <html>/<body> and the beforeInteractive script live in app/layout.tsx (root).
 export function generateStaticParams() {
     return routing.locales.map((locale) => ({ locale }));

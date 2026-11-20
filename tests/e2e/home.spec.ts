@@ -1,17 +1,15 @@
 import { expect, test } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner, languageButton, languageOption, themeToggle } from "./support/home";
 import { lpRe } from "./support/locale-path";
-import { AXONS_HOME, AXONS_HOME_SKIP } from "./support/site-slots";
 
 test.describe("Home — structural smoke", () => {
-    test("shows the hero, the component library, the SEO section and the FAQ", async ({ page }) => {
-        test.skip(!AXONS_HOME, AXONS_HOME_SKIP);
+    test("shows the home title, the approach, the projects and the latest entries", async ({ page }) => {
         await page.goto("/");
 
         await expect(page.locator("h1")).toBeVisible();
-        await expect(page.locator("#showcase")).toBeVisible();
-        await expect(page.locator("#seo")).toBeVisible();
-        await expect(page.locator("#faq")).toBeVisible();
+        await expect(page.locator("#approach")).toBeVisible();
+        await expect(page.locator("#projects")).toBeVisible();
+        await expect(page.locator("#latest-articles")).toBeVisible();
     });
 
     test("the cookie banner appears then hides after acceptance", async ({ page }) => {

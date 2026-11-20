@@ -1,10 +1,9 @@
 import { expect, test, type Page } from "@playwright/test";
 import { LS_THEME_MODE } from "../../lib/storage";
 import { acceptCookiesButton, cookieBanner } from "./support/home";
-import { AXONS_HOME, AXONS_HOME_SKIP } from "./support/site-slots";
 
-// v0.3.0 site configuration: consent can be re-opened from the footer, the scripted terminal
-// demo runs without any network call, and the security headers keep same-origin framing.
+// v0.3.0 site configuration: consent can be re-opened from the footer, the home stays
+// at the top after hydration, and the security headers keep same-origin framing.
 // These specs assume a consent-requiring tracker is configured (CI sets NEXT_PUBLIC_ADS_ENABLED).
 
 async function hydrated(page: Page) {
@@ -59,45 +58,8 @@ test.describe("Site configuration", () => {
         await expect(cookieBanner(page)).toBeHidden();
     });
 
-    test("the terminal demo plays the scripted sequence without network requests", async ({ page }) => {
-        test.skip(!AXONS_HOME, AXONS_HOME_SKIP);
-        await page.goto("/fr");
-        await hydrated(page);
-        const calls: string[] = [];
-        page.on("request", (r) => {
-            if (r.url().includes("/api/")) calls.push(r.url());
-        });
-        const showcase = page.locator("#showcase");
-        await showcase.getByRole("button", { name: "Lancer la démo" }).click();
-
-        const log = showcase.getByRole("log", { name: "Démo scénarisée" });
-        await expect(log).toContainText("npm run demo");
-        await expect(log).toContainText("aucun appel IA", { timeout: 10_000 });
-        await expect(showcase.getByRole("button", { name: "Lancer la démo" })).toBeEnabled();
-        expect(calls).toEqual([]);
-    });
-
-    test("with prefers-reduced-motion, the sequence shows at once", async ({ page }) => {
-        test.skip(!AXONS_HOME, AXONS_HOME_SKIP);
-        await page.emulateMedia({ reducedMotion: "reduce" });
-        await page.goto("/fr");
-        await hydrated(page);
-        const showcase = page.locator("#showcase");
-        await showcase.getByRole("button", { name: "Lancer la démo" }).click();
-        await expect(showcase.getByRole("log", { name: "Démo scénarisée" }).locator(".terminal__line")).toHaveCount(5, {
-            timeout: 500,
-        });
-    });
-
-    test("tabs switch panels", async ({ page }) => {
-        test.skip(!AXONS_HOME, AXONS_HOME_SKIP);
-        await page.goto("/fr");
-        await hydrated(page);
-        const showcase = page.locator("#showcase");
-        await showcase.getByRole("button", { name: "Problèmes" }).click();
-        await expect(showcase.getByRole("button", { name: "Problèmes" })).toHaveAttribute("aria-pressed", "true");
-        await expect(showcase.getByText("Aucun problème détecté.")).toBeVisible();
-    });
+    // The demo home showcase (scripted terminal, tabs) was removed with the demo home: ezjsdev's
+    // own terminal demo is covered by tests/e2e/seo-demo.spec.ts.
 
     test("no ad placeholder in a production build", async ({ page }) => {
         // CI serves `next start` (production): placeholders are a development aid only, the
@@ -128,7 +90,7 @@ test.describe("Site configuration", () => {
         }
     });
 
-    test("the favicon is the site icon (site/icon.svg), served as SVG", async ({ page, request }) => {
+    test("the favicon is app/icon.svg, served as SVG", async ({ page, request }) => {
         await page.goto("/");
         const href = await page.locator("link[rel=icon]").first().getAttribute("href");
         expect(href).toBeTruthy();

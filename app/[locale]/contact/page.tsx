@@ -1,12 +1,12 @@
 import { StaticPage } from "@/components/content/StaticPage";
 import { Button } from "@/components/ui";
 import { pageMetadata } from "@/lib/seo";
-import { PROFILE } from "@/site/profile";
+import { PROFILE } from "@/constants/profile";
 import { getTranslations } from "next-intl/server";
 
 // EZJSDEV — Contact (spec v0.2 §5.6, revised by the user): LinkedIn only, his real channel (no e-mail
-// address published). The LinkedIn call to action is Axons' `Button` as an `external` link (new tab, hidden notice).
-// No phone, no form (nothing is collected by the site). Copy: site/messages → `pages.contact`.
+// address published). The LinkedIn call to action is the `Button` as an `external` link (new tab, hidden notice).
+// No phone, no form (nothing is collected by the site). Copy: messages → `pages.contact`.
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;

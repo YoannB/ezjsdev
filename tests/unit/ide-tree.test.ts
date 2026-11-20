@@ -14,7 +14,7 @@ import {
     type TreeFolder,
     type TreeNode,
 } from "@/components/site/ide/tree-model";
-import { EXPLORER } from "@/site/explorer";
+import { EXPLORER } from "@/constants/explorer";
 import { describe, expect, it } from "vitest";
 
 // PURE model of the IDE shell (components/site/ide/tree-model.ts): inline fixtures, no fs, no
@@ -332,7 +332,7 @@ describe("openTab / closeTab", () => {
     });
 });
 
-describe("site/explorer.ts — the ezjsdev declaration", () => {
+describe("constants/explorer.ts — the ezjsdev declaration", () => {
     const pages = (list: readonly ExplorerDecl[]): ExplorerDecl[] =>
         list.flatMap((d) => (d.kind === "folder" ? (d.planned ? [] : pages(d.children)) : [d]));
 

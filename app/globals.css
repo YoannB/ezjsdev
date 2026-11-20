@@ -17,9 +17,6 @@
 @import "../styles/layout/ad-slots.css";
 @import "../styles/layout/header.css";
 @import "../styles/layout/footer.css";
-@import "../styles/home/hero.css";
-@import "../styles/home/roulette.css";
-@import "../styles/home/showcase.css";
 @import "../styles/ui/gauge.css";
 @import "../styles/ui/icons.css";
 @import "../styles/ui/logo.css";
@@ -27,10 +24,8 @@
 @import "../styles/ui/language-switcher.css";
 @import "../styles/ui/theme-toggle.css";
 @import "../styles/ui/limit-badge.css";
+/* Kept: the .article-card / .dur look reused by ArticleTeaser (collection listings, home blocks). */
 @import "../styles/home/seo-resources.css";
-@import "../styles/home/value-props.css";
-@import "../styles/home/feature-strip.css";
-@import "../styles/home/faq.css";
 @import "../styles/pages/cookie-banner.css";
 @import "../styles/pages/static.css";
 @import "../styles/pages/not-found.css";
@@ -39,5 +34,9 @@
 @import "../styles/text-tools.css";
 @import "../styles/ui/tabs.css";
 @import "../styles/ui/terminal.css";
-/* LAST: the derived site's own CSS (token overrides, brand rules). Empty in Axons. */
-@import "../site/theme.css";
+/* ezjsdev's own blocks, LAST (they win over the generic rules at equal specificity): the IDE
+   shell (page frame), the content pages, the home demo, the preview panel. */
+@import "../styles/layout/ide.css";
+@import "../styles/pages/content.css";
+@import "../styles/home/demo.css";
+@import "../styles/layout/ide-preview.css";

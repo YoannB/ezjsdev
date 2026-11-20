@@ -1,6 +1,6 @@
 // PURE module (no React, no DOM access, no next-intl): what the preview panel shows for the open
 // page, and the outline ("plan") of a page built from its real headings. The declaration (which
-// page gets which mode, which site captures exist) lives in site/preview.ts; the DOM reading and the
+// page gets which mode, which site captures exist) lives in constants/preview.ts; the DOM reading and the
 // observers live in use-outline.ts. Unit tests: tests/unit/ide-preview.test.ts.
 
 /** A static capture of a public site, shown in a browser frame (never a live preview). */
@@ -16,11 +16,11 @@ export interface SiteCapture {
 }
 
 export interface PreviewDecl {
-    /** File ids (site/explorer.ts) shown as an outline; collection entries always are. */
+    /** File ids (constants/explorer.ts) shown as an outline; collection entries always are. */
     readonly outline: readonly string[];
     /** File ids shown as browser frames, with the ids of the captures to show, in order. */
     readonly browser: Readonly<Record<string, readonly string[]>>;
-    /** Every capture, by id (its alt text: `ide.captureAlt.<id>` in site/messages). */
+    /** Every capture, by id (its alt text: `ide.captureAlt.<id>` in messages). */
     readonly captures: Readonly<Record<string, SiteCapture>>;
 }
 

@@ -55,7 +55,7 @@ test.describe("Social images", () => {
 
     test.describe("article entry", () => {
         test.skip(!ARTICLES_ENABLED, "articles section disabled (ARTICLES_ENABLED = false)");
-        // EZJSDEV: Axons' demo articles are removed; a migrated article with the same slug in fr/en.
+        // EZJSDEV: the demo articles are removed; a migrated article with the same slug in fr/en.
         const entries = [
             { locale: "fr", path: "/articles/tco-2015-round-3-peg-jump" },
             { locale: "en", path: "/articles/tco-2015-round-3-peg-jump" },

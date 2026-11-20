@@ -2,19 +2,18 @@ import { getCollection, SITE_NAME, SITE_URL } from "@/constants/site";
 import { getPathname, routing } from "@/i18n/routing";
 import { getCollectionCatalog, getEntries } from "@/lib/articles/source";
 import { entryPath, type EntryHref, type LogicalHref } from "@/lib/seo";
-import type { SiteShellProps } from "@/lib/site-extension";
-import { EXPLORER } from "@/site/explorer";
+import { EXPLORER } from "@/constants/explorer";
 import { getTranslations } from "next-intl/server";
+import type { ReactNode } from "react";
 import { IdeShell } from "./IdeShell";
 import { resolveTree, type CollectionItem, type TreeNode } from "./tree-model";
 
-// ezjsdev's page FRAME (exported as `SiteShell` by site/shell.tsx, rendered by Axons'
-// app/[locale]/layout.tsx around every page). Server Component: resolves the explorer
-// declaration (site/explorer.ts) for the locale — folder names, page titles, localized hrefs,
+// ezjsdev's page FRAME, rendered by app/[locale]/layout.tsx around every page. Server Component:
+// resolves the explorer declaration (constants/explorer.ts) for the locale — folder names, page titles, localized hrefs,
 // the collections' entries — then hands a plain, serializable tree to the client shell, which
 // only derives its state from the URL. No request data is read (cookies/headers), so the pages
 // keep their rendering mode.
-export async function SiteShell({ children, locale }: SiteShellProps) {
+export async function SiteShell({ children, locale }: { children: ReactNode; locale: string }) {
     const t = await getTranslations({ locale });
 
     const entries = (id: string): CollectionItem[] | null => {

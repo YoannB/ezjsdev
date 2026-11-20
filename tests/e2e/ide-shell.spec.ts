@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { acceptCookiesButton, cookieBanner, themeToggle } from "./support/home";
 import { lpRe } from "./support/locale-path";
 
-// EZJSDEV IDE shell (site/shell.tsx → components/site/ide/*): explorer tree, tabs derived from the
+// EZJSDEV IDE shell (app/[locale]/layout.tsx → components/site/ide/*): explorer tree, tabs derived from the
 // URL, panels, mobile drawer, overflow and themes. Pages are opened with an explicit locale prefix
 // ("/fr/...", redirected to the canonical URL when fr is the default) so labels are known.
 const at = (path = "") => `/fr${path}`;

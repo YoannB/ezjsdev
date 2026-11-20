@@ -2,7 +2,7 @@ import type { ProjectDecl } from "@/components/site/content/profile-model";
 
 // EZJSDEV — the facts behind the content pages (About, Projects, Contact) that are NOT copy:
 // links, contact details and technology names. The copy itself (6 locales) lives
-// in site/messages/<locale>.json under `pages.about`, `pages.projects`, `pages.contact`.
+// in messages/<locale>.json under `pages.about`, `pages.projects`, `pages.contact`.
 // Sources: spec v0.2 §3.1, §3.3, §5.4, §5.6 and the user's decisions (LinkedIn only, no e-mail published).
 
 /** Live preview of Axons (Projects page link, result of the home demo — spec v0.2 §7.3). */

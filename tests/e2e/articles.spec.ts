@@ -19,7 +19,7 @@ async function ready(page: Page) {
 }
 
 test.describe("Articles", () => {
-    // A derived site that turned the section off (site/config.ts) has nothing to check here.
+    // A site that turned the section off (constants/site.ts) has nothing to check here.
     test.skip(!ARTICLES_ENABLED, "articles section disabled (ARTICLES_ENABLED = false)");
     // "Accept" also grants the comments purpose: when comments are on, the entry pages would load
     // Disqus. Never reach it from a spec (tests/e2e/comments.spec.ts covers the comments).
@@ -92,7 +92,7 @@ test.describe("Articles", () => {
         await page.goto("/fr");
         await ready(page);
         const block = page.locator("#latest-articles");
-        // Every migrated article is an archive (site/config.ts → archiveBefore): archives title.
+        // Every migrated article is an archive (constants/site.ts → COLLECTION_DEFAULTS.archiveBefore): archives title.
         await expect(block.getByRole("heading", { level: 2, name: "Articles (archives)" })).toBeVisible();
         await expect(block.locator(".article-teaser")).toHaveCount(3);
         await block.getByRole("link", { name: /Tous les articles/ }).click();

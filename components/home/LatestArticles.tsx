@@ -9,7 +9,7 @@ import { getTranslations } from "next-intl/server";
 
 const LATEST_COUNT = 3;
 
-// Server Component: the 3 most recent NON-archived entries of a collection (default: Axons'
+// Server Component: the 3 most recent NON-archived entries of a collection (default: the
 // articles) in `locale`, titled `latestTitle`. When every entry is an archive, the 3 most recent
 // archives under `archivesTitle` instead: old content is never presented as news. Renders nothing
 // without entries or when the collection is disabled (ARTICLES_ENABLED for the articles).

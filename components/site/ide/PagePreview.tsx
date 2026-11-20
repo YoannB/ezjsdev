@@ -1,5 +1,5 @@
 "use client";
-import { PREVIEW } from "@/site/preview";
+import { PREVIEW } from "@/constants/preview";
 import { useTranslations } from "next-intl";
 import { BrowserFrame } from "./BrowserFrame";
 import { previewMode, type OutlineItem, type PreviewDecl } from "./preview-model";
@@ -9,7 +9,7 @@ import type { TreeFile } from "./tree-model";
 import { useOutline } from "./use-outline";
 
 // Body of the preview panel, CONTEXTUAL like VS Code's side views (spec §6.4: a rendering panel,
-// not a second navigation). What it shows depends on the open page (site/preview.ts):
+// not a second navigation). What it shows depends on the open page (constants/preview.ts):
 // - long pages and every collection entry: the page's OUTLINE (its real h2/h3), the section being
 //   read highlighted while the editor scrolls; a page without headings falls back to the share card;
 // - the home and Projects: BROWSER FRAMES around static captures of the real sites;

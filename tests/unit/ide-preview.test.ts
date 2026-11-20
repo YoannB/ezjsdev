@@ -11,7 +11,7 @@ import {
 import { describe, expect, it } from "vitest";
 
 // PURE model of the IDE preview panel (components/site/ide/preview-model.ts): inline fixtures, no
-// DOM, no next-intl. The site's own declaration (site/preview.ts) is not pinned here.
+// DOM, no next-intl. The site's own declaration (constants/preview.ts) is not pinned here.
 const decl: PreviewDecl = {
     outline: ["long/page"],
     browser: { "home/page": ["a"], "work/page": ["a", "missing", "b"], "broken/page": ["missing"] },

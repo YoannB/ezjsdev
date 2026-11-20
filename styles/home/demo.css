@@ -1,11 +1,11 @@
 /* =====================================================================
    ezjsdev — "Generate a site" demo (components/site/demo/*, spec v0.2 §7). Imported by
-   site/theme.css. The terminal panel shows the scripted lines, then the result card: beside the
+   app/globals.css. The terminal panel shows the scripted lines, then the result card: beside the
    lines when the panel is wide enough, below otherwise (container queries: the panel width, not
    the viewport, decides — it depends on the explorer and the preview column).
    ===================================================================== */
 
-/* Triggers: Axons Buttons (components/ui/Button) — the home one and the compact one of the
+/* Triggers: Buttons (components/ui/Button) — the home one and the compact one of the
    terminal bar. Only their placement is styled here. */
 .ez-home__demo {
     display: grid;
@@ -28,7 +28,7 @@
 }
 @media (pointer: coarse) {
     .ide-panel__action {
-        min-height: 2.75rem; /* touch target (Axons' small button is shorter) */
+        min-height: 2.75rem; /* touch target (the small button is shorter) */
     }
 }
 
