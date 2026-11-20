@@ -16,159 +16,21 @@
         "contact": "Contacto"
     },
     "hero": {
-        "badge": "Tu asistente de IA, listo en un clic",
-        "titleLead": "El boilerplate de Next.js para tus ",
-        "rotating": ["agentes de IA", "sitios SEO", "apps de Next.js", "demos de OpenRouter"],
-        "subtitle": "Una base moderna, rápida y SEO para crear fácilmente aplicaciones web con IA. Componentes listos para usar, multilingüe y desplegable en Netlify.",
-        "ctaDemo": "Ver la demo",
-        "ctaPlan": "Mapa del sitio",
-        "scrollCue": "Desplázate hacia abajo",
         "limitSuffix": "Limitado: {count} llamadas de IA / día",
-        "tech": {
-            "next": "Next.js 16+",
-            "nextSub": "App Router",
-            "ts": "TypeScript",
-            "tsSub": "Seguridad y estabilidad",
-            "mui": "Material UI 9+",
-            "muiSub": "Componentes modernos",
-            "or": "OpenRouter",
-            "orSub": "IA gratuita"
-        }
+        "scrollCue": "Desplázate hacia abajo"
     },
     "showcase": {
-        "title": "Biblioteca de componentes",
-        "inputLabel": "Entrada",
-        "inputPlaceholder": "Tu texto...",
-        "textareaLabel": "Área de texto",
-        "textareaPlaceholder": "Tu mensaje...",
-        "btnPrimary": "Botón primario",
-        "btnSecondary": "Botón secundario",
-        "chipLabel": "Chip",
-        "chipInfo": "Info",
-        "chipSuccess": "Verificado",
-        "chipWarn": "Revisar",
-        "chipRemoved": "Elemento eliminado.",
-        "toastLabel": "Toast",
-        "toastFire": "Mostrar un toast",
-        "toastMsg": "Toast mostrado correctamente.",
-        "dialogLabel": "Diálogo",
-        "dialogOpen": "Abrir diálogo",
-        "dialogTitle": "Ventana modal",
-        "dialogBody": "Contenido del diálogo, aislado detrás de la API neutra.",
-        "dialogClose": "Cerrar",
-        "confirmLabel": "Confirmar",
-        "confirmQuestion": "¿Estás seguro de que quieres continuar?",
-        "confirmCancel": "Cancelar",
-        "confirmOk": "Confirmar",
-        "gaugeLabel": "Puntuación / Indicador",
-        "gaugeValue": "{value}%",
-        "iconsLabel": "Iconos animados",
         "bcHome": "Inicio",
-        "bcSection": "Sección",
-        "bcPage": "Página",
-        "langLabel": "Selector de idioma",
-        "langCurrent": "{name} (detectado automáticamente)",
-        "themeLabel": "Modo claro / oscuro",
-        "themeSub": "Según tu sistema",
-        "counterLabel": "Mostrar contador",
-        "counterRemaining": "{count} llamadas restantes",
         "copyLabel": "Copiar al portapapeles",
         "copyCopied": "¡Copiado!",
-        "testAi": "Probar la IA",
+        "langLabel": "Selector de idioma",
         "resetDone": "Limitador restablecido.",
-        "runSkill": "Ejecutar la skill (demo)",
-        "elapsed": "{seconds} s",
-        "tabsLabel": "Paneles",
-        "tabTerminal": "Terminal",
-        "tabOutput": "Salida",
-        "tabProblems": "Problemas",
-        "terminalTitle": "Demo guionizada",
-        "terminalRun": "Lanzar la demo",
-        "terminalReset": "Restablecer",
-        "outputEmpty": "Aún no hay salida.",
-        "problemsEmpty": "No se detectaron problemas.",
-        "terminalLines": [
-            "npm run demo",
-            "Leyendo la configuración…",
-            "Preparando los 6 idiomas…",
-            "Generando las páginas estáticas…",
-            "Listo: secuencia simulada, sin llamada a la IA."
-        ]
+        "dialogClose": "Cerrar"
     },
     "aiNotice": {
         "thirdParty": "Tu texto se envía al proveedor de IA externo ({provider}) y al modelo que utiliza, que pueden conservarlo según sus propias condiciones. Este sitio, por su parte, no lo guarda.",
         "quality": "Los modelos gratuitos pueden ser lentos o imprecisos: si el resultado parece incorrecto, vuelve a lanzarlo.",
         "wait": "Una respuesta puede tardar hasta 30 segundos cuando el modelo gratuito está saturado."
-    },
-    "seo": {
-        "title": "Guías y tutoriales",
-        "videoCaption": "Aprende a crear aplicaciones modernas con Next.js 16",
-        "articlesTitle": "¿Por qué elegir {site}?",
-        "why": [
-            "Una base de Next.js 16 ultrarrápida",
-            "SEO optimizado y multilingüe (6 idiomas)",
-            "Componentes de UI reutilizables (Material UI)",
-            "Integración sencilla con IA (OpenRouter)",
-            "Despliegue en un clic en Netlify"
-        ],
-        "ctaTitle": "¿Listo para empezar?",
-        "ctaText": "¡Explora los componentes y prueba la IA ahora para ver lo que puedes crear!",
-        "ctaButton": "Probar la IA",
-        "a1": {
-            "title": "Next.js 16: el tutorial completo (2026)",
-            "summary": "Aprende cómo crear una aplicación full stack con Next.js 16 en 13 pasos concretos: App Router, RSC, Server Actions, Turbopack, PPR, Prisma, Auth.js y despliegue.",
-            "source": "YouTube",
-            "duration": "12 min"
-        },
-        "a2": {
-            "title": "Crea una aplicación React con Next.js",
-            "summary": "Aprende a iniciar un proyecto de Next.js y configurar tu entorno de desarrollo: estructura de la carpeta app/, Server Components por defecto, layout raíz y renderizado en el servidor para SEO y velocidad.",
-            "source": "OpenClassrooms",
-            "duration": "8 min"
-        },
-        "a3": {
-            "title": "Next.js 16: Tutorial completo",
-            "summary": "Una guía completa para dominar Next.js 16 y sus novedades de 2026: versión estable 16.3.x, refuerzo de seguridad (avisos CVE coordinados), caché, imágenes y alojamiento soberano en la UE.",
-            "source": "Tech Insider",
-            "duration": "10 min"
-        }
-    },
-    "features": {
-        "multilang": "Multilingüe",
-        "multilangSub": "FR, EN, ES, DE, IT, PT",
-        "theme": "Modo claro / oscuro",
-        "themeSub": "Según tu sistema",
-        "cookies": "Cookies",
-        "cookiesSub": "Gestión del consentimiento",
-        "storage": "Almacenamiento local",
-        "storageSub": "Tus datos permanecen locales",
-        "security": "Seguro",
-        "securitySub": "Protección antibots"
-    },
-    "faq": {
-        "title": "Preguntas frecuentes",
-        "items": [
-            {
-                "q": "¿Qué es Axons?",
-                "a": "Un boilerplate de Next.js 16 / React 19 centrado en SEO e IA, desplegable en Netlify, con una biblioteca de componentes aislada (Material UI) e integración de OpenRouter mediante Route Handler."
-            },
-            {
-                "q": "¿La IA es de pago?",
-                "a": "El modelo predeterminado es un modelo gratuito de OpenRouter (openrouter/free). Una cuota diaria limita las llamadas desde el navegador; los errores se muestran como toasts para reintentar fácilmente."
-            },
-            {
-                "q": "¿Mis datos van a algún sitio?",
-                "a": "No. El tema, el consentimiento de cookies y el contador diario se almacenan localmente (cookie + localStorage). La clave de OpenRouter permanece en el servidor y nunca se expone al navegador."
-            },
-            {
-                "q": "¿Cómo añado una nueva acción de IA?",
-                "a": "Coloca un archivo en capabilities/agents/ (o una carpeta capabilities/skills/<id>/) y llama a POST /api/run con { prompt, agentId?, skillId?, inputs? }. La ruta se mantiene fina: composición, cuota, tiempo de espera y errores viven en lib/ai (run → composeRun + runPrompt)."
-            },
-            {
-                "q": "¿El sitio es indexable por Google?",
-                "a": "Sí: se proporcionan renderizado en el servidor, URLs localizadas, metadatos, hreflang, sitemap XML y mapa del sitio HTML."
-            }
-        ]
     },
     "footer": {
         "tagline": "Desarrollo full-stack independiente, con base en Nantes (Francia).",

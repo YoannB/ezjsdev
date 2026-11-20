@@ -1,5 +1,4 @@
 // @vitest-environment node
-import { SEO_RESOURCES } from "@/constants/site";
 import { CLIENT_MESSAGES } from "@/i18n/client-messages";
 import { coversPath, pickMessages } from "@/lib/client-messages";
 import { readdirSync, readFileSync } from "node:fs";
@@ -132,11 +131,6 @@ describe("client messages guard", () => {
     });
     it("no Client Component reads the raw catalogue (useMessages would see the client subset only)", () => {
         expect(files.filter((f) => /\buseMessages\(/.test(f.text)).map((f) => f.file)).toEqual([]);
-    });
-
-    it("the SEO resource keys read by ArticleCard are serialized", () => {
-        const keys = SEO_RESOURCES.flatMap((r) => [r.titleKey, r.summaryKey, r.sourceKey, r.durationKey]);
-        expect(keys.filter((k) => !coversPath(CLIENT_MESSAGES, k))).toEqual([]);
     });
 
     for (const locale of ["fr", "en", "es", "de", "it", "pt"]) {

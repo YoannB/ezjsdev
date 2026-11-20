@@ -1,8 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 import { lp, lpRe } from "./support/locale-path";
 
-// Button with `href` renders a REAL link styled as a button. Regression: the hero "Sitemap"
-// CTA and the 404 "Back to home" used to nest a <button> inside an <a> (invalid HTML:
+// Button with `href` renders a REAL link styled as a button. Regression: the home CTAs
+// and the 404 "Back to home" used to nest a <button> inside an <a> (invalid HTML:
 // interactive content inside interactive content, two tab stops, ambiguous semantics).
 
 async function hydrated(page: Page) {
@@ -14,22 +14,23 @@ async function expectNoNestedInteractive(page: Page) {
 }
 
 test.describe("Button as a link", () => {
-    test("the hero sitemap CTA is a localized link, reachable with the keyboard", async ({ page }) => {
+    test("the home contact CTA is a localized link, reachable with the keyboard", async ({ page }) => {
         await page.goto("/fr"); // explicit prefix forces the locale (redirected to lp("fr") when fr is the default)
         await hydrated(page);
         await expectNoNestedInteractive(page);
 
-        const cta = page.locator(".hero__cta");
-        const plan = cta.getByRole("link", { name: "Plan du site" });
-        await expect(plan).toHaveAttribute("href", lp("fr", "/plan-du-site"));
-        await expect(cta.getByRole("button", { name: "Plan du site" })).toHaveCount(0);
+        const cta = page.locator(".ez-home__actions");
+        const contact = cta.getByRole("link", { name: "Me contacter" });
+        const about = cta.getByRole("link", { name: "Mon parcours" });
+        await expect(contact).toHaveAttribute("href", lp("fr", "/contact"));
+        await expect(cta.getByRole("button", { name: "Me contacter" })).toHaveCount(0);
 
-        // Tab order: the demo button, then the sitemap link (one tab stop, not two).
-        await cta.getByRole("button").first().focus();
+        // Tab order: the contact link, then the about link (one tab stop each, not two).
+        await contact.focus();
         await page.keyboard.press("Tab");
-        await expect(plan).toBeFocused();
+        await expect(about).toBeFocused();
         await page.keyboard.press("Enter");
-        await expect(page).toHaveURL(lpRe("fr", "/plan-du-site"));
+        await expect(page).toHaveURL(lpRe("fr", "/a-propos"));
     });
 
     test("the 404 back-to-home action is a link to the localized home", async ({ page }) => {

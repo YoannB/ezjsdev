@@ -16,159 +16,21 @@
         "contact": "Contact"
     },
     "hero": {
-        "badge": "Your AI assistant, ready in one click",
-        "titleLead": "The Next.js boilerplate for your",
-        "rotating": ["AI agents", "SEO sites", "Next.js apps", "OpenRouter demos"],
-        "subtitle": "A modern, fast and SEO foundation to easily build web apps with AI. Ready‑to‑use components, multilingual, deployable on Netlify.",
-        "ctaDemo": "See the demo",
-        "ctaPlan": "Sitemap",
-        "scrollCue": "Scroll down",
         "limitSuffix": "Limited: {count} AI calls / day",
-        "tech": {
-            "next": "Next.js 16+",
-            "nextSub": "App Router",
-            "ts": "TypeScript",
-            "tsSub": "Security & stability",
-            "mui": "Material UI 9+",
-            "muiSub": "Modern components",
-            "or": "OpenRouter",
-            "orSub": "Free AI"
-        }
+        "scrollCue": "Scroll down"
     },
     "showcase": {
-        "title": "Component library",
-        "inputLabel": "Input",
-        "inputPlaceholder": "Your text...",
-        "textareaLabel": "Textarea",
-        "textareaPlaceholder": "Your message...",
-        "btnPrimary": "Primary button",
-        "btnSecondary": "Secondary button",
-        "chipLabel": "Chip",
-        "chipInfo": "Info",
-        "chipSuccess": "Verified",
-        "chipWarn": "Review",
-        "chipRemoved": "Item removed.",
-        "toastLabel": "Toast",
-        "toastFire": "Show a toast",
-        "toastMsg": "Toast displayed successfully.",
-        "dialogLabel": "Dialog",
-        "dialogOpen": "Open dialog",
-        "dialogTitle": "Modal window",
-        "dialogBody": "Dialog content, isolated behind the neutral API.",
-        "dialogClose": "Close",
-        "confirmLabel": "Confirm",
-        "confirmQuestion": "Are you sure you want to continue?",
-        "confirmCancel": "Cancel",
-        "confirmOk": "Confirm",
-        "gaugeLabel": "Score / Gauge",
-        "gaugeValue": "{value}%",
-        "iconsLabel": "Animated icons",
         "bcHome": "Home",
-        "bcSection": "Section",
-        "bcPage": "Page",
-        "langLabel": "Language selector",
-        "langCurrent": "{name} (auto‑detected)",
-        "themeLabel": "Light / dark mode",
-        "themeSub": "According to your system",
-        "counterLabel": "Counter display",
-        "counterRemaining": "{count} calls left",
         "copyLabel": "Copy to clipboard",
         "copyCopied": "Copied!",
-        "testAi": "Test the AI",
+        "langLabel": "Language selector",
         "resetDone": "Limiter reset.",
-        "runSkill": "Run the skill (demo)",
-        "elapsed": "{seconds} s",
-        "tabsLabel": "Panels",
-        "tabTerminal": "Terminal",
-        "tabOutput": "Output",
-        "tabProblems": "Problems",
-        "terminalTitle": "Scripted demo",
-        "terminalRun": "Run the demo",
-        "terminalReset": "Reset",
-        "outputEmpty": "No output yet.",
-        "problemsEmpty": "No problems detected.",
-        "terminalLines": [
-            "npm run demo",
-            "Reading the configuration…",
-            "Preparing the 6 locales…",
-            "Generating static pages…",
-            "Done: simulated sequence, no AI call."
-        ]
+        "dialogClose": "Close"
     },
     "aiNotice": {
         "thirdParty": "Your text is sent to the third-party AI provider ({provider}) and to the model it routes to, which may keep it under their own terms. This site itself does not store it.",
         "quality": "Free models can be slow or imprecise: if the result looks wrong, simply run it again.",
         "wait": "A reply can take up to 30 seconds when the free model is busy."
-    },
-    "seo": {
-        "title": "Guides & tutorials",
-        "videoCaption": "Learn to build modern apps with Next.js 16",
-        "articlesTitle": "Why choose {site}?",
-        "why": [
-            "An ultra‑performant Next.js 16 foundation",
-            "Optimized and multilingual SEO (6 languages)",
-            "Reusable UI components (Material UI)",
-            "Simple AI integration (OpenRouter)",
-            "One‑click deploy on Netlify"
-        ],
-        "ctaTitle": "Ready to start?",
-        "ctaText": "Explore the components and test the AI now to see what you can build!",
-        "ctaButton": "Test the AI",
-        "a1": {
-            "title": "Next.js 16: the complete tutorial (2026)",
-            "summary": "Learn how to build a full‑stack app with Next.js 16 in 13 concrete steps: App Router, RSC, Server Actions, Turbopack, PPR, Prisma, Auth.js and deployment.",
-            "source": "YouTube",
-            "duration": "12 min"
-        },
-        "a2": {
-            "title": "Build a React app with Next.js",
-            "summary": "Learn to start a Next.js project and set up your development environment: app/ folder structure, Server Components by default, root layout and server rendering for SEO and speed.",
-            "source": "OpenClassrooms",
-            "duration": "8 min"
-        },
-        "a3": {
-            "title": "Next.js 16: Complete tutorial",
-            "summary": "A complete guide to master Next.js 16 and its 2026 features: stable 16.3.x, coordinated CVE security hardening, cache, images and EU‑sovereign hosting.",
-            "source": "Tech Insider",
-            "duration": "10 min"
-        }
-    },
-    "features": {
-        "multilang": "Multilingual",
-        "multilangSub": "FR, EN, ES, DE, IT, PT",
-        "theme": "Light / dark mode",
-        "themeSub": "According to your system",
-        "cookies": "Cookies",
-        "cookiesSub": "Consent management",
-        "storage": "Local storage",
-        "storageSub": "Your data stays local",
-        "security": "Secured",
-        "securitySub": "Anti‑bot protection"
-    },
-    "faq": {
-        "title": "Frequently asked questions",
-        "items": [
-            {
-                "q": "What is Axons?",
-                "a": "A Next.js 16 / React 19 boilerplate focused on SEO and AI, deployable on Netlify, with an isolated component library (Material UI) and OpenRouter wiring through a Route Handler."
-            },
-            {
-                "q": "Is the AI paid?",
-                "a": "The default model is a free OpenRouter model (openrouter/free). A daily quota limits browser calls; errors surface as toasts so you can retry easily."
-            },
-            {
-                "q": "Does my data go anywhere?",
-                "a": "No. Theme, cookie consent and the daily counter are stored locally (cookie + localStorage). The OpenRouter key stays server‑side and is never exposed to the browser."
-            },
-            {
-                "q": "How do I add a new AI action?",
-                "a": "Drop a file in capabilities/agents/ (or a folder capabilities/skills/<id>/), then call POST /api/run with { prompt, agentId?, skillId?, inputs? }. The route stays thin: composition, quota, timeout and errors live in lib/ai (run → composeRun + runPrompt)."
-            },
-            {
-                "q": "Is the site indexable by Google?",
-                "a": "Yes: server rendering, localized URLs, metadata, hreflang, XML sitemap and an HTML sitemap are provided."
-            }
-        ]
     },
     "footer": {
         "tagline": "Freelance full-stack development, based in Nantes, France.",

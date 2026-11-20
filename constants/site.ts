@@ -205,55 +205,6 @@ export const OG_PAGES: Readonly<Record<string, string>> = buildOgPages(
     Object.fromEntries(ENABLED_COLLECTIONS.map((c) => [c.href, c.namespace])),
 );
 
-export interface SeoResource {
-    id: string;
-    kind: "video" | "article";
-    url: string;
-    videoId?: string;
-    short?: boolean;
-    mark: string;
-    titleKey: string;
-    summaryKey: string;
-    sourceKey: string;
-    durationKey: string;
-}
-export const SEO_RESOURCES: readonly SeoResource[] = [
-    {
-        id: "yt",
-        kind: "video",
-        url: "https://www.youtube.com/watch?v=jzdTBDmCAKE",
-        videoId: "jzdTBDmCAKE",
-        short: false,
-        mark: "YT",
-        titleKey: "seo.a1.title",
-        summaryKey: "seo.a1.summary",
-        sourceKey: "seo.a1.source",
-        durationKey: "seo.a1.duration",
-    },
-    {
-        id: "oc",
-        kind: "article",
-        url: "https://openclassrooms.com/fr/courses/8710351-creez-une-application-react-avec-next-js/8856186-demarrez-un-projet-next-js",
-        mark: "OC",
-        titleKey: "seo.a2.title",
-        summaryKey: "seo.a2.summary",
-        sourceKey: "seo.a2.source",
-        durationKey: "seo.a2.duration",
-    },
-    {
-        id: "ti",
-        kind: "article",
-        url: "https://tech-insider.org/fr/nextjs-16-tutoriel-app-full-stack-13-etapes-2026/",
-        mark: "TI",
-        titleKey: "seo.a3.title",
-        summaryKey: "seo.a3.summary",
-        sourceKey: "seo.a3.source",
-        durationKey: "seo.a3.duration",
-    },
-];
-/** Hero video of the SEO block; "" (with no SEO_RESOURCES either) removes the whole block. */
-export const HERO_VIDEO_ID: string = "jzdTBDmCAKE";
-
 // SYMMETRIC, THIN vertical rails (160x600): symmetry kept (the 160/300
 // asymmetry looked bad) AND breathing room in the center (~912px on a 1280 container) => the
 // feature-strip and the hero are no longer squashed. Do NOT go back to 300: 300+300 steals
