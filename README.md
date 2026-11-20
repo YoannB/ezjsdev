@@ -26,7 +26,7 @@ les maquettes du site sont dans [`mockups/`](mockups/).
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : ezjsdev 0.2.0, basé sur Axons [v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
+**Version : ezjsdev 0.3.0, basé sur Axons [v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
 
 ezjsdev est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions et
 la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) du moteur pour
