@@ -8,18 +8,25 @@ Site en ligne : https://ezjsdev.netlify.app
 
 ## Ce que contient le site
 
-- **Interface IDE** : explorateur de fichiers relié aux pages, onglets synchronisés avec l'URL, zone de lecture avec
-  numéros de ligne, aperçu et terminal repliables, barre d'état ; drawer et panneaux empilés sur mobile.
-- **Identité** : logo `</>`, thèmes sombre (bleu nuit, accents cyan) et clair, six langues (français à la racine, puis
-  `en`, `es`, `de`, `it`, `pt`).
+- **Interface IDE** : explorateur de fichiers relié aux pages (masquable), onglets synchronisés avec l'URL, panneau
+  d'aperçu contextuel (plan de la page, captures des projets, carte de partage), terminal replié par défaut, barre
+  d'état ; drawer et panneaux empilés sur mobile.
+- **Identité** : logo `</>` animé d'un reflet (aussi sur l'écran de chargement), palette inspirée de VS Code en sombre
+  et en clair, six langues (français à la racine, puis `en`, `es`, `de`, `it`, `pt`).
+- **Pages** : accueil, À propos, Services, Projets (Axons en tête), Contact (LinkedIn), mentions légales,
+  confidentialité et cookies.
+- **Démonstration « Générer un site »** : déroulé simulé dans le terminal, sans appel IA, qui aboutit à la présentation
+  d'Axons.
 - **Articles** : 15 articles d'archives (2013-2015 : Node.js, Angular, Stylus, TopCoder TCO…), avec coloration du code
   au rendu serveur.
 - **Pense-bêtes** : 14 aide-mémoire techniques (2013-2017), une deuxième collection Markdown.
-- **À venir** : les pages À propos, Services, Projets et Contact, et la démonstration « Générer un site SEO » (simulée,
-  sans appel IA).
+- **Badges et commentaires** : badge « Nouveau » pendant 90 jours, « Archive » avant 2018 ; commentaires Disqus sur les
+  entrées non archivées, chargés seulement après consentement.
+- **Référencement** : URL traduites, canonical et hreflang, JSON-LD, sitemap, image de partage par page.
 
-La spécification de référence est [`specs/specification-site-ezjsdev-v0.2.md`](specs/specification-site-ezjsdev-v0.2.md) ;
-les maquettes du site sont dans [`mockups/`](mockups/).
+La première spécification (brouillon, dépassé sur plusieurs points) est
+[`specs/specification-site-ezjsdev-v0.2.md`](specs/specification-site-ezjsdev-v0.2.md) ; les maquettes d'origine sont
+dans [`mockups/`](mockups/). Le site en ligne fait référence.
 
 ## Stack
 
@@ -113,7 +120,7 @@ l'environnement de la CI (voir le bloc `env` de `.github/workflows/ci.yml`) ; en
 
 ## Récupérer les mises à jour d'Axons
 
-Le dépôt Axons est le remote `upstream`. Ses tags sont rangés localement sous `axons/` (`axons/v0.8.0`) pour ne jamais
+Le dépôt Axons est le remote `upstream`. Ses tags sont rangés localement sous `axons/` (`axons/v0.16.0`) pour ne jamais
 se mélanger à ceux d'ezjsdev. Configuration, une seule fois par clone :
 
 ```bash
@@ -157,9 +164,9 @@ PR. La PR se merge avec un **merge commit**, jamais en squash : l'historique d'A
 
 ## Versions et tags
 
-Les tags d'ezjsdev suivent leur propre numérotation (`v1.0.0`…), à partir de la première version publiée du site, et
-sont annotés avec la version d'Axons utilisée (par exemple « ezjsdev 1.0.0 — basé sur Axons v0.8.0 »). Une version se
-publie après le merge de sa PR, tag par tag : `git push origin vX.Y.Z`. Ne jamais lancer `git push --tags`, qui
+Les tags d'ezjsdev suivent leur propre numérotation (`v0.1.0`, `v0.2.0`, `v0.3.0`…) et sont annotés avec la version
+d'Axons utilisée (par exemple « ezjsdev 0.3.0 — basé sur Axons v0.16.0 »). Une version passe par une PR qui met à jour
+`package.json`, `package-lock.json` et la ligne de version de ce README ; le tag se pose après son merge, tag par tag : `git push origin vX.Y.Z`. Ne jamais lancer `git push --tags`, qui
 publierait aussi les tags `axons/*` locaux.
 
 ## Licence
