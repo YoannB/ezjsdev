@@ -26,11 +26,11 @@ les maquettes du site sont dans [`mockups/`](mockups/).
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : ezjsdev 0.2.0, basé sur Axons [v0.15.0](https://github.com/YoannB/axons/tree/v0.15.0).**
+**Version : ezjsdev 0.2.0, basé sur Axons [v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
 
 ezjsdev est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions et
-la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) d'Axons pour les
-agents de code ; ils ne sont pas spécifiques à ezjsdev.
+la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) du moteur pour
+les agents de code.
 
 ## Démarrage rapide
 
@@ -75,20 +75,26 @@ Référence complète et commentée : [`.env.example`](.env.example). Valeurs d'
 
 ## Où vit le code propre à ezjsdev
 
-Un site dérivé d'Axons ne modifie que `site/` et ajoute ses propres fichiers (voir `docs/architecture.md` →
-_Deriving a site_).
+Depuis Axons v0.16.0, il n'y a plus de couche `site/` : ezjsdev est une application Next.js ordinaire, avec **une seule
+source par sujet**, modifiée sur place (voir `docs/architecture.md` → _Site identity_).
 
-| Emplacement                                                           | Contenu                                                                 |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [`site/config.ts`](site/config.ts)                                    | Nom, routes traduites, navigation, collection des pense-bêtes, palette. |
-| `site/messages/<locale>.json`                                         | Textes propres à ezjsdev dans les six langues.                          |
-| `site/theme.css`, `site/logo.tsx`, `site/icon.svg`                    | Jetons de couleur, logo `</>` et favicon.                               |
-| `site/shell.tsx`, `site/home.tsx`, `site/explorer.ts`, `site/ide.css` | Cadre IDE, accueil et arborescence de l'explorateur.                    |
-| `components/site/`                                                    | Composants de l'interface IDE et de l'accueil.                          |
-| `content/articles/`, `content/reminders/`                             | Articles et pense-bêtes (un dossier par entrée, un fichier par langue). |
-| `public/articles/`, `public/reminders/`                               | Images des contenus.                                                    |
-| `app/[locale]/reminders/`                                             | Les deux pages de la collection des pense-bêtes.                        |
-| `tests/e2e/reminders.spec.ts`, `tests/e2e/ide-shell.spec.ts`          | Tests e2e des pense-bêtes et de l'interface IDE.                        |
+| Emplacement                                                                  | Contenu                                                                                         |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [`constants/site.ts`](constants/site.ts)                                     | Nom, titres, palette MUI, navigation, collections (dont les pense-bêtes), commentaires, splash. |
+| [`constants/explorer.ts`](constants/explorer.ts), `preview.ts`, `profile.ts` | Arborescence de l'explorateur, panneau d'aperçu, faits du profil et des projets.                |
+| `messages/<locale>.json`                                                     | Tous les textes, dans les six langues (un fichier par langue).                                  |
+| [`i18n/pathnames.ts`](i18n/pathnames.ts)                                     | Routes traduites (À propos, Services, Projets, Contact, pense-bêtes…).                          |
+| `app/[locale]/layout.tsx`                                                    | Cadre de page : l'interface IDE (`components/site/ide/SiteShell`).                              |
+| `components/home/Home.tsx`                                                   | Corps de la page d'accueil.                                                                     |
+| `components/ui/Logo.tsx`, `app/icon.svg`                                     | Logo `</>` et favicon.                                                                          |
+| `styles/tokens.css`, `styles/ui/logo.css`                                    | Jetons de couleur, reflet du logo.                                                              |
+| `styles/layout/ide.css`, `styles/layout/ide-preview.css`                     | Interface IDE et panneau d'aperçu.                                                              |
+| `styles/pages/content.css`, `styles/home/demo.css`                           | Pages de contenu et démo « Générer un site ».                                                   |
+| `components/og/OgImage.tsx`                                                  | Couleurs des images de partage (`OG_THEME`).                                                    |
+| `components/site/`                                                           | Composants de l'interface IDE et de la démo.                                                    |
+| `app/[locale]/about/`, `services/`, `projects/`, `contact/`, `reminders/`    | Pages propres à ezjsdev.                                                                        |
+| `content/articles/`, `content/reminders/`                                    | Articles et pense-bêtes (un dossier par entrée, un fichier par langue).                         |
+| `public/articles/`, `public/reminders/`, `public/demo/`, `public/projects/`  | Images des contenus et captures des projets.                                                    |
 
 ## Contrôle qualité
 
@@ -101,7 +107,7 @@ npm run typecheck && npm run lint && npm run format:check && npm run test && npm
 Plus `npm audit`. Le formatage est géré par Prettier (`npm run format`).
 
 Sous Windows, si le build échoue avec `ERR_SWC_NATIVE_CACHE`, définir `SWC_NATIVE_BINDING_CACHE` vers un dossier
-accessible au seul utilisateur (par exemple `C:\Users\<vous>\.cache\swc-native`). Les tests e2e d'Axons supposent
+accessible au seul utilisateur (par exemple `C:\Users\<vous>\.cache\swc-native`). Les tests e2e supposent
 l'environnement de la CI (voir le bloc `env` de `.github/workflows/ci.yml`) ; en local, lancer `npm run build` puis
 `CI=1 npm run test:e2e` avec ces variables.
 
@@ -132,13 +138,19 @@ git fetch upstream
 git merge --no-ff -m "chore: merge Axons vX.Y.Z" axons/vX.Y.Z
 ```
 
-En cas de conflit :
+En cas de conflit, le résoudre fichier par fichier, volontairement :
 
-- garder la version ezjsdev de `site/**` (en y ajoutant les nouveaux champs exigés par Axons) et de ce `README.md` ;
+- **identité et contenu d'ezjsdev** (les fichiers du tableau « Où vit le code propre à ezjsdev », les pages, les
+  contenus, les tests e2e propres à ezjsdev et ce `README.md`) : garder la version ezjsdev, puis y reporter à la main
+  ce que la release ajoute (une nouvelle clé dans chaque `messages/<locale>.json`, une nouvelle constante dans
+  `constants/site.ts`…) ;
+- **moteur** (tout le reste) : reprendre la version Axons ;
 - `package.json` / `package-lock.json` : reprendre la version **Axons** (dépendances, correctifs de sécurité), puis y
   remettre seulement le `name` et la `version` d'ezjsdev ;
-- garder la suppression des maquettes d'Axons (`mockups/axons-*`) : `mockups/` ne contient que celles d'ezjsdev ;
-- reprendre la version Axons de tout autre fichier, puis reporter dans `site/` ce qui doit l'être.
+- garder la suppression de la démo d'Axons (articles de démo, accueil de démo, `mockups/axons-*`) : `mockups/` ne
+  contient que les maquettes d'ezjsdev.
+
+Lire la section MIGRATION des notes de la release (`gh release view vX.Y.Z --repo YoannB/axons`) avant de merger.
 
 Puis mettre à jour la ligne « basé sur Axons » en tête de ce README, relancer le contrôle qualité complet et ouvrir la
 PR. La PR se merge avec un **merge commit**, jamais en squash : l'historique d'Axons doit rester un ancêtre de `main`.
