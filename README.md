@@ -33,7 +33,7 @@ dans [`mockups/`](mockups/). Le site en ligne fait référence.
 Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Material UI 9 derrière une API neutre · `next-intl` 4 ·
 Vitest, Playwright, Storybook 10 · Netlify.
 
-**Version : ezjsdev 0.3.0, basé sur Axons [v0.16.0](https://github.com/YoannB/axons/tree/v0.16.0).**
+**Version : ezjsdev 0.3.0, basé sur Axons [v0.17.0](https://github.com/YoannB/axons/tree/v0.17.0).**
 
 ezjsdev est construit sur le boilerplate [Axons](https://github.com/YoannB/axons) : l'architecture, les conventions et
 la documentation technique viennent de là. `AGENTS.md` et `docs/` sont la documentation (en anglais) du moteur pour
@@ -79,6 +79,7 @@ Référence complète et commentée : [`.env.example`](.env.example). Valeurs d'
 | `NEXT_PUBLIC_GTM_ID`           | Vide : pas de mesure d'audience (le bandeau cookies n'apparaît que si les commentaires sont actifs).        |
 | `NEXT_PUBLIC_DISQUS_SHORTNAME` | Shortname Disqus ; vide = commentaires désactivés. Seules les entrées non archivées en affichent.           |
 | `LEGAL_*`                      | Informations éditeur des mentions légales (serveur uniquement) ; jamais de vraies valeurs dans le dépôt.    |
+| `LEGAL_EDITOR_ADDRESS_KIND`    | `city` : l'adresse éditeur se limite à la ville (« situé à Nantes, France ») ; vide = adresse complète.     |
 
 ## Où vit le code propre à ezjsdev
 
