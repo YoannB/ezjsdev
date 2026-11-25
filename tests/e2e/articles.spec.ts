@@ -5,9 +5,10 @@ import { acceptCookiesButton, cookieBanner, languageButton, languageOption } fro
 import { lp, lpRe } from "./support/locale-path";
 
 // Articles: listing -> article -> language switch onto the TRANSLATED slug, SEO tags, sitemap and
-// the home "latest articles" block. Relies on the two most recent EZJSDEV articles (content/articles/,
-// translated in every supported locale): tco-2015-round-3-peg-jump (2015-07-22) and
-// tco-2015-round-2-path-defense (2015-07-20); material-design carries the GFM table.
+// the home "latest articles" block. Relies on the EZJSDEV articles (content/articles/, translated in
+// every supported locale): neural-network-js (2026-11-25, the only non-archived one), then the two
+// most recent archives tco-2015-round-3-peg-jump (2015-07-22) and tco-2015-round-2-path-defense
+// (2015-07-20); material-design carries the GFM table.
 
 async function ready(page: Page) {
     await expect(page.locator("#app-splash")).toHaveClass(/is-leaving/);
@@ -33,11 +34,13 @@ test.describe("Articles", () => {
         await expect(page.getByRole("heading", { level: 1, name: "Articles" })).toBeVisible();
         // Newest first.
         const titles = page.locator(".article-feed .article-teaser__title");
-        await expect(titles).toHaveCount(15);
-        await expect(titles.nth(0)).toHaveText("TCO 2015 - Round 3 - PegJump");
-        await expect(titles.nth(1)).toHaveText("TCO 2015 - Round 2 - PathDefense");
+        await expect(titles).toHaveCount(16);
+        await expect(titles.nth(0)).toHaveText("Un réseau de neurones en JavaScript, pas à pas");
+        await expect(titles.nth(1)).toHaveText("TCO 2015 - Round 3 - PegJump");
+        await expect(titles.nth(2)).toHaveText("TCO 2015 - Round 2 - PathDefense");
 
-        await titles.first().getByRole("link").click();
+        // PegJump: the most recent article with an image in its body.
+        await titles.nth(1).getByRole("link").click();
         await expect(page).toHaveURL(lpRe("fr", "/articles/tco-2015-round-3-peg-jump"));
         await expect(page.getByRole("heading", { level: 1, name: "TCO 2015 - Round 3 - PegJump" })).toBeVisible();
         await expect(page.locator(".article-body img").first()).toHaveAttribute(
@@ -88,13 +91,17 @@ test.describe("Articles", () => {
         await expect(page).toHaveURL(lpRe("fr"));
     });
 
-    test("home shows the most recent (archived) articles with a link to the list", async ({ page }) => {
+    test("home shows the most recent non-archived articles with a link to the list", async ({ page }) => {
         await page.goto("/fr");
         await ready(page);
         const block = page.locator("#latest-articles");
-        // Every migrated article is an archive (constants/site.ts → COLLECTION_DEFAULTS.archiveBefore): archives title.
-        await expect(block.getByRole("heading", { level: 2, name: "Articles (archives)" })).toBeVisible();
-        await expect(block.locator(".article-teaser")).toHaveCount(3);
+        // Every migrated article is an archive (constants/site.ts → COLLECTION_DEFAULTS.archiveBefore), so the
+        // block lists only the non-archived ones (lib/articles/status.ts → pickLatest): one so far.
+        await expect(block.getByRole("heading", { level: 2, name: "Derniers articles" })).toBeVisible();
+        await expect(block.locator(".article-teaser")).toHaveCount(1);
+        await expect(block.locator(".article-teaser__title")).toHaveText(
+            "Un réseau de neurones en JavaScript, pas à pas",
+        );
         await block.getByRole("link", { name: /Tous les articles/ }).click();
         await expect(page).toHaveURL(lpRe("fr", "/articles"));
     });
@@ -105,5 +112,7 @@ test.describe("Articles", () => {
         expect(xml).toContain(`${lp("en", "/articles/tco-2015-round-3-peg-jump")}</loc>`);
         expect(xml).toContain(`${lp("es", "/articulos/tco-2015-ronda-3-peg-jump")}</loc>`);
         expect(xml).toContain(`${lp("de", "/artikel")}</loc>`);
+        expect(xml).toContain(`${lp("fr", "/articles/reseau-de-neurones-en-javascript-pas-a-pas")}</loc>`);
+        expect(xml).toContain(`${lp("pt", "/artigos/rede-neural-em-javascript-passo-a-passo")}</loc>`);
     });
 });

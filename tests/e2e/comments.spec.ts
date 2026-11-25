@@ -8,12 +8,14 @@ import { lp } from "./support/locale-path";
 // Comments under collection entries (docs/articles.md → Comments). Needs a build that saw a
 // shortname: CI sets a FAKE NEXT_PUBLIC_DISQUS_SHORTNAME, and every request to Disqus is
 // intercepted and aborted (support/disqus.ts), so the specs check what the page TRIES to load.
-// ezjsdev: every entry published so far (2013–2017 articles and reminders) is archived
-// (constants/site.ts → COLLECTION_DEFAULTS.archiveBefore), so only the archived cases run. When the first non-archived
-// entry is published, set ENTRY and OTHER_ENTRY to two of them and the live cases run again.
+// ezjsdev: the migrated entries (2013–2017 articles and reminders) are archived (constants/site.ts →
+// COLLECTION_DEFAULTS.archiveBefore); the only non-archived entry so far is the neural-network-js article.
+// ENTRY is its French page; OTHER_ENTRY, its English translation, is another entry PAGE (what is checked
+// there is the gate's "this page only" state and the recorded consent, not the thread). When a second
+// non-archived entry is published, point OTHER_ENTRY at it. Explicit "/fr": see ARCHIVED_REMINDER below.
 
-const ENTRY: string = "";
-const OTHER_ENTRY: string = "";
+const ENTRY: string = "/fr/articles/reseau-de-neurones-en-javascript-pas-a-pas";
+const OTHER_ENTRY: string = "/en/articles/neural-network-in-javascript-step-by-step";
 const NO_LIVE_ENTRY = "no non-archived ezjsdev entry yet (all are before archiveBefore): set ENTRY and OTHER_ENTRY";
 const ARCHIVED = lp("fr", "/articles/tco-2015-round-2-path-defense");
 // Explicit "/fr" prefix: the French slug differs from the English one, and an unprefixed path is
